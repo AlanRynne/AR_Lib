@@ -297,9 +297,11 @@ namespace AR_Lib
                 string isoVert = "Isolated vertices: " + HasIsolatedVertices().ToString() + "\n";
                 string isoFace = "Isolated faces: " + HasIsolatedFaces().ToString() + "\n";
                 string manifold = "Has Non-Manifold Edges: " + HasNonManifoldEdges().ToString() + "\n";
+                string tail = "-----       -----\n\n";
 
 
-                return head + VEF + HEC + Bounds + euler + isoVert + isoFace + manifold;
+
+                return head + VEF + HEC + Bounds + euler + isoVert + isoFace + manifold + tail;
             }
         }
     }
