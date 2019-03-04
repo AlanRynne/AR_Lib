@@ -5,7 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="RhinoCommon" Version="6.13.19058.371" />
+    <PackageReference Include="Rhino3dmIO.Desktop" Version="6.13.19058.371" />
   </ItemGroup>
+
+  <ItemGroup>
+  <Reference Include="Rhino3dmIO">
+    <HintPath>bin/Debug/netstandard2.0/librhino3dmio_native.dylib</HintPath>
+  </Reference>
+</ItemGroup>
+  
 
 </Project>

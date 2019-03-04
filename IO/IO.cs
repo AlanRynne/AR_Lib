@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using AR_Lib.Geometry;
 using AR_Lib.HalfEdgeMesh;
+using Rhino;
 
 namespace AR_Lib.IO
 {
@@ -125,14 +126,28 @@ namespace AR_Lib.IO
 
     #region To/From Applications
 
-    public static class RhinoIO{
-        public static Rhino.Geometry.Mesh ToRhinoMesh(HE_Mesh mesh){ throw new NotImplementedException(); }
+    public static class RhinoIO
+    {
+        public static RhinoMeshResult ToRhinoMesh(HE_Mesh mesh)
+        {
+            Rhino.Geometry.Mesh tmpMesh = new Rhino.Geometry.Mesh();
+
+            return RhinoMeshResult.OK;
+
+        }
 
         public static HE_Mesh FromRhinoMesh(Rhino.Geometry.Mesh rhinoMesh){ throw new NotImplementedException(); }
 
+        public enum RhinoMeshResult
+        {
+            OK,
+            Empty,
+            Invalid
+        }
     }
-    
-    public static class DynamoIO{
+
+    public static class DynamoIO
+    {
         public static object ToDynamoMesh(HE_Mesh mesh){ throw new NotImplementedException(); }
 
         public static HE_Mesh FromRhinoMesh(object dynamoMesh){ throw new NotImplementedException(); }
