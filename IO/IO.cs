@@ -6,10 +6,13 @@ using AR_Lib.HalfEdgeMesh;
 
 namespace AR_Lib.IO
 {
-    // Input / Output Namespace
+    #region To/From Files
 
+    /// CSV format
     public static class CSVReader { }
     public static class CSVWritter { }
+
+    /// OFF format
     public static class OFFReader 
     {
         public static OFFResult ReadMeshFromFile(string FilePath, out OFFMeshData data)
@@ -81,6 +84,7 @@ namespace AR_Lib.IO
 
     public static class OFFWritter { }
 
+
     public enum OFFResult
     {
         OK,
@@ -116,5 +120,25 @@ namespace AR_Lib.IO
     {
         
     }
+    
+    #endregion
 
+    #region To/From Applications
+
+    public static class RhinoIO{
+        public static Rhino.Geometry.Mesh ToRhinoMesh(HE_Mesh mesh){ throw new NotImplementedException(); }
+
+        public static HE_Mesh FromRhinoMesh(Rhino.Geometry.Mesh rhinoMesh){ throw new NotImplementedException(); }
+
+    }
+    
+    public static class DynamoIO{
+        public static object ToDynamoMesh(HE_Mesh mesh){ throw new NotImplementedException(); }
+
+        public static HE_Mesh FromRhinoMesh(object dynamoMesh){ throw new NotImplementedException(); }
+
+    }
+
+
+    #endregion
 }
