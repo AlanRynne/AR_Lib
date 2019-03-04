@@ -4,4 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="RhinoCommon" Version="6.13.19058.371" />
+  </ItemGroup>
+
 </Project>
