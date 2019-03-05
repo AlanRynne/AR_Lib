@@ -30,7 +30,7 @@ namespace AR_Lib
                 Generators = new List<HE_Generators>();
             }
 
-            public HE_Mesh(List<Point3d> vertices, List<List<int>> faceIndexes): this()
+            public HE_Mesh(List<Point3d> vertices, List<List<int>> faceIndexes) : this()
             {
                 //There are 3 steps for this process
                 //- Iterate through vertices, create vertex objects
@@ -38,6 +38,7 @@ namespace AR_Lib
                 //- Iterate through faces, creating face, edge, and halfedge objects (and connecting where possible)
                 createFaces(faceIndexes);
             }
+
             void createVertices(List<Point3d> points)
             {
                 List<HE_Vertex> verts = new List<HE_Vertex>(points.Count);
@@ -94,11 +95,11 @@ namespace AR_Lib
                         f.HalfEdge = h;
 
                         // Reverse v0 and v1 if v0 > v1
-                        if (v0 > v1) 
-                        { 
-                            int temp = v0; 
-                            v0 = v1; 
-                            v1 = temp; 
+                        if (v0 > v1)
+                        {
+                            int temp = v0;
+                            v0 = v1;
+                            v1 = temp;
                         }
                         string key = v0 + " " + v1;
                         if (existingHalfEdges.ContainsKey(key))
@@ -111,7 +112,9 @@ namespace AR_Lib
                             hasTwinHalfEdge[h] = true;
                             hasTwinHalfEdge[twin] = true;
                             edgeCount[key] += 1;
-                        } else {
+                        }
+                        else
+                        {
                             // Create an edge and set its half-edge
                             HE_Edge e = new HE_Edge();
                             Edges.Add(e);
@@ -162,7 +165,7 @@ namespace AR_Lib
                         } while (hE != h);
 
                         int n = boundaryCycle.Count;
-                        for (int j = 0; j < n; j++) 
+                        for (int j = 0; j < n; j++)
                         {
                             boundaryCycle[j].Next = boundaryCycle[(j + n - 1) % n];
                             boundaryCycle[j].Prev = boundaryCycle[(j + 1) % n];
@@ -180,7 +183,7 @@ namespace AR_Lib
                     }
                 }
 
-                if ( HasIsolatedFaces() || HasIsolatedVertices()|| HasNonManifoldEdges() )
+                if (HasIsolatedFaces() || HasIsolatedVertices() || HasNonManifoldEdges())
                 {
                     return false;
                 }
@@ -203,10 +206,10 @@ namespace AR_Lib
                 }
                 return false;
             }
-        
+
             public bool HasIsolatedFaces()
             {
-                foreach (HE_Face  f in Faces)
+                foreach (HE_Face f in Faces)
                 {
                     int boundaryEdges = 0;
                     List<HE_HalfEdge> adjacent = f.adjacentHalfEdges();
@@ -227,26 +230,30 @@ namespace AR_Lib
             public void indexElements()
             {
                 int index = -1;
-                foreach (HE_Vertex v in Vertices) v.Index = index++;
+                foreach (HE_Vertex v in Vertices) 
+                {
+                    index++;
+                    v.Index = index;
+                }
 
                 index = -1;
-                foreach (HE_Face f in Faces) f.Index = index++;
+                foreach (HE_Face f in Faces) {index++; f.Index = index;}
 
                 index = -1;
-                foreach (HE_HalfEdge hE in HalfEdges) hE.Index = index++;
+                foreach (HE_HalfEdge hE in HalfEdges) {index++; hE.Index = index;}
 
                 index = -1;
-                foreach (HE_Edge e in Edges) e.Index = index++;
+                foreach (HE_Edge e in Edges) {index++; e.Index = index;}
 
                 index = -1;
-                foreach (HE_Corner c in Corners) c.Index = index++;
+                foreach (HE_Corner c in Corners) {index++; c.Index = index;}
 
                 index = -1;
-                foreach (HE_Face b in Boundaries) b.Index = index++;
+                foreach (HE_Face b in Boundaries) {index++; b.Index = index;}
 
             }
 
-            public Dictionary<HE_Vertex,int> indexVertices()
+            public Dictionary<HE_Vertex, int> indexVertices()
             {
                 int i = -1;
                 Dictionary<HE_Vertex, int> index = new Dictionary<HE_Vertex, int>();
@@ -254,7 +261,7 @@ namespace AR_Lib
                     index[v] = i++;
                 return index;
             }
-            public Dictionary<HE_Face,int> indexFaces()
+            public Dictionary<HE_Face, int> indexFaces()
             {
                 int i = -1;
                 Dictionary<HE_Face, int> index = new Dictionary<HE_Face, int>();
@@ -262,7 +269,7 @@ namespace AR_Lib
                     index[v] = i++;
                 return index;
             }
-            public Dictionary<HE_Edge,int> indexEdges()
+            public Dictionary<HE_Edge, int> indexEdges()
             {
                 int i = -1;
                 Dictionary<HE_Edge, int> index = new Dictionary<HE_Edge, int>();
@@ -270,7 +277,7 @@ namespace AR_Lib
                     index[v] = i++;
                 return index;
             }
-            public Dictionary<HE_HalfEdge,int> indexHalfEdes()
+            public Dictionary<HE_HalfEdge, int> indexHalfEdes()
             {
                 int i = -1;
                 Dictionary<HE_HalfEdge, int> index = new Dictionary<HE_HalfEdge, int>();
@@ -278,7 +285,7 @@ namespace AR_Lib
                     index[f] = i++;
                 return index;
             }
-            public Dictionary<HE_Corner,int> indexCorners()
+            public Dictionary<HE_Corner, int> indexCorners()
             {
                 int i = -1;
                 Dictionary<HE_Corner, int> index = new Dictionary<HE_Corner, int>();
@@ -290,6 +297,7 @@ namespace AR_Lib
             public override string ToString()
             {
                 string head = "--- Mesh Info ---\n";
+
                 string VEF = "V: " + Vertices.Count + "; F: " + Faces.Count + "; E:" + Edges.Count + "\n";
                 string HEC = "Half-edges: " + HalfEdges.Count + "; Corners: " + Corners.Count + "\n";
                 string Bounds = "Boundaries: " + Boundaries.Count + "\n";
@@ -297,12 +305,49 @@ namespace AR_Lib
                 string isoVert = "Isolated vertices: " + HasIsolatedVertices().ToString() + "\n";
                 string isoFace = "Isolated faces: " + HasIsolatedFaces().ToString() + "\n";
                 string manifold = "Has Non-Manifold Edges: " + HasNonManifoldEdges().ToString() + "\n";
+
+                FaceData faceData = countFaceEdges();
+                string triangles = "Tri faces: " + faceData.Triangles + "\n";
+                string quads = "Quad faces: " + faceData.Quads + "\n";
+                string ngons = "Ngon faces: " + faceData.Ngons + "\n";
+
                 string tail = "-----       -----\n\n";
 
 
-
-                return head + VEF + HEC + Bounds + euler + isoVert + isoFace + manifold + tail;
+                return head + VEF + HEC + Bounds + euler + isoVert + isoFace + manifold + triangles + quads + ngons + tail;
             }
+            
+            private FaceData countFaceEdges()
+            {
+                FaceData data = new FaceData();
+
+                foreach (HE_Face face in this.Faces)
+                {
+                    switch (face.adjacentCorners().Count)
+                    {
+                        case 3:
+                            data.Triangles++;
+                            break;
+                        case 4:
+                            data.Quads++;
+                            break;
+                        default:
+                            data.Ngons++;
+                            break;
+                    }
+                }
+
+                return data;
+
+            }
+
+            private struct FaceData
+            {
+                public double Triangles;
+                public double Quads;
+                public double Ngons;
+            }
+
         }
     }
 }
