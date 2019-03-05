@@ -3,7 +3,6 @@ using System.IO;
 using System.Collections.Generic;
 using AR_Lib.Geometry;
 using AR_Lib.HalfEdgeMesh;
-using Rhino;
 
 namespace AR_Lib.IO
 {
@@ -130,13 +129,13 @@ namespace AR_Lib.IO
     {
         public static RhinoMeshResult ToRhinoMesh(HE_Mesh mesh)
         {
-            Rhino.Geometry.Mesh tmpMesh = new Rhino.Geometry.Mesh();
+            object tmpMesh = new object();
 
             return RhinoMeshResult.OK;
 
         }
 
-        public static HE_Mesh FromRhinoMesh(Rhino.Geometry.Mesh rhinoMesh){ throw new NotImplementedException(); }
+        public static HE_Mesh FromRhinoMesh(object rhinoMesh){ throw new NotImplementedException(); }
 
         public enum RhinoMeshResult
         {
