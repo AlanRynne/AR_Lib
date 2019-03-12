@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using AR_Lib.Geometry;
 
 namespace AR_Lib.HalfEdgeMesh
@@ -13,10 +14,26 @@ namespace AR_Lib.HalfEdgeMesh
         public HE_HalfEdge HalfEdge; //One of the half-edges connected to the vertex
         public int Index;
 
+        public Dictionary<string, double> UserValues
+        {
+            get
+            {
+                // Set private property to auto initialize if null.
+                if (_userValues == null) return new Dictionary<string, double>();
+                else return _userValues;
+            }
+            set
+            {
+                _userValues = value;
+            }
+        }
+
+        private Dictionary<string, double> _userValues;
+
         // Constructor
-        public HE_Vertex(): base() {}
-        public HE_Vertex(Point3d pt) : base(pt){}
-        public HE_Vertex(double X, double Y, double Z) : base(X, Y, Z){}
+        public HE_Vertex(): base() { _userValues = new Dictionary<string, double>(); }
+        public HE_Vertex(Point3d pt) : base(pt){ _userValues = new Dictionary<string, double>(); }
+        public HE_Vertex(double X, double Y, double Z) : base(X, Y, Z){ _userValues = new Dictionary<string, double>(); }
 
         // Calculate the valence of a vertex
         public int Degree() => adjacentHalfEdges().Count;
@@ -72,7 +89,7 @@ namespace AR_Lib.HalfEdgeMesh
             HE_HalfEdge _halfEdge = this.HalfEdge;
             do
             {
-                _vertices.Add(_halfEdge.Vertex);
+                _vertices.Add(_halfEdge.Twin.Vertex);
                 _halfEdge = _halfEdge.Twin.Next;
             } while (_halfEdge != this.HalfEdge);
               
