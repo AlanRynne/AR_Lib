@@ -14,9 +14,10 @@ namespace AR_Lib
             public Vector3d(double xCoord, double yCoord, double zCoord) : base(xCoord, yCoord, zCoord) { }
 
             // Operators
-            public static Vector3d operator +(Vector3d v, Vector3d point2) => new Vector3d(v.X + point2.X, v.Y + point2.Y, v.Z + point2.Z);
-            public static Vector3d operator -(Vector3d v, Vector3d point2) => new Vector3d(v.X - point2.X, v.Y - point2.Y, v.Z - point2.Z);
+           public static Vector3d operator +(Vector3d v, Vector3d point2) => new Vector3d(v.X + point2.X, v.Y + point2.Y, v.Z + point2.Z);
+            public static Vector3d operator -(Vector3d v, Vector3d point2) => new Vector3d(v.X - point2.X, v.Y - point2.Y, v.Z - point2.Z); 
             public static Vector3d operator *(Vector3d v, double scalar) => new Vector3d(v.X * scalar, v.Y * scalar, v.Z * scalar);
+            public static Vector3d operator *(double scalar, Vector3d v) => new Vector3d(v.X * scalar, v.Y * scalar, v.Z * scalar);
             public static Vector3d operator -(Vector3d v) => new Vector3d(-v.X, -v.Y, -v.Z);
             public static Vector3d operator /(Vector3d v, double scalar) => new Vector3d(v.X / scalar, v.Y / scalar, v.Z / scalar);
             public static bool operator ==(Vector3d v, Vector3d w) => v.Equals(w);
