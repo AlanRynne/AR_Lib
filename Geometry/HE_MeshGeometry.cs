@@ -7,48 +7,32 @@ namespace AR_Lib.Geometry
     /// <summary>
     /// Represents the geometry of a HE_Mesh such as positions at vertices
     /// </summary>
-    public class HE_MeshGeometry
+    public static class HE_MeshGeometry
     {
-        /// <summary>
-        /// Mesh to operate on
-        /// </summary>
-        public HE_Mesh Mesh;
         /// <summary>
         /// Normalize positions of mesh.
         /// </summary>
-        public bool NormalizePositions;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:AR_Lib.Geometry.HE_MeshGeometry"/> class.
-        /// </summary>
-        /// <param name="mesh">Mesh.</param>
-        /// <param name="normalizePositions">If set to <c>true</c> normalize positions.</param>
-        public HE_MeshGeometry(HE_Mesh mesh, bool normalizePositions)
-        {
-            Mesh = mesh;
-            NormalizePositions = normalizePositions;
-        }
 
         /// <summary>
         /// Calculate the vector of a specified half-edge.
         /// </summary>
         /// <returns>The half-edge vector.</returns>
         /// <param name="halfEdge">Half edge.</param>
-        public Vector3d Vector(HE_HalfEdge halfEdge) => halfEdge.Vertex - halfEdge.Next.Vertex;
+        public static Vector3d Vector(HE_HalfEdge halfEdge) => halfEdge.Vertex - halfEdge.Next.Vertex;
 
         /// <summary>
         /// Calculates the length of the specified edge.
         /// </summary>
         /// <returns>The length.</returns>
         /// <param name="edge">Edge.</param>
-        public double Length(HE_Edge edge) => Vector(edge.HalfEdge).Norm;
-
+        public static double Length(HE_Edge edge) => Vector(edge.HalfEdge).Norm;
+        
         /// <summary>
         /// Calculates the midpoint of the specifiec edge.
         /// </summary>
         /// <returns>The point.</returns>
         /// <param name="edge">Edge.</param>
-        public Point3d MidPoint(HE_Edge edge) 
+        public static Point3d MidPoint(HE_Edge edge) 
         {
             HE_HalfEdge halfEdge = edge.HalfEdge;
             Point3d a = halfEdge.Vertex;
@@ -60,7 +44,7 @@ namespace AR_Lib.Geometry
         /// Calculates the mean edge length of the mesh
         /// </summary>
         /// <returns>The mean edge length of the mesh</returns>
-        public double MeanEdgeLength()
+        public static double MeanEdgeLength(HE_Mesh Mesh)
         {
             double sum = 0.0;
             foreach (HE_Edge e in Mesh.Edges) sum += Length(e);
@@ -72,7 +56,7 @@ namespace AR_Lib.Geometry
         /// </summary>
         /// <returns>The face area</returns>
         /// <param name="face">Face.</param>
-        public double Area(HE_Face face)
+        public static double Area(HE_Face face)
         {
             if (face.isBoundaryLoop()) return 0.0;
 
@@ -85,7 +69,7 @@ namespace AR_Lib.Geometry
         /// Computes the total area of the mesh
         /// </summary>
         /// <returns>The mesh area.</returns>
-        public double TotalArea()
+        public static double TotalArea(HE_Mesh Mesh)
         {
             double sum = 0.0;
             foreach (HE_Face f in Mesh.Faces) sum += Area(f);
@@ -97,7 +81,7 @@ namespace AR_Lib.Geometry
         /// </summary>
         /// <returns>The normal.</returns>
         /// <param name="face">Face.</param>
-        public Vector3d FaceNormal(HE_Face face) 
+        public static Vector3d FaceNormal(HE_Face face) 
         {
             if (face.isBoundaryLoop()) return null;
 
@@ -111,7 +95,7 @@ namespace AR_Lib.Geometry
         /// </summary>
         /// <returns>The centroid.</returns>
         /// <param name="face">Face.</param>
-        public Point3d Centroid(HE_Face face)
+        public static Point3d Centroid(HE_Face face)
         {
             HE_HalfEdge hE = face.HalfEdge;
             Point3d a = hE.Vertex;
@@ -128,7 +112,7 @@ namespace AR_Lib.Geometry
         /// </summary>
         /// <returns>The circumcenter.</returns>
         /// <param name="face">Face.</param>
-        public Point3d Circumcenter(HE_Face face)
+        public static Point3d Circumcenter(HE_Face face)
         {
             HE_HalfEdge hE = face.HalfEdge;
 
@@ -153,9 +137,9 @@ namespace AR_Lib.Geometry
         /// <summary>
         /// Compute the orthonormal bases of the specified face
         /// </summary>
-        /// <returns>Array containin the 2 Vector3d.</returns>
+        /// <returns>Array containing the 2 Vector3d.</returns>
         /// <param name="face">Face.</param>
-        public Vector3d[] OrthonormalBases(HE_Face face)
+        public static Vector3d[] OrthonormalBases(HE_Face face)
         {
             Vector3d e1 = Vector(face.HalfEdge).Unit();
             Vector3d normal = FaceNormal(face);
@@ -169,7 +153,7 @@ namespace AR_Lib.Geometry
         /// </summary>
         /// <returns>The angle (in radians(</returns>
         /// <param name="corner">Corner.</param>
-        public double Angle(HE_Corner corner)
+        public static double Angle(HE_Corner corner)
         {
             Vector3d u = Vector(corner.HalfEdge.Prev).Unit();
             Vector3d v = (-Vector(corner.HalfEdge.Next).Unit());
@@ -182,7 +166,7 @@ namespace AR_Lib.Geometry
         /// </summary>
         /// <returns>The cotan.</returns>
         /// <param name="hE">H e.</param>
-        public double Cotan(HE_HalfEdge hE)
+        public static double Cotan(HE_HalfEdge hE)
         {
             if (hE.onBoundary) return 0.0;
 
@@ -198,7 +182,7 @@ namespace AR_Lib.Geometry
         /// </summary>
         /// <returns>The angle (in radians) between faces.</returns>
         /// <param name="hE">H e.</param>
-        public double DihedralAngle(HE_HalfEdge hE)
+        public static double DihedralAngle(HE_HalfEdge hE)
         {
             if (hE.onBoundary || hE.Twin.onBoundary) return 0.0;
 
@@ -217,7 +201,7 @@ namespace AR_Lib.Geometry
         /// </summary>
         /// <returns>The dual area.</returns>
         /// <param name="vertex">Vertex.</param>
-        public double BarycentricDualArea(HE_Vertex vertex)
+        public static double BarycentricDualArea(HE_Vertex vertex)
         {
             double area = 0.0;
             foreach (HE_Face f in vertex.adjacentFaces()) area += Area(f);
@@ -229,7 +213,7 @@ namespace AR_Lib.Geometry
         /// </summary>
         /// <returns>The dualarea.</returns>
         /// <param name="vertex">Vertex.</param>
-        public double CircumcentricDualarea(HE_Vertex vertex)
+        public static double CircumcentricDualarea(HE_Vertex vertex)
         {
             double area = 0.0;
             foreach (HE_HalfEdge hE in vertex.adjacentHalfEdges())
@@ -249,7 +233,7 @@ namespace AR_Lib.Geometry
         /// </summary>
         /// <returns>The normal vector.</returns>
         /// <param name="vertex">Vertex.</param>
-        public Vector3d VertexNormalEquallyWeighted(HE_Vertex vertex) 
+        public static Vector3d VertexNormalEquallyWeighted(HE_Vertex vertex) 
         {
             Vector3d n = new Vector3d();
             foreach (HE_Face f in vertex.adjacentFaces()) n += FaceNormal(f);
@@ -257,7 +241,7 @@ namespace AR_Lib.Geometry
             return n.Unit();
         }
 
-        public Vector3d VertexNormalAreaWeighted(HE_Vertex vertex) 
+        public static Vector3d VertexNormalAreaWeighted(HE_Vertex vertex) 
         {
             Vector3d n = new Vector3d();
             foreach(HE_Face f in vertex.adjacentFaces())
@@ -270,7 +254,7 @@ namespace AR_Lib.Geometry
             return n.Unit();
         }
 
-        public Vector3d VertexNormalAngleWeighted(HE_Vertex vertex) 
+        public static Vector3d VertexNormalAngleWeighted(HE_Vertex vertex) 
         {
             Vector3d n = new Vector3d();
             foreach (HE_Corner c in vertex.adjacentCorners())
@@ -283,7 +267,7 @@ namespace AR_Lib.Geometry
             return n.Unit();
         }
 
-        public Vector3d VertexNormalGaussCurvature(HE_Vertex vertex) 
+        public static Vector3d VertexNormalGaussCurvature(HE_Vertex vertex) 
         { 
             Vector3d n = new Vector3d();
             foreach (HE_HalfEdge hE in vertex.adjacentHalfEdges())
@@ -294,7 +278,7 @@ namespace AR_Lib.Geometry
             return n.Unit();
         }
 
-        public Vector3d VertexNormalMeanCurvature(HE_Vertex vertex) 
+        public static Vector3d VertexNormalMeanCurvature(HE_Vertex vertex) 
         {
             Vector3d n = new Vector3d();
             foreach (HE_HalfEdge hE in vertex.adjacentHalfEdges())
@@ -305,7 +289,7 @@ namespace AR_Lib.Geometry
             return n.Unit();
         }
 
-        public Vector3d VertexNormalSphereInscribed(HE_Vertex vertex)
+        public static Vector3d VertexNormalSphereInscribed(HE_Vertex vertex)
         {
             Vector3d n = new Vector3d();
             foreach (HE_Corner c in vertex.adjacentCorners())
@@ -318,7 +302,7 @@ namespace AR_Lib.Geometry
             return n.Unit();
         }
 
-        public double AngleDefect(HE_Vertex vertex)
+        public static double AngleDefect(HE_Vertex vertex)
         {
             double angleSum = 0.0;
             foreach (HE_Corner c in vertex.adjacentCorners()) angleSum += Angle(c);
@@ -327,12 +311,12 @@ namespace AR_Lib.Geometry
             return vertex.OnBoundary()  ? Math.PI - angleSum: 2 * Math.PI - angleSum;
         }
 
-        public double scalarGaussCurvature(HE_Vertex vertex)
+        public static double scalarGaussCurvature(HE_Vertex vertex)
         {
             return AngleDefect(vertex);
         }
 
-        public double scalarMeanCurvature(HE_Vertex vertex)
+        public static double scalarMeanCurvature(HE_Vertex vertex)
         {
             double sum = 0.0;
             foreach (HE_HalfEdge hE in vertex.adjacentHalfEdges())
@@ -340,7 +324,7 @@ namespace AR_Lib.Geometry
             return sum;
         }
 
-        public double TotalAngleDefect(HE_Vertex vertex)
+        public static double TotalAngleDefect(HE_Mesh Mesh)
         {
             double totalDefect = 0.0;
             foreach (HE_Vertex v in Mesh.Vertices)
@@ -348,7 +332,7 @@ namespace AR_Lib.Geometry
             return totalDefect;
         }
 
-        public double[] PrincipalCurvatures(HE_Vertex vertex)
+        public static double[] PrincipalCurvatures(HE_Vertex vertex)
         {
             double A = CircumcentricDualarea(vertex);
             double H = scalarMeanCurvature(vertex) / A;
