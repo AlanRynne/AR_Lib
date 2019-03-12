@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AR_Lib.Geometry;
 using AR_Lib;
 
@@ -11,6 +12,7 @@ namespace AR_Lib
         /// </summary>
         public class HE_Mesh
         {
+            /// Public variables
             public List<HE_Vertex> Vertices;
             public List<HE_Edge> Edges;
             public List<HE_Face> Faces;
@@ -19,6 +21,11 @@ namespace AR_Lib
             public List<HE_Face> Boundaries;
             public List<HE_Generators> Generators;
 
+            /// Computed properties
+            public int EulerCharacteristic => Vertices.Count - Edges.Count + Faces.Count;
+
+
+            #region Constructors
             public HE_Mesh()
             {
                 Vertices = new List<HE_Vertex>();
@@ -39,7 +46,168 @@ namespace AR_Lib
                 createFaces(faceIndexes);
             }
 
-            void createVertices(List<Point3d> points)
+            #endregion
+
+            #region Public methods
+
+            public bool HasIsolatedVertices()
+            {
+                foreach (HE_Vertex v in Vertices)
+                {
+                    if (v.IsIsolated())
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            public bool HasIsolatedFaces()
+            {
+                foreach (HE_Face f in Faces)
+                {
+                    int boundaryEdges = 0;
+                    List<HE_HalfEdge> adjacent = f.adjacentHalfEdges();
+                    foreach (HE_HalfEdge e in adjacent)
+                    {
+                        if (e.onBoundary) boundaryEdges++;
+                    }
+                    if (boundaryEdges == adjacent.Count) return true;
+                }
+                return false;
+            }
+
+            public bool HasNonManifoldEdges()
+            {
+                return false;
+            }
+
+            public void indexElements()
+            {
+                int index = -1;
+                foreach (HE_Vertex v in Vertices) 
+                {
+                    index++;
+                    v.Index = index;
+                }
+
+                index = -1;
+                foreach (HE_Face f in Faces) {index++; f.Index = index;}
+
+                index = -1;
+                foreach (HE_HalfEdge hE in HalfEdges) {index++; hE.Index = index;}
+
+                index = -1;
+                foreach (HE_Edge e in Edges) {index++; e.Index = index;}
+
+                index = -1;
+                foreach (HE_Corner c in Corners) {index++; c.Index = index;}
+
+                index = -1;
+                foreach (HE_Face b in Boundaries) {index++; b.Index = index;}
+
+            }
+
+            public Dictionary<HE_Vertex, int> indexVertices()
+            {
+                int i = -1;
+                Dictionary<HE_Vertex, int> index = new Dictionary<HE_Vertex, int>();
+                foreach (var v in Vertices)
+                    index[v] = i++;
+                return index;
+            }
+            public Dictionary<HE_Face, int> indexFaces()
+            {
+                int i = -1;
+                Dictionary<HE_Face, int> index = new Dictionary<HE_Face, int>();
+                foreach (var v in Faces)
+                    index[v] = i++;
+                return index;
+            }
+            public Dictionary<HE_Edge, int> indexEdges()
+            {
+                int i = -1;
+                Dictionary<HE_Edge, int> index = new Dictionary<HE_Edge, int>();
+                foreach (var v in Edges)
+                    index[v] = i++;
+                return index;
+            }
+            public Dictionary<HE_HalfEdge, int> indexHalfEdes()
+            {
+                int i = -1;
+                Dictionary<HE_HalfEdge, int> index = new Dictionary<HE_HalfEdge, int>();
+                foreach (var f in HalfEdges)
+                    index[f] = i++;
+                return index;
+            }
+            public Dictionary<HE_Corner, int> indexCorners()
+            {
+                int i = -1;
+                Dictionary<HE_Corner, int> index = new Dictionary<HE_Corner, int>();
+                foreach (var f in Corners)
+                    index[f] = i++;
+                return index;
+            }
+
+            /// Topology related methods
+            public bool isTriangularMesh(){
+                if (isMesh() == isMeshResult.Triangular) return true;
+                else return false;
+            }
+            public bool isQuadMesh(){
+                if (isMesh() == isMeshResult.Quad) return true;
+                else return false;
+            }
+            public bool isNgonMesh(){
+                if (isMesh() == isMeshResult.Ngon) return true;
+                else return false;
+            }
+            
+            /// <summary>
+            /// Returns an enum corresponding to the mesh face topology  (triangular, quad or ngon).
+            /// </summary>
+            private isMeshResult isMesh(){
+                var count = countFaceEdges();
+                if(count.Triangles == this.Faces.Count) return isMeshResult.Triangular;
+                if(count.Quads == this.Faces.Count) return isMeshResult.Quad;
+                if(count.Ngons != 0) return isMeshResult.Ngon;
+                else return isMeshResult.ERROR;
+            }
+            private enum isMeshResult
+            {
+                Triangular,
+                Quad,
+                Ngon,
+                ERROR
+            }
+            
+            /// Utility methods
+
+            public override string ToString()
+            {
+                string head = "--- Mesh Info ---\n";
+
+                string VEF = "V: " + Vertices.Count + "; F: " + Faces.Count + "; E:" + Edges.Count + "\n";
+                string HEC = "Half-edges: " + HalfEdges.Count + "; Corners: " + Corners.Count + "\n";
+                string Bounds = "Boundaries: " + Boundaries.Count + "\n";
+                string euler = "Euler characteristic: " + EulerCharacteristic + "\n";
+                string isoVert = "Isolated vertices: " + HasIsolatedVertices().ToString() + "\n";
+                string isoFace = "Isolated faces: " + HasIsolatedFaces().ToString() + "\n";
+                string manifold = "Has Non-Manifold Edges: " + HasNonManifoldEdges().ToString() + "\n";
+
+                FaceData faceData = countFaceEdges();
+                string triangles = "Tri faces: " + faceData.Triangles + "\n";
+                string quads = "Quad faces: " + faceData.Quads + "\n";
+                string ngons = "Ngon faces: " + faceData.Ngons + "\n";
+
+                string tail = "-----       -----\n\n";
+
+
+                return head + VEF + HEC + Bounds + euler + isoVert + isoFace + manifold + triangles + quads + ngons + tail;
+            }
+            #endregion
+            #region Private methods
+            private void createVertices(List<Point3d> points)
             {
                 List<HE_Vertex> verts = new List<HE_Vertex>(points.Count);
 
@@ -52,7 +220,7 @@ namespace AR_Lib
             }
 
             // Takes a List containing another List per face with the vertex indexes belonging to that face
-            bool createFaces(List<List<int>> faceIndexes)
+            private bool createFaces(List<List<int>> faceIndexes)
             {
                 Dictionary<string, int> edgeCount = new Dictionary<string, int>();
                 Dictionary<string, HE_HalfEdge> existingHalfEdges = new Dictionary<string, HE_HalfEdge>();
@@ -193,130 +361,6 @@ namespace AR_Lib
                 return true;
             }
 
-            public int EulerCharacteristic => Vertices.Count - Edges.Count + Faces.Count;
-
-            public bool HasIsolatedVertices()
-            {
-                foreach (HE_Vertex v in Vertices)
-                {
-                    if (v.IsIsolated())
-                    {
-                        return true;
-                    }
-                }
-                return false;
-            }
-
-            public bool HasIsolatedFaces()
-            {
-                foreach (HE_Face f in Faces)
-                {
-                    int boundaryEdges = 0;
-                    List<HE_HalfEdge> adjacent = f.adjacentHalfEdges();
-                    foreach (HE_HalfEdge e in adjacent)
-                    {
-                        if (e.onBoundary) boundaryEdges++;
-                    }
-                    if (boundaryEdges == adjacent.Count) return true;
-                }
-                return false;
-            }
-
-            public bool HasNonManifoldEdges()
-            {
-                return false;
-            }
-
-            public void indexElements()
-            {
-                int index = -1;
-                foreach (HE_Vertex v in Vertices) 
-                {
-                    index++;
-                    v.Index = index;
-                }
-
-                index = -1;
-                foreach (HE_Face f in Faces) {index++; f.Index = index;}
-
-                index = -1;
-                foreach (HE_HalfEdge hE in HalfEdges) {index++; hE.Index = index;}
-
-                index = -1;
-                foreach (HE_Edge e in Edges) {index++; e.Index = index;}
-
-                index = -1;
-                foreach (HE_Corner c in Corners) {index++; c.Index = index;}
-
-                index = -1;
-                foreach (HE_Face b in Boundaries) {index++; b.Index = index;}
-
-            }
-
-            public Dictionary<HE_Vertex, int> indexVertices()
-            {
-                int i = -1;
-                Dictionary<HE_Vertex, int> index = new Dictionary<HE_Vertex, int>();
-                foreach (var v in Vertices)
-                    index[v] = i++;
-                return index;
-            }
-            public Dictionary<HE_Face, int> indexFaces()
-            {
-                int i = -1;
-                Dictionary<HE_Face, int> index = new Dictionary<HE_Face, int>();
-                foreach (var v in Faces)
-                    index[v] = i++;
-                return index;
-            }
-            public Dictionary<HE_Edge, int> indexEdges()
-            {
-                int i = -1;
-                Dictionary<HE_Edge, int> index = new Dictionary<HE_Edge, int>();
-                foreach (var v in Edges)
-                    index[v] = i++;
-                return index;
-            }
-            public Dictionary<HE_HalfEdge, int> indexHalfEdes()
-            {
-                int i = -1;
-                Dictionary<HE_HalfEdge, int> index = new Dictionary<HE_HalfEdge, int>();
-                foreach (var f in HalfEdges)
-                    index[f] = i++;
-                return index;
-            }
-            public Dictionary<HE_Corner, int> indexCorners()
-            {
-                int i = -1;
-                Dictionary<HE_Corner, int> index = new Dictionary<HE_Corner, int>();
-                foreach (var f in Corners)
-                    index[f] = i++;
-                return index;
-            }
-
-            public override string ToString()
-            {
-                string head = "--- Mesh Info ---\n";
-
-                string VEF = "V: " + Vertices.Count + "; F: " + Faces.Count + "; E:" + Edges.Count + "\n";
-                string HEC = "Half-edges: " + HalfEdges.Count + "; Corners: " + Corners.Count + "\n";
-                string Bounds = "Boundaries: " + Boundaries.Count + "\n";
-                string euler = "Euler characteristic: " + EulerCharacteristic + "\n";
-                string isoVert = "Isolated vertices: " + HasIsolatedVertices().ToString() + "\n";
-                string isoFace = "Isolated faces: " + HasIsolatedFaces().ToString() + "\n";
-                string manifold = "Has Non-Manifold Edges: " + HasNonManifoldEdges().ToString() + "\n";
-
-                FaceData faceData = countFaceEdges();
-                string triangles = "Tri faces: " + faceData.Triangles + "\n";
-                string quads = "Quad faces: " + faceData.Quads + "\n";
-                string ngons = "Ngon faces: " + faceData.Ngons + "\n";
-
-                string tail = "-----       -----\n\n";
-
-
-                return head + VEF + HEC + Bounds + euler + isoVert + isoFace + manifold + triangles + quads + ngons + tail;
-            }
-            
             private FaceData countFaceEdges()
             {
                 FaceData data = new FaceData();
@@ -340,14 +384,14 @@ namespace AR_Lib
                 return data;
 
             }
-
             private struct FaceData
             {
-                public double Triangles;
-                public double Quads;
-                public double Ngons;
+                public int Triangles;
+                public int Quads;
+                public int Ngons;
             }
 
+            #endregion
         }
     }
 }
