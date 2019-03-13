@@ -85,14 +85,9 @@ namespace AR_Lib
 
 
             // Implicit conversions
-            public static implicit operator Point3d(Vector3d v)
-            {
-                return v;
-            }
-            public static implicit operator Vector3d(Point3d pt)
-            {
-                return new Vector3d(pt);
-            }
+            public static implicit operator Point3d(Vector3d v) => v;
+            
+            public static implicit operator Vector3d(Point3d pt) => new Vector3d(pt);
 
         }
 
