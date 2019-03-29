@@ -54,7 +54,7 @@ namespace AR_Lib
             return 1;
         }
     
-        public static int RayFacePerimeter(Point3d RayOrigin, Vector3d RayDir, HE_Face Face, out Point3d result)
+        public static int RayFacePerimeter(Point3d RayOrigin, Vector3d RayDir, HE_Face Face, out Point3d result, out HE_HalfEdge halfEdge)
         {
             Vector3d faceNormal = HE_MeshGeometry.FaceNormal(Face);
             Vector3d biNormal = Vector3d.CrossProduct(RayDir,faceNormal);
@@ -66,19 +66,18 @@ namespace AR_Lib
             Point3d temp = new Point3d();
 
             Line line = new Line(vertices[0], vertices[1]);
-            if(LinePlane(line, perpPlane, out temp) != 1) { result = null; return 0; } // No intersection found
-            if(temp != RayOrigin && temp != null){ result = temp; return 1; } // Intersection found
+            if(LinePlane(line, perpPlane, out temp) != 1) { result = null; halfEdge = null; return 0; } // No intersection found
+            if(temp != RayOrigin && temp != null){ result = temp; halfEdge = null; return 1; } // Intersection found
 
             line = new Line(vertices[1], vertices[2]);
-            if(LinePlane(line, perpPlane, out temp) != 1) { result = null; return 0; } // No intersection found
-            if(temp != RayOrigin && temp != null){ result = temp; return 1; } // Intersection found
+            if(LinePlane(line, perpPlane, out temp) != 1) { result = null; halfEdge = null; return 0; } // No intersection found
+            if(temp != RayOrigin && temp != null){ result = temp; halfEdge = null; return 1; } // Intersection found
 
             line = new Line(vertices[2], vertices[0]);
-            if(LinePlane(line, perpPlane, out temp) != 1) { result = null; return 0; } // No intersection found
-            if(temp != RayOrigin && temp != null){ result = temp; return 1; } // Intersection found
+            if(LinePlane(line, perpPlane, out temp) != 1) { result = null; halfEdge = null; return 0; } // No intersection found
+            if(temp != RayOrigin && temp != null){ result = temp; halfEdge = null; return 1; } // Intersection found
 
-            else{ result = null;  return 4; } // Error 4 means something weird happened!
-            
+            else{ result = null; halfEdge = null; return 4; } // Error 4 means something weird happened!
         }
     }
 }

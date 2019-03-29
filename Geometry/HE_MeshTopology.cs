@@ -121,14 +121,9 @@ namespace AR_Lib.HalfEdgeMesh
             {
                 foreach (HE_Vertex adjacent in edge.adjacentVertices())
                 {
-                    if (!EdgeVertex.ContainsKey(edge.Index))
-                    {
-                        EdgeVertex.Add(edge.Index, new List<int>() { adjacent.Index });
-                    }
-                    else
-                    {
-                        EdgeVertex[edge.Index].Add(adjacent.Index);
-                    }
+                    if (!EdgeVertex.ContainsKey(edge.Index)) EdgeVertex.Add(edge.Index, new List<int>() { adjacent.Index });
+                    else EdgeVertex[edge.Index].Add(adjacent.Index);
+                    
                 }
                 foreach (HE_Face adjacent in edge.adjacentFaces())
                 {

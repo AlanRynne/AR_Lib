@@ -26,6 +26,10 @@ namespace AR_Lib
 
 
             #region Constructors
+
+            /// <summary>
+            /// Constructs an emtpy Half-Edge Mesh
+            /// </summary>
             public HE_Mesh()
             {
                 Vertices = new List<HE_Vertex>();
@@ -37,6 +41,11 @@ namespace AR_Lib
                 Generators = new List<HE_Generators>();
             }
 
+            /// <summary>
+            /// Constructs a new Half-Edge Mesh from verticees and faces
+            /// </summary>
+            /// <param name="vertices">list of mesh vertices</param>
+            /// <param name="faceIndexes">Nested list with face vertices index</param>
             public HE_Mesh(List<Point3d> vertices, List<List<int>> faceIndexes) : this()
             {
                 //There are 3 steps for this process
@@ -46,10 +55,28 @@ namespace AR_Lib
                 createFaces(faceIndexes);
             }
 
+            /// <summary>
+            /// Constructs a new Half-Edge Mesh from an existing one
+            /// </summary>
+            /// <param name="halfEdgeMesh">Existing Half-Edge Mesh</param>
+            public HE_Mesh(HE_Mesh halfEdgeMesh)
+            {
+                Vertices = new List<HE_Vertex>(halfEdgeMesh.Vertices);
+                Edges = new List<HE_Edge>(halfEdgeMesh.Edges);
+                Faces = new List<HE_Face>(halfEdgeMesh.Faces);
+                Corners = new List<HE_Corner>(halfEdgeMesh.Corners);
+                HalfEdges = new List<HE_HalfEdge>(halfEdgeMesh.HalfEdges);
+                Boundaries = new List<HE_Face>(halfEdgeMesh.Boundaries);
+                Generators = new List<HE_Generators>(halfEdgeMesh.Generators);
+            }
+
             #endregion
 
-            #region Public methods
 
+            /// <summary>
+            /// Check if the mesh has isolated vertices
+            /// </summary>
+            /// <returns>True if there are isolated vertices, false if not</returns>
             public bool HasIsolatedVertices()
             {
                 foreach (HE_Vertex v in Vertices)
@@ -62,6 +89,10 @@ namespace AR_Lib
                 return false;
             }
 
+            /// <summary>
+            /// Check if the mesh contains isolated faces
+            /// </summary>
+            /// <returns>True if there are isolated faces, false if not</returns>
             public bool HasIsolatedFaces()
             {
                 foreach (HE_Face f in Faces)
@@ -77,37 +108,48 @@ namespace AR_Lib
                 return false;
             }
 
+            /// <summary>
+            /// Check if the mesh contains non-manifold edges
+            /// </summary>
+            /// <returns>True if there are non-manifold edges, false if not</returns>
             public bool HasNonManifoldEdges()
             {
-                return false;
+                throw new NotImplementedException();
             }
 
+            /// <summary>
+            /// Assign an index number to each mesh member
+            /// </summary>
             public void indexElements()
             {
                 int index = -1;
-                foreach (HE_Vertex v in Vertices) 
+                foreach (HE_Vertex v in Vertices)
                 {
                     index++;
                     v.Index = index;
                 }
 
                 index = -1;
-                foreach (HE_Face f in Faces) {index++; f.Index = index;}
+                foreach (HE_Face f in Faces) { index++; f.Index = index; }
 
                 index = -1;
-                foreach (HE_HalfEdge hE in HalfEdges) {index++; hE.Index = index;}
+                foreach (HE_HalfEdge hE in HalfEdges) { index++; hE.Index = index; }
 
                 index = -1;
-                foreach (HE_Edge e in Edges) {index++; e.Index = index;}
+                foreach (HE_Edge e in Edges) { index++; e.Index = index; }
 
                 index = -1;
-                foreach (HE_Corner c in Corners) {index++; c.Index = index;}
+                foreach (HE_Corner c in Corners) { index++; c.Index = index; }
 
                 index = -1;
-                foreach (HE_Face b in Boundaries) {index++; b.Index = index;}
+                foreach (HE_Face b in Boundaries) { index++; b.Index = index; }
 
             }
 
+            /// <summary>
+            /// Assign an index to each vertex of the mesh
+            /// </summary>
+            /// <returns>Dictionary containing Vertex<->Index assignments</returns>
             public Dictionary<HE_Vertex, int> indexVertices()
             {
                 int i = -1;
@@ -116,6 +158,11 @@ namespace AR_Lib
                     index[v] = i++;
                 return index;
             }
+
+            /// <summary>
+            /// Assign an index to each face of the mesh
+            /// </summary>
+            /// <returns>Dictionary containing Face<->Index assignments</returns>
             public Dictionary<HE_Face, int> indexFaces()
             {
                 int i = -1;
@@ -124,6 +171,11 @@ namespace AR_Lib
                     index[v] = i++;
                 return index;
             }
+
+            /// <summary>
+            /// Assign an index to each edge of the mesh
+            /// </summary>
+            /// <returns>Dictionary containing Edge<->Index assignments</returns>
             public Dictionary<HE_Edge, int> indexEdges()
             {
                 int i = -1;
@@ -132,6 +184,11 @@ namespace AR_Lib
                     index[v] = i++;
                 return index;
             }
+
+            /// <summary>
+            /// Assign an index to each Half-Edge of the mesh
+            /// </summary>
+            /// <returns>Dictionary containing Half-Edge<->Index assignments</returns>
             public Dictionary<HE_HalfEdge, int> indexHalfEdes()
             {
                 int i = -1;
@@ -140,6 +197,11 @@ namespace AR_Lib
                     index[f] = i++;
                 return index;
             }
+
+            /// <summary>
+            /// Assign an index to each corner of the mesh
+            /// </summary>
+            /// <returns>Dictionary containing Corner<->Index assignments</returns>
             public Dictionary<HE_Corner, int> indexCorners()
             {
                 int i = -1;
@@ -149,30 +211,38 @@ namespace AR_Lib
                 return index;
             }
 
-            /// Topology related methods
-            public bool isTriangularMesh(){
+            #region Topology related methods
+            public bool isTriangularMesh()
+            {
                 if (isMesh() == isMeshResult.Triangular) return true;
                 else return false;
             }
-            public bool isQuadMesh(){
+            public bool isQuadMesh()
+            {
                 if (isMesh() == isMeshResult.Quad) return true;
                 else return false;
             }
-            public bool isNgonMesh(){
+            public bool isNgonMesh()
+            {
                 if (isMesh() == isMeshResult.Ngon) return true;
                 else return false;
             }
-            
+
             /// <summary>
             /// Returns an enum corresponding to the mesh face topology  (triangular, quad or ngon).
             /// </summary>
-            private isMeshResult isMesh(){
+            private isMeshResult isMesh()
+            {
                 var count = countFaceEdges();
-                if(count.Triangles == this.Faces.Count) return isMeshResult.Triangular;
-                if(count.Quads == this.Faces.Count) return isMeshResult.Quad;
-                if(count.Ngons != 0) return isMeshResult.Ngon;
+                if (count.Triangles == this.Faces.Count) return isMeshResult.Triangular;
+                if (count.Quads == this.Faces.Count) return isMeshResult.Quad;
+                if (count.Ngons != 0) return isMeshResult.Ngon;
                 else return isMeshResult.ERROR;
             }
+
+            /// <summary>
+            /// Type of mesh (Triangular, Quad, Ngon or Error)
+            /// </summary>
             private enum isMeshResult
             {
                 Triangular,
@@ -180,7 +250,9 @@ namespace AR_Lib
                 Ngon,
                 ERROR
             }
-            
+
+            #endregion
+
             /// Utility methods
 
             public override string ToString()
@@ -205,7 +277,7 @@ namespace AR_Lib
 
                 return head + VEF + HEC + Bounds + euler + isoVert + isoFace + manifold + triangles + quads + ngons + tail;
             }
-            #endregion
+
             #region Private methods
             private void createVertices(List<Point3d> points)
             {
@@ -226,14 +298,14 @@ namespace AR_Lib
                 Dictionary<string, HE_HalfEdge> existingHalfEdges = new Dictionary<string, HE_HalfEdge>();
                 Dictionary<HE_HalfEdge, bool> hasTwinHalfEdge = new Dictionary<HE_HalfEdge, bool>();
                 // Create the faces, edges and half-edges, non-boundary loops and link references when possible;
-                foreach ( List<int> indexes in faceIndexes )
+                foreach (List<int> indexes in faceIndexes)
                 {
                     HE_Face f = new HE_Face();
                     Faces.Add(f);
 
                     List<HE_HalfEdge> tempHEdges = new List<HE_HalfEdge>(indexes.Count);
                     //Create empty half-edges
-                    for (int i = 0 ;i < indexes.Count; i++)
+                    for (int i = 0; i < indexes.Count; i++)
                     {
                         HE_HalfEdge h = new HE_HalfEdge();
                         tempHEdges.Add(h);

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Collections;
+
 using AR_Lib.Geometry;
 using AR_Lib.HalfEdgeMesh;
 
@@ -14,6 +15,8 @@ namespace AR_Lib.IO
     public static class CSVWritter { }
 
     /// OFF format
+
+    /// <summary>OFF Reader class</summary>
     public static class OFFReader
     {
         public static OFFResult ReadMeshFromFile(string FilePath, out OFFMeshData data)
@@ -83,8 +86,16 @@ namespace AR_Lib.IO
         }
     }
 
+
+    /// <summary>Writter class</summary>
     public static class OFFWritter
     {
+        /// <summary>
+        /// Write a Half-Edge mesh to a .OFF file
+        /// </summary>
+        /// <param name="mesh">Half-edge mesh to export</param>
+        /// <param name="filePath">Path to save the file to</param>
+        /// <returns></returns>
         public static OFFResult WriteMeshToFile(HE_Mesh mesh, string filePath)
         {
             string[] offLines = new string[mesh.Vertices.Count+mesh.Faces.Count+2];
@@ -122,7 +133,9 @@ namespace AR_Lib.IO
             return OFFResult.OK;
         }
     }
-
+    /// <summary>
+    /// Enum containing the result of the OFF conversion
+    /// </summary>
     public enum OFFResult
     {
         OK,
@@ -133,12 +146,17 @@ namespace AR_Lib.IO
         Non_Matching_Faces_Size,
         File_Not_Found
     }
+
+    /// <summary>
+    /// Struct containing the resulting mesh data extracted from an .OFF file
+    /// </summary>
     public struct OFFMeshData
     {
         public List<Point3d> vertices;
         public List<List<int>> faces;
     }
 
+    
     public struct OBJMeshData
     {
         public List<Point3d> vertices;
@@ -224,13 +242,13 @@ namespace AR_Lib.IO
     //     }
     // }
 
-    public static class DynamoIO
-    {
-        public static object ToDynamoMesh(HE_Mesh mesh) { throw new NotImplementedException(); }
+    // public static class DynamoIO
+    // {
+    //     public static object ToDynamoMesh(HE_Mesh mesh) { throw new NotImplementedException(); }
 
-        public static HE_Mesh FromRhinoMesh(object dynamoMesh) { throw new NotImplementedException(); }
+    //     public static HE_Mesh FromRhinoMesh(object dynamoMesh) { throw new NotImplementedException(); }
 
-    }
+    // }
 
     #endregion
 }
