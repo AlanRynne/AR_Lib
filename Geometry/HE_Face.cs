@@ -91,14 +91,13 @@ namespace AR_Lib
             public override string ToString()
             {
                 List<HE_Vertex> faceVertices = this.adjacentVertices();
-                string text = "F{ ";
+                string text = "F";
                 foreach (HE_Vertex v in faceVertices)
                 {
                     text += " ";
                     text += v.Index;
 
                 }
-                text += "}";
                 return text;
             }
 

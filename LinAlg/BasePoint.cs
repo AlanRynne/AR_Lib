@@ -1,18 +1,20 @@
-﻿namespace AR_Lib.Geometry
+﻿using System;
+
+namespace AR_Lib.Geometry
 {
     public abstract class BasePoint
     {
         // Public properties
-        public double X { get { isUnset = false; return x; } set => x = value; }
-        public double Y { get { isUnset = false; return y; } set => y = value; }
-        public double Z { get { isUnset = false; return z; } set => z = value; }
+        public double X { get { return x; } set { if (isUnset) isUnset = false; x = value; } }
+        public double Y { get { return y; } set { if (isUnset) isUnset = false; y = value; } }
+        public double Z { get { return z; } set { if (isUnset) isUnset = false; z = value; } }
         public bool IsUnset { get => isUnset; }
 
         // Private parameters
-        private double x;
-        private double y;
-        private double z;
-        private bool isUnset;
+        protected double x;
+        protected double y;
+        protected double z;
+        protected bool isUnset;
 
         //Constructors
 
@@ -72,6 +74,37 @@
 
         public override string ToString() => "{ " + x + ", " + y + ", " + z + " }";
         public double[] ToArray() => new double[] { x, y, z };
+
+        // Override Methods
+        public override bool Equals(object obj)
+        {
+            if (obj is Point3d)
+            {
+                Point3d pt = (Point3d)obj;
+                if (Math.Abs(this.X - pt.X) < 0.000001 && Math.Abs(this.Y - pt.Y) < 0.000001 && Math.Abs(this.Z - pt.Z) < 0.000001) { return true; }
+                else { return false; }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                // Choose large primes to avoid hashing collisions
+                const int HashingBase = (int)2166136261;
+                const int HashingMultiplier = 16777619;
+
+                int hash = HashingBase;
+                hash = (hash * HashingMultiplier) ^ (!Object.ReferenceEquals(null, X) ? X.GetHashCode() : 0);
+                hash = (hash * HashingMultiplier) ^ (!Object.ReferenceEquals(null, Y) ? Y.GetHashCode() : 0);
+                hash = (hash * HashingMultiplier) ^ (!Object.ReferenceEquals(null, Z) ? Z.GetHashCode() : 0);
+                return hash;
+            }
+        }
 
     }
 }

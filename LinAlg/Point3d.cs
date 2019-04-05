@@ -7,9 +7,6 @@ namespace AR_Lib
     {
         public class Point3d : BasePoint
         {
-            //Public properties
-            public bool isUnset;
-
             //Constructors
             public Point3d() : base() { }
 
@@ -50,43 +47,23 @@ namespace AR_Lib
             // Override Methods
             public override bool Equals(object obj)
             {
-                if (obj is Point3d)
-                {
-                    Point3d pt = (Point3d)obj;
-                    if (Math.Abs(this.X - pt.X) < 0.000001 && Math.Abs(this.Y - pt.Y) < 0.000001 && Math.Abs(this.Z - pt.Z) < 0.000001) { return true; }
-                    else { return false; }
-                }
-                else
-                {
-                    return false;
-                }
+                return base.Equals(obj);
             }
 
             public override int GetHashCode()
             {
-                unchecked
-                {
-                    // Choose large primes to avoid hashing collisions
-                    const int HashingBase = (int)2166136261;
-                    const int HashingMultiplier = 16777619;
-
-                    int hash = HashingBase;
-                    hash = (hash * HashingMultiplier) ^ (!Object.ReferenceEquals(null, X) ? X.GetHashCode() : 0);
-                    hash = (hash * HashingMultiplier) ^ (!Object.ReferenceEquals(null, Y) ? Y.GetHashCode() : 0);
-                    hash = (hash * HashingMultiplier) ^ (!Object.ReferenceEquals(null, Z) ? Z.GetHashCode() : 0);
-                    return hash;
-                }
+                return base.GetHashCode();
             }
 
             public override string ToString()
             {
-                return base.ToString();
+                return "Point3d" + base.ToString();
             }
 
 
             // Implicit conversions
             public static implicit operator Point3d(Vector3d v) => v;
-            
+
             public static implicit operator Vector3d(Point3d pt) => new Vector3d(pt);
 
         }

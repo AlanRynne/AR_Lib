@@ -5,7 +5,7 @@ using AR_Lib.Geometry;
 namespace AR_Lib.HalfEdgeMesh
 {
     /// <summary>
-    /// Vertex class 
+    /// Vertex class
     /// Inherits from AR_Point
     /// </summary>
    public class HE_Vertex : Point3d
@@ -64,7 +64,7 @@ namespace AR_Lib.HalfEdgeMesh
             while (_halfEdge != this.HalfEdge);
 
             return _halfEdges;
-            
+
         }
 
         // Returns a list with all adjacent HE_Face of a vertex
@@ -92,7 +92,7 @@ namespace AR_Lib.HalfEdgeMesh
                 _vertices.Add(_halfEdge.Twin.Vertex);
                 _halfEdge = _halfEdge.Twin.Next;
             } while (_halfEdge != this.HalfEdge);
-              
+
             return _vertices;
         }
 

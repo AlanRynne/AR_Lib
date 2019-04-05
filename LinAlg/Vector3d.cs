@@ -14,8 +14,8 @@ namespace AR_Lib
             public Vector3d(double xCoord, double yCoord, double zCoord) : base(xCoord, yCoord, zCoord) { }
 
             // Operators
-           public static Vector3d operator +(Vector3d v, Vector3d point2) => new Vector3d(v.X + point2.X, v.Y + point2.Y, v.Z + point2.Z);
-            public static Vector3d operator -(Vector3d v, Vector3d point2) => new Vector3d(v.X - point2.X, v.Y - point2.Y, v.Z - point2.Z); 
+            public static Vector3d operator +(Vector3d v, Vector3d point2) => new Vector3d(v.X + point2.X, v.Y + point2.Y, v.Z + point2.Z);
+            public static Vector3d operator -(Vector3d v, Vector3d point2) => new Vector3d(v.X - point2.X, v.Y - point2.Y, v.Z - point2.Z);
             public static Vector3d operator *(Vector3d v, double scalar) => new Vector3d(v.X * scalar, v.Y * scalar, v.Z * scalar);
             public static Vector3d operator *(double scalar, Vector3d v) => new Vector3d(v.X * scalar, v.Y * scalar, v.Z * scalar);
             public static Vector3d operator -(Vector3d v) => new Vector3d(-v.X, -v.Y, -v.Z);
@@ -26,7 +26,7 @@ namespace AR_Lib
             // Computes the Euclidiean length squared of this vector
             public double Norm2 => DotProduct(this, this);
             // Computes the Euclidean length of this vector
-            public double Norm => Math.Sqrt(Norm2); 
+            public double Norm => Math.Sqrt(Norm2);
 
             // Divides this vector by it's euclidean length
             public void Normalize()
@@ -41,9 +41,9 @@ namespace AR_Lib
             public Vector3d Unit()
             {
                 double length = Norm;
-                double x = X/length;
-                double y = Y/length;
-                double z = Z/length;
+                double x = X / length;
+                double y = Y / length;
+                double z = Z / length;
                 return new Vector3d(x, y, z);
             }
 
@@ -59,6 +59,8 @@ namespace AR_Lib
                 // Dot product = u1*v1 + u2*v2 + u3*v3
                 return u.X * v.X + u.Y * v.Y + u.Z * v.Z;
             }
+
+
             public static Vector3d CrossProduct(Vector3d u, Vector3d v)
             {
                 double x = u.Y * v.Z - u.Z * v.Y;
@@ -81,39 +83,19 @@ namespace AR_Lib
             // Overrided methods
             public override bool Equals(object obj)
             {
-                if (obj is Vector3d)
-                {
-                    Vector3d pt = (Vector3d)obj;
-                    if (Math.Abs(this.X - pt.X) < 0.000001 && Math.Abs(this.Y - pt.Y) < 0.000001 && Math.Abs(this.Z - pt.Z) < 0.000001) { return true; }
-                    else { return false; }
-                }
-                else
-                {
-                    return false;
-                }
+                return base.Equals(obj);
             }
 
             public override string ToString()
             {
-                return base.ToString();
+                return "Vector3d" + base.ToString();
             }
 
             public override int GetHashCode()
             {
-                unchecked
-                {
-                    // Choose large primes to avoid hashing collisions
-                    const int HashingBase = (int)2166136261;
-                    const int HashingMultiplier = 16777619;
-
-                    int hash = HashingBase;
-                    hash = (hash * HashingMultiplier) ^ (!Object.ReferenceEquals(null, X) ? X.GetHashCode() : 0);
-                    hash = (hash * HashingMultiplier) ^ (!Object.ReferenceEquals(null, Y) ? Y.GetHashCode() : 0);
-                    hash = (hash * HashingMultiplier) ^ (!Object.ReferenceEquals(null, Z) ? Z.GetHashCode() : 0);
-                    return hash;
-                }
+                return base.GetHashCode();
             }
-        
+
 
         }
 

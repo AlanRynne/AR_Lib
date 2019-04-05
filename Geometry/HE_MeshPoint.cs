@@ -10,7 +10,7 @@ namespace AR_Lib.HalfEdgeMesh
         public double U;
         public double V;
         public double W;
- 
+
         public HE_MeshPoint(int faceIndex, double u, double v, double w)
         {
             FaceIndex = faceIndex;
@@ -30,7 +30,7 @@ namespace AR_Lib.HalfEdgeMesh
 
         public override string ToString()
         {
-            return "{ " + FaceIndex + "; " + U + ", " + V + ", " + W + " }";
+            return "MeshPoint{ " + FaceIndex + "; " + U + ", " + V + ", " + W + " }";
         }
 
 

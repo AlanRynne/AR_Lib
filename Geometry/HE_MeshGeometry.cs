@@ -9,9 +9,6 @@ namespace AR_Lib.Geometry
     /// </summary>
     public static class HE_MeshGeometry
     {
-        /// <summary>
-        /// Normalize positions of mesh.
-        /// </summary>
 
         /// <summary>
         /// Calculate the vector of a specified half-edge.
@@ -26,13 +23,13 @@ namespace AR_Lib.Geometry
         /// <returns>The length.</returns>
         /// <param name="edge">Edge.</param>
         public static double Length(HE_Edge edge) => Vector(edge.HalfEdge).Norm;
-        
+
         /// <summary>
         /// Calculates the midpoint of the specifiec edge.
         /// </summary>
         /// <returns>The point.</returns>
         /// <param name="edge">Edge.</param>
-        public static Point3d MidPoint(HE_Edge edge) 
+        public static Point3d MidPoint(HE_Edge edge)
         {
             HE_HalfEdge halfEdge = edge.HalfEdge;
             Point3d a = halfEdge.Vertex;
@@ -81,7 +78,7 @@ namespace AR_Lib.Geometry
         /// </summary>
         /// <returns>The normal.</returns>
         /// <param name="face">Face.</param>
-        public static Vector3d FaceNormal(HE_Face face) 
+        public static Vector3d FaceNormal(HE_Face face)
         {
             if (face.isBoundaryLoop()) return null;
 
@@ -133,7 +130,7 @@ namespace AR_Lib.Geometry
 
             return x + a;
         }
-    
+
         /// <summary>
         /// Compute the orthonormal bases of the specified face
         /// </summary>
@@ -147,7 +144,7 @@ namespace AR_Lib.Geometry
 
             return new Vector3d[]{ e1 , e2 };
         }
-    
+
         /// <summary>
         /// Compute the angle (in radians) at the specified corner
         /// </summary>
@@ -158,9 +155,9 @@ namespace AR_Lib.Geometry
             Vector3d u = Vector(corner.HalfEdge.Prev).Unit();
             Vector3d v = (-Vector(corner.HalfEdge.Next).Unit());
 
-            return Math.Acos(Math.Max(-1, Math.Min(1.0, u.Dot(v))));              
+            return Math.Acos(Math.Max(-1, Math.Min(1.0, u.Dot(v))));
         }
-    
+
         /// <summary>
         /// Computes the cotangent of the angle opposite to a halfedge.
         /// </summary>
@@ -176,7 +173,7 @@ namespace AR_Lib.Geometry
             return u.Dot(v) / u.Cross(v).Norm;
 
         }
-    
+
         /// <summary>
         /// Computes the signed angle (in radians) between the faces adjacent to the specified half-edge.
         /// </summary>
@@ -207,7 +204,7 @@ namespace AR_Lib.Geometry
             foreach (HE_Face f in vertex.adjacentFaces()) area += Area(f);
             return area;
         }
-    
+
         /// <summary>
         /// Computes the circumcentric dual area around a given mesh vertex.
         /// </summary>
@@ -227,13 +224,13 @@ namespace AR_Lib.Geometry
             }
             return area;
         }
-    
+
         /// <summary>
         /// Computes the equally weighted normal arround the specified vertex
         /// </summary>
         /// <returns>The normal vector.</returns>
         /// <param name="vertex">Vertex.</param>
-        public static Vector3d VertexNormalEquallyWeighted(HE_Vertex vertex) 
+        public static Vector3d VertexNormalEquallyWeighted(HE_Vertex vertex)
         {
             Vector3d n = new Vector3d();
             foreach (HE_Face f in vertex.adjacentFaces()) n += FaceNormal(f);
@@ -241,7 +238,7 @@ namespace AR_Lib.Geometry
             return n.Unit();
         }
 
-        public static Vector3d VertexNormalAreaWeighted(HE_Vertex vertex) 
+        public static Vector3d VertexNormalAreaWeighted(HE_Vertex vertex)
         {
             Vector3d n = new Vector3d();
             foreach(HE_Face f in vertex.adjacentFaces())
@@ -254,7 +251,7 @@ namespace AR_Lib.Geometry
             return n.Unit();
         }
 
-        public static Vector3d VertexNormalAngleWeighted(HE_Vertex vertex) 
+        public static Vector3d VertexNormalAngleWeighted(HE_Vertex vertex)
         {
             Vector3d n = new Vector3d();
             foreach (HE_Corner c in vertex.adjacentCorners())
@@ -267,8 +264,8 @@ namespace AR_Lib.Geometry
             return n.Unit();
         }
 
-        public static Vector3d VertexNormalGaussCurvature(HE_Vertex vertex) 
-        { 
+        public static Vector3d VertexNormalGaussCurvature(HE_Vertex vertex)
+        {
             Vector3d n = new Vector3d();
             foreach (HE_HalfEdge hE in vertex.adjacentHalfEdges())
             {
@@ -278,7 +275,7 @@ namespace AR_Lib.Geometry
             return n.Unit();
         }
 
-        public static Vector3d VertexNormalMeanCurvature(HE_Vertex vertex) 
+        public static Vector3d VertexNormalMeanCurvature(HE_Vertex vertex)
         {
             Vector3d n = new Vector3d();
             foreach (HE_HalfEdge hE in vertex.adjacentHalfEdges())
