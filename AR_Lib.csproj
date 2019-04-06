@@ -1,16 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <!-- Target Framework -->
+
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <!-- Add Nuget Packages and other  dependencies -->
+
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
   </ItemGroup>
 
   <!-- Add resource files -->
+
   <ItemGroup>
     <Content Remove="Data\Settings.json" />
   </ItemGroup>
@@ -20,6 +23,7 @@
   </ItemGroup>
 
   <!-- Export XML coments on build -->
+
   <!-- <PropertyGroup>
   <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup> -->
