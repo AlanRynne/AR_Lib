@@ -5,36 +5,13 @@ using AR_Lib.LinearAlgebra;
 
 namespace AR_Lib.Geometry.Nurbs
 {
-    public class Point4d : Point3d
-    {
-        public double Weight { get => weight; set { weight = value; if (isUnset) isUnset = false; } }
-
-        private double weight;
-
-        // Constructors
-        public Point4d() : base()
-        {
-            weight = 0;
-        }
-        public Point4d(double x, double y, double z, double w) : base(x, y, z)
-        {
-            weight = w;
-        }
-
-        public Point4d(Point3d pt, double w) : base(pt)
-        {
-            weight = w;
-        }
-
-
-    }
-
     public class Surface
     {
         // TODO: Check for license? Make sure of this part
         // This class is implemented based on the explanation on NURBS found at:
         // https://www.gamasutra.com/view/feature/131808/using_nurbs_surfaces_in_realtime_.php?page=4
         #region Public Fields
+
         public int UDegree { get => uDegree; set => uDegree = value; }
         public int VDegree { get => vDegree; set => vDegree = value; }
         public List<Point4d> ControlPoints { get => controlPoints; set => controlPoints = value; }
@@ -47,18 +24,18 @@ namespace AR_Lib.Geometry.Nurbs
         #region Private Properties
 
         // Integer properties
-        int uDegree, vDegree;
-        int uOrder, vOrder;
-        int uKnotCount, vKnotCount;
-        int uControlPointCount, vControlPointCount;
-        int uBasisSpanCount, vBasisSpanCount;
-        int uTessellationCount, vTessellationCount;
+        int uDegree, vDegree; // Surface degrees
+        int uOrder, vOrder; // Surface order
+        int uKnotCount, vKnotCount; // Knot count in each direction
+        int uControlPointCount, vControlPointCount; // Control point count in each direction
+        int uBasisSpanCount, vBasisSpanCount; // Basis span count in each direction
+        int uTessellationCount, vTessellationCount; // Tesselation count in each direction (for rendering)
 
         // Collection properties
-        List<Point4d> controlPoints;
-        List<double> uBasisCoefficients, vBasisCoefficients;
-        List<double> uKnots, vKnots;
-        List<double> uBasis, duBasis, vBasis, dvBasis;
+        List<Point4d> controlPoints; //TODO: This should actually be a Matrix<T>
+        List<double> uBasisCoefficients, vBasisCoefficients; // Computed basis coefficients
+        List<double> uKnots, vKnots; // Knot values in each direction
+        List<double> uBasis, duBasis, vBasis, dvBasis; 
         List<Point4d> uTemp, duTemp;
         List<int> uTessKnotSpan, vTessKnotSpan;
         List<Point3d> pVertices;
@@ -73,7 +50,7 @@ namespace AR_Lib.Geometry.Nurbs
         #region Constructors
 
         // TODO: Implement constructors
-        public Surface(int uDeg, int vDeg, int uCntrPts, int vCntrlPts, List<Point4d> cntrlPts, List<double> uKnotsValues, List<double> vKnotsValues, int uTesselations, int vTesselations)
+        public Surface(int uDeg, int vDeg, int uCntrPts, int vCntrlPts, List<Point4d> cntrlPts, List<double> uKnotsValues, List<double> vKnotsValues, int uTessellations, int vTessellations)
         {
             //Assign incoming values
             uDegree = uDeg;
@@ -83,16 +60,16 @@ namespace AR_Lib.Geometry.Nurbs
             controlPoints = cntrlPts;
             uKnots = uKnotsValues;
             vKnots = vKnotsValues;
-            uTessellationCount = uTesselations;
-            vTessellationCount = vTesselations;
 
             //Compute some useful property values
             uOrder = uDegree + 1;
             vOrder = vDegree + 1;
-            uBasisSpanCount = uOrder + uControlPointCount;
-            vBasisSpanCount = vOrder + vControlPointCount;
+
             uKnotCount = uOrder + uControlPointCount;
             vKnotCount = vOrder + vControlPointCount;
+
+            uBasisSpanCount = uOrder - 2 + uControlPointCount;
+            vBasisSpanCount = vOrder - 2 + vControlPointCount;
 
             // Initialize empty objects
             uBasisCoefficients = new List<double>();
@@ -111,7 +88,7 @@ namespace AR_Lib.Geometry.Nurbs
 
             ComputeBasisCoefficients();
 
-            SetTesselations(uTessellationCount, vTessellationCount);
+            SetTesselations(uTessellations, vTessellations);
 
         }
 
@@ -182,8 +159,9 @@ namespace AR_Lib.Geometry.Nurbs
                 {
                     for (k = 0; k < uOrder; k++)
                     {
-                        uBasisCoefficients[(i * uOrder + j) * uOrder + k] =
-                            ComputeCoefficient(uKnots, i + uDegree, i + j, uDegree, k);
+                        //uBasisCoefficients[(i * uOrder + j) * uOrder + k] =
+                        uBasisCoefficients.Add(
+                            ComputeCoefficient(uKnots, i + uDegree, i + j, uDegree, k));
                     }
                 }
             }
@@ -194,8 +172,10 @@ namespace AR_Lib.Geometry.Nurbs
                 {
                     for (k = 0; k < vOrder; k++)
                     {
-                        vBasisCoefficients[(i * vOrder + j) * vOrder + k] =
-                            ComputeCoefficient(vKnots, i + vDegree, i + j, vDegree, k);
+                        // vBasisCoefficients[(i * vOrder + j) * vOrder + k] =
+                        //     ComputeCoefficient(vKnots, i + vDegree, i + j, vDegree, k);
+                        vBasisCoefficients.Add(
+                            ComputeCoefficient(vKnots, i + vDegree, i + j, vDegree, k));
                     }
                 }
             }
@@ -221,15 +201,17 @@ namespace AR_Lib.Geometry.Nurbs
                 while ((idx < uKnotCount - uDegree * 2 - 2) && (u >= uKnots[idx + uDegree + 1]))
                     idx++;
 
-                uTessKnotSpan[i] = idx + uDegree;
+                uTessKnotSpan.Add(idx + uDegree);
 
                 //
                 // Evaluate using Horner's method
                 //
                 for (j = 0; j < uOrder; j++)
                 {
-                    uBasis[(i * uOrder + j) * SIMD_SIZE] = uBasisCoefficients[(idx * uOrder + j) * uOrder + uDegree];
-                    duBasis[(i * uOrder + j) * SIMD_SIZE] = uBasis[(i * uOrder + j) * SIMD_SIZE] * uDegree;
+                    //uBasis[(i * uOrder + j) * SIMD_SIZE] = uBasisCoefficients[(idx * uOrder + j) * uOrder + uDegree];
+                    //duBasis[(i * uOrder + j) * SIMD_SIZE] = uBasis[(i * uOrder + j) * SIMD_SIZE] * uDegree;
+                    uBasis.Add(uBasisCoefficients[(idx * uOrder + j) * uOrder + uDegree]);
+                    duBasis.Add(uBasis[(i * uOrder + j) * SIMD_SIZE] * uDegree);
                     for (k = uDegree - 1; k >= 0; k--)
                     {
                         uBasis[(i * uOrder + j) * SIMD_SIZE] = uBasis[(i * uOrder + j) * SIMD_SIZE] * u +
@@ -261,15 +243,18 @@ namespace AR_Lib.Geometry.Nurbs
                 while ((idx < vKnotCount - vDegree * 2 - 2) && (v >= vKnots[idx + vDegree + 1]))
                     idx++;
 
-                vTessKnotSpan[i] = idx + vDegree;
+                //vTessKnotSpan[i] = idx + vDegree;
+                vTessKnotSpan.Add(idx + vDegree);
 
                 //
                 // Evaluate using Horner's method
                 //
                 for (j = 0; j < vOrder; j++)
                 {
-                    vBasis[(i * vOrder + j) * SIMD_SIZE] = vBasisCoefficients[(idx * vOrder + j) * vOrder + vDegree];
-                    dvBasis[(i * vOrder + j) * SIMD_SIZE] = vBasis[(i * vOrder + j) * SIMD_SIZE] * vDegree;
+                    // vBasis[(i * vOrder + j) * SIMD_SIZE] = vBasisCoefficients[(idx * vOrder + j) * vOrder + vDegree];
+                    // dvBasis[(i * vOrder + j) * SIMD_SIZE] = vBasis[(i * vOrder + j) * SIMD_SIZE] * vDegree;
+                    vBasis.Add(vBasisCoefficients[(idx * vOrder + j) * vOrder + vDegree]);
+                    dvBasis.Add(vBasis[(i * vOrder + j) * SIMD_SIZE] * vDegree);
                     for (k = vDegree - 1; k >= 0; k--)
                     {
                         vBasis[(i * vOrder + j) * SIMD_SIZE] = vBasis[(i * vOrder + j) * SIMD_SIZE] * v +
@@ -297,10 +282,10 @@ namespace AR_Lib.Geometry.Nurbs
                 //
                 // Overwrite all entities with emepty values
                 //
-                uBasis = new List<double>(uOrder * SIMD_SIZE * (uTessellationCount + 1));
-                vBasis = new List<double>(vOrder * SIMD_SIZE * (vTessellationCount + 1));
-                duBasis = new List<double>(uOrder * SIMD_SIZE * (uTessellationCount + 1));
-                dvBasis = new List<double>(vOrder * SIMD_SIZE * (vTessellationCount + 1));
+                uBasis = new List<double>(uOrder * (uTessellationCount + 1));
+                vBasis = new List<double>(vOrder * (vTessellationCount + 1));
+                duBasis = new List<double>(uOrder * (uTessellationCount + 1));
+                dvBasis = new List<double>(vOrder * (vTessellationCount + 1));
 
                 uTessKnotSpan = new List<int>(uTessellationCount + 1);
                 vTessKnotSpan = new List<int>(vTessellationCount + 1);
@@ -314,7 +299,7 @@ namespace AR_Lib.Geometry.Nurbs
                 EvaluateBasisFunctions();
             }
         }
-        public void TesselateSurface()
+        public void TessellateSurface()
         {
             List<Point4d> pControlPoints = controlPoints;
             int u, v, k, l;
@@ -361,10 +346,21 @@ namespace AR_Lib.Geometry.Nurbs
                         for (k = 0; k <= vDegree; k++)
                         {
                             iCPOffset = (uKnot - uDegree) * vControlPointCount + (vKnot - vDegree);
+
+                            // UTemp[k].X = uBasis[uidx] * pControlPoints[iCPOffset + k].X;
+                            // UTemp[k].Y = uBasis[uidx] * pControlPoints[iCPOffset + k].Y;
+                            // UTemp[k].Z = uBasis[uidx] * pControlPoints[iCPOffset + k].Z;
+                            // UTemp[k].Weight = uBasis[uidx] * pControlPoints[iCPOffset + k].Weight;
+                            UTemp.Add(new Point4d());
                             UTemp[k].X = uBasis[uidx] * pControlPoints[iCPOffset + k].X;
                             UTemp[k].Y = uBasis[uidx] * pControlPoints[iCPOffset + k].Y;
                             UTemp[k].Z = uBasis[uidx] * pControlPoints[iCPOffset + k].Z;
                             UTemp[k].Weight = uBasis[uidx] * pControlPoints[iCPOffset + k].Weight;
+                            // dUTemp[k].X = duBasis[uidx] * pControlPoints[iCPOffset + k].X;
+                            // dUTemp[k].Y = duBasis[uidx] * pControlPoints[iCPOffset + k].Y;
+                            // dUTemp[k].Z = duBasis[uidx] * pControlPoints[iCPOffset + k].Z;
+                            // dUTemp[k].Weight = duBasis[uidx] * pControlPoints[iCPOffset + k].Weight;
+                            dUTemp.Add(new Point4d());
                             dUTemp[k].X = duBasis[uidx] * pControlPoints[iCPOffset + k].X;
                             dUTemp[k].Y = duBasis[uidx] * pControlPoints[iCPOffset + k].Y;
                             dUTemp[k].Z = duBasis[uidx] * pControlPoints[iCPOffset + k].Z;
@@ -373,10 +369,12 @@ namespace AR_Lib.Geometry.Nurbs
                             for (l = 1; l <= uDegree; l++)
                             {
                                 iCPOffset += vControlPointCount;
+
                                 UTemp[k].X += uBasis[uidx + l * SIMD_SIZE] * pControlPoints[iCPOffset + k].X;
                                 UTemp[k].Y += uBasis[uidx + l * SIMD_SIZE] * pControlPoints[iCPOffset + k].Y;
                                 UTemp[k].Z += uBasis[uidx + l * SIMD_SIZE] * pControlPoints[iCPOffset + k].Z;
                                 UTemp[k].Weight += uBasis[uidx + l * SIMD_SIZE] * pControlPoints[iCPOffset + k].Weight;
+
                                 dUTemp[k].X += duBasis[uidx + l * SIMD_SIZE] * pControlPoints[iCPOffset + k].X;
                                 dUTemp[k].Y += duBasis[uidx + l * SIMD_SIZE] * pControlPoints[iCPOffset + k].Y;
                                 dUTemp[k].Z += duBasis[uidx + l * SIMD_SIZE] * pControlPoints[iCPOffset + k].Z;
@@ -405,15 +403,14 @@ namespace AR_Lib.Geometry.Nurbs
                     }
 
                     // rhw is the factor to multiply by inorder to bring the 4-D points back into 3-D
-                    rhw = 1.0f / Pw.Weight;
+                    rhw = 1.0 / Pw.Weight;
                     Pw.X = Pw.X * rhw;
                     Pw.Y = Pw.Y * rhw;
                     Pw.Z = Pw.Z * rhw;
 
                     // Store the vertex position.
-                    pVertices[idx].X = Pw.X;
-                    pVertices[idx].Y = Pw.Y;
-                    pVertices[idx].Z = Pw.Z;
+                    pVertices.Add(new Point3d(Pw));
+
                 }
             }
 

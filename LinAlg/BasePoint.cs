@@ -78,9 +78,9 @@ namespace AR_Lib.Geometry
         // Override Methods
         public override bool Equals(object obj)
         {
-            if (obj is Point3d)
+            if (obj is BasePoint)
             {
-                Point3d pt = (Point3d)obj;
+                BasePoint pt = (BasePoint)obj;
                 if (Math.Abs(this.X - pt.X) < 0.000001 && Math.Abs(this.Y - pt.Y) < 0.000001 && Math.Abs(this.Z - pt.Z) < 0.000001) { return true; }
                 else { return false; }
             }

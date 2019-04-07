@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace AR_Lib
+namespace AR_Lib.Collections
 {
     public class Matrix<T>
     {
