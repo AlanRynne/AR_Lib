@@ -82,6 +82,8 @@ namespace AR_Lib.Collections
         public void FlipMatrix()
         {
             //TODO: Implement FlipMatrix()
+
+            throw new NotImplementedException();
         }
 
 
@@ -138,11 +140,10 @@ namespace AR_Lib.Collections
         /// <returns>List of all neighbour entities</returns>
         public List<T> GetAllNeighboursAt(int column, int row)
         {
-            ///TODO: This is a hacked up implementation
-            ///It provides the neighbours out of order (first contiguous, then corners)
+            //HACK: This is a hacked up implementation. It provides the neighbours out of order (first contiguous, then corners)
 
-            List<T> neighbours = GetContiguousNeighboursAt(column,row);
-            neighbours.AddRange(GetCornerNeighboursAt(column,row));
+            List<T> neighbours = GetContiguousNeighboursAt(column, row);
+            neighbours.AddRange(GetCornerNeighboursAt(column, row));
 
             return neighbours;
         }
@@ -156,7 +157,8 @@ namespace AR_Lib.Collections
         public List<T> GetCornerNeighboursAt(int column, int row)
         {
             //TODO: Implement GetCornerNeighboursOfEntityAt()
-            return null;
+
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -168,7 +170,8 @@ namespace AR_Lib.Collections
         public List<T> GetContiguousNeighboursAt(int column, int row)
         {
             //TODO: Implement GetContiguousNeighboursOfEntityAt()
-            return null;
+
+            throw new NotImplementedException();
         }
 
 

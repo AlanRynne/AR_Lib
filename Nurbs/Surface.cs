@@ -3,13 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using AR_Lib.LinearAlgebra;
 
+
 namespace AR_Lib.Geometry.Nurbs
 {
+    //FIXME: Coordinates should be divided by weight
+
+    //FIXME: Degree 3 works but others do strange stuff (deg = 1 or 2 creates a surface with a subset of the control points)
+
+    /// <summary>
+    /// Class representing an arbitrary N.U.R.B.S surface.
+    /// </summary>
     public class Surface
     {
-        // TODO: Check for license? Make sure of this part
         // This class is implemented based on the explanation on NURBS found at:
         // https://www.gamasutra.com/view/feature/131808/using_nurbs_surfaces_in_realtime_.php?page=4
+
         #region Public Fields
 
         public int UDegree { get => uDegree; set => uDegree = value; }
@@ -20,6 +28,7 @@ namespace AR_Lib.Geometry.Nurbs
         public List<double> VKnots { get => vKnots; set => vKnots = value; }
 
         #endregion
+
 
         #region Private Properties
 
@@ -35,7 +44,7 @@ namespace AR_Lib.Geometry.Nurbs
         List<Point4d> controlPoints; //TODO: This should actually be a Matrix<T>
         List<double> uBasisCoefficients, vBasisCoefficients; // Computed basis coefficients
         List<double> uKnots, vKnots; // Knot values in each direction
-        List<double> uBasis, duBasis, vBasis, dvBasis; 
+        List<double> uBasis, duBasis, vBasis, dvBasis;
         List<Point4d> uTemp, duTemp;
         List<int> uTessKnotSpan, vTessKnotSpan;
         List<Point3d> pVertices;
@@ -46,6 +55,7 @@ namespace AR_Lib.Geometry.Nurbs
 
 
         #endregion
+
 
         #region Constructors
 
@@ -94,7 +104,137 @@ namespace AR_Lib.Geometry.Nurbs
 
         #endregion
 
+
         #region Public Methods
+
+        public void TessellateSurface()
+        {
+            List<Point4d> pControlPoints = controlPoints;
+            int u, v, k, l;
+            int uKnot, vKnot;
+            List<Point4d> UTemp = uTemp, dUTemp = duTemp;
+            Point4d Pw = new Point4d();
+            double rhw;
+            int iVertices;
+            int iCPOffset;
+            double VBasis, dVBasis;
+            int idx, uidx;
+
+            if ((uTessellationCount == 0) || (vTessellationCount == 0))
+                return;
+
+            iVertices = 2 * (vTessellationCount + 1);
+
+            // Step over the U and V coordinates and generate triangle strips to render
+            //
+            for (u = 0; u <= uTessellationCount; u++)
+            {
+                // What's the current knot span in the U direction?
+                uKnot = uTessKnotSpan[u];
+
+                // Calculate the offset into the pre-calculated basis functions array
+                uidx = u * uOrder;
+                vKnot = -1;
+
+                // Create one row of vertices
+                for (v = 0; v <= vTessellationCount; v++)
+                {
+                    idx = u * uTessellationCount + v;
+                    if (vKnot != vTessKnotSpan[v])
+                    {
+                        vKnot = vTessKnotSpan[v];
+                        //
+                        // If our knot span in the V direction has changed, then calculate some
+                        // temporary variables.  These are the sum of the U-basis functions times
+                        // the control points (times the weights because the control points have
+                        // the weights factored in).
+                        //
+                        for (k = 0; k <= vDegree; k++)
+                        {
+                            iCPOffset = (uKnot - uDegree) * vControlPointCount + (vKnot - vDegree);
+
+                            // UTemp[k].X = uBasis[uidx] * pControlPoints[iCPOffset + k].X;
+                            // UTemp[k].Y = uBasis[uidx] * pControlPoints[iCPOffset + k].Y;
+                            // UTemp[k].Z = uBasis[uidx] * pControlPoints[iCPOffset + k].Z;
+                            // UTemp[k].Weight = uBasis[uidx] * pControlPoints[iCPOffset + k].Weight;
+                            UTemp.Add(new Point4d());
+                            UTemp[k].X = uBasis[uidx] * pControlPoints[iCPOffset + k].X;
+                            UTemp[k].Y = uBasis[uidx] * pControlPoints[iCPOffset + k].Y;
+                            UTemp[k].Z = uBasis[uidx] * pControlPoints[iCPOffset + k].Z;
+                            UTemp[k].Weight = uBasis[uidx] * pControlPoints[iCPOffset + k].Weight;
+                            // dUTemp[k].X = duBasis[uidx] * pControlPoints[iCPOffset + k].X;
+                            // dUTemp[k].Y = duBasis[uidx] * pControlPoints[iCPOffset + k].Y;
+                            // dUTemp[k].Z = duBasis[uidx] * pControlPoints[iCPOffset + k].Z;
+                            // dUTemp[k].Weight = duBasis[uidx] * pControlPoints[iCPOffset + k].Weight;
+                            dUTemp.Add(new Point4d());
+                            dUTemp[k].X = duBasis[uidx] * pControlPoints[iCPOffset + k].X;
+                            dUTemp[k].Y = duBasis[uidx] * pControlPoints[iCPOffset + k].Y;
+                            dUTemp[k].Z = duBasis[uidx] * pControlPoints[iCPOffset + k].Z;
+                            dUTemp[k].Weight = duBasis[uidx] * pControlPoints[iCPOffset + k].Weight;
+
+                            for (l = 1; l <= uDegree; l++)
+                            {
+                                iCPOffset += vControlPointCount;
+
+                                UTemp[k].X += uBasis[uidx + l] * pControlPoints[iCPOffset + k].X;
+                                UTemp[k].Y += uBasis[uidx + l] * pControlPoints[iCPOffset + k].Y;
+                                UTemp[k].Z += uBasis[uidx + l] * pControlPoints[iCPOffset + k].Z;
+                                UTemp[k].Weight += uBasis[uidx + l] * pControlPoints[iCPOffset + k].Weight;
+
+                                dUTemp[k].X += duBasis[uidx + l] * pControlPoints[iCPOffset + k].X;
+                                dUTemp[k].Y += duBasis[uidx + l] * pControlPoints[iCPOffset + k].Y;
+                                dUTemp[k].Z += duBasis[uidx + l] * pControlPoints[iCPOffset + k].Z;
+                                dUTemp[k].Weight += duBasis[uidx + l] * pControlPoints[iCPOffset + k].Weight;
+                            }
+                        }
+                    }
+
+                    // Compute the point in the U and V directions
+                    VBasis = vBasis[(v * vOrder)];
+                    dVBasis = dvBasis[(v * vOrder)];
+
+                    Pw.X = VBasis * UTemp[0].X;
+                    Pw.Y = VBasis * UTemp[0].Y;
+                    Pw.Z = VBasis * UTemp[0].Z;
+                    Pw.Weight = VBasis * UTemp[0].Weight;
+
+                    for (k = 1; k <= vDegree; k++)
+                    {
+                        VBasis = vBasis[(v * vOrder + k)];
+                        dVBasis = dvBasis[(v * vOrder + k)];
+                        Pw.X += VBasis * UTemp[k].X;
+                        Pw.Y += VBasis * UTemp[k].Y;
+                        Pw.Z += VBasis * UTemp[k].Z;
+                        Pw.Weight += VBasis * UTemp[k].Weight;
+                    }
+
+                    // rhw is the factor to multiply by inorder to bring the 4-D points back into 3-D
+                    rhw = 1.0 / Pw.Weight;
+                    Pw.X = Pw.X * rhw;
+                    Pw.Y = Pw.Y * rhw;
+                    Pw.Z = Pw.Z * rhw;
+
+                    // Store the vertex position.
+                    pVertices.Add(new Point3d(Pw));
+
+                }
+            }
+
+
+        }
+        public void UpdateControlPoints()
+        {
+            //TODO: Implement UpdateControlPoints
+            // This method should contain the logic AFTER control points have been changed
+            // i.e.: recomputing some of the basis functions...etc
+        }
+
+        #endregion
+
+
+        #region Private Methods
+
+        // Any private methods should go here
 
         public double ComputeCoefficient(List<double> knots, int interval, int i, int p, int k)
         {
@@ -269,10 +409,9 @@ namespace AR_Lib.Geometry.Nurbs
                 v += vinc;
             }
         }
-        public void SetTesselations(int uTessellations, int vTessellations)
+        private void SetTesselations(int uTessellations, int vTessellations)
         {
             //TODO: Implement SetTesselations
-            int SIMD_SIZE = 1;
 
             if ((uTessellations != uTessellationCount) || (vTessellations != vTessellationCount))
             {
@@ -299,136 +438,8 @@ namespace AR_Lib.Geometry.Nurbs
                 EvaluateBasisFunctions();
             }
         }
-        public void TessellateSurface()
-        {
-            List<Point4d> pControlPoints = controlPoints;
-            int u, v, k, l;
-            int uKnot, vKnot;
-            List<Point4d> UTemp = uTemp, dUTemp = duTemp;
-            Point4d Pw = new Point4d();
-            double rhw;
-            int iVertices;
-            int iCPOffset;
-            double VBasis, dVBasis;
-            int idx, uidx;
-
-            if ((uTessellationCount == 0) || (vTessellationCount == 0))
-                return;
-
-            iVertices = 2 * (vTessellationCount + 1);
-
-            // Step over the U and V coordinates and generate triangle strips to render
-            //
-            for (u = 0; u <= uTessellationCount; u++)
-            {
-                int SIMD_SIZE = 1;
-
-                // What's the current knot span in the U direction?
-                uKnot = uTessKnotSpan[u];
-
-                // Calculate the offset into the pre-calculated basis functions array
-                uidx = u * uOrder * SIMD_SIZE;
-                vKnot = -1;
-
-                // Create one row of vertices
-                for (v = 0; v <= vTessellationCount; v++)
-                {
-                    idx = u * uTessellationCount + v;
-                    if (vKnot != vTessKnotSpan[v])
-                    {
-                        vKnot = vTessKnotSpan[v];
-                        //
-                        // If our knot span in the V direction has changed, then calculate some
-                        // temporary variables.  These are the sum of the U-basis functions times
-                        // the control points (times the weights because the control points have
-                        // the weights factored in).
-                        //
-                        for (k = 0; k <= vDegree; k++)
-                        {
-                            iCPOffset = (uKnot - uDegree) * vControlPointCount + (vKnot - vDegree);
-
-                            // UTemp[k].X = uBasis[uidx] * pControlPoints[iCPOffset + k].X;
-                            // UTemp[k].Y = uBasis[uidx] * pControlPoints[iCPOffset + k].Y;
-                            // UTemp[k].Z = uBasis[uidx] * pControlPoints[iCPOffset + k].Z;
-                            // UTemp[k].Weight = uBasis[uidx] * pControlPoints[iCPOffset + k].Weight;
-                            UTemp.Add(new Point4d());
-                            UTemp[k].X = uBasis[uidx] * pControlPoints[iCPOffset + k].X;
-                            UTemp[k].Y = uBasis[uidx] * pControlPoints[iCPOffset + k].Y;
-                            UTemp[k].Z = uBasis[uidx] * pControlPoints[iCPOffset + k].Z;
-                            UTemp[k].Weight = uBasis[uidx] * pControlPoints[iCPOffset + k].Weight;
-                            // dUTemp[k].X = duBasis[uidx] * pControlPoints[iCPOffset + k].X;
-                            // dUTemp[k].Y = duBasis[uidx] * pControlPoints[iCPOffset + k].Y;
-                            // dUTemp[k].Z = duBasis[uidx] * pControlPoints[iCPOffset + k].Z;
-                            // dUTemp[k].Weight = duBasis[uidx] * pControlPoints[iCPOffset + k].Weight;
-                            dUTemp.Add(new Point4d());
-                            dUTemp[k].X = duBasis[uidx] * pControlPoints[iCPOffset + k].X;
-                            dUTemp[k].Y = duBasis[uidx] * pControlPoints[iCPOffset + k].Y;
-                            dUTemp[k].Z = duBasis[uidx] * pControlPoints[iCPOffset + k].Z;
-                            dUTemp[k].Weight = duBasis[uidx] * pControlPoints[iCPOffset + k].Weight;
-
-                            for (l = 1; l <= uDegree; l++)
-                            {
-                                iCPOffset += vControlPointCount;
-
-                                UTemp[k].X += uBasis[uidx + l * SIMD_SIZE] * pControlPoints[iCPOffset + k].X;
-                                UTemp[k].Y += uBasis[uidx + l * SIMD_SIZE] * pControlPoints[iCPOffset + k].Y;
-                                UTemp[k].Z += uBasis[uidx + l * SIMD_SIZE] * pControlPoints[iCPOffset + k].Z;
-                                UTemp[k].Weight += uBasis[uidx + l * SIMD_SIZE] * pControlPoints[iCPOffset + k].Weight;
-
-                                dUTemp[k].X += duBasis[uidx + l * SIMD_SIZE] * pControlPoints[iCPOffset + k].X;
-                                dUTemp[k].Y += duBasis[uidx + l * SIMD_SIZE] * pControlPoints[iCPOffset + k].Y;
-                                dUTemp[k].Z += duBasis[uidx + l * SIMD_SIZE] * pControlPoints[iCPOffset + k].Z;
-                                dUTemp[k].Weight += duBasis[uidx + l * SIMD_SIZE] * pControlPoints[iCPOffset + k].Weight;
-                            }
-                        }
-                    }
-
-                    // Compute the point in the U and V directions
-                    VBasis = vBasis[(v * vOrder) * SIMD_SIZE];
-                    dVBasis = dvBasis[(v * vOrder) * SIMD_SIZE];
-
-                    Pw.X = VBasis * UTemp[0].X;
-                    Pw.Y = VBasis * UTemp[0].Y;
-                    Pw.Z = VBasis * UTemp[0].Z;
-                    Pw.Weight = VBasis * UTemp[0].Weight;
-
-                    for (k = 1; k <= vDegree; k++)
-                    {
-                        VBasis = vBasis[(v * vOrder + k) * SIMD_SIZE];
-                        dVBasis = dvBasis[(v * vOrder + k) * SIMD_SIZE];
-                        Pw.X += VBasis * UTemp[k].X;
-                        Pw.Y += VBasis * UTemp[k].Y;
-                        Pw.Z += VBasis * UTemp[k].Z;
-                        Pw.Weight += VBasis * UTemp[k].Weight;
-                    }
-
-                    // rhw is the factor to multiply by inorder to bring the 4-D points back into 3-D
-                    rhw = 1.0 / Pw.Weight;
-                    Pw.X = Pw.X * rhw;
-                    Pw.Y = Pw.Y * rhw;
-                    Pw.Z = Pw.Z * rhw;
-
-                    // Store the vertex position.
-                    pVertices.Add(new Point3d(Pw));
-
-                }
-            }
-
-
-        }
-        public void UpdateControlPoints()
-        {
-            //TODO: Implement UpdateControlPoints
-            // This method should contain the logic AFTER control points have been changed
-            // i.e.: recomputing some of the basis functions...etc
-        }
 
         #endregion
 
-        #region Private Methods
-
-        // Any private methods should go here
-
-        #endregion
     }
 }

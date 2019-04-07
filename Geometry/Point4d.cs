@@ -9,7 +9,6 @@ namespace AR_Lib.Geometry
 {
     public class Point4d : Point3d
     {
-
         public double Weight { get => weight; set { weight = value; if (isUnset) isUnset = false; } }
 
         private double weight;
@@ -53,8 +52,7 @@ namespace AR_Lib.Geometry
 
         #endregion
 
-        // Overriden methods
-
+        #region Overriden methods
 
         public override bool Equals(object obj)
         {
@@ -72,6 +70,10 @@ namespace AR_Lib.Geometry
         {
             return base.GetHashCode();
         }
+
+        #endregion
+
+        //TODO: Add hasWeightedCoordinates boolean and implement a weightCoordinates() method
 
     }
 

@@ -10,7 +10,7 @@ namespace AR_Lib.HalfEdgeMesh
     /// </summary>
     public class HE_Mesh
     {
-        /// Public variables
+        #region Public properties
         public List<HE_Vertex> Vertices;
         public List<HE_Edge> Edges;
         public List<HE_Face> Faces;
@@ -19,8 +19,14 @@ namespace AR_Lib.HalfEdgeMesh
         public List<HE_Face> Boundaries;
         public List<HE_Generators> Generators;
 
-        /// Computed properties
+        #endregion
+
+
+        #region Computed properties
+
         public int EulerCharacteristic => Vertices.Count - Edges.Count + Faces.Count;
+
+        #endregion
 
 
         #region Constructors
@@ -71,6 +77,8 @@ namespace AR_Lib.HalfEdgeMesh
         #endregion
 
 
+        #region Error checking methods
+
         /// <summary>
         /// Check if the mesh has isolated vertices
         /// </summary>
@@ -112,9 +120,15 @@ namespace AR_Lib.HalfEdgeMesh
         /// <returns>True if there are non-manifold edges, false if not</returns>
         public bool HasNonManifoldEdges()
         {
-            // TODO: IMPLEMENT THIS METHOD!
+            //HACK: Implement HasNonManifoldEdges(). Currently it always returns FALSE
+
             return false;
         }
+
+        #endregion
+
+
+        #region Indexing methods
 
         /// <summary>
         /// Assign an index number to each mesh member
@@ -210,7 +224,10 @@ namespace AR_Lib.HalfEdgeMesh
             return index;
         }
 
-        #region Topology related methods
+        #endregion
+
+
+        #region Topology methods
         public bool isTriangularMesh()
         {
             if (isMesh() == isMeshResult.Triangular) return true;
@@ -252,7 +269,8 @@ namespace AR_Lib.HalfEdgeMesh
 
         #endregion
 
-        /// Utility methods
+
+        #region Utility methods
         public string GetMeshInfo()
         {
             string head = "--- Mesh Info ---\n";
@@ -282,6 +300,9 @@ namespace AR_Lib.HalfEdgeMesh
 
             return "HE_Mesh{" + VEFH + "}";
         }
+
+        #endregion
+
 
         #region Private methods
         private void createVertices(List<Point3d> points)
