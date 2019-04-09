@@ -7,7 +7,7 @@ using AR_Lib.LinearAlgebra;
 namespace AR_Lib.Geometry.Nurbs
 {
     //FIXME: Coordinates should be divided by weight
-
+    
     //FIXME: Degree 3 works but others do strange stuff (deg = 1 or 2 creates a surface with a subset of the control points)
 
     /// <summary>
@@ -442,4 +442,5 @@ namespace AR_Lib.Geometry.Nurbs
         #endregion
 
     }
+
 }
