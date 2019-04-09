@@ -1,13 +1,13 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using AR_Lib.LinearAlgebra;
+using System.Text;
 
-
-namespace AR_Lib.Geometry.Nurbs
+namespace AR_Lib.Geometry
 {
+    //HACK: This implementation needs to be cleaned up and fixed:
+
     //FIXME: Coordinates should be divided by weight
-    
+
     //FIXME: Degree 3 works but others do strange stuff (deg = 1 or 2 creates a surface with a subset of the control points)
 
     /// <summary>
@@ -63,6 +63,7 @@ namespace AR_Lib.Geometry.Nurbs
         public Surface(int uDeg, int vDeg, int uCntrPts, int vCntrlPts, List<Point4d> cntrlPts, List<double> uKnotsValues, List<double> vKnotsValues, int uTessellations, int vTessellations)
         {
             //Assign incoming values
+
             uDegree = uDeg;
             vDegree = vDeg;
             uControlPointCount = uCntrPts;
@@ -72,6 +73,7 @@ namespace AR_Lib.Geometry.Nurbs
             vKnots = vKnotsValues;
 
             //Compute some useful property values
+
             uOrder = uDegree + 1;
             vOrder = vDegree + 1;
 
@@ -82,6 +84,7 @@ namespace AR_Lib.Geometry.Nurbs
             vBasisSpanCount = vOrder - 2 + vControlPointCount;
 
             // Initialize empty objects
+
             uBasisCoefficients = new List<double>();
             vBasisCoefficients = new List<double>();
             uBasis = new List<double>();
@@ -109,6 +112,8 @@ namespace AR_Lib.Geometry.Nurbs
 
         public void TessellateSurface()
         {
+            //FIXME: Rename this variables to fit the convention.
+
             List<Point4d> pControlPoints = controlPoints;
             int u, v, k, l;
             int uKnot, vKnot;
@@ -153,38 +158,17 @@ namespace AR_Lib.Geometry.Nurbs
                         {
                             iCPOffset = (uKnot - uDegree) * vControlPointCount + (vKnot - vDegree);
 
-                            // UTemp[k].X = uBasis[uidx] * pControlPoints[iCPOffset + k].X;
-                            // UTemp[k].Y = uBasis[uidx] * pControlPoints[iCPOffset + k].Y;
-                            // UTemp[k].Z = uBasis[uidx] * pControlPoints[iCPOffset + k].Z;
-                            // UTemp[k].Weight = uBasis[uidx] * pControlPoints[iCPOffset + k].Weight;
                             UTemp.Add(new Point4d());
-                            UTemp[k].X = uBasis[uidx] * pControlPoints[iCPOffset + k].X;
-                            UTemp[k].Y = uBasis[uidx] * pControlPoints[iCPOffset + k].Y;
-                            UTemp[k].Z = uBasis[uidx] * pControlPoints[iCPOffset + k].Z;
-                            UTemp[k].Weight = uBasis[uidx] * pControlPoints[iCPOffset + k].Weight;
-                            // dUTemp[k].X = duBasis[uidx] * pControlPoints[iCPOffset + k].X;
-                            // dUTemp[k].Y = duBasis[uidx] * pControlPoints[iCPOffset + k].Y;
-                            // dUTemp[k].Z = duBasis[uidx] * pControlPoints[iCPOffset + k].Z;
-                            // dUTemp[k].Weight = duBasis[uidx] * pControlPoints[iCPOffset + k].Weight;
+                            UTemp[k] = uBasis[uidx] * pControlPoints[iCPOffset + k];
+
                             dUTemp.Add(new Point4d());
-                            dUTemp[k].X = duBasis[uidx] * pControlPoints[iCPOffset + k].X;
-                            dUTemp[k].Y = duBasis[uidx] * pControlPoints[iCPOffset + k].Y;
-                            dUTemp[k].Z = duBasis[uidx] * pControlPoints[iCPOffset + k].Z;
-                            dUTemp[k].Weight = duBasis[uidx] * pControlPoints[iCPOffset + k].Weight;
+                            duTemp[k] = duBasis[uidx] * pControlPoints[iCPOffset + k];
 
                             for (l = 1; l <= uDegree; l++)
                             {
                                 iCPOffset += vControlPointCount;
-
-                                UTemp[k].X += uBasis[uidx + l] * pControlPoints[iCPOffset + k].X;
-                                UTemp[k].Y += uBasis[uidx + l] * pControlPoints[iCPOffset + k].Y;
-                                UTemp[k].Z += uBasis[uidx + l] * pControlPoints[iCPOffset + k].Z;
-                                UTemp[k].Weight += uBasis[uidx + l] * pControlPoints[iCPOffset + k].Weight;
-
-                                dUTemp[k].X += duBasis[uidx + l] * pControlPoints[iCPOffset + k].X;
-                                dUTemp[k].Y += duBasis[uidx + l] * pControlPoints[iCPOffset + k].Y;
-                                dUTemp[k].Z += duBasis[uidx + l] * pControlPoints[iCPOffset + k].Z;
-                                dUTemp[k].Weight += duBasis[uidx + l] * pControlPoints[iCPOffset + k].Weight;
+                                UTemp[k] += uBasis[uidx + l] * pControlPoints[iCPOffset + k];
+                                duTemp[k] += duBasis[uidx + l] * pControlPoints[iCPOffset + k];
                             }
                         }
                     }
@@ -192,27 +176,17 @@ namespace AR_Lib.Geometry.Nurbs
                     // Compute the point in the U and V directions
                     VBasis = vBasis[(v * vOrder)];
                     dVBasis = dvBasis[(v * vOrder)];
-
-                    Pw.X = VBasis * UTemp[0].X;
-                    Pw.Y = VBasis * UTemp[0].Y;
-                    Pw.Z = VBasis * UTemp[0].Z;
-                    Pw.Weight = VBasis * UTemp[0].Weight;
+                    Pw = VBasis * UTemp[0];
 
                     for (k = 1; k <= vDegree; k++)
                     {
                         VBasis = vBasis[(v * vOrder + k)];
                         dVBasis = dvBasis[(v * vOrder + k)];
-                        Pw.X += VBasis * UTemp[k].X;
-                        Pw.Y += VBasis * UTemp[k].Y;
-                        Pw.Z += VBasis * UTemp[k].Z;
-                        Pw.Weight += VBasis * UTemp[k].Weight;
+                        Pw += VBasis * UTemp[k];
                     }
 
-                    // rhw is the factor to multiply by inorder to bring the 4-D points back into 3-D
-                    rhw = 1.0 / Pw.Weight;
-                    Pw.X = Pw.X * rhw;
-                    Pw.Y = Pw.Y * rhw;
-                    Pw.Z = Pw.Z * rhw;
+                    // rhw is the factor to multiply by inorder to bring the 4-D points back into 3-D                    
+                    Pw *= 1.0 / Pw.Weight;
 
                     // Store the vertex position.
                     pVertices.Add(new Point3d(Pw));
@@ -279,7 +253,6 @@ namespace AR_Lib.Geometry.Nurbs
                     C2 = ComputeCoefficient(knots, interval, i + 1, p - 1, k);
                     result -= (C1 - knots[i + p + 1] * C2) / (knots[i + p + 1] - knots[i + 1]);
                 }
-
             }
             return result;
         }
@@ -299,7 +272,6 @@ namespace AR_Lib.Geometry.Nurbs
                 {
                     for (k = 0; k < uOrder; k++)
                     {
-                        //uBasisCoefficients[(i * uOrder + j) * uOrder + k] =
                         uBasisCoefficients.Add(
                             ComputeCoefficient(uKnots, i + uDegree, i + j, uDegree, k));
                     }
@@ -312,8 +284,6 @@ namespace AR_Lib.Geometry.Nurbs
                 {
                     for (k = 0; k < vOrder; k++)
                     {
-                        // vBasisCoefficients[(i * vOrder + j) * vOrder + k] =
-                        //     ComputeCoefficient(vKnots, i + vDegree, i + j, vDegree, k);
                         vBasisCoefficients.Add(
                             ComputeCoefficient(vKnots, i + vDegree, i + j, vDegree, k));
                     }
@@ -323,11 +293,10 @@ namespace AR_Lib.Geometry.Nurbs
         }
         public void EvaluateBasisFunctions()
         {
-            //TODO: Check EvaluateBasisFunctions
+            //TODO: Check EvaluateBasisFunctions, rename properties to something more meaningfull
             int i, j, k, idx;
             double u, uinc;
             double v, vinc;
-            int SIMD_SIZE = 1;
 
             //
             // First evaluate the U basis functions and derivitives at uniformly spaced u values
@@ -348,24 +317,18 @@ namespace AR_Lib.Geometry.Nurbs
                 //
                 for (j = 0; j < uOrder; j++)
                 {
-                    //uBasis[(i * uOrder + j) * SIMD_SIZE] = uBasisCoefficients[(idx * uOrder + j) * uOrder + uDegree];
-                    //duBasis[(i * uOrder + j) * SIMD_SIZE] = uBasis[(i * uOrder + j) * SIMD_SIZE] * uDegree;
                     uBasis.Add(uBasisCoefficients[(idx * uOrder + j) * uOrder + uDegree]);
-                    duBasis.Add(uBasis[(i * uOrder + j) * SIMD_SIZE] * uDegree);
+                    duBasis.Add(uBasis[(i * uOrder + j)] * uDegree);
                     for (k = uDegree - 1; k >= 0; k--)
                     {
-                        uBasis[(i * uOrder + j) * SIMD_SIZE] = uBasis[(i * uOrder + j) * SIMD_SIZE] * u +
+                        uBasis[(i * uOrder + j)] = uBasis[(i * uOrder + j)] * u +
                             uBasisCoefficients[(idx * uOrder + j) * uOrder + k];
                         if (k > 0)
                         {
-                            duBasis[(i * uOrder + j) * SIMD_SIZE] = duBasis[(i * uOrder + j) * SIMD_SIZE] * u +
+                            duBasis[(i * uOrder + j)] = duBasis[(i * uOrder + j)] * u +
                                 uBasisCoefficients[(idx * uOrder + j) * uOrder + k] * k;
                         }
                     }
-                    //
-                    // Make three copies.  This isn't necessary if we're using straight C
-                    // code but for the Pentium III optimizations, it is.
-                    //
                 }
 
                 u += uinc;
@@ -394,14 +357,14 @@ namespace AR_Lib.Geometry.Nurbs
                     // vBasis[(i * vOrder + j) * SIMD_SIZE] = vBasisCoefficients[(idx * vOrder + j) * vOrder + vDegree];
                     // dvBasis[(i * vOrder + j) * SIMD_SIZE] = vBasis[(i * vOrder + j) * SIMD_SIZE] * vDegree;
                     vBasis.Add(vBasisCoefficients[(idx * vOrder + j) * vOrder + vDegree]);
-                    dvBasis.Add(vBasis[(i * vOrder + j) * SIMD_SIZE] * vDegree);
+                    dvBasis.Add(vBasis[(i * vOrder + j)] * vDegree);
                     for (k = vDegree - 1; k >= 0; k--)
                     {
-                        vBasis[(i * vOrder + j) * SIMD_SIZE] = vBasis[(i * vOrder + j) * SIMD_SIZE] * v +
+                        vBasis[(i * vOrder + j)] = vBasis[(i * vOrder + j)] * v +
                             vBasisCoefficients[(idx * vOrder + j) * vOrder + k];
                         if (k > 0)
                         {
-                            dvBasis[(i * vOrder + j) * SIMD_SIZE] = dvBasis[(i * vOrder + j) * SIMD_SIZE] * v +
+                            dvBasis[(i * vOrder + j)] = dvBasis[(i * vOrder + j)] * v +
                                 vBasisCoefficients[(idx * vOrder + j) * vOrder + k] * k;
                         }
                     }
