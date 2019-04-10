@@ -13,6 +13,13 @@
         private Vector3d _yAxis;
         private Vector3d _zAxis;
 
+        public Plane(Point3d origin, Vector3d xAxis, Vector3d yAxis)
+        {
+            _origin = origin;
+            _xAxis = xAxis;
+            _yAxis = yAxis;
+            _zAxis = xAxis.Cross(yAxis);
+        }
         public Plane(Point3d origin, Vector3d xAxis, Vector3d yAxis, Vector3d zAxis)
         {
             _origin = origin;
