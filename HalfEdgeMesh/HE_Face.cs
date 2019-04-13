@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using AR_Lib.Geometry;
 
 namespace AR_Lib
 {
@@ -12,6 +13,8 @@ namespace AR_Lib
             public HE_HalfEdge HalfEdge; //One of the half-edges surrounding the face
             public int Index;
 
+            public double Area => HE_MeshGeometry.Area(this);
+            public Vector3d Normal => HE_MeshGeometry.FaceNormal(this);
             // Constructor
 
             public HE_Face()
