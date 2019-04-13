@@ -1,8 +1,4 @@
 {
-    "Constants":
-    {
-        "DefaultTesselation": 10,
-        "Tolerance": 0.00001
-
-    },
+    "DefaultTesselation": 10,
+    "Tolerance": 0.00001
 }

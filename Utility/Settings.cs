@@ -10,22 +10,11 @@ namespace AR_Lib
     /// <summary>
     /// Multi-layered struct that holds the library settings
     /// </summary>
-    public struct Settings
+    public class Settings
     {
-        /// <summary>
-        /// Constants of the library
-        /// </summary>
-        public ConstStruct Constants;
+        public static double Tolerance = 0.000001;
+        public static double DefaultTesselation = 10;
 
-
-        /// <summary>
-        /// Data structure that save the library constants
-        /// </summary>
-        public struct ConstStruct
-        {
-            public double Tolerance;
-            public double DefaultTesselation;
-        }
 
     }
 
