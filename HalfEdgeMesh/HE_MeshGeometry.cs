@@ -142,7 +142,7 @@ namespace AR_Lib.Geometry
             Vector3d normal = FaceNormal(face);
             Vector3d e2 = normal.Cross(e1);
 
-            return new Vector3d[]{ e1 , e2 };
+            return new Vector3d[] { e1, e2 };
         }
 
         /// <summary>
@@ -228,7 +228,7 @@ namespace AR_Lib.Geometry
         /// <summary>
         /// Computes the equally weighted normal arround the specified vertex
         /// </summary>
-        /// <returns>The normal vector.</returns>
+        /// <returns>The normal vector at that vertex.</returns>
         /// <param name="vertex">Vertex.</param>
         public static Vector3d VertexNormalEquallyWeighted(HE_Vertex vertex)
         {
@@ -238,10 +238,15 @@ namespace AR_Lib.Geometry
             return n.Unit();
         }
 
+        /// <summary>
+        /// Computes the area weighted normal arround the specified vertex
+        /// </summary>
+        /// <returns>The normal vector at that vertex.</returns>
+        /// <param name="vertex">Vertex.</param>
         public static Vector3d VertexNormalAreaWeighted(HE_Vertex vertex)
         {
             Vector3d n = new Vector3d();
-            foreach(HE_Face f in vertex.adjacentFaces())
+            foreach (HE_Face f in vertex.adjacentFaces())
             {
                 Vector3d normal = FaceNormal(f);
                 double area = Area(f);
@@ -251,6 +256,11 @@ namespace AR_Lib.Geometry
             return n.Unit();
         }
 
+        /// <summary>
+        /// Computes the angle weighted normal arround the specified vertex
+        /// </summary>
+        /// <returns>The normal vector at that vertex.</returns>
+        /// <param name="vertex">Vertex.</param>
         public static Vector3d VertexNormalAngleWeighted(HE_Vertex vertex)
         {
             Vector3d n = new Vector3d();
@@ -264,6 +274,11 @@ namespace AR_Lib.Geometry
             return n.Unit();
         }
 
+        /// <summary>
+        /// Computes the gauss curvature weighted normal arround the specified vertex
+        /// </summary>
+        /// <returns>The normal vector at that vertex.</returns>
+        /// <param name="vertex">Vertex.</param>
         public static Vector3d VertexNormalGaussCurvature(HE_Vertex vertex)
         {
             Vector3d n = new Vector3d();
@@ -275,6 +290,11 @@ namespace AR_Lib.Geometry
             return n.Unit();
         }
 
+        /// <summary>
+        /// Computes the mean curvature weighted normal arround the specified vertex
+        /// </summary>
+        /// <returns>The normal vector at that vertex.</returns>
+        /// <param name="vertex">Vertex.</param>
         public static Vector3d VertexNormalMeanCurvature(HE_Vertex vertex)
         {
             Vector3d n = new Vector3d();
@@ -286,6 +306,11 @@ namespace AR_Lib.Geometry
             return n.Unit();
         }
 
+        /// <summary>
+        /// Computes the sphere inscribed normal arround the specified vertex
+        /// </summary>
+        /// <returns>The normal vector at that vertex.</returns>
+        /// <param name="vertex">Vertex.</param>
         public static Vector3d VertexNormalSphereInscribed(HE_Vertex vertex)
         {
             Vector3d n = new Vector3d();
@@ -299,20 +324,35 @@ namespace AR_Lib.Geometry
             return n.Unit();
         }
 
+        /// <summary>
+        /// Computes the angle defect at the given vertex
+        /// </summary>
+        /// <param name="vertex">Vertex to compute angle defect.</param>
+        /// <returns>Number representing the deviation of the current vertex from $2\PI$</returns>
         public static double AngleDefect(HE_Vertex vertex)
         {
             double angleSum = 0.0;
             foreach (HE_Corner c in vertex.adjacentCorners()) angleSum += Angle(c);
-            if (vertex.OnBoundary()) angleSum = Math.PI - angleSum;
+            //if (vertex.OnBoundary()) angleSum = Math.PI - angleSum;
 
-            return vertex.OnBoundary()  ? Math.PI - angleSum: 2 * Math.PI - angleSum;
+            return vertex.OnBoundary() ? Math.PI - angleSum : 2 * Math.PI - angleSum;
         }
 
+        /// <summary>
+        /// Compute the Gaussian curvature at the given vertex
+        /// </summary>
+        /// <param name="vertex">Vertex to compute Gaussian curvature</param>
+        /// <returns>Number representing the gaussian curvature at that vertex.</returns>
         public static double scalarGaussCurvature(HE_Vertex vertex)
         {
-            return AngleDefect(vertex);
+            return AngleDefect(vertex) / HE_MeshGeometry.CircumcentricDualarea(vertex);
         }
 
+        /// <summary>
+        /// Compute the Mean curvature at the given vertex
+        /// </summary>
+        /// <param name="vertex">Vertex to compute Mean curvature</param>
+        /// <returns>Number representing the Mean curvature at that vertex.</returns>
         public static double scalarMeanCurvature(HE_Vertex vertex)
         {
             double sum = 0.0;
@@ -321,6 +361,11 @@ namespace AR_Lib.Geometry
             return sum;
         }
 
+        /// <summary>
+        /// Compute the total angle defect of the mesh.
+        /// </summary>
+        /// <param name="Mesh">Mesh to compute angle defect.</param>
+        /// <returns>Returns the total angle defect as a scalar value.</returns>
         public static double TotalAngleDefect(HE_Mesh Mesh)
         {
             double totalDefect = 0.0;
@@ -329,6 +374,11 @@ namespace AR_Lib.Geometry
             return totalDefect;
         }
 
+        /// <summary>
+        /// Compute the principal curvature scalar values at a given vertes.
+        /// </summary>
+        /// <param name="vertex">Vertex to compute the curvature.</param>
+        /// <returns>Returns an array of 2 values {k1, k2}.</returns>
         public static double[] PrincipalCurvatures(HE_Vertex vertex)
         {
             double A = CircumcentricDualarea(vertex);
@@ -342,7 +392,7 @@ namespace AR_Lib.Geometry
             double k1 = H - discriminant;
             double k2 = H + discriminant;
 
-            return new double[]{k1,k2};
+            return new double[] { k1, k2 };
         }
 
     }
