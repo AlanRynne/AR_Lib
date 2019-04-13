@@ -31,14 +31,15 @@ namespace AR_Lib.Geometry
         #region Utility properties/methods
 
         // Computes the Euclidiean length squared of this vector
-        public double Norm2 => DotProduct(this, this);
+        public double Length2 => DotProduct(this, this);
+
         // Computes the Euclidean length of this vector
-        public double Norm => Math.Sqrt(Norm2);
+        public double Length => Math.Sqrt(Length2);
 
         // Divides this vector by it's euclidean length
         public void Normalize()
         {
-            double length = Norm;
+            double length = Length;
             X /= length;
             Y /= length;
             Z /= length;
@@ -47,7 +48,7 @@ namespace AR_Lib.Geometry
         // Returns a normalized copy of this vector
         public Vector3d Unit()
         {
-            double length = Norm;
+            double length = Length;
             double x = X / length;
             double y = Y / length;
             double z = Z / length;
@@ -79,7 +80,7 @@ namespace AR_Lib.Geometry
         public static double Angle(Vector3d u, Vector3d v)
         {
             // Angle = Arcosine of the CrossProduct of U & V divided with their multiplied lengths.
-            return Math.Acos(Vector3d.DotProduct(u, v) / (u.Norm * v.Norm));
+            return Math.Acos(Vector3d.DotProduct(u, v) / (u.Length * v.Length));
         }
 
         // Global unit vectors

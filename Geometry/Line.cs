@@ -18,7 +18,7 @@ namespace AR_Lib.Geometry
             throw new System.NotImplementedException();
         }
 
-        public override Point3d PointAt(double t) => _endPoint + t * (_endPoint - _startPoint);
+        public override Point3d PointAt(double t) => _startPoint + t * (_endPoint - _startPoint);
         public override Vector3d TangentAt(double t)
         {
             Vector3d tangent = _endPoint - _startPoint;
