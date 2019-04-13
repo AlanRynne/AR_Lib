@@ -28,16 +28,17 @@ namespace AR_Lib.Geometry
     public abstract class BaseCurve
     {
         // Public properties
-        public Point3d StartPoint;
-        public Point3d EndPoint;
-        public Point3d T0;
-        public Point3d T1;
+        public virtual Point3d StartPoint { get => _startPoint; set => _startPoint = value; }
+        public virtual Point3d EndPoint { get => _endPoint; set => _endPoint = value; }
+        public virtual double T0 { get => _t0; set => _t0 = value; }
+        public virtual double T1 { get => _t1; set => _t1 = value; }
+
+        public virtual bool IsValid => _isValid;
 
         protected Point3d _startPoint;
         protected Point3d _endPoint;
         protected double _t0;
         protected double _t1;
-        public bool IsValid => _isValid;
         public double Length => ComputeLength();
 
         // Private fields
