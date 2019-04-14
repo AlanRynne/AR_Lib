@@ -2,7 +2,6 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-
 using Newtonsoft.Json;
 
 namespace AR_Lib
@@ -12,9 +11,18 @@ namespace AR_Lib
     /// </summary>
     public class Settings
     {
-        public static double Tolerance = 0.000001;
+        public static double Tolerance => _tolerance;
         public static double DefaultTesselation = 10;
+        public static int MaxDecimals => _maxDecimals;
 
+        private static int _maxDecimals = 8;
+        private static double _tolerance = 0.0000001;
+        public static void ModifyTolerance(double tolerance)
+        {
+            _tolerance = tolerance;
+            string t = tolerance.ToString("N14");
+            _maxDecimals = t.Substring(t.IndexOf(".") + 1).IndexOf("1");
+        }
 
     }
 

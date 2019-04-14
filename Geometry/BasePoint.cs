@@ -5,9 +5,13 @@ namespace AR_Lib.Geometry
     public abstract class BasePoint
     {
         // Public properties
-        public double X { get { return x; } set { if (isUnset) isUnset = false; x = value; } }
-        public double Y { get { return y; } set { if (isUnset) isUnset = false; y = value; } }
-        public double Z { get { return z; } set { if (isUnset) isUnset = false; z = value; } }
+        public double X
+        {
+            get { return x; }
+            set { if (isUnset) isUnset = false; x = Math.Round(value, Settings.MaxDecimals); }
+        }
+        public double Y { get { return y; } set { if (isUnset) isUnset = false; y = Math.Round(value, Settings.MaxDecimals); } }
+        public double Z { get { return z; } set { if (isUnset) isUnset = false; z = Math.Round(value, Settings.MaxDecimals); } }
         public bool IsUnset { get => isUnset; }
 
         // Private parameters
@@ -20,15 +24,15 @@ namespace AR_Lib.Geometry
 
         protected BasePoint() : this(0, 0, 0) { isUnset = true; }
 
-        protected BasePoint(BasePoint point) : this(point.x, point.y, point.z)
+        protected BasePoint(BasePoint point) : this(point.X, point.Y, point.Z)
         {
         }
 
         protected BasePoint(double xCoord, double yCoord, double zCoord)
         {
-            x = xCoord;
-            y = yCoord;
-            z = zCoord;
+            X = xCoord;
+            Y = yCoord;
+            Z = zCoord;
             isUnset = false;
         }
 
