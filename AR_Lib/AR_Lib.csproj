@@ -24,8 +24,8 @@
 
   <!-- Export XML coments on build -->
 
-  <PropertyGroup>
+  <!-- <PropertyGroup>
   <GenerateDocumentationFile>true</GenerateDocumentationFile>
-  </PropertyGroup>
+  </PropertyGroup> -->
 
 </Project>
