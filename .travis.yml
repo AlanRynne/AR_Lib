@@ -2,7 +2,9 @@ dist: trusty
 sudo: required
 language: csharp
 mono: none
+# Use net core 2.0.0 for compatibility reasons
 dotnet: 2.0.0
 script:
   - dotnet restore
   - dotnet build -c Release
+  - dotnet test AR_Lib.Tests
