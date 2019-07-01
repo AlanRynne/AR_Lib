@@ -2,7 +2,8 @@ dist: trusty
 sudo: required
 language: csharp
 mono: none
-dotnet: 2.2.0
+dotnet: 2.2
 script:
   - dotnet restore
   - dotnet build -c Release
+  - dotnet test
