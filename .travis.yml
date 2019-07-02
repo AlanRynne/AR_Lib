@@ -8,3 +8,8 @@ script:
   - dotnet restore
   - dotnet build -c Release
   - dotnet test AR_Lib.Tests
+
+branches:
+  only:
+  - master
+  - development
