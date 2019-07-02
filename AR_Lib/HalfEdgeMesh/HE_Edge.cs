@@ -39,8 +39,6 @@ namespace AR_Lib
                 edges.AddRange(this.HalfEdge.Twin.Vertex.adjacentEdges());
                 return edges;
             }
-
-
         }
     }
 }

@@ -8,7 +8,7 @@ namespace AR_Lib.HalfEdgeMesh
     public class HE_Corner 
     {
         /// <summary>
-        /// The corner's 
+        /// The corner's first half-edge
         /// </summary>
         public HE_HalfEdge HalfEdge;
         public int Index;
