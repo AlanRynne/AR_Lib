@@ -10,12 +10,17 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/AR_Lib.Tests/bin/Debug/netcoreapp2.2/AR_Lib.Tests.dll",
-            "args": [],
+            "program": "dotnet",
+            "args": ["test"],
             "cwd": "${workspaceFolder}/AR_Lib.Tests",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
-            "stopAtEntry": false
+            "stopAtEntry": false,
+            "logging": {
+                "engineLogging": false,
+                "moduleLoad": false,
+                "browserStdOut": false
+            }
         },
         {
             "name": ".NET Core Attach",
