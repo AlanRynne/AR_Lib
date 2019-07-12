@@ -60,13 +60,13 @@ namespace AR_Lib.Geometry
         }
         
         /// Plane with axis' UnitX and UnitY.
-        public static Plane WorldXY => new Plane(Point3d.WorldOrigin, Vector3d.WorldX, Vector3d.WorldY);
+        public static Plane WorldXY => new Plane(Point3d.WorldOrigin, Vector3d.UnitX, Vector3d.UnitY);
         
         /// Plane with axis' UnitX and UnitZ.
-        public static Plane WorldXZ => new Plane(Point3d.WorldOrigin, Vector3d.WorldX, Vector3d.WorldZ);
+        public static Plane WorldXZ => new Plane(Point3d.WorldOrigin, Vector3d.UnitX, Vector3d.UnitZ);
         
         /// Plane with axis' UnitY and UnitZ.
-        public static Plane WorldYZ => new Plane(Point3d.WorldOrigin, Vector3d.WorldY, Vector3d.WorldZ);
+        public static Plane WorldYZ => new Plane(Point3d.WorldOrigin, Vector3d.UnitY, Vector3d.UnitZ);
 
         #endregion
 
@@ -83,7 +83,7 @@ namespace AR_Lib.Geometry
         /// Constructs an XY Plane with it's origin at the specified point.
         /// </summary>
         /// <param name="origin">Point to act as origin.</param>
-        public Plane(Point3d origin) : this(origin, Vector3d.WorldX, Vector3d.WorldY) { }
+        public Plane(Point3d origin) : this(origin, Vector3d.UnitX, Vector3d.UnitY) { }
 
         /// <summary>
         /// Constructs a new Plane instance given a point and two vectors. 
@@ -121,8 +121,8 @@ namespace AR_Lib.Geometry
         {
             Vector3d tempX = ptB - ptA;
             Vector3d tempY = ptC - ptA;
-            tempX.Normalize();
-            tempY.Normalize();
+            tempX.Unitize();
+            tempY.Unitize();
 
             Vector3d normal = tempX.Cross(tempY);
             double colinearCheck = Math.Abs(1 - tempY.Dot(tempX));

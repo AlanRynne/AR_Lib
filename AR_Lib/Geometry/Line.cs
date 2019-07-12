@@ -22,7 +22,7 @@ namespace AR_Lib.Geometry
         public override Vector3d TangentAt(double t)
         {
             Vector3d tangent = _endPoint - _startPoint;
-            tangent.Normalize();
+            tangent.Unitize();
             return tangent;
         }
         public override Vector3d NormalAt(double t)
@@ -30,8 +30,8 @@ namespace AR_Lib.Geometry
             Vector3d tangent = TangentAt(t);
             Vector3d v = new Vector3d();
 
-            if (tangent.Dot(Vector3d.WorldZ) == 1) v = Vector3d.WorldX;
-            else v = Vector3d.WorldZ;
+            if (tangent.Dot(Vector3d.UnitZ) == 1) v = Vector3d.UnitX;
+            else v = Vector3d.UnitZ;
 
             return tangent.Cross(v);
         }

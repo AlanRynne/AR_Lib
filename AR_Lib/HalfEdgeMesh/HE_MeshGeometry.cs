@@ -123,10 +123,10 @@ namespace AR_Lib.Geometry
             Vector3d ab = b - a;
             Vector3d w = ab.Cross(ac);
 
-            Vector3d u = (w.Cross(ab)) * ac.Length2;
-            Vector3d v = (ac.Cross(w)) * ab.Length2;
+            Vector3d u = (w.Cross(ab)) * ac.LengthSquared;
+            Vector3d v = (ac.Cross(w)) * ab.LengthSquared;
 
-            Point3d x = (u + v) / (2 * w.Length2);
+            Point3d x = (u + v) / (2 * w.LengthSquared);
 
             return x + a;
         }
@@ -215,8 +215,8 @@ namespace AR_Lib.Geometry
             double area = 0.0;
             foreach (HE_HalfEdge hE in vertex.adjacentHalfEdges())
             {
-                double u2 = Vector(hE.Prev).Length2;
-                double v2 = Vector(hE).Length2;
+                double u2 = Vector(hE.Prev).LengthSquared;
+                double v2 = Vector(hE).LengthSquared;
                 double cotAlpha = Cotan(hE.Prev);
                 double cotBeta = Cotan(hE);
 
@@ -319,7 +319,7 @@ namespace AR_Lib.Geometry
                 Vector3d u = Vector(c.HalfEdge.Prev);
                 Vector3d v = -Vector(c.HalfEdge.Next);
 
-                n += ((u.Cross(v) / (u.Length2 * v.Length2)));
+                n += ((u.Cross(v) / (u.LengthSquared * v.LengthSquared)));
             }
             return n.Unit();
         }

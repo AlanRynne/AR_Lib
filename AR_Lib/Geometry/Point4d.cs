@@ -7,7 +7,7 @@ using AR_Lib.LinearAlgebra;
 
 namespace AR_Lib.Geometry
 {
-    public class Point4d : Point3d
+    public class Point4d : BasePoint
     {
         public double Weight { get => weight; set { weight = value; if (isUnset) isUnset = false; } }
 
@@ -60,7 +60,6 @@ namespace AR_Lib.Geometry
             {
                 Point4d pt = (Point4d)obj;
                 return base.Equals(obj) && this.Weight == pt.Weight;
-
             }
             else return false;
 
@@ -68,7 +67,8 @@ namespace AR_Lib.Geometry
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            //TODO: Non consistent getHashCode implementation
+            return base.GetHashCode() ^ weight.GetHashCode();
         }
 
         #endregion

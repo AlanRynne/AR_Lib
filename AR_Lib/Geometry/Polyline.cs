@@ -8,8 +8,17 @@ namespace AR_Lib.Geometry
     {
         private List<Point3d> _knots;
         private List<Line> _segments;
+        private bool _isUnset;
+        private bool _segmentsNeedUpdate;
 
+        public List<Line> Segments {
+            get {
+                if(_segmentsNeedUpdate) RebuildSegments();
+                return _segments;
+            }
+        }
         public bool IsClosed => _knots[0] == _knots[_knots.Count - 1];
+        public bool IsUnset => _isUnset;
 
         #region Constructors
 
@@ -17,11 +26,15 @@ namespace AR_Lib.Geometry
         {
             _knots = new List<Point3d>();
             _segments = new List<Line>();
+            _isUnset = true;
+            _segmentsNeedUpdate = false;
         }
         public Polyline(List<Point3d> knots)
         {
             _knots = knots;
-            RebuildSegments();
+            _segments = new List<Line>();
+            _segmentsNeedUpdate = true;
+            _isUnset = false;
         }
 
         #endregion
@@ -31,12 +44,12 @@ namespace AR_Lib.Geometry
         public void AddKnot(Point3d knot)
         {
             _knots.Add(knot); // Add knot to list
-            _segments.Add(new Line(_knots[_knots.Count - 1], knot)); //Add the corresponding segment
+            _segmentsNeedUpdate = true;            
         }
         public void AddKnot(Point3d knot, int index)
         {
             _knots.Insert(index, knot); // Add knot to list
-            RebuildSegments();
+            _segmentsNeedUpdate = true;
 
         }
         public void RemoveKnot(Point3d knot)
@@ -44,9 +57,16 @@ namespace AR_Lib.Geometry
             if (_knots.Contains(knot))
             {
                 _knots.Remove(knot);
-                RebuildSegments();
+                _segmentsNeedUpdate = true;
             }
 
+        }
+        
+        public void RemoveKnot(int index) 
+        {
+            if(_isUnset) throw new Exception("Cannot erase knot from an Unset polyline");
+            if(index < 0 || index > _segments.Count -1) throw new IndexOutOfRangeException("Knot index must be within the Knot list count");
+            
         }
         private void RebuildSegments()
         {
