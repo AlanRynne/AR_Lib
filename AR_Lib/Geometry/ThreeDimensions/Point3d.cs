@@ -12,7 +12,7 @@ namespace AR_Lib
 
             public Point3d(double xCoord, double yCoord, double zCoord) : base(xCoord, yCoord, zCoord) { }
 
-            public Point3d(Point2d point) : base(point) { }
+            public Point3d(Point2d point) { throw new NotImplementedException(); }
 
             public Point3d(Point3d point) : base(point) { }
 
