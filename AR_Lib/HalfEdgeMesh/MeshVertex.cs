@@ -36,7 +36,7 @@ namespace AR_Lib.HalfEdgeMesh
         public MeshVertex(double X, double Y, double Z) : base(X, Y, Z){ _userValues = new Dictionary<string, double>(); }
 
         // Calculate the valence of a vertex
-        public int Degree() => adjacentHalfEdges().Count;
+        public int Degree() => AdjacentHalfEdges().Count;
 
         // Check if vertex is isolated, meaning corresponding half-edge is null
         public bool IsIsolated() => this.HalfEdge == null;
@@ -44,7 +44,7 @@ namespace AR_Lib.HalfEdgeMesh
         // Check if vertex is on mesh boundary
         public bool OnBoundary()
         {
-            foreach(MeshHalfEdge halfEdge in adjacentHalfEdges())
+            foreach(MeshHalfEdge halfEdge in AdjacentHalfEdges())
             {
                 if (halfEdge.onBoundary) return true;
             }
@@ -52,7 +52,7 @@ namespace AR_Lib.HalfEdgeMesh
         }
 
         // Returns a list with all adjacent HE_HalfEdge of this vertex
-        public List<MeshHalfEdge> adjacentHalfEdges()
+        public List<MeshHalfEdge> AdjacentHalfEdges()
         {
             MeshHalfEdge _halfEdge = this.HalfEdge;
             List<MeshHalfEdge> _halfEdges = new List<MeshHalfEdge>();
@@ -68,7 +68,7 @@ namespace AR_Lib.HalfEdgeMesh
         }
 
         // Returns a list with all adjacent HE_Face of a vertex
-        public List<MeshFace> adjacentFaces()
+        public List<MeshFace> AdjacentFaces()
         {
             MeshHalfEdge _halfEdge = this.HalfEdge;
             List<MeshFace> _faces = new List<MeshFace>();
@@ -83,7 +83,7 @@ namespace AR_Lib.HalfEdgeMesh
         }
 
         // Returns a list with all the adjacent HE_Vertex of this vertex
-        public List<MeshVertex> adjacentVertices()
+        public List<MeshVertex> AdjacentVertices()
         {
             List<MeshVertex> _vertices = new List<MeshVertex>();
             MeshHalfEdge _halfEdge = this.HalfEdge;
@@ -97,7 +97,7 @@ namespace AR_Lib.HalfEdgeMesh
         }
 
         // Returns a list with all the adjacent HE_Edge of this vertex
-        public List<MeshEdge> adjacentEdges()
+        public List<MeshEdge> AdjacentEdges()
         {
             List<MeshEdge> _edges = new List<MeshEdge>();
             MeshHalfEdge _halfEdge = this.HalfEdge;
@@ -112,7 +112,7 @@ namespace AR_Lib.HalfEdgeMesh
         }
 
         // Returns a list with all the adjacent HE_Corners of this vertex
-        public List<MeshCorner> adjacentCorners()
+        public List<MeshCorner> AdjacentCorners()
         {
             List<MeshCorner> _corners = new List<MeshCorner>();
             MeshHalfEdge _halfEdge = this.HalfEdge;

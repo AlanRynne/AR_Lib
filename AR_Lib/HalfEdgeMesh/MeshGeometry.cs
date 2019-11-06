@@ -55,7 +55,7 @@ namespace AR_Lib.Geometry
         /// <param name="face">Face.</param>
         public static double Area(MeshFace face)
         {
-            if (face.isBoundaryLoop()) return 0.0;
+            if (face.IsBoundaryLoop()) return 0.0;
 
             Vector3d u = Vector(face.HalfEdge);
             Vector3d v = -Vector(face.HalfEdge.Prev);
@@ -80,7 +80,7 @@ namespace AR_Lib.Geometry
         /// <param name="face">Face.</param>
         public static Vector3d FaceNormal(MeshFace face)
         {
-            if (face.isBoundaryLoop()) return null;
+            if (face.IsBoundaryLoop()) return null;
 
             Vector3d u = Vector(face.HalfEdge);
             Vector3d v = -Vector(face.HalfEdge.Prev);
@@ -99,7 +99,7 @@ namespace AR_Lib.Geometry
             Point3d b = hE.Next.Vertex;
             Point3d c = hE.Prev.Vertex;
 
-            if (face.isBoundaryLoop()) return (a + b) / 2;
+            if (face.IsBoundaryLoop()) return (a + b) / 2;
 
             return (a + b + c) / 3;
         }
@@ -117,7 +117,7 @@ namespace AR_Lib.Geometry
             Point3d b = hE.Next.Vertex;
             Point3d c = hE.Prev.Vertex;
 
-            if (face.isBoundaryLoop()) return (a + b) / 2;
+            if (face.IsBoundaryLoop()) return (a + b) / 2;
 
             Vector3d ac = c - a;
             Vector3d ab = b - a;
@@ -201,7 +201,7 @@ namespace AR_Lib.Geometry
         public static double BarycentricDualArea(MeshVertex vertex)
         {
             double area = 0.0;
-            foreach (MeshFace f in vertex.adjacentFaces()) area += Area(f);
+            foreach (MeshFace f in vertex.AdjacentFaces()) area += Area(f);
             return area;
         }
 
@@ -213,7 +213,7 @@ namespace AR_Lib.Geometry
         public static double CircumcentricDualarea(MeshVertex vertex)
         {
             double area = 0.0;
-            foreach (MeshHalfEdge hE in vertex.adjacentHalfEdges())
+            foreach (MeshHalfEdge hE in vertex.AdjacentHalfEdges())
             {
                 double u2 = Vector(hE.Prev).LengthSquared;
                 double v2 = Vector(hE).LengthSquared;
@@ -233,7 +233,7 @@ namespace AR_Lib.Geometry
         public static Vector3d VertexNormalEquallyWeighted(MeshVertex vertex)
         {
             Vector3d n = new Vector3d();
-            foreach (MeshFace f in vertex.adjacentFaces()) n += FaceNormal(f);
+            foreach (MeshFace f in vertex.AdjacentFaces()) n += FaceNormal(f);
 
             return n.Unit();
         }
@@ -246,7 +246,7 @@ namespace AR_Lib.Geometry
         public static Vector3d VertexNormalAreaWeighted(MeshVertex vertex)
         {
             Vector3d n = new Vector3d();
-            foreach (MeshFace f in vertex.adjacentFaces())
+            foreach (MeshFace f in vertex.AdjacentFaces())
             {
                 Vector3d normal = FaceNormal(f);
                 double area = Area(f);
@@ -264,7 +264,7 @@ namespace AR_Lib.Geometry
         public static Vector3d VertexNormalAngleWeighted(MeshVertex vertex)
         {
             Vector3d n = new Vector3d();
-            foreach (MeshCorner c in vertex.adjacentCorners())
+            foreach (MeshCorner c in vertex.AdjacentCorners())
             {
                 Vector3d normal = FaceNormal(c.HalfEdge.Face);
                 double angle = Angle(c);
@@ -282,7 +282,7 @@ namespace AR_Lib.Geometry
         public static Vector3d VertexNormalGaussCurvature(MeshVertex vertex)
         {
             Vector3d n = new Vector3d();
-            foreach (MeshHalfEdge hE in vertex.adjacentHalfEdges())
+            foreach (MeshHalfEdge hE in vertex.AdjacentHalfEdges())
             {
                 double weight = 0.5 * DihedralAngle(hE) / Length(hE.Edge);
                 n -= (Vector(hE) * weight);
@@ -298,7 +298,7 @@ namespace AR_Lib.Geometry
         public static Vector3d VertexNormalMeanCurvature(MeshVertex vertex)
         {
             Vector3d n = new Vector3d();
-            foreach (MeshHalfEdge hE in vertex.adjacentHalfEdges())
+            foreach (MeshHalfEdge hE in vertex.AdjacentHalfEdges())
             {
                 double weight = 0.5 * Cotan(hE) + Cotan(hE.Twin);
                 n -= (Vector(hE) * weight);
@@ -314,7 +314,7 @@ namespace AR_Lib.Geometry
         public static Vector3d VertexNormalSphereInscribed(MeshVertex vertex)
         {
             Vector3d n = new Vector3d();
-            foreach (MeshCorner c in vertex.adjacentCorners())
+            foreach (MeshCorner c in vertex.AdjacentCorners())
             {
                 Vector3d u = Vector(c.HalfEdge.Prev);
                 Vector3d v = -Vector(c.HalfEdge.Next);
@@ -332,7 +332,7 @@ namespace AR_Lib.Geometry
         public static double AngleDefect(MeshVertex vertex)
         {
             double angleSum = 0.0;
-            foreach (MeshCorner c in vertex.adjacentCorners()) angleSum += Angle(c);
+            foreach (MeshCorner c in vertex.AdjacentCorners()) angleSum += Angle(c);
             //if (vertex.OnBoundary()) angleSum = Math.PI - angleSum;
 
             return vertex.OnBoundary() ? Math.PI - angleSum : 2 * Math.PI - angleSum;
@@ -343,7 +343,7 @@ namespace AR_Lib.Geometry
         /// </summary>
         /// <param name="vertex">Vertex to compute Gaussian curvature</param>
         /// <returns>Number representing the gaussian curvature at that vertex.</returns>
-        public static double scalarGaussCurvature(MeshVertex vertex)
+        public static double ScalarGaussCurvature(MeshVertex vertex)
         {
             return AngleDefect(vertex) / MeshGeometry.CircumcentricDualarea(vertex);
         }
@@ -353,10 +353,10 @@ namespace AR_Lib.Geometry
         /// </summary>
         /// <param name="vertex">Vertex to compute Mean curvature</param>
         /// <returns>Number representing the Mean curvature at that vertex.</returns>
-        public static double scalarMeanCurvature(MeshVertex vertex)
+        public static double ScalarMeanCurvature(MeshVertex vertex)
         {
             double sum = 0.0;
-            foreach (MeshHalfEdge hE in vertex.adjacentHalfEdges())
+            foreach (MeshHalfEdge hE in vertex.AdjacentHalfEdges())
                 sum += 0.5 * Length(hE.Edge) * DihedralAngle(hE);
             return sum;
         }
@@ -382,7 +382,7 @@ namespace AR_Lib.Geometry
         public static double[] PrincipalCurvatures(MeshVertex vertex)
         {
             double A = CircumcentricDualarea(vertex);
-            double H = scalarMeanCurvature(vertex) / A;
+            double H = ScalarMeanCurvature(vertex) / A;
             double K = AngleDefect(vertex) / A;
 
             double discriminant = H * H - K;

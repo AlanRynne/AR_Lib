@@ -56,9 +56,8 @@ namespace AR_Lib.Geometry
 
         public override bool Equals(object obj)
         {
-            if (obj is Point4d)
+            if (obj is Point4d pt)
             {
-                Point4d pt = (Point4d)obj;
                 return base.Equals(obj) && this.Weight == pt.Weight;
             }
             else return false;

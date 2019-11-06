@@ -35,11 +35,11 @@ namespace AR_Lib.HalfEdgeMesh
         public Dictionary<int, List<int>> FaceEdge;
         public Dictionary<int, List<int>> FaceFace;
 
-        public void computeVertexAdjacency()
+        public void ComputeVertexAdjacency()
         {
             foreach (MeshVertex vertex in mesh.Vertices)
             {
-                foreach (MeshVertex adjacent in vertex.adjacentVertices())
+                foreach (MeshVertex adjacent in vertex.AdjacentVertices())
                 {
                     if (!VertexVertex.ContainsKey(vertex.Index))
                     {
@@ -50,7 +50,7 @@ namespace AR_Lib.HalfEdgeMesh
                         VertexVertex[vertex.Index].Add(adjacent.Index);
                     }
                 }
-                foreach (MeshFace adjacent in vertex.adjacentFaces())
+                foreach (MeshFace adjacent in vertex.AdjacentFaces())
                 {
                     if (!VertexFaces.ContainsKey(vertex.Index))
                     {
@@ -61,7 +61,7 @@ namespace AR_Lib.HalfEdgeMesh
                         VertexFaces[vertex.Index].Add(adjacent.Index);
                     }
                 }
-                foreach (MeshEdge adjacent in vertex.adjacentEdges())
+                foreach (MeshEdge adjacent in vertex.AdjacentEdges())
                 {
                     if (!VertexEdges.ContainsKey(vertex.Index))
                     {
@@ -75,11 +75,11 @@ namespace AR_Lib.HalfEdgeMesh
             }
         }
 
-        public void computeFaceAdjacency()
+        public void ComputeFaceAdjacency()
         {
             foreach (MeshFace face in mesh.Faces)
             {
-                foreach (MeshVertex adjacent in face.adjacentVertices())
+                foreach (MeshVertex adjacent in face.AdjacentVertices())
                 {
                     if (!FaceVertex.ContainsKey(face.Index))
                     {
@@ -90,7 +90,7 @@ namespace AR_Lib.HalfEdgeMesh
                         FaceVertex[face.Index].Add(adjacent.Index);
                     }
                 }
-                foreach (MeshFace adjacent in face.adjacentFaces())
+                foreach (MeshFace adjacent in face.AdjacentFaces())
                 {
                     if (!FaceFace.ContainsKey(face.Index))
                     {
@@ -101,7 +101,7 @@ namespace AR_Lib.HalfEdgeMesh
                         FaceFace[face.Index].Add(adjacent.Index);
                     }
                 }
-                foreach (MeshEdge adjacent in face.adjacentEdges())
+                foreach (MeshEdge adjacent in face.AdjacentEdges())
                 {
                     if (!FaceEdge.ContainsKey(face.Index))
                     {
@@ -115,17 +115,17 @@ namespace AR_Lib.HalfEdgeMesh
             }
         }
 
-        public void computeEdgeAdjacency()
+        public void ComputeEdgeAdjacency()
         {
             foreach (MeshEdge edge in mesh.Edges)
             {
-                foreach (MeshVertex adjacent in edge.adjacentVertices())
+                foreach (MeshVertex adjacent in edge.AdjacentVertices())
                 {
                     if (!EdgeVertex.ContainsKey(edge.Index)) EdgeVertex.Add(edge.Index, new List<int>() { adjacent.Index });
                     else EdgeVertex[edge.Index].Add(adjacent.Index);
 
                 }
-                foreach (MeshFace adjacent in edge.adjacentFaces())
+                foreach (MeshFace adjacent in edge.AdjacentFaces())
                 {
                     if (!EdgeFace.ContainsKey(edge.Index))
                     {
@@ -136,7 +136,7 @@ namespace AR_Lib.HalfEdgeMesh
                         EdgeFace[edge.Index].Add(adjacent.Index);
                     }
                 }
-                foreach (MeshEdge adjacent in edge.adjacentEdges())
+                foreach (MeshEdge adjacent in edge.AdjacentEdges())
                 {
                     if (!EdgeEdge.ContainsKey(edge.Index))
                     {

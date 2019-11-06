@@ -115,12 +115,12 @@ namespace AR_Lib.IO
             }
             foreach (MeshFace face in mesh.Faces)
             {
-                if (!face.isBoundaryLoop())
+                if (!face.IsBoundaryLoop())
                 {
-                    List<MeshVertex> vertices = face.adjacentVertices();
+                    List<MeshVertex> vertices = face.AdjacentVertices();
                     string faceString = vertices.Count.ToString();
 
-                    foreach (MeshVertex v in face.adjacentVertices())
+                    foreach (MeshVertex v in face.AdjacentVertices())
                     {
                         faceString = faceString + " " + v.Index;
                     }

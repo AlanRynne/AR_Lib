@@ -52,9 +52,9 @@ namespace AR_Lib.HalfEdgeMesh
         {
             //There are 3 steps for this process
             //- Iterate through vertices, create vertex objects
-            createVertices(vertices);
+            CreateVertices(vertices);
             //- Iterate through faces, creating face, edge, and halfedge objects (and connecting where possible)
-            createFaces(faceIndexes);
+            CreateFaces(faceIndexes);
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace AR_Lib.HalfEdgeMesh
             foreach (MeshFace f in Faces)
             {
                 int boundaryEdges = 0;
-                List<MeshHalfEdge> adjacent = f.adjacentHalfEdges();
+                List<MeshHalfEdge> adjacent = f.AdjacentHalfEdges();
                 foreach (MeshHalfEdge e in adjacent)
                 {
                     if (e.onBoundary) boundaryEdges++;
@@ -130,7 +130,7 @@ namespace AR_Lib.HalfEdgeMesh
         /// <summary>
         /// Assign an index number to each mesh member
         /// </summary>
-        public void indexElements()
+        public void IndexElements()
         {
             int index = -1;
             foreach (MeshVertex v in Vertices)
@@ -160,7 +160,7 @@ namespace AR_Lib.HalfEdgeMesh
         /// Assign an index to each vertex of the mesh
         /// </summary>
         /// <returns>Dictionary containing Vertex-Index assignments</returns>
-        public Dictionary<MeshVertex, int> indexVertices()
+        public Dictionary<MeshVertex, int> IndexVertices()
         {
             int i = -1;
             Dictionary<MeshVertex, int> index = new Dictionary<MeshVertex, int>();
@@ -173,7 +173,7 @@ namespace AR_Lib.HalfEdgeMesh
         /// Assign an index to each face of the mesh
         /// </summary>
         /// <returns>Dictionary containing Face-Index assignments</returns>
-        public Dictionary<MeshFace, int> indexFaces()
+        public Dictionary<MeshFace, int> IndexFaces()
         {
             int i = -1;
             Dictionary<MeshFace, int> index = new Dictionary<MeshFace, int>();
@@ -186,7 +186,7 @@ namespace AR_Lib.HalfEdgeMesh
         /// Assign an index to each edge of the mesh
         /// </summary>
         /// <returns>Dictionary containing Edge-Index assignments</returns>
-        public Dictionary<MeshEdge, int> indexEdges()
+        public Dictionary<MeshEdge, int> IndexEdges()
         {
             int i = -1;
             Dictionary<MeshEdge, int> index = new Dictionary<MeshEdge, int>();
@@ -199,7 +199,7 @@ namespace AR_Lib.HalfEdgeMesh
         /// Assign an index to each Half-Edge of the mesh
         /// </summary>
         /// <returns>Dictionary containing HalfEdge-Index assignments</returns>
-        public Dictionary<MeshHalfEdge, int> indexHalfEdes()
+        public Dictionary<MeshHalfEdge, int> IndexHalfEdes()
         {
             int i = -1;
             Dictionary<MeshHalfEdge, int> index = new Dictionary<MeshHalfEdge, int>();
@@ -212,7 +212,7 @@ namespace AR_Lib.HalfEdgeMesh
         /// Assign an index to each corner of the mesh
         /// </summary>
         /// <returns>Dictionary containing Corner-Index assignments</returns>
-        public Dictionary<MeshCorner, int> indexCorners()
+        public Dictionary<MeshCorner, int> IndexCorners()
         {
             int i = -1;
             Dictionary<MeshCorner, int> index = new Dictionary<MeshCorner, int>();
@@ -230,9 +230,9 @@ namespace AR_Lib.HalfEdgeMesh
         /// Check if a mesh is triangular.
         /// </summary>
         /// <returns>Returns true if all faces are triangular.</returns>
-        public bool isTriangularMesh()
+        public bool IsTriangularMesh()
         {
-            if (isMesh() == isMeshResult.Triangular) return true;
+            if (IsMesh() == IsMeshResult.Triangular) return true;
             else return false;
         }
 
@@ -240,9 +240,9 @@ namespace AR_Lib.HalfEdgeMesh
         /// Check if a mesh is quad.
         /// </summary>
         /// <returns>Returns true if all faces are quads.</returns>
-        public bool isQuadMesh()
+        public bool IsQuadMesh()
         {
-            if (isMesh() == isMeshResult.Quad) return true;
+            if (IsMesh() == IsMeshResult.Quad) return true;
             else return false;
         }
 
@@ -250,28 +250,28 @@ namespace AR_Lib.HalfEdgeMesh
         /// Check if a mesh is n-gonal.
         /// </summary>
         /// <returns>Returns true if the mesh contains ANY ngons.</returns>
-        public bool isNgonMesh()
+        public bool IsNgonMesh()
         {
-            if (isMesh() == isMeshResult.Ngon) return true;
+            if (IsMesh() == IsMeshResult.Ngon) return true;
             else return false;
         }
 
         /// <summary>
         /// Returns an enum corresponding to the mesh face topology  (triangular, quad or ngon).
         /// </summary>
-        private isMeshResult isMesh()
+        private IsMeshResult IsMesh()
         {
-            var count = countFaceEdges();
-            if (count.Triangles == this.Faces.Count) return isMeshResult.Triangular;
-            if (count.Quads == this.Faces.Count) return isMeshResult.Quad;
-            if (count.Ngons != 0) return isMeshResult.Ngon;
-            else return isMeshResult.ERROR;
+            var count = CountFaceEdges();
+            if (count.Triangles == this.Faces.Count) return IsMeshResult.Triangular;
+            if (count.Quads == this.Faces.Count) return IsMeshResult.Quad;
+            if (count.Ngons != 0) return IsMeshResult.Ngon;
+            else return IsMeshResult.ERROR;
         }
 
         /// <summary>
         /// Type of mesh (Triangular, Quad, Ngon or Error)
         /// </summary>
-        private enum isMeshResult
+        private enum IsMeshResult
         {
             Triangular,
             Quad,
@@ -295,7 +295,7 @@ namespace AR_Lib.HalfEdgeMesh
             string isoFace = "Isolated faces: " + HasIsolatedFaces().ToString() + "\n";
             string manifold = "Has Non-Manifold Edges: " + HasNonManifoldEdges().ToString() + "\n";
 
-            FaceData faceData = countFaceEdges();
+            FaceData faceData = CountFaceEdges();
             string triangles = "Tri faces: " + faceData.Triangles + "\n";
             string quads = "Quad faces: " + faceData.Quads + "\n";
             string ngons = "Ngon faces: " + faceData.Ngons + "\n";
@@ -317,7 +317,7 @@ namespace AR_Lib.HalfEdgeMesh
 
 
         #region Private methods
-        private void createVertices(List<Point3d> points)
+        private void CreateVertices(List<Point3d> points)
         {
             List<MeshVertex> verts = new List<MeshVertex>(points.Count);
 
@@ -330,7 +330,7 @@ namespace AR_Lib.HalfEdgeMesh
         }
 
         // Takes a List containing another List per face with the vertex indexes belonging to that face
-        private bool createFaces(List<List<int>> faceIndexes)
+        private bool CreateFaces(List<List<int>> faceIndexes)
         {
             Dictionary<string, int> edgeCount = new Dictionary<string, int>();
             Dictionary<string, MeshHalfEdge> existingHalfEdges = new Dictionary<string, MeshHalfEdge>();
@@ -469,18 +469,18 @@ namespace AR_Lib.HalfEdgeMesh
             }
 
             // Index elements
-            indexElements();
+            IndexElements();
 
             return true;
         }
 
-        private FaceData countFaceEdges()
+        private FaceData CountFaceEdges()
         {
             FaceData data = new FaceData();
 
             foreach (MeshFace face in this.Faces)
             {
-                switch (face.adjacentCorners().Count)
+                switch (face.AdjacentCorners().Count)
                 {
                     case 3:
                         data.Triangles++;

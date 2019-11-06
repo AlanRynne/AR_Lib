@@ -72,7 +72,7 @@ namespace AR_Lib
 
             Plane perpPlane = new Plane(ray.Origin, ray.Direction, faceNormal, biNormal);
 
-            List<MeshVertex> vertices = Face.adjacentVertices();
+            List<MeshVertex> vertices = Face.AdjacentVertices();
 
             Point3d temp = new Point3d();
 

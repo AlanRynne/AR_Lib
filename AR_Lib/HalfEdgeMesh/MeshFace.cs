@@ -55,7 +55,7 @@ namespace AR_Lib
             /// Get all adjacent edges to this face.
             /// </summary>
             /// <returns>Returns a list of all adjacent edges in order.</returns>
-            public List<MeshEdge> adjacentEdges()
+            public List<MeshEdge> AdjacentEdges()
             {
                 MeshHalfEdge _edge = this.HalfEdge;
                 List<MeshEdge> _edges = new List<MeshEdge>();
@@ -73,7 +73,7 @@ namespace AR_Lib
             /// Get all adjacent half-edges to this face.
             /// </summary>
             /// <returns>Returns a list of all adjacent half-edges in order.</returns>
-            public List<MeshHalfEdge> adjacentHalfEdges()
+            public List<MeshHalfEdge> AdjacentHalfEdges()
             {
                 MeshHalfEdge _edge = this.HalfEdge;
                 List<MeshHalfEdge> _halfEdges = new List<MeshHalfEdge>();
@@ -91,7 +91,7 @@ namespace AR_Lib
             /// Get all adjacent vertices to this face.
             /// </summary>
             /// <returns>Returns a list of all adjacent vertices in order.</returns>
-            public List<MeshVertex> adjacentVertices()
+            public List<MeshVertex> AdjacentVertices()
             {
                 List<MeshVertex> _vertices = new List<MeshVertex>();
                 MeshHalfEdge _edge = this.HalfEdge;
@@ -109,7 +109,7 @@ namespace AR_Lib
             /// Get all adjacent faces to this face.
             /// </summary>
             /// <returns>Returns a list of all adjacent faces in order.</returns>
-            public List<MeshFace> adjacentFaces()
+            public List<MeshFace> AdjacentFaces()
             {
                 List<MeshFace> _faces = new List<MeshFace>();
                 MeshHalfEdge _edge = this.HalfEdge;
@@ -125,7 +125,7 @@ namespace AR_Lib
             /// Get all adjacent corners to this face.
             /// </summary>
             /// <returns>Returns a list of all adjacent corners in order.</returns>
-            public List<MeshCorner> adjacentCorners()
+            public List<MeshCorner> AdjacentCorners()
             {
                 List<MeshCorner> _corners = new List<MeshCorner>();
                 MeshHalfEdge _edge = this.HalfEdge;
@@ -141,7 +141,7 @@ namespace AR_Lib
             /// Checks if the current face is a boundary face.
             /// </summary>
             /// <returns>Returns true if the face is a boundary face, false if not.</returns>
-            public bool isBoundaryLoop() => this.HalfEdge.onBoundary;
+            public bool IsBoundaryLoop() => this.HalfEdge.onBoundary;
 
             #endregion
 
@@ -153,7 +153,7 @@ namespace AR_Lib
             /// <returns>Returns the string representation of the mesh face.</returns>
             public override string ToString()
             {
-                List<MeshVertex> faceVertices = this.adjacentVertices();
+                List<MeshVertex> faceVertices = this.AdjacentVertices();
                 string text = "F";
                 foreach (MeshVertex v in faceVertices)
                 {

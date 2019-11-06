@@ -56,7 +56,7 @@ namespace AR_Lib.Curve
         /// <returns>True if successful, false if not.</returns>
         public static bool GetFaceLevel(string valueKey, double level, MeshFace face, out Line line)
         {
-            List<MeshVertex> adj = face.adjacentVertices();
+            List<MeshVertex> adj = face.AdjacentVertices();
             List<double> vertexValues = new List<double> { adj[0].UserValues[valueKey], adj[1].UserValues[valueKey], adj[2].UserValues[valueKey] };
 
             List<int> above = new List<int>();
@@ -121,7 +121,7 @@ namespace AR_Lib.Curve
         /// <returns>A vector representing the gradient on that mesh face</returns>
         public static Vector3d ComputeFaceGradient(string valueKey, MeshFace face)
         {
-            List<MeshVertex> adjacentVertices = face.adjacentVertices();
+            List<MeshVertex> adjacentVertices = face.AdjacentVertices();
             Point3d i = adjacentVertices[0];
             Point3d j = adjacentVertices[1];
             Point3d k = adjacentVertices[2];
