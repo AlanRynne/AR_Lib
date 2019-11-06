@@ -96,7 +96,7 @@ namespace AR_Lib.IO
         /// <param name="mesh">Half-edge mesh to export</param>
         /// <param name="filePath">Path to save the file to</param>
         /// <returns></returns>
-        public static OFFResult WriteMeshToFile(HE_Mesh mesh, string filePath)
+        public static OFFResult WriteMeshToFile(Mesh mesh, string filePath)
         {
             string[] offLines = new string[mesh.Vertices.Count+mesh.Faces.Count+2];
 
@@ -106,23 +106,23 @@ namespace AR_Lib.IO
             offLines[1] = offCount;
 
             int count = 2;
-            foreach (HE_Vertex vertex in mesh.Vertices)
+            foreach (MeshVertex vertex in mesh.Vertices)
             {
                 string vText = vertex.X + " " + vertex.Y + " " + vertex.Z;
                 offLines[count] = vText;
                 count++;
 
             }
-            foreach (HE_Face face in mesh.Faces)
+            foreach (MeshFace face in mesh.Faces)
             {
                 if (!face.isBoundaryLoop())
                 {
-                    List<HE_Vertex> vertices = face.adjacentVertices();
+                    List<MeshVertex> vertices = face.adjacentVertices();
                     string faceString = vertices.Count.ToString();
 
-                    foreach (HE_Vertex v in face.adjacentVertices())
+                    foreach (MeshVertex v in face.adjacentVertices())
                     {
-                        faceString = faceString + " " + v.Index; 
+                        faceString = faceString + " " + v.Index;
                     }
                     offLines[count] = faceString;
                     count++;
@@ -156,7 +156,7 @@ namespace AR_Lib.IO
         public List<List<int>> faces;
     }
 
-    
+
     public struct OBJMeshData
     {
         public List<Point3d> vertices;
@@ -186,7 +186,7 @@ namespace AR_Lib.IO
     //     public static RhinoMeshResult ToRhinoMesh(HE_Mesh mesh, out Rhino.Geometry.Mesh rhinoMesh)
     //     {
     //         //CHECKS FOR NGON MESHES!
-    //         if(mesh.isNgonMesh()) 
+    //         if(mesh.isNgonMesh())
     //         {
     //             rhinoMesh = null;
     //             return RhinoMeshResult.Invalid;
@@ -211,7 +211,7 @@ namespace AR_Lib.IO
     //     }
 
     //     public static RhinoMeshResult FromRhinoMesh(Rhino.Geometry.Mesh rhinoMesh, out HE_Mesh mesh)
-    //     { 
+    //     {
     //         List<Point3d> vertices = new List<Point3d>();
     //         List<List<int>> faceVertexIndexes = new List<List<int>>();
 

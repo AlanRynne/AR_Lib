@@ -7,30 +7,30 @@ namespace AR_Lib.HalfEdgeMesh
     /// <summary>
     /// Represents a point on a mesh as it's face index and barycentric coordinatees.
     /// </summary>
-    public class HE_MeshPoint
+    public class MeshPoint
     {
         public int FaceIndex;
         public double U;
         public double V;
         public double W;
 
-        public HE_MeshPoint(int faceIndex, double u, double v, double w)
+        public MeshPoint(int faceIndex, double u, double v, double w)
         {
             FaceIndex = faceIndex;
             U = u;
             V = v;
             W = w;
         }
-        
-        public HE_MeshPoint(Point3d point, HE_Face face)
+
+        public MeshPoint(Point3d point, MeshFace face)
         {
-            List<HE_Vertex> adj = face.adjacentVertices();
+            List<MeshVertex> adj = face.adjacentVertices();
             double[] bary = Convert.Point3dToBarycentric(point,adj[0],adj[1],adj[2]);
             U = bary[0];
             V = bary[1];
             W = bary[2];
         }
-        
+
         /// <summary>
         /// Converts a mesh point into a string.
         /// </summary>

@@ -65,14 +65,14 @@ namespace AR_Lib
         /// <param name="result">The resulting intersection point.</param>
         /// <param name="halfEdge">The half-edge on where the intersection lies.</param>
         /// <returns></returns>
-        public static ISRayFacePerimeter RayFacePerimeter(Ray ray, HE_Face Face, out Point3d result, out HE_HalfEdge halfEdge)
+        public static ISRayFacePerimeter RayFacePerimeter(Ray ray, MeshFace Face, out Point3d result, out MeshHalfEdge halfEdge)
         {
-            Vector3d faceNormal = HE_MeshGeometry.FaceNormal(Face);
+            Vector3d faceNormal = MeshGeometry.FaceNormal(Face);
             Vector3d biNormal = Vector3d.CrossProduct(ray.Direction, faceNormal);
 
             Plane perpPlane = new Plane(ray.Origin, ray.Direction, faceNormal, biNormal);
 
-            List<HE_Vertex> vertices = Face.adjacentVertices();
+            List<MeshVertex> vertices = Face.adjacentVertices();
 
             Point3d temp = new Point3d();
 

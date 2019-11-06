@@ -6,18 +6,17 @@ using AR_Lib;
 namespace AR_Lib.HalfEdgeMesh
 {
     /// <summary>
-    /// The Half-Edge Mesh class
+    /// Represents a Half-Edge Mesh data structure.
     /// </summary>
-    public class HE_Mesh
+    public class Mesh
     {
         #region Public properties
-        public List<HE_Vertex> Vertices;
-        public List<HE_Edge> Edges;
-        public List<HE_Face> Faces;
-        public List<HE_Corner> Corners;
-        public List<HE_HalfEdge> HalfEdges;
-        public List<HE_Face> Boundaries;
-        public List<HE_Generators> Generators;
+        public List<MeshVertex> Vertices;
+        public List<MeshEdge> Edges;
+        public List<MeshFace> Faces;
+        public List<MeshCorner> Corners;
+        public List<MeshHalfEdge> HalfEdges;
+        public List<MeshFace> Boundaries;
 
         #endregion
 
@@ -34,15 +33,14 @@ namespace AR_Lib.HalfEdgeMesh
         /// <summary>
         /// Constructs an emtpy Half-Edge Mesh
         /// </summary>
-        public HE_Mesh()
+        public Mesh()
         {
-            Vertices = new List<HE_Vertex>();
-            Edges = new List<HE_Edge>();
-            Faces = new List<HE_Face>();
-            Corners = new List<HE_Corner>();
-            HalfEdges = new List<HE_HalfEdge>();
-            Boundaries = new List<HE_Face>();
-            Generators = new List<HE_Generators>();
+            Vertices = new List<MeshVertex>();
+            Edges = new List<MeshEdge>();
+            Faces = new List<MeshFace>();
+            Corners = new List<MeshCorner>();
+            HalfEdges = new List<MeshHalfEdge>();
+            Boundaries = new List<MeshFace>();
         }
 
         /// <summary>
@@ -50,7 +48,7 @@ namespace AR_Lib.HalfEdgeMesh
         /// </summary>
         /// <param name="vertices">list of mesh vertices</param>
         /// <param name="faceIndexes">Nested list with face vertices index</param>
-        public HE_Mesh(List<Point3d> vertices, List<List<int>> faceIndexes) : this()
+        public Mesh(List<Point3d> vertices, List<List<int>> faceIndexes) : this()
         {
             //There are 3 steps for this process
             //- Iterate through vertices, create vertex objects
@@ -63,15 +61,14 @@ namespace AR_Lib.HalfEdgeMesh
         /// Constructs a new Half-Edge Mesh from an existing one
         /// </summary>
         /// <param name="halfEdgeMesh">Existing Half-Edge Mesh</param>
-        public HE_Mesh(HE_Mesh halfEdgeMesh)
+        public Mesh(Mesh halfEdgeMesh)
         {
-            Vertices = new List<HE_Vertex>(halfEdgeMesh.Vertices);
-            Edges = new List<HE_Edge>(halfEdgeMesh.Edges);
-            Faces = new List<HE_Face>(halfEdgeMesh.Faces);
-            Corners = new List<HE_Corner>(halfEdgeMesh.Corners);
-            HalfEdges = new List<HE_HalfEdge>(halfEdgeMesh.HalfEdges);
-            Boundaries = new List<HE_Face>(halfEdgeMesh.Boundaries);
-            Generators = new List<HE_Generators>(halfEdgeMesh.Generators);
+            Vertices = new List<MeshVertex>(halfEdgeMesh.Vertices);
+            Edges = new List<MeshEdge>(halfEdgeMesh.Edges);
+            Faces = new List<MeshFace>(halfEdgeMesh.Faces);
+            Corners = new List<MeshCorner>(halfEdgeMesh.Corners);
+            HalfEdges = new List<MeshHalfEdge>(halfEdgeMesh.HalfEdges);
+            Boundaries = new List<MeshFace>(halfEdgeMesh.Boundaries);
         }
 
         #endregion
@@ -85,7 +82,7 @@ namespace AR_Lib.HalfEdgeMesh
         /// <returns>True if there are isolated vertices, false if not</returns>
         public bool HasIsolatedVertices()
         {
-            foreach (HE_Vertex v in Vertices)
+            foreach (MeshVertex v in Vertices)
             {
                 if (v.IsIsolated())
                 {
@@ -101,11 +98,11 @@ namespace AR_Lib.HalfEdgeMesh
         /// <returns>True if there are isolated faces, false if not</returns>
         public bool HasIsolatedFaces()
         {
-            foreach (HE_Face f in Faces)
+            foreach (MeshFace f in Faces)
             {
                 int boundaryEdges = 0;
-                List<HE_HalfEdge> adjacent = f.adjacentHalfEdges();
-                foreach (HE_HalfEdge e in adjacent)
+                List<MeshHalfEdge> adjacent = f.adjacentHalfEdges();
+                foreach (MeshHalfEdge e in adjacent)
                 {
                     if (e.onBoundary) boundaryEdges++;
                 }
@@ -136,26 +133,26 @@ namespace AR_Lib.HalfEdgeMesh
         public void indexElements()
         {
             int index = -1;
-            foreach (HE_Vertex v in Vertices)
+            foreach (MeshVertex v in Vertices)
             {
                 index++;
                 v.Index = index;
             }
 
             index = -1;
-            foreach (HE_Face f in Faces) { index++; f.Index = index; }
+            foreach (MeshFace f in Faces) { index++; f.Index = index; }
 
             index = -1;
-            foreach (HE_HalfEdge hE in HalfEdges) { index++; hE.Index = index; }
+            foreach (MeshHalfEdge hE in HalfEdges) { index++; hE.Index = index; }
 
             index = -1;
-            foreach (HE_Edge e in Edges) { index++; e.Index = index; }
+            foreach (MeshEdge e in Edges) { index++; e.Index = index; }
 
             index = -1;
-            foreach (HE_Corner c in Corners) { index++; c.Index = index; }
+            foreach (MeshCorner c in Corners) { index++; c.Index = index; }
 
             index = -1;
-            foreach (HE_Face b in Boundaries) { index++; b.Index = index; }
+            foreach (MeshFace b in Boundaries) { index++; b.Index = index; }
 
         }
 
@@ -163,10 +160,10 @@ namespace AR_Lib.HalfEdgeMesh
         /// Assign an index to each vertex of the mesh
         /// </summary>
         /// <returns>Dictionary containing Vertex-Index assignments</returns>
-        public Dictionary<HE_Vertex, int> indexVertices()
+        public Dictionary<MeshVertex, int> indexVertices()
         {
             int i = -1;
-            Dictionary<HE_Vertex, int> index = new Dictionary<HE_Vertex, int>();
+            Dictionary<MeshVertex, int> index = new Dictionary<MeshVertex, int>();
             foreach (var v in Vertices)
                 index[v] = i++;
             return index;
@@ -176,10 +173,10 @@ namespace AR_Lib.HalfEdgeMesh
         /// Assign an index to each face of the mesh
         /// </summary>
         /// <returns>Dictionary containing Face-Index assignments</returns>
-        public Dictionary<HE_Face, int> indexFaces()
+        public Dictionary<MeshFace, int> indexFaces()
         {
             int i = -1;
-            Dictionary<HE_Face, int> index = new Dictionary<HE_Face, int>();
+            Dictionary<MeshFace, int> index = new Dictionary<MeshFace, int>();
             foreach (var v in Faces)
                 index[v] = i++;
             return index;
@@ -189,10 +186,10 @@ namespace AR_Lib.HalfEdgeMesh
         /// Assign an index to each edge of the mesh
         /// </summary>
         /// <returns>Dictionary containing Edge-Index assignments</returns>
-        public Dictionary<HE_Edge, int> indexEdges()
+        public Dictionary<MeshEdge, int> indexEdges()
         {
             int i = -1;
-            Dictionary<HE_Edge, int> index = new Dictionary<HE_Edge, int>();
+            Dictionary<MeshEdge, int> index = new Dictionary<MeshEdge, int>();
             foreach (var v in Edges)
                 index[v] = i++;
             return index;
@@ -202,10 +199,10 @@ namespace AR_Lib.HalfEdgeMesh
         /// Assign an index to each Half-Edge of the mesh
         /// </summary>
         /// <returns>Dictionary containing HalfEdge-Index assignments</returns>
-        public Dictionary<HE_HalfEdge, int> indexHalfEdes()
+        public Dictionary<MeshHalfEdge, int> indexHalfEdes()
         {
             int i = -1;
-            Dictionary<HE_HalfEdge, int> index = new Dictionary<HE_HalfEdge, int>();
+            Dictionary<MeshHalfEdge, int> index = new Dictionary<MeshHalfEdge, int>();
             foreach (var f in HalfEdges)
                 index[f] = i++;
             return index;
@@ -215,10 +212,10 @@ namespace AR_Lib.HalfEdgeMesh
         /// Assign an index to each corner of the mesh
         /// </summary>
         /// <returns>Dictionary containing Corner-Index assignments</returns>
-        public Dictionary<HE_Corner, int> indexCorners()
+        public Dictionary<MeshCorner, int> indexCorners()
         {
             int i = -1;
-            Dictionary<HE_Corner, int> index = new Dictionary<HE_Corner, int>();
+            Dictionary<MeshCorner, int> index = new Dictionary<MeshCorner, int>();
             foreach (var f in Corners)
                 index[f] = i++;
             return index;
@@ -228,7 +225,7 @@ namespace AR_Lib.HalfEdgeMesh
 
 
         #region Topology methods
-        
+
         /// <summary>
         /// Check if a mesh is triangular.
         /// </summary>
@@ -248,6 +245,7 @@ namespace AR_Lib.HalfEdgeMesh
             if (isMesh() == isMeshResult.Quad) return true;
             else return false;
         }
+
         /// <summary>
         /// Check if a mesh is n-gonal.
         /// </summary>
@@ -321,11 +319,11 @@ namespace AR_Lib.HalfEdgeMesh
         #region Private methods
         private void createVertices(List<Point3d> points)
         {
-            List<HE_Vertex> verts = new List<HE_Vertex>(points.Count);
+            List<MeshVertex> verts = new List<MeshVertex>(points.Count);
 
             foreach (Point3d pt in points)
             {
-                HE_Vertex vertex = new HE_Vertex(pt.X, pt.Y, pt.Z);
+                MeshVertex vertex = new MeshVertex(pt.X, pt.Y, pt.Z);
                 verts.Add(vertex);
             }
             Vertices = verts;
@@ -335,20 +333,20 @@ namespace AR_Lib.HalfEdgeMesh
         private bool createFaces(List<List<int>> faceIndexes)
         {
             Dictionary<string, int> edgeCount = new Dictionary<string, int>();
-            Dictionary<string, HE_HalfEdge> existingHalfEdges = new Dictionary<string, HE_HalfEdge>();
-            Dictionary<HE_HalfEdge, bool> hasTwinHalfEdge = new Dictionary<HE_HalfEdge, bool>();
+            Dictionary<string, MeshHalfEdge> existingHalfEdges = new Dictionary<string, MeshHalfEdge>();
+            Dictionary<MeshHalfEdge, bool> hasTwinHalfEdge = new Dictionary<MeshHalfEdge, bool>();
 
             // Create the faces, edges and half-edges, non-boundary loops and link references when possible;
             foreach (List<int> indexes in faceIndexes)
             {
-                HE_Face f = new HE_Face();
+                MeshFace f = new MeshFace();
                 Faces.Add(f);
 
-                List<HE_HalfEdge> tempHEdges = new List<HE_HalfEdge>(indexes.Count);
+                List<MeshHalfEdge> tempHEdges = new List<MeshHalfEdge>(indexes.Count);
                 //Create empty half-edges
                 for (int i = 0; i < indexes.Count; i++)
                 {
-                    HE_HalfEdge h = new HE_HalfEdge();
+                    MeshHalfEdge h = new MeshHalfEdge();
                     tempHEdges.Add(h);
                 }
 
@@ -359,7 +357,7 @@ namespace AR_Lib.HalfEdgeMesh
                     int v0 = indexes[i];
                     int v1 = indexes[(i + 1) % indexes.Count];
 
-                    HE_HalfEdge h = tempHEdges[i];
+                    MeshHalfEdge h = tempHEdges[i];
                     // Set previous and next
                     h.Next = tempHEdges[(i + 1) % indexes.Count];
                     h.Prev = tempHEdges[(i + indexes.Count - 1) % indexes.Count];
@@ -386,7 +384,7 @@ namespace AR_Lib.HalfEdgeMesh
                     if (existingHalfEdges.ContainsKey(key))
                     {
                         // If this half-edge key already exists, it is the twin of this current half-edge
-                        HE_HalfEdge twin = existingHalfEdges[key];
+                        MeshHalfEdge twin = existingHalfEdges[key];
                         h.Twin = twin;
                         twin.Twin = h;
                         h.Edge = twin.Edge;
@@ -397,7 +395,7 @@ namespace AR_Lib.HalfEdgeMesh
                     else
                     {
                         // Create an edge and set its half-edge
-                        HE_Edge e = new HE_Edge();
+                        MeshEdge e = new MeshEdge();
                         Edges.Add(e);
                         h.Edge = e;
                         e.HalfEdge = h;
@@ -415,21 +413,21 @@ namespace AR_Lib.HalfEdgeMesh
             // Create boundary edges
             for (int i = 0; i < HalfEdges.Count; i++)
             {
-                HE_HalfEdge h = HalfEdges[i];
+                MeshHalfEdge h = HalfEdges[i];
                 if (!hasTwinHalfEdge[h])
                 {
-                    HE_Face f = new HE_Face();
+                    MeshFace f = new MeshFace();
                     Boundaries.Add(f);
 
-                    List<HE_HalfEdge> boundaryCycle = new List<HE_HalfEdge>();
-                    HE_HalfEdge hE = h;
+                    List<MeshHalfEdge> boundaryCycle = new List<MeshHalfEdge>();
+                    MeshHalfEdge hE = h;
                     do
                     {
-                        HE_HalfEdge bH = new HE_HalfEdge();
+                        MeshHalfEdge bH = new MeshHalfEdge();
                         HalfEdges.Add(bH);
                         boundaryCycle.Add(bH);
 
-                        HE_HalfEdge nextHE = hE.Next;
+                        MeshHalfEdge nextHE = hE.Next;
                         while (hasTwinHalfEdge[nextHE]) nextHE = nextHE.Twin.Next;
 
                         bH.Vertex = nextHE.Vertex;
@@ -457,7 +455,7 @@ namespace AR_Lib.HalfEdgeMesh
 
                 if (!h.onBoundary)
                 {
-                    HE_Corner corner = new HE_Corner();
+                    MeshCorner corner = new MeshCorner();
                     corner.HalfEdge = h;
                     h.Corner = corner;
                     Corners.Add(corner);
@@ -480,7 +478,7 @@ namespace AR_Lib.HalfEdgeMesh
         {
             FaceData data = new FaceData();
 
-            foreach (HE_Face face in this.Faces)
+            foreach (MeshFace face in this.Faces)
             {
                 switch (face.adjacentCorners().Count)
                 {

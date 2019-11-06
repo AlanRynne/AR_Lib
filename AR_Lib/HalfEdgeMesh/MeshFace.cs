@@ -8,14 +8,14 @@ namespace AR_Lib
         /// <summary>
         /// Half-edge mesh face class
         /// </summary>
-        public class HE_Face
+        public class MeshFace
         {
             #region Properties & Fields
 
             /// <summary>
             /// One of the  half-edges surrounding the face
             /// </summary>
-            public HE_HalfEdge HalfEdge;
+            public MeshHalfEdge HalfEdge;
 
             /// <summary>
             /// The face index on the mesh face list.
@@ -26,13 +26,13 @@ namespace AR_Lib
             /// Computes the area of the face.
             /// </summary>
             /// <returns>Returns the value of the face area.</returns>
-            public double Area => HE_MeshGeometry.Area(this);
+            public double Area => MeshGeometry.Area(this);
 
             /// <summary>
             /// Compute the normal vector of the face.
             /// </summary>
             /// <returns>Returns the perpendicular vector to the face</returns>
-            public Vector3d Normal => HE_MeshGeometry.FaceNormal(this);
+            public Vector3d Normal => MeshGeometry.FaceNormal(this);
 
             #endregion
 
@@ -41,7 +41,7 @@ namespace AR_Lib
             /// <summary>
             /// Initialize an empty half-edge mesh face.
             /// </summary>
-            public HE_Face()
+            public MeshFace()
             {
                 HalfEdge = null;
                 Index = -1;
@@ -55,10 +55,10 @@ namespace AR_Lib
             /// Get all adjacent edges to this face.
             /// </summary>
             /// <returns>Returns a list of all adjacent edges in order.</returns>
-            public List<HE_Edge> adjacentEdges()
+            public List<MeshEdge> adjacentEdges()
             {
-                HE_HalfEdge _edge = this.HalfEdge;
-                List<HE_Edge> _edges = new List<HE_Edge>();
+                MeshHalfEdge _edge = this.HalfEdge;
+                List<MeshEdge> _edges = new List<MeshEdge>();
                 do
                 {
                     _edges.Add(_edge.Edge);
@@ -73,10 +73,10 @@ namespace AR_Lib
             /// Get all adjacent half-edges to this face.
             /// </summary>
             /// <returns>Returns a list of all adjacent half-edges in order.</returns>
-            public List<HE_HalfEdge> adjacentHalfEdges()
+            public List<MeshHalfEdge> adjacentHalfEdges()
             {
-                HE_HalfEdge _edge = this.HalfEdge;
-                List<HE_HalfEdge> _halfEdges = new List<HE_HalfEdge>();
+                MeshHalfEdge _edge = this.HalfEdge;
+                List<MeshHalfEdge> _halfEdges = new List<MeshHalfEdge>();
                 do
                 {
                     _halfEdges.Add(_edge);
@@ -91,10 +91,10 @@ namespace AR_Lib
             /// Get all adjacent vertices to this face.
             /// </summary>
             /// <returns>Returns a list of all adjacent vertices in order.</returns>
-            public List<HE_Vertex> adjacentVertices()
+            public List<MeshVertex> adjacentVertices()
             {
-                List<HE_Vertex> _vertices = new List<HE_Vertex>();
-                HE_HalfEdge _edge = this.HalfEdge;
+                List<MeshVertex> _vertices = new List<MeshVertex>();
+                MeshHalfEdge _edge = this.HalfEdge;
                 do
                 {
                     _vertices.Add(_edge.Vertex);
@@ -109,10 +109,10 @@ namespace AR_Lib
             /// Get all adjacent faces to this face.
             /// </summary>
             /// <returns>Returns a list of all adjacent faces in order.</returns>
-            public List<HE_Face> adjacentFaces()
+            public List<MeshFace> adjacentFaces()
             {
-                List<HE_Face> _faces = new List<HE_Face>();
-                HE_HalfEdge _edge = this.HalfEdge;
+                List<MeshFace> _faces = new List<MeshFace>();
+                MeshHalfEdge _edge = this.HalfEdge;
                 do
                 {
                     _faces.Add(_edge.Twin.Face);
@@ -125,10 +125,10 @@ namespace AR_Lib
             /// Get all adjacent corners to this face.
             /// </summary>
             /// <returns>Returns a list of all adjacent corners in order.</returns>
-            public List<HE_Corner> adjacentCorners()
+            public List<MeshCorner> adjacentCorners()
             {
-                List<HE_Corner> _corners = new List<HE_Corner>();
-                HE_HalfEdge _edge = this.HalfEdge;
+                List<MeshCorner> _corners = new List<MeshCorner>();
+                MeshHalfEdge _edge = this.HalfEdge;
                 do
                 {
                     _corners.Add(_edge.Corner);
@@ -153,9 +153,9 @@ namespace AR_Lib
             /// <returns>Returns the string representation of the mesh face.</returns>
             public override string ToString()
             {
-                List<HE_Vertex> faceVertices = this.adjacentVertices();
+                List<MeshVertex> faceVertices = this.adjacentVertices();
                 string text = "F";
-                foreach (HE_Vertex v in faceVertices)
+                foreach (MeshVertex v in faceVertices)
                 {
                     text += " ";
                     text += v.Index;

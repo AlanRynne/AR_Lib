@@ -49,7 +49,8 @@ namespace AR_Lib
 
             #region Operators
 
-            public static Vector3d operator +(Point3d point, Point3d point2) => new Vector3d(point.X + point2.X, point.Y + point2.Y, point.Z + point2.Z);
+            public static Point3d operator +(Point3d point, Vector3d v) => new Point3d(point.X + v.X, point.Y + v.Y, point.Z + v.Z);
+            public static Point3d operator +(Point3d point, Point3d point2) => new Point3d(point + (Vector3d)point2);
             public static Vector3d operator -(Point3d point, Point3d point2) => new Vector3d(point.X - point2.X, point.Y - point2.Y, point.Z - point2.Z);
 
             public static Point3d operator -(Point3d point) => new Point3d(-point.X, -point.Y, -point.Z);
@@ -63,7 +64,6 @@ namespace AR_Lib
             public static bool operator ==(Point3d point, Point3d point2) => point.Equals(point2);
             public static bool operator !=(Point3d point, Point3d point2) => !point.Equals(point2);
 
-            public static Point3d operator +(Point3d point, Vector3d v) => new Point3d(point.X + v.X, point.Y + v.Y, point.Z + v.Z);
 
             // Implicit conversions
             public static implicit operator Point3d(Vector3d v) => v;

@@ -16,14 +16,14 @@ namespace AR_Lib.Curve
         /// Computes a geodesic on a mesh given a starting point and an initial direction.
         /// Returns true if successfull and false if something went wrong.
         /// </summary>
-        public static bool StartDir(HE_MeshPoint meshPoint, Vector3d vector, HE_Mesh mesh, int maxIter, out List<Point3d> geodesic)
+        public static bool StartDir(MeshPoint meshPoint, Vector3d vector, Mesh mesh, int maxIter, out List<Point3d> geodesic)
         {
             // Get initial face on the mesh
-            HE_Face initialFace = mesh.Faces[meshPoint.FaceIndex];
+            MeshFace initialFace = mesh.Faces[meshPoint.FaceIndex];
             // Start iteration
 
             // Create variables for current iteration step
-            HE_Face thisFace = initialFace;
+            MeshFace thisFace = initialFace;
             Point3d thisPoint = new Point3d();
             Vector3d thisDirection = vector;
 
@@ -34,7 +34,7 @@ namespace AR_Lib.Curve
                 Ray ray = new Ray(thisPoint, thisDirection);
 
                 // Find intersection between ray and boundary
-                AR_Lib.Intersect3D.RayFacePerimeter(ray, thisFace, out Point3d nextPoint, out HE_HalfEdge halfEdge);
+                Intersect3D.RayFacePerimeter(ray, thisFace, out Point3d nextPoint, out MeshHalfEdge halfEdge);
 
                 // Intersection method should check for correct direction using sign of dot product
 
@@ -42,11 +42,11 @@ namespace AR_Lib.Curve
                 geodPoints.Add(nextPoint);
 
                 // Walk to next face
-                HE_Face nextFace = halfEdge.Twin.Face;
+                MeshFace nextFace = halfEdge.Twin.Face;
 
                 // Flip vector to next face
-                Vector3d perpVector = Vector3d.CrossProduct(thisDirection, HE_MeshGeometry.FaceNormal(thisFace));
-                Vector3d nextVector = Vector3d.CrossProduct(HE_MeshGeometry.FaceNormal(nextFace), perpVector);
+                Vector3d perpVector = Vector3d.CrossProduct(thisDirection, MeshGeometry.FaceNormal(thisFace));
+                Vector3d nextVector = Vector3d.CrossProduct(MeshGeometry.FaceNormal(nextFace), perpVector);
 
                 // Assign iteration variables to current
                 thisPoint = nextPoint;

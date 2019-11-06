@@ -18,7 +18,7 @@ namespace AR_Lib.Curve
         /// <param name="levels">List of level values to be computed.</param>
         /// <param name="mesh">The mesh to compute the level-sets in.</param>
         /// <param name="levelSets">Resulting level sets.</param>
-        public static void ComputeLevels(string valueKey, List<double> levels, HE_Mesh mesh, out List<List<Line>> levelSets)
+        public static void ComputeLevels(string valueKey, List<double> levels, Mesh mesh, out List<List<Line>> levelSets)
         {
             List<List<Line>> resultLines = new List<List<Line>>();
 
@@ -27,7 +27,7 @@ namespace AR_Lib.Curve
                 resultLines.Add(new List<Line>());
             }
             int iter = 0;
-            foreach (HE_Face face in mesh.Faces)
+            foreach (MeshFace face in mesh.Faces)
             {
                 int count = 0;
                 foreach (double level in levels)
@@ -54,9 +54,9 @@ namespace AR_Lib.Curve
         /// <param name="face">Face to computee the level in.</param>
         /// <param name="line">Resulting level line on the face</param>
         /// <returns>True if successful, false if not.</returns>
-        public static bool GetFaceLevel(string valueKey, double level, HE_Face face, out Line line)
+        public static bool GetFaceLevel(string valueKey, double level, MeshFace face, out Line line)
         {
-            List<HE_Vertex> adj = face.adjacentVertices();
+            List<MeshVertex> adj = face.adjacentVertices();
             List<double> vertexValues = new List<double> { adj[0].UserValues[valueKey], adj[1].UserValues[valueKey], adj[2].UserValues[valueKey] };
 
             List<int> above = new List<int>();
@@ -104,7 +104,7 @@ namespace AR_Lib.Curve
         /// <param name="valueKey">Key of the values in the vertex.UserData dictionary</param>
         /// <param name="mesh">Mesh to compute the gradient.</param>
         /// <returns>A list containing all the gradient vectors per-face.</returns>
-        public static List<Vector3d> ComputeGradientField(string valueKey, HE_Mesh mesh)
+        public static List<Vector3d> ComputeGradientField(string valueKey, Mesh mesh)
         {
             List<Vector3d> gradientField = new List<Vector3d>();
 
@@ -119,9 +119,9 @@ namespace AR_Lib.Curve
         /// <param name="valueKey">Key of the values in the vertex.UserData dictionary</param>
         /// <param name="face">Face to compute thee gradient.</param>
         /// <returns>A vector representing the gradient on that mesh face</returns>
-        public static Vector3d ComputeFaceGradient(string valueKey, HE_Face face)
+        public static Vector3d ComputeFaceGradient(string valueKey, MeshFace face)
         {
-            List<HE_Vertex> adjacentVertices = face.adjacentVertices();
+            List<MeshVertex> adjacentVertices = face.adjacentVertices();
             Point3d i = adjacentVertices[0];
             Point3d j = adjacentVertices[1];
             Point3d k = adjacentVertices[2];
