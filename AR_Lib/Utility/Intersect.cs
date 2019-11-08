@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using AR_Lib.Curve;
+using AR_Lib.Curves;
 using AR_Lib.Geometry;
 using AR_Lib.HalfEdgeMesh;
 using AR_Lib.LinearAlgebra;

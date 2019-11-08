@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using AR_Lib.HalfEdgeMesh;
 using AR_Lib.Geometry;
 using AR_Lib.LinearAlgebra;
-using AR_Lib.Curve;
+using AR_Lib.Curves;
 
 
 namespace AR_Lib

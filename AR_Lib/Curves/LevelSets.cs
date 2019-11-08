@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
 using AR_Lib.HalfEdgeMesh;
-using AR_Lib.Curve;
 using AR_Lib.Geometry;
 
-namespace AR_Lib.Curve
+namespace AR_Lib.Curves
 {
     /// <summary>
     /// Compute the level sets of a given function.
