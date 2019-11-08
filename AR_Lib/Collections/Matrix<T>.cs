@@ -40,6 +40,25 @@ namespace AR_Lib.Collections
         /// </summary>
         public ref T this[int row, int column] => ref _data[row, column];
 
+        public T[] Row(int n)
+        {
+            var row = new T[N];
+            for (int i = 0; i < M; i++)
+            {
+                row[i] = _data[n, i];
+            }
+            return row;
+        }
+        public T[] Column(int m)
+        {
+            var row = new T[M];
+            for (int i = 0; i < N; i++)
+            {
+                row[i] = _data[i, m];
+            }
+            return row;
+        }
+
         #endregion
 
 
