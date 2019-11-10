@@ -3,12 +3,16 @@ mono: none
 sudo: required
 dist: xenial
 dotnet: 2.2
+
 script:
   - dotnet restore
   - dotnet build -c Release
-  - dotnet test AR_Lib.Tests
+  - dotnet test AR_Lib.Tests /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=../coverage/coverage.cobertura.xml",
+
+  after_script:
+  - bash <(curl -s https://codecov.io/bash)
 
 branches:
   only:
-  - master
-  - development
+    - master
+    - development
