@@ -9,7 +9,7 @@ script:
   - dotnet build -c Release
   - dotnet test AR_Lib.Tests /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=../coverage/coverage.cobertura.xml",
 
-  after_script:
+after_script:
   - bash <(curl -s https://codecov.io/bash)
 
 branches:
