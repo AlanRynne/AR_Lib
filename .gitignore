@@ -352,4 +352,4 @@ MigrationBackup/
 !.vscode/extensions.json
 .vscode/settings.json
 
-coverage/
+coverage/reports/
