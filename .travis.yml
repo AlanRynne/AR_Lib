@@ -7,7 +7,7 @@ dotnet: 2.2
 script:
   - dotnet restore
   - dotnet build -c Release
-  - dotnet test AR_Lib.Tests /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=../coverage/coverage.cobertura.xml",
+  - dotnet test AR_Lib.Tests /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=../coverage/coverage.cobertura.xml
 
 after_script:
   - bash <(curl -s https://codecov.io/bash)
