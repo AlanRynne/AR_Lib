@@ -9,8 +9,8 @@ script:
   - dotnet build -c Release
   - dotnet test AR_Lib.Tests /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=../coverage/opencover.xml
 
-after_script:
-  - bash <(curl -s https://codecov.io/bash)
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -f "coverage/opencover.xml"
 
 branches:
   only:
