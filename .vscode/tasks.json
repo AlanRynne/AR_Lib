@@ -7,9 +7,11 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/AR_Lib.Tests/AR_Lib.Tests.csproj"
+                "${workspaceFolder}/tests/AR_Lib.Tests.csproj"
             ],
-            "problemMatcher": "$tsc"
+            "problemMatcher": [
+                "$msCompile"
+            ]
         },
         {
             "label": "publish",
@@ -17,9 +19,8 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/AR_Lib.Tests/AR_Lib.Tests.csproj"
-            ],
-            "problemMatcher": "$tsc"
+                "${workspaceFolder}/tests/AR_Lib.Tests.csproj"
+            ]
         },
         {
             "label": "watch",
@@ -28,9 +29,8 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/AR_Lib.Tests/AR_Lib.Tests.csproj"
-            ],
-            "problemMatcher": "$tsc"
+                "${workspaceFolder}/tests/AR_Lib.Tests.csproj"
+            ]
         }
     ]
 }

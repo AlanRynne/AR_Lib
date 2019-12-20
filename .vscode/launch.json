@@ -16,7 +16,7 @@
             "/p:CoverletOutputFormat=opencover",
             "/p:CoverletOutput=../coverage/opencover.xml",
         ],
-        "cwd": "${workspaceFolder}/AR_Lib.Tests",
+        "cwd": "${workspaceFolder}/tests",
         "console": "internalConsole",
         "stopAtEntry": false,
         "logging": {

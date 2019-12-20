@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AR_Lib", "AR_Lib\AR_Lib.csproj", "{FD765C61-21BE-47EF-A9D0-3098534472F2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AR_Lib", "src\AR_Lib.csproj", "{FD765C61-21BE-47EF-A9D0-3098534472F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AR_Lib.Tests", "AR_Lib.Tests\AR_Lib.Tests.csproj", "{C2382EC6-F096-4E84-8057-A1507E62310F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AR_Lib.Tests", "tests\AR_Lib.Tests.csproj", "{C2382EC6-F096-4E84-8057-A1507E62310F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
