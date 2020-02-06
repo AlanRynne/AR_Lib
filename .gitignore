@@ -353,3 +353,4 @@ MigrationBackup/
 .vscode/settings.json
 
 coverage/reports/
+docs/*
