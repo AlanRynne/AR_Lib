@@ -114,6 +114,7 @@ namespace AR_Lib.Geometry
             }
             return mid;
         }
+
         public static double[,] AllBasisFuns(int span, double u, int p, IList<double> U)
         {
             var N = new double[p + 1, p + 1];
