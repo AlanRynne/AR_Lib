@@ -22,7 +22,7 @@ namespace AR_Lib.Geometry
         /// </summary>
         /// <param name="x">X coordinate of the point</param>
         /// <param name="y">Y coordinate of the point</param>
-        public Point2d(double x, double y) 
+        public Point2d(double x, double y)
         {
             this.X = x;
             this.Y = y;
@@ -32,7 +32,7 @@ namespace AR_Lib.Geometry
         /// Constructs a new 2D point out of an existing point
         /// </summary>
         /// <param name="pt">A 2D point</param>
-        public Point2d(Point2d pt): this(pt.X,pt.Y) { }
+        public Point2d(Point2d pt) : this(pt.X, pt.Y) { }
 
         // Overrided methods
 
@@ -52,12 +52,11 @@ namespace AR_Lib.Geometry
         /// <returns>Returns true if object is equals, false if not.</returns>
         public override bool Equals(object obj)
         {
-            if (obj is Point2d)
-            {
-                Point2d pt = obj as Point2d;
-                return this.X == pt.X && this.Y == pt.Y ? true : false;
-            }
-            return false;
+            if (!(obj is Point2d))
+                return false;
+            var pt = (Point2d)obj;
+            return Math.Abs(X - pt.X) <= Settings.Tolerance
+                && Math.Abs(Y - pt.Y) <= Settings.Tolerance;
         }
         /// <summary>
         /// Gets the hash code for the corresponding Point2d instance.
@@ -68,12 +67,15 @@ namespace AR_Lib.Geometry
             unchecked
             {
                 // Choose large primes to avoid hashing collisions
-                const int HashingBase = (int)2166136261;
-                const int HashingMultiplier = 16777619;
+                const int hashingBase = (int)2166136261;
+                const int hashingMultiplier = 16777619;
+                double tol = Settings.Tolerance * 2;
+                double tX = (int)(X * (1 / tol)) * tol;
+                double tY = (int)(Y * (1 / tol)) * tol;
 
-                int hash = HashingBase;
-                hash = (hash * HashingMultiplier) ^ (!Object.ReferenceEquals(null, X) ? X.GetHashCode() : 0);
-                hash = (hash * HashingMultiplier) ^ (!Object.ReferenceEquals(null, Y) ? Y.GetHashCode() : 0);
+                int hash = hashingBase;
+                hash = (hash * hashingMultiplier) ^ tX.GetHashCode();
+                hash = (hash * hashingMultiplier) ^ tY.GetHashCode();
                 return hash;
             }
         }
@@ -97,8 +99,8 @@ namespace AR_Lib.Geometry
         public static Point2d operator +(Point2d point, Vector2d v) => new Point2d(point.X + v.X, point.Y + v.Y);
 
         // Implicit conversions
-        public static implicit operator Point2d(Vector2d v) => v;
-        public static explicit operator Vector2d(Point2d pt) => new Vector2d(pt);
+        public static explicit operator Point2d(Vector2d v) => new Point2d(v.X, v.Y);
+        public static implicit operator Vector2d(Point2d pt) => new Vector2d(pt);
 
         #endregion
 

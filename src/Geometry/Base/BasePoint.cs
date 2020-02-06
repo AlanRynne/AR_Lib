@@ -95,13 +95,17 @@ namespace AR_Lib.Geometry
             unchecked
             {
                 // Choose large primes to avoid hashing collisions
-                const int HashingBase = (int)2166136261;
-                const int HashingMultiplier = 16777619;
+                const int hashingBase = (int)2166136261;
+                const int hashingMultiplier = 16777619;
+                double tol = Settings.Tolerance * 2;
+                double tX = (int)(X * (1 / tol)) * tol;
+                double tY = (int)(Y * (1 / tol)) * tol;
+                double tZ = (int)(Z * (1 / tol)) * tol;
 
-                int hash = HashingBase;
-                hash = (hash * HashingMultiplier) ^ (!ReferenceEquals(null, X) ? X.GetHashCode() : 0);
-                hash = (hash * HashingMultiplier) ^ (!ReferenceEquals(null, Y) ? Y.GetHashCode() : 0);
-                hash = (hash * HashingMultiplier) ^ (!ReferenceEquals(null, Z) ? Z.GetHashCode() : 0);
+                int hash = hashingBase;
+                hash = (hash * hashingMultiplier) ^ tX.GetHashCode();
+                hash = (hash * hashingMultiplier) ^ tY.GetHashCode();
+                hash = (hash * hashingMultiplier) ^ tZ.GetHashCode();
                 return hash;
             }
         }

@@ -3,7 +3,7 @@ using Xunit;
 
 namespace AR_Lib.Tests.Geometry
 {
-    public class Point3dTests
+    public class Point2dTests
     {
         [Fact]
         public void CanBe_Added()
@@ -11,10 +11,10 @@ namespace AR_Lib.Tests.Geometry
             var a = 3.3;
             var b = 2.2;
             var c = 4.11;
-            var ptA = new Point3d(a, b, c);
-            var ptB = new Point3d(b, c, a);
+            var ptA = new Point2d(a, b);
+            var ptB = new Point2d(b, c);
             var s = ptA - ptB;
-            var ptResult = new Point3d(a + b, b + c, c + a);
+            var ptResult = new Point2d(a + b, b + c);
             Assert.True(ptA + ptB == ptResult);
         }
 
@@ -24,12 +24,10 @@ namespace AR_Lib.Tests.Geometry
             var a = 3.3;
             var b = 2.2;
             var c = 4.11;
-            var ptA = new Point3d(a, b, c);
-            var ptB = new Point3d(b, c, a);
-            var ptResult = new Point3d(a - b, b - c, c - a);
-            var subs = ptA - ptB;
-            var s1 = ptA;
-            Assert.True(subs == ptResult);
+            var ptA = new Point2d(a, b);
+            var ptB = new Point2d(b, c);
+            var ptResult = new Point2d(a - b, b - c);
+            Assert.True(ptA - ptB == ptResult);
         }
 
         [Fact]
@@ -37,10 +35,9 @@ namespace AR_Lib.Tests.Geometry
         {
             var a = 3.3;
             var b = 2.2;
-            var c = 4.11;
             var m = 1.45;
-            var ptA = new Point3d(a, b, c);
-            var ptResult = new Point3d(a * m, b * m, c * m);
+            var ptA = new Point2d(a, b);
+            var ptResult = new Point2d(a * m, b * m);
             Assert.True(ptA * m == ptResult);
         }
 
@@ -49,17 +46,28 @@ namespace AR_Lib.Tests.Geometry
         {
             var a = 3.3;
             var b = 2.2;
-            var c = 4.11;
             var m = 1.45;
-            var ptA = new Point3d(a, b, c);
-            var ptResult = new Point3d(a / m, b / m, c / m);
+            var ptA = new Point2d(a, b);
+            var ptResult = new Point2d(a / m, b / m);
             Assert.True(ptA / m == ptResult);
         }
 
-        [Theory]
-        [ClassData(typeof(Point3dEqualDataset))]
-        public void EqualsAndHashCode_HaveConsistentResults(Point3d pt, Point3d pt2)
+        [Fact]
+        public void CanBe_Negated()
         {
+            var a = 3.3;
+            var b = 2.2;
+            var ptA = new Point2d(a, b);
+            var ptResult = new Point2d(-a, -b);
+            Assert.True(-ptA == ptResult);
+        }
+
+
+        [Fact]
+        public void EqualsAndHashCode_HaveConsistentResults()
+        {
+            var pt = new Point2d(1.00000009, -1);
+            var pt2 = new Point2d(1, -1);
             bool b1 = pt == pt2;
             bool b2 = pt.GetHashCode() == pt2.GetHashCode();
 

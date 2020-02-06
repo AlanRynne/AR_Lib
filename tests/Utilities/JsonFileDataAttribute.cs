@@ -10,7 +10,7 @@ namespace AR_Lib.Tests
 {
     /// <summary>
     /// Data Attribute to extract text data out of JSON files
-    /// 
+    ///
     /// From: https://andrewlock.net/creating-a-custom-xunit-theory-test-dataattribute-to-load-data-from-json-files/
     /// </summary>
     public class JsonFileDataAttribute : DataAttribute
