@@ -3,7 +3,7 @@
     <!-- Target Framework -->
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFramework>netstandard2.1</TargetFramework>
     </PropertyGroup>
 
     <!-- Add Nuget Packages and other  dependencies -->
