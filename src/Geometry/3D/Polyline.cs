@@ -11,9 +11,12 @@ namespace AR_Lib.Geometry
         private bool _isUnset;
         private bool _segmentsNeedUpdate;
 
-        public List<Line> Segments {
-            get {
-                if(_segmentsNeedUpdate) RebuildSegments();
+        public List<Line> Segments
+        {
+            get
+            {
+                if (_segmentsNeedUpdate)
+                    RebuildSegments();
                 return _segments;
             }
         }
@@ -64,8 +67,10 @@ namespace AR_Lib.Geometry
 
         public void RemoveKnot(int index)
         {
-            if(_isUnset) throw new Exception("Cannot erase knot from an Unset polyline");
-            if(index < 0 || index > _segments.Count -1) throw new IndexOutOfRangeException("Knot index must be within the Knot list count");
+            if (_isUnset)
+                throw new Exception("Cannot erase knot from an Unset polyline");
+            if (index < 0 || index > _segments.Count - 1)
+                throw new IndexOutOfRangeException("Knot index must be within the Knot list count");
 
         }
         private void RebuildSegments()

@@ -44,7 +44,8 @@ namespace AR_Lib.Geometry
         public static double MeanEdgeLength(Mesh Mesh)
         {
             double sum = 0.0;
-            foreach (MeshEdge e in Mesh.Edges) sum += Length(e);
+            foreach (MeshEdge e in Mesh.Edges)
+                sum += Length(e);
             return sum / Mesh.Edges.Count;
         }
 
@@ -55,7 +56,8 @@ namespace AR_Lib.Geometry
         /// <param name="face">Face.</param>
         public static double Area(MeshFace face)
         {
-            if (face.IsBoundaryLoop()) return 0.0;
+            if (face.IsBoundaryLoop())
+                return 0.0;
 
             Vector3d u = Vector(face.HalfEdge);
             Vector3d v = -Vector(face.HalfEdge.Prev);
@@ -69,7 +71,8 @@ namespace AR_Lib.Geometry
         public static double TotalArea(Mesh Mesh)
         {
             double sum = 0.0;
-            foreach (MeshFace f in Mesh.Faces) sum += Area(f);
+            foreach (MeshFace f in Mesh.Faces)
+                sum += Area(f);
             return sum;
         }
 
@@ -80,7 +83,8 @@ namespace AR_Lib.Geometry
         /// <param name="face">Face.</param>
         public static Vector3d FaceNormal(MeshFace face)
         {
-            if (face.IsBoundaryLoop()) return null;
+            if (face.IsBoundaryLoop())
+                return null;
 
             Vector3d u = Vector(face.HalfEdge);
             Vector3d v = -Vector(face.HalfEdge.Prev);
@@ -99,7 +103,8 @@ namespace AR_Lib.Geometry
             Point3d b = hE.Next.Vertex;
             Point3d c = hE.Prev.Vertex;
 
-            if (face.IsBoundaryLoop()) return (a + b) / 2;
+            if (face.IsBoundaryLoop())
+                return (a + b) / 2;
 
             return (a + b + c) / 3;
         }
@@ -117,7 +122,8 @@ namespace AR_Lib.Geometry
             Point3d b = hE.Next.Vertex;
             Point3d c = hE.Prev.Vertex;
 
-            if (face.IsBoundaryLoop()) return (a + b) / 2;
+            if (face.IsBoundaryLoop())
+                return (a + b) / 2;
 
             Vector3d ac = c - a;
             Vector3d ab = b - a;
@@ -165,7 +171,8 @@ namespace AR_Lib.Geometry
         /// <param name="hE">H e.</param>
         public static double Cotan(MeshHalfEdge hE)
         {
-            if (hE.onBoundary) return 0.0;
+            if (hE.onBoundary)
+                return 0.0;
 
             Vector3d u = Vector(hE.Prev);
             Vector3d v = -Vector(hE.Next);
@@ -181,7 +188,8 @@ namespace AR_Lib.Geometry
         /// <param name="hE">H e.</param>
         public static double DihedralAngle(MeshHalfEdge hE)
         {
-            if (hE.onBoundary || hE.Twin.onBoundary) return 0.0;
+            if (hE.onBoundary || hE.Twin.onBoundary)
+                return 0.0;
 
             Vector3d n1 = FaceNormal(hE.Face);
             Vector3d n2 = FaceNormal(hE.Twin.Face);
@@ -201,7 +209,8 @@ namespace AR_Lib.Geometry
         public static double BarycentricDualArea(MeshVertex vertex)
         {
             double area = 0.0;
-            foreach (MeshFace f in vertex.AdjacentFaces()) area += Area(f);
+            foreach (MeshFace f in vertex.AdjacentFaces())
+                area += Area(f);
             return area;
         }
 
@@ -233,7 +242,8 @@ namespace AR_Lib.Geometry
         public static Vector3d VertexNormalEquallyWeighted(MeshVertex vertex)
         {
             Vector3d n = new Vector3d();
-            foreach (MeshFace f in vertex.AdjacentFaces()) n += FaceNormal(f);
+            foreach (MeshFace f in vertex.AdjacentFaces())
+                n += FaceNormal(f);
 
             return n.Unit();
         }
@@ -332,7 +342,8 @@ namespace AR_Lib.Geometry
         public static double AngleDefect(MeshVertex vertex)
         {
             double angleSum = 0.0;
-            foreach (MeshCorner c in vertex.AdjacentCorners()) angleSum += Angle(c);
+            foreach (MeshCorner c in vertex.AdjacentCorners())
+                angleSum += Angle(c);
             //if (vertex.OnBoundary()) angleSum = Math.PI - angleSum;
 
             return vertex.OnBoundary() ? Math.PI - angleSum : 2 * Math.PI - angleSum;
@@ -386,8 +397,10 @@ namespace AR_Lib.Geometry
             double K = AngleDefect(vertex) / A;
 
             double discriminant = H * H - K;
-            if (discriminant > 0) discriminant = Math.Sqrt(discriminant);
-            else discriminant = 0;
+            if (discriminant > 0)
+                discriminant = Math.Sqrt(discriminant);
+            else
+                discriminant = 0;
 
             double k1 = H - discriminant;
             double k2 = H + discriminant;

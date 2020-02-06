@@ -2,7 +2,7 @@ using AR_Lib.Geometry.Interfaces;
 
 namespace AR_Lib.Geometry
 {
-    public class Sphere: ISurface
+    public class Sphere : ISurface
     {
         public Point3d Origin { get; set; }
         public double Radius { get; set; }

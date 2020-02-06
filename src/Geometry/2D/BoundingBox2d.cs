@@ -20,7 +20,7 @@ namespace AR_Lib.Geometry
             this.xDomain = new Interval(bottomLeftCorner.X, topRightCorner.X);
             this.yDomain = new Interval(bottomLeftCorner.Y, topRightCorner.Y);
         }
-        
+
         public BoundingBox2d(Polyline2d polyline)
         {
             double xMin = polyline.Vertices[0].X;
@@ -30,11 +30,15 @@ namespace AR_Lib.Geometry
 
             polyline.Vertices.ForEach(vertex =>
             {
-                if (vertex.X < xMin) xMin = vertex.X;
-                if (vertex.X > xMax) xMax = vertex.X;
+                if (vertex.X < xMin)
+                    xMin = vertex.X;
+                if (vertex.X > xMax)
+                    xMax = vertex.X;
 
-                if (vertex.Y < yMin) yMin = vertex.Y;
-                if (vertex.X > yMax) yMax = vertex.Y;
+                if (vertex.Y < yMin)
+                    yMin = vertex.Y;
+                if (vertex.X > yMax)
+                    yMax = vertex.Y;
             });
 
             this.xDomain = new Interval(xMin, xMax);

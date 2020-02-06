@@ -63,8 +63,10 @@ namespace AR_Lib.Curves
 
             for (int i = 0; i < vertexValues.Count; i++)
             {
-                if (vertexValues[i] < level) below.Add(i);
-                else above.Add(i);
+                if (vertexValues[i] < level)
+                    below.Add(i);
+                else
+                    above.Add(i);
             }
 
             if (above.Count == 3 || below.Count == 3)

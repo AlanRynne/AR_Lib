@@ -3,7 +3,7 @@ using AR_Lib.Geometry.Interfaces;
 
 namespace AR_Lib.Geometry
 {
-    public class Cylinder: ISurface
+    public class Cylinder : ISurface
     {
         public Cylinder(Plane plane, double radius, Interval domain)
         {

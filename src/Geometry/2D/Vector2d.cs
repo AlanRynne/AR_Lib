@@ -9,8 +9,8 @@ namespace AR_Lib.Geometry
         public double X { get => x; set => x = value; }
         public double Y { get => y; set => y = value; }
 
-        public Vector2d(Vector2d vector): this(vector.X, vector.Y) { }
-        public Vector2d(Point2d point): this(point.X, point.Y) { }
+        public Vector2d(Vector2d vector) : this(vector.X, vector.Y) { }
+        public Vector2d(Point2d point) : this(point.X, point.Y) { }
         public Vector2d(double x, double y)
         {
             this.x = x;
@@ -21,7 +21,8 @@ namespace AR_Lib.Geometry
         public double Length => Math.Sqrt(this.LengthSquared);
 
         public Vector2d Unit() => new Vector2d(this / this.Length);
-        public void Unitize() {
+        public void Unitize()
+        {
             double length = this.Length;
             this.x /= length;
             this.y /= length;
@@ -57,9 +58,10 @@ namespace AR_Lib.Geometry
             return @"Vector3d [{X}, {Y}]";
         }
 
-        public override bool Equals(object obj) 
+        public override bool Equals(object obj)
         {
-            if(obj is Vector2d){
+            if (obj is Vector2d)
+            {
                 Vector2d vect = obj as Vector2d;
                 return this.X == vect.X && this.Y == vect.Y ? true : false;
             }

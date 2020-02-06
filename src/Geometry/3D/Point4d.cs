@@ -60,7 +60,8 @@ namespace AR_Lib.Geometry
             {
                 return base.Equals(obj) && this.Weight == pt.Weight;
             }
-            else return false;
+            else
+                return false;
 
         }
 

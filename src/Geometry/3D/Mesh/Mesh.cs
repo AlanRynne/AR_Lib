@@ -104,9 +104,11 @@ namespace AR_Lib.HalfEdgeMesh
                 List<MeshHalfEdge> adjacent = f.AdjacentHalfEdges();
                 foreach (MeshHalfEdge e in adjacent)
                 {
-                    if (e.onBoundary) boundaryEdges++;
+                    if (e.onBoundary)
+                        boundaryEdges++;
                 }
-                if (boundaryEdges == adjacent.Count) return true;
+                if (boundaryEdges == adjacent.Count)
+                    return true;
             }
             return false;
         }
@@ -140,19 +142,24 @@ namespace AR_Lib.HalfEdgeMesh
             }
 
             index = -1;
-            foreach (MeshFace f in Faces) { index++; f.Index = index; }
+            foreach (MeshFace f in Faces)
+            { index++; f.Index = index; }
 
             index = -1;
-            foreach (MeshHalfEdge hE in HalfEdges) { index++; hE.Index = index; }
+            foreach (MeshHalfEdge hE in HalfEdges)
+            { index++; hE.Index = index; }
 
             index = -1;
-            foreach (MeshEdge e in Edges) { index++; e.Index = index; }
+            foreach (MeshEdge e in Edges)
+            { index++; e.Index = index; }
 
             index = -1;
-            foreach (MeshCorner c in Corners) { index++; c.Index = index; }
+            foreach (MeshCorner c in Corners)
+            { index++; c.Index = index; }
 
             index = -1;
-            foreach (MeshFace b in Boundaries) { index++; b.Index = index; }
+            foreach (MeshFace b in Boundaries)
+            { index++; b.Index = index; }
 
         }
 
@@ -232,8 +239,10 @@ namespace AR_Lib.HalfEdgeMesh
         /// <returns>Returns true if all faces are triangular.</returns>
         public bool IsTriangularMesh()
         {
-            if (IsMesh() == IsMeshResult.Triangular) return true;
-            else return false;
+            if (IsMesh() == IsMeshResult.Triangular)
+                return true;
+            else
+                return false;
         }
 
         /// <summary>
@@ -242,8 +251,10 @@ namespace AR_Lib.HalfEdgeMesh
         /// <returns>Returns true if all faces are quads.</returns>
         public bool IsQuadMesh()
         {
-            if (IsMesh() == IsMeshResult.Quad) return true;
-            else return false;
+            if (IsMesh() == IsMeshResult.Quad)
+                return true;
+            else
+                return false;
         }
 
         /// <summary>
@@ -252,8 +263,10 @@ namespace AR_Lib.HalfEdgeMesh
         /// <returns>Returns true if the mesh contains ANY ngons.</returns>
         public bool IsNgonMesh()
         {
-            if (IsMesh() == IsMeshResult.Ngon) return true;
-            else return false;
+            if (IsMesh() == IsMeshResult.Ngon)
+                return true;
+            else
+                return false;
         }
 
         /// <summary>
@@ -262,10 +275,14 @@ namespace AR_Lib.HalfEdgeMesh
         private IsMeshResult IsMesh()
         {
             var count = CountFaceEdges();
-            if (count.Triangles == this.Faces.Count) return IsMeshResult.Triangular;
-            if (count.Quads == this.Faces.Count) return IsMeshResult.Quad;
-            if (count.Ngons != 0) return IsMeshResult.Ngon;
-            else return IsMeshResult.ERROR;
+            if (count.Triangles == this.Faces.Count)
+                return IsMeshResult.Triangular;
+            if (count.Quads == this.Faces.Count)
+                return IsMeshResult.Quad;
+            if (count.Ngons != 0)
+                return IsMeshResult.Ngon;
+            else
+                return IsMeshResult.ERROR;
         }
 
         /// <summary>
@@ -428,7 +445,8 @@ namespace AR_Lib.HalfEdgeMesh
                         boundaryCycle.Add(bH);
 
                         MeshHalfEdge nextHE = hE.Next;
-                        while (hasTwinHalfEdge[nextHE]) nextHE = nextHE.Twin.Next;
+                        while (hasTwinHalfEdge[nextHE])
+                            nextHE = nextHE.Twin.Next;
 
                         bH.Vertex = nextHE.Vertex;
                         bH.Edge = hE.Edge;

@@ -102,14 +102,17 @@ namespace AR_Lib.Geometry
 
         public static int FindSpan(int n, int p, double u, IList<double> U)
         {
-            if (u == U[n + 1]) return n;
+            if (u == U[n + 1])
+                return n;
             int low = p;
             int high = n + 1;
             int mid = (low + high) / 2;
             while (u < U[mid] || u >= U[mid + 1])
             {
-                if (u < U[mid]) high = mid;
-                else low = mid;
+                if (u < U[mid])
+                    high = mid;
+                else
+                    low = mid;
                 mid = (low + high) / 2;
             }
             return mid;
@@ -222,14 +225,18 @@ namespace AR_Lib.Geometry
 
         public static double OneBasisFun(int p, int m, IList<double> U, int i, double u)
         {
-            if ((i == 0 && u == U[0]) || (i == (m - p - 1) && u == U[m])) return 1.0;
-            if (u < U[i] || u >= U[i + p + 1]) return 0.0;
+            if ((i == 0 && u == U[0]) || (i == (m - p - 1) && u == U[m]))
+                return 1.0;
+            if (u < U[i] || u >= U[i + p + 1])
+                return 0.0;
             // Initialize zeroth-degree functions
             var N = new double[p + 1];
             for (int j = 0; j <= p; j++)
             {
-                if (u >= U[i + j] && u < U[i + j + 1]) N[j] = 1.0;
-                else N[j] = 0.0;
+                if (u >= U[i + j] && u < U[i + j + 1])
+                    N[j] = 1.0;
+                else
+                    N[j] = 0.0;
             }
             for (int k = 1; k <= p; k++)
             {
@@ -267,13 +274,16 @@ namespace AR_Lib.Geometry
             var N = new double[p + 1, p + 1];
             for (int j = 0; j <= p; j++)
             {
-                if (u >= U[i + j] && u < U[i + j + 1]) N[j, 0] = 1.0;
+                if (u >= U[i + j] && u < U[i + j + 1])
+                    N[j, 0] = 1.0;
             }
             for (int k = 1; k <= p; k++)
             {
                 double saved;
-                if (N[0, k - 1] == 0.0) saved = 0.0;
-                else saved = (u - U[i]) * N[0, k - 1] / (U[i + k] - U[i]);
+                if (N[0, k - 1] == 0.0)
+                    saved = 0.0;
+                else
+                    saved = (u - U[i]) * N[0, k - 1] / (U[i + k] - U[i]);
 
                 for (int j = 0; j < p - k + 1; j++)
                 {
@@ -304,8 +314,10 @@ namespace AR_Lib.Geometry
                 for (int jj = 1; jj <= k; jj++)
                 {
                     double saved;
-                    if (ND[0] == 0.0) saved = 0.0;
-                    else saved = ND[0] / (U[i + p - k + jj] - U[i]);
+                    if (ND[0] == 0.0)
+                        saved = 0.0;
+                    else
+                        saved = ND[0] / (U[i + p - k + jj] - U[i]);
                     for (int j = 0; j < k - jj + 1; j++)
                     {
                         double Uleft = U[i + j + 1];
@@ -342,7 +354,8 @@ namespace AR_Lib.Geometry
         {
             var CK = new Vector3d[d + 1];
             var du = Math.Min(d, p);
-            for (int k = p + 1; k <= d; k++) CK[k] = new Vector3d();
+            for (int k = p + 1; k <= d; k++)
+                CK[k] = new Vector3d();
             var span = FindSpan(n, p, u, U);
             var nders = DersBasisFuns(span, u, p, du, U);
             for (int k = 0; k <= du; k++)
@@ -376,7 +389,8 @@ namespace AR_Lib.Geometry
         {
             var du = Math.Min(d, p);
             var CK = new Vector3d[d + 1];
-            for (int k = p + 1; k <= d; k++) CK[k] = new Vector3d();
+            for (int k = p + 1; k <= d; k++)
+                CK[k] = new Vector3d();
             var span = FindSpan(n, p, u, U);
             var N = AllBasisFuns(span, u, p, U);
             var PK = CurveDerivCpts(n, p, U, P, du, span - p, span);
@@ -409,7 +423,8 @@ namespace AR_Lib.Geometry
         }
         public static double[] CreateUnitKnotVector(int n, int p)
         {
-            if (p > n) throw new Exception("Degree cannot be bigger than 'ControlPoints - 1'");
+            if (p > n)
+                throw new Exception("Degree cannot be bigger than 'ControlPoints - 1'");
             var U = new double[n + p + 2];
             for (int i = 0; i <= p; i++)
                 U[i] = 0.0;

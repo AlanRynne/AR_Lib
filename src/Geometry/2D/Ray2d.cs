@@ -8,6 +8,6 @@ namespace AR_Lib.Geometry
         public Point2d Origin { get => origin; set => origin = value; }
         public Vector2d Direction { get => direction; set => direction = value; }
 
-        
+
     }
 }

@@ -48,7 +48,7 @@ namespace AR_Lib.Collections
             end = temp;
         }
 
-        
+
         public static Interval Unit => new Interval(0, 1);
 
         public static double CropNumber(double number, Interval interval)

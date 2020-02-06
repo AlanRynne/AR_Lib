@@ -121,8 +121,10 @@ namespace AR_Lib.HalfEdgeMesh
             {
                 foreach (MeshVertex adjacent in edge.AdjacentVertices())
                 {
-                    if (!EdgeVertex.ContainsKey(edge.Index)) EdgeVertex.Add(edge.Index, new List<int>() { adjacent.Index });
-                    else EdgeVertex[edge.Index].Add(adjacent.Index);
+                    if (!EdgeVertex.ContainsKey(edge.Index))
+                        EdgeVertex.Add(edge.Index, new List<int>() { adjacent.Index });
+                    else
+                        EdgeVertex[edge.Index].Add(adjacent.Index);
 
                 }
                 foreach (MeshFace adjacent in edge.AdjacentFaces())
@@ -154,9 +156,10 @@ namespace AR_Lib.HalfEdgeMesh
         {
             string finalString = "";
 
-            foreach(KeyValuePair<int, List<int>> pair in dict){
+            foreach (KeyValuePair<int, List<int>> pair in dict)
+            {
                 string tmpString = "Key: " + pair.Key.ToString() + " --> ";
-                foreach(int i in pair.Value)
+                foreach (int i in pair.Value)
                 {
                     tmpString += i + " ";
                 }

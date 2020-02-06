@@ -25,7 +25,7 @@ namespace AR_Lib.HalfEdgeMesh
         public MeshPoint(Point3d point, MeshFace face)
         {
             List<MeshVertex> adj = face.AdjacentVertices();
-            double[] bary = Convert.Point3dToBarycentric(point,adj[0],adj[1],adj[2]);
+            double[] bary = Convert.Point3dToBarycentric(point, adj[0], adj[1], adj[2]);
             U = bary[0];
             V = bary[1];
             W = bary[2];

@@ -28,7 +28,7 @@ namespace AR_Lib.Geometry
                 _origin = value;
             }
         }
-        
+
         /// Gets or sets the plane X axis
         public Vector3d XAxis
         {
@@ -38,7 +38,7 @@ namespace AR_Lib.Geometry
                 _xAxis = value;
             }
         }
-        
+
         /// Gets or sets the plane Y axis
         public Vector3d YAxis
         {
@@ -48,7 +48,7 @@ namespace AR_Lib.Geometry
                 _yAxis = value;
             }
         }
-        
+
         /// Gets or sets the plane Z axis
         public Vector3d ZAxis
         {
@@ -58,13 +58,13 @@ namespace AR_Lib.Geometry
                 _zAxis = value;
             }
         }
-        
+
         /// Plane with axis' UnitX and UnitY.
         public static Plane WorldXY => new Plane(Point3d.WorldOrigin, Vector3d.UnitX, Vector3d.UnitY);
-        
+
         /// Plane with axis' UnitX and UnitZ.
         public static Plane WorldXZ => new Plane(Point3d.WorldOrigin, Vector3d.UnitX, Vector3d.UnitZ);
-        
+
         /// Plane with axis' UnitY and UnitZ.
         public static Plane WorldYZ => new Plane(Point3d.WorldOrigin, Vector3d.UnitY, Vector3d.UnitZ);
 
@@ -127,7 +127,8 @@ namespace AR_Lib.Geometry
             Vector3d normal = tempX.Cross(tempY);
             double colinearCheck = Math.Abs(1 - tempY.Dot(tempX));
             // Ensure points are not co-linear
-            if (tempY.Dot(tempX) == 1) throw new System.Exception("Cannot create plane out of co-linear points.");
+            if (tempY.Dot(tempX) == 1)
+                throw new System.Exception("Cannot create plane out of co-linear points.");
 
             _origin = ptA;
             _xAxis = tempX;
@@ -148,13 +149,13 @@ namespace AR_Lib.Geometry
         {
             throw new NotImplementedException();
         }
-        
+
         #endregion
 
         #region Public methods
-        
+
         //TODO: Add utility methods to Plane class  (flip Axis, relative coordinates...)
-        
+
         /// <summary>
         /// Flips the plane by interchanging the X and Y axis and negating the Z axis.
         /// </summary>
@@ -165,7 +166,7 @@ namespace AR_Lib.Geometry
             _xAxis = temp;
             _zAxis = -_zAxis;
         }
-        
+
         /// <summary>
         /// Computes the point at the specified Plane parameters
         /// </summary>
@@ -201,6 +202,6 @@ namespace AR_Lib.Geometry
         public override string ToString() => base.ToString();
 
         #endregion
-    
+
     }
 }

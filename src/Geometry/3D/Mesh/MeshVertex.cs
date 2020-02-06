@@ -8,7 +8,7 @@ namespace AR_Lib.HalfEdgeMesh
     /// Vertex class
     /// Inherits from AR_Point
     /// </summary>
-   public class MeshVertex : Point3d
+    public class MeshVertex : Point3d
     {
 
         public MeshHalfEdge HalfEdge; //One of the half-edges connected to the vertex
@@ -19,8 +19,10 @@ namespace AR_Lib.HalfEdgeMesh
             get
             {
                 // Set private property to auto initialize if null.
-                if (_userValues == null) return new Dictionary<string, double>();
-                else return _userValues;
+                if (_userValues == null)
+                    return new Dictionary<string, double>();
+                else
+                    return _userValues;
             }
             set
             {
@@ -31,9 +33,9 @@ namespace AR_Lib.HalfEdgeMesh
         private Dictionary<string, double> _userValues;
 
         // Constructor
-        public MeshVertex(): base() { _userValues = new Dictionary<string, double>(); }
-        public MeshVertex(Point3d pt) : base(pt){ _userValues = new Dictionary<string, double>(); }
-        public MeshVertex(double X, double Y, double Z) : base(X, Y, Z){ _userValues = new Dictionary<string, double>(); }
+        public MeshVertex() : base() { _userValues = new Dictionary<string, double>(); }
+        public MeshVertex(Point3d pt) : base(pt) { _userValues = new Dictionary<string, double>(); }
+        public MeshVertex(double X, double Y, double Z) : base(X, Y, Z) { _userValues = new Dictionary<string, double>(); }
 
         // Calculate the valence of a vertex
         public int Degree() => AdjacentHalfEdges().Count;
@@ -44,9 +46,10 @@ namespace AR_Lib.HalfEdgeMesh
         // Check if vertex is on mesh boundary
         public bool OnBoundary()
         {
-            foreach(MeshHalfEdge halfEdge in AdjacentHalfEdges())
+            foreach (MeshHalfEdge halfEdge in AdjacentHalfEdges())
             {
-                if (halfEdge.onBoundary) return true;
+                if (halfEdge.onBoundary)
+                    return true;
             }
             return false;
         }
@@ -74,7 +77,8 @@ namespace AR_Lib.HalfEdgeMesh
             List<MeshFace> _faces = new List<MeshFace>();
             do
             {
-                if (!_halfEdge.onBoundary) _faces.Add(_halfEdge.Face);
+                if (!_halfEdge.onBoundary)
+                    _faces.Add(_halfEdge.Face);
                 _halfEdge = _halfEdge.Twin.Next;
             }
             while (_halfEdge != this.HalfEdge);
@@ -118,7 +122,8 @@ namespace AR_Lib.HalfEdgeMesh
             MeshHalfEdge _halfEdge = this.HalfEdge;
             do
             {
-                if (!_halfEdge.onBoundary) _corners.Add(_halfEdge.Next.Corner);
+                if (!_halfEdge.onBoundary)
+                    _corners.Add(_halfEdge.Next.Corner);
                 _halfEdge = _halfEdge.Twin.Next;
 
             } while (_halfEdge != this.HalfEdge);
@@ -128,7 +133,7 @@ namespace AR_Lib.HalfEdgeMesh
 
         public override string ToString()
         {
-            return "V "+ Index;
+            return "V " + Index;
         }
     }
 

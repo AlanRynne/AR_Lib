@@ -20,13 +20,15 @@ namespace AR_Lib
 
             public bool OnBoundary => (this.HalfEdge.onBoundary || this.HalfEdge.Twin.onBoundary);
 
-            public List<MeshVertex> AdjacentVertices(){
+            public List<MeshVertex> AdjacentVertices()
+            {
                 List<MeshVertex> vertices = new List<MeshVertex>();
                 vertices.Add(this.HalfEdge.Vertex);
                 vertices.Add(this.HalfEdge.Twin.Vertex);
                 return vertices;
             }
-            public List<MeshFace> AdjacentFaces(){
+            public List<MeshFace> AdjacentFaces()
+            {
                 List<MeshFace> faces = new List<MeshFace>();
                 faces.Add(this.HalfEdge.AdjacentFace);
                 faces.Add(this.HalfEdge.Twin.AdjacentFace);

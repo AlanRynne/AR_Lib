@@ -60,7 +60,7 @@ namespace AR_Lib.LinearAlgebra
 
         Complex OverReal(double s) => TimesReal(1 / s);
 
-        Complex TimesComplex(Complex v) 
+        Complex TimesComplex(Complex v)
         {
             double a = _real;
             double b = _imaginary;

@@ -39,7 +39,8 @@ namespace AR_Lib.Tests
         /// <inheritDoc />
         public override IEnumerable<object[]> GetData(MethodInfo testMethod)
         {
-            if (testMethod == null) { throw new ArgumentNullException(nameof(testMethod)); }
+            if (testMethod == null)
+            { throw new ArgumentNullException(nameof(testMethod)); }
 
             // Get the absolute path to the JSON file
             var path = Path.IsPathRooted(_filePath)

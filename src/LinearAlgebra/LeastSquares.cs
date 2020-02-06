@@ -13,7 +13,7 @@ namespace AR_Lib.LinearAlgebra
         // Find the least squares linear fit.
         // Return the total error.
         // Found at: http://csharphelper.com/blog/2014/10/find-a-linear-least-squares-fit-for-a-set-of-points-in-c/
-        
+
         /// <summary>
         /// Find the least squares best fitting line to the given points.
         /// </summary>

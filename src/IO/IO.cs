@@ -24,17 +24,21 @@ namespace AR_Lib.IO
             string[] lines = File.ReadAllLines(FilePath);
             data = new OFFMeshData();
             // Check if first line states OFF format
-            if (lines[0] != "OFF") return OFFResult.Incorrect_Format;
+            if (lines[0] != "OFF")
+                return OFFResult.Incorrect_Format;
 
             // Get second line and extract number of vertices and faces
             string[] initialData = lines[1].Split(' ');
             int nVertex = 0;
             int nFaces = 0;
-            if (!Int32.TryParse(initialData[0], out nVertex)) return OFFResult.Incorrect_Format;
-            if (!Int32.TryParse(initialData[1], out nFaces)) return OFFResult.Incorrect_Format;
+            if (!Int32.TryParse(initialData[0], out nVertex))
+                return OFFResult.Incorrect_Format;
+            if (!Int32.TryParse(initialData[1], out nFaces))
+                return OFFResult.Incorrect_Format;
 
             // Check if length of lines correct
-            if (nVertex + nFaces + 2 != lines.Length) return OFFResult.Incorrect_Format;
+            if (nVertex + nFaces + 2 != lines.Length)
+                return OFFResult.Incorrect_Format;
 
             // Iterate through all the lines containing the mesh data
             int start = 2;
@@ -52,7 +56,8 @@ namespace AR_Lib.IO
                     foreach (string ptStr in pointStrings)
                     {
                         double ptCoord;
-                        if (!Double.TryParse(ptStr, out ptCoord)) return OFFResult.Incorrect_Vertex;
+                        if (!Double.TryParse(ptStr, out ptCoord))
+                            return OFFResult.Incorrect_Vertex;
                         coords.Add(ptCoord);
                     }
                     vertices.Add(new Point3d(coords[0], coords[1], coords[2]));
@@ -66,12 +71,14 @@ namespace AR_Lib.IO
                     string[] faceStrings = lines[i].Split(' ');
                     // Get first int that represents vertex count of face
                     int vertexCount;
-                    if (!Int32.TryParse(faceStrings[0], out vertexCount)) return OFFResult.Incorrect_Face;
+                    if (!Int32.TryParse(faceStrings[0], out vertexCount))
+                        return OFFResult.Incorrect_Face;
 
                     for (int f = 1; f < faceStrings.Length; f++)
                     {
                         int vertIndex;
-                        if (!Int32.TryParse(faceStrings[f], out vertIndex)) return OFFResult.Incorrect_Face;
+                        if (!Int32.TryParse(faceStrings[f], out vertIndex))
+                            return OFFResult.Incorrect_Face;
                         vertexIndexes.Add(vertIndex);
                     }
                     faces.Add(vertexIndexes);
@@ -98,7 +105,7 @@ namespace AR_Lib.IO
         /// <returns></returns>
         public static OFFResult WriteMeshToFile(Mesh mesh, string filePath)
         {
-            string[] offLines = new string[mesh.Vertices.Count+mesh.Faces.Count+2];
+            string[] offLines = new string[mesh.Vertices.Count + mesh.Faces.Count + 2];
 
             string offHead = "OFF";
             offLines[0] = offHead;

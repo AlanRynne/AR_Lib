@@ -13,7 +13,8 @@ namespace AR_Lib.Geometry
 
         public override bool CheckValidity()
         {
-            if (this.Length < Settings.Tolerance) return false;
+            if (this.Length < Settings.Tolerance)
+                return false;
             return true;
         }
 
@@ -29,8 +30,10 @@ namespace AR_Lib.Geometry
             Vector3d tangent = TangentAt(t);
             Vector3d v = new Vector3d();
 
-            if (tangent.Dot(Vector3d.UnitZ) == 1) v = Vector3d.UnitX;
-            else v = Vector3d.UnitZ;
+            if (tangent.Dot(Vector3d.UnitZ) == 1)
+                v = Vector3d.UnitX;
+            else
+                v = Vector3d.UnitZ;
 
             return tangent.Cross(v);
         }

@@ -2,7 +2,7 @@ using AR_Lib.Geometry.Interfaces;
 
 namespace AR_Lib.Geometry.Primitives
 {
-    public class Torus: ISurface
+    public class Torus : ISurface
     {
         public Torus(Plane plane, double majorRadius, double minorRadius)
         {

@@ -7,10 +7,10 @@ namespace AR_Lib.Tests.Geometry
 {
     public class Polyline2dUnitSquareAndSegments : IEnumerable<object[]>
     {
-            Point2d pt1 = new Point2d(0, 0);
-            Point2d pt2 = new Point2d(1, 0);
-            Point2d pt3 = new Point2d(1, 1);
-            Point2d pt4 = new Point2d(0, 1);
+        Point2d pt1 = new Point2d(0, 0);
+        Point2d pt2 = new Point2d(1, 0);
+        Point2d pt3 = new Point2d(1, 1);
+        Point2d pt4 = new Point2d(0, 1);
         public IEnumerator<object[]> GetEnumerator()
         {
             yield return new object[] { new Polyline2d(new List<Point2d> { pt1, pt2, pt3, pt4 }, false), 3 };
@@ -38,12 +38,12 @@ namespace AR_Lib.Tests.Geometry
         [ClassData(typeof(Polyline2dUnitSquareAndSegments))]
         public void Constructor_ClosedOption_AddsVertexAndSegment(Polyline2d polyline, int expectedSegments)
         {
-            Assert.True(polyline.Vertices.Count == expectedSegments + 1 );
+            Assert.True(polyline.Vertices.Count == expectedSegments + 1);
             Assert.True(polyline.Segments.Count == expectedSegments);
         }
-        
+
         [Theory]
-        [ClassData(typeof(Polyline2dUnitSquareAndSegments))] 
+        [ClassData(typeof(Polyline2dUnitSquareAndSegments))]
         public void DefaultDomain_IsParametrizedByArcLength(Polyline2d polyline, double expectedLength)
         {
 

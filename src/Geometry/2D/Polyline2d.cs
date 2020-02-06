@@ -7,7 +7,7 @@ namespace AR_Lib.Geometry
     public class Polyline2d
     {
 
-#region Fields
+        #region Fields
 
         private List<Point2d> vertices;
         private List<Line2d> segments;
@@ -15,9 +15,9 @@ namespace AR_Lib.Geometry
         private bool isClosed;
         private bool segmentsNeedUpdate;
 
-#endregion
+        #endregion
 
-#region Constructor
+        #region Constructor
 
         public Polyline2d(List<Point2d> vertices, bool closed)
         {
@@ -26,31 +26,37 @@ namespace AR_Lib.Geometry
             RebuildSegments();
         }
 
-#endregion
+        #endregion
 
-#region Properties
+        #region Properties
 
-        public List<Point2d> Vertices 
+        public List<Point2d> Vertices
         {
-            get {
-                return vertices; 
-                }
-            set {
+            get
+            {
+                return vertices;
+            }
+            set
+            {
                 vertices = value;
                 segmentsNeedUpdate = true;
             }
         }
         public List<Line2d> Segments
-        { 
-            get {
-                if(segmentsNeedUpdate) RebuildSegments();
+        {
+            get
+            {
+                if (segmentsNeedUpdate)
+                    RebuildSegments();
                 return segments;
-            } 
+            }
         }
         public Interval Domain => domain;
         public BoundingBox2d BoundingBox => new BoundingBox2d(this);
-        public double Length {
-            get {
+        public double Length
+        {
+            get
+            {
                 double length = 0;
                 Segments.ForEach(segment =>
                 {
@@ -60,14 +66,19 @@ namespace AR_Lib.Geometry
             }
         }
         public bool IsClosed
-        { 
-            get => isClosed; 
-            set {
-                if(isClosed == value) return; // Do nothing
+        {
+            get => isClosed;
+            set
+            {
+                if (isClosed == value)
+                    return; // Do nothing
 
-                if(isClosed){
+                if (isClosed)
+                {
                     vertices.RemoveAt(vertices.Count - 1);
-                } else {
+                }
+                else
+                {
                     vertices.Add(vertices[0]);
                 }
                 isClosed = value;
@@ -75,16 +86,19 @@ namespace AR_Lib.Geometry
             }
         }
 
-#endregion
-        
-        public double Area() {
-            if(!isClosed) return 0; // Return 0 if polyline is not closed
+        #endregion
+
+        public double Area()
+        {
+            if (!isClosed)
+                return 0; // Return 0 if polyline is not closed
             List<Point2d> V = vertices;
             int n = vertices.Count;
             double area = 0;
             int i, j, k;
 
-            if (n < 3) return 0;  // a degenerate polygon
+            if (n < 3)
+                return 0;  // a degenerate polygon
 
             for (i = 1, j = 2, k = 0; i < n; i++, j++, k++)
             {
@@ -103,8 +117,10 @@ namespace AR_Lib.Geometry
         /// FALSE if the polyline is CCW.
         /// </returns>
         /// <exception cref="Exception">Throws an exception if the polyline is not closed or is degenerate.</exception>
-        public bool IsClockwise() {
-            if(!isClosed) throw new Exception("Cannot compute orientation in an Open polyline");
+        public bool IsClockwise()
+        {
+            if (!isClosed)
+                throw new Exception("Cannot compute orientation in an Open polyline");
             // first find rightmost lowest vertex of the polygon
             int rmin = 0;
             double xmin = vertices[0].X;
@@ -131,12 +147,14 @@ namespace AR_Lib.Geometry
                 result = new Line2d(vertices[vertices.Count - 1], vertices[0]).IsLeft(vertices[1]);
             else
                 result = new Line2d(vertices[rmin - 1], vertices[rmin]).IsLeft(vertices[rmin + 1]);
-            
-            if (result == 0) throw new Exception("Polyline is degenerate, cannot compute orientation.");
+
+            if (result == 0)
+                throw new Exception("Polyline is degenerate, cannot compute orientation.");
             return result < 0 ? true : false;
         }
-        
-        public void Reparametrize() {
+
+        public void Reparametrize()
+        {
 
             double maxParameter = domain.End;
             double ratio = 1 / domain.End;
@@ -152,12 +170,13 @@ namespace AR_Lib.Geometry
 
             this.domain = Interval.Unit;
         }
-        
-        private void RebuildSegments() 
+
+        private void RebuildSegments()
         {
             segments = new List<Line2d>();
             double currentParam = 0;
-            for (int i = 0; i < vertices.Count - 1; i++) {
+            for (int i = 0; i < vertices.Count - 1; i++)
+            {
                 Point2d vertA = vertices[i];
                 Point2d vertB = vertices[i + 1];
                 Line2d line = BuildSegment(ref currentParam, vertA, vertB);

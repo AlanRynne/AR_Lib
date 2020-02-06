@@ -77,16 +77,24 @@ namespace AR_Lib
             Point3d temp = new Point3d();
 
             Line line = new Line(vertices[0], vertices[1]);
-            if (LinePlane(line, perpPlane, out temp) != ISLinePlane.Point) { result = null; halfEdge = null; return ISRayFacePerimeter.Point; } // No intersection found
-            if (temp != ray.Origin && temp != null) { result = temp; halfEdge = null; return ISRayFacePerimeter.Point; } // Intersection found
+            if (LinePlane(line, perpPlane, out temp) != ISLinePlane.Point)
+            { result = null; halfEdge = null; return ISRayFacePerimeter.Point; } // No intersection found
+            if (temp != ray.Origin && temp != null)
+            { result = temp; halfEdge = null; return ISRayFacePerimeter.Point; } // Intersection found
 
             line = new Line(vertices[1], vertices[2]);
-            if (LinePlane(line, perpPlane, out temp) != ISLinePlane.Point) { result = null; halfEdge = null; return ISRayFacePerimeter.NoIntersection; } // No intersection found
-            if (temp != ray.Origin && temp != null) { result = temp; halfEdge = null; return ISRayFacePerimeter.Point; } // Intersection found
+            if (LinePlane(line, perpPlane, out temp) != ISLinePlane.Point)
+            { result = null; halfEdge = null; return ISRayFacePerimeter.NoIntersection; } // No intersection found
+            if (temp != ray.Origin && temp != null)
+            { result = temp; halfEdge = null; return ISRayFacePerimeter.Point; } // Intersection found
 
             line = new Line(vertices[2], vertices[0]);
-            if (LinePlane(line, perpPlane, out temp) != ISLinePlane.Point) { result = null; halfEdge = null; return ISRayFacePerimeter.NoIntersection; }
-            if (temp != ray.Origin && temp != null) { result = temp; halfEdge = null; return ISRayFacePerimeter.Point; } else { result = null; halfEdge = null; return ISRayFacePerimeter.Error; }
+            if (LinePlane(line, perpPlane, out temp) != ISLinePlane.Point)
+            { result = null; halfEdge = null; return ISRayFacePerimeter.NoIntersection; }
+            if (temp != ray.Origin && temp != null)
+            { result = temp; halfEdge = null; return ISRayFacePerimeter.Point; }
+            else
+            { result = null; halfEdge = null; return ISRayFacePerimeter.Error; }
         }
 
         /// <summary>
@@ -178,9 +186,12 @@ namespace AR_Lib
             result.pointA = lineA.PointAt(sc);
             result.pointB = lineB.PointAt(tc);
 
-            if (result.Distance <= Settings.Tolerance) return ISLineLine.Point;
-            else if (result.Distance > Settings.Tolerance) return ISLineLine.NoIntersection;
-            else return ISLineLine.Error;
+            if (result.Distance <= Settings.Tolerance)
+                return ISLineLine.Point;
+            else if (result.Distance > Settings.Tolerance)
+                return ISLineLine.NoIntersection;
+            else
+                return ISLineLine.Error;
         }
     }
 }
