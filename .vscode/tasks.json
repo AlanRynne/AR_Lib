@@ -1,22 +1,35 @@
 {
   "version": "2.0.0",
   "tasks": [{
-    "label": "build",
-    "command": "dotnet",
-    "type": "process",
-    "args": [
-      "build",
-      "${workspaceFolder}/tests/AR_Lib.Tests.csproj"
-    ],
-    "problemMatcher": [
-      "$msCompile"
-    ]
-  }, {
-    "label": "build-docs",
-    "command": "docfx",
-    "type": "shell",
-    "args": [
-      "docfx_project/docfx.json"
-    ]
-  }]
+      "label": "build",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/tests/AR_Lib.Tests.csproj"
+      ],
+      "problemMatcher": [
+        "$msCompile"
+      ]
+    },
+    {
+      "label": "build-docs",
+      "command": "docfx",
+      "type": "shell",
+      "args": [
+        "docfx_project/docfx.json"
+      ]
+    },
+    {
+      "label": "serve-docs",
+      "command": "docfx",
+      "type": "shell",
+      "args": [
+        "docfx_project/docfx.json",
+        "--serve"
+      ],
+      "isBackground": true,
+      "problemMatcher": []
+    }
+  ]
 }
