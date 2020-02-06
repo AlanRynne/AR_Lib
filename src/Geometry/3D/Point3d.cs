@@ -17,7 +17,7 @@ namespace AR_Lib
             public Point3d(Point3d point) : base(point) { }
 
             public Point3d(Point4d point) : this(point.X / point.Weight, point.Y / point.Weight, point.Z / point.Weight) { }
-            
+
             #endregion
 
             public static Point3d Unset => new Point3d();
@@ -28,7 +28,7 @@ namespace AR_Lib
             /// Computes the euclidean distance between this point and the provided one.
             public double DistanceTo(Point3d point) => Math.Sqrt(Math.Pow(point.X - X, 2) + Math.Pow(point.Y - Y, 2) + Math.Pow(point.Z - Z, 2));
 
-            #region Overriden methods 
+            #region Overriden methods
 
             public override bool Equals(object obj)
             {
@@ -50,8 +50,8 @@ namespace AR_Lib
             #region Operators
 
             public static Point3d operator +(Point3d point, Vector3d v) => new Point3d(point.X + v.X, point.Y + v.Y, point.Z + v.Z);
-            public static Point3d operator +(Point3d point, Point3d point2) => new Point3d(point + (Vector3d)point2);
             public static Vector3d operator -(Point3d point, Point3d point2) => new Vector3d(point.X - point2.X, point.Y - point2.Y, point.Z - point2.Z);
+            public static Vector3d operator -(Point3d point, Vector3d vector) => new Vector3d(point.X - vector.X, point.Y - vector.Y, point.Z - vector.Z);
 
             public static Point3d operator -(Point3d point) => new Point3d(-point.X, -point.Y, -point.Z);
 
@@ -66,12 +66,12 @@ namespace AR_Lib
 
 
             // Implicit conversions
-            public static implicit operator Point3d(Vector3d v) => v;
-            public static explicit operator Vector3d(Point3d pt) => new Vector3d(pt);
-            
+            public static explicit operator Point3d(Vector3d v) => new Point3d(v.X, v.Y, v.Z);
+            public static implicit operator Vector3d(Point3d pt) => new Vector3d(pt.X, pt.Y, pt.Z);
+
             // Explicit conversions
             public static explicit operator Point3d(Point4d point) => new Point3d(point);
-            
+
             #endregion
         }
 

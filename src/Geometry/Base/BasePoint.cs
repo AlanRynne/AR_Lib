@@ -82,15 +82,12 @@ namespace AR_Lib.Geometry
         // Override Methods
         public override bool Equals(object obj)
         {
-            if (obj is BasePoint pt)
-            {
-                if (Math.Abs(this.X - pt.X) < 0.000001 && Math.Abs(this.Y - pt.Y) < 0.000001 && Math.Abs(this.Z - pt.Z) < 0.000001) { return true; }
-                else { return false; }
-            }
-            else
-            {
+            if (!(obj is BasePoint))
                 return false;
-            }
+            var pt = (BasePoint)obj;
+            return Math.Abs(X - pt.X) <= Settings.Tolerance
+                && Math.Abs(Y - pt.Y) <= Settings.Tolerance
+                && Math.Abs(Z - pt.Z) <= Settings.Tolerance;
         }
 
         public override int GetHashCode()
@@ -102,9 +99,9 @@ namespace AR_Lib.Geometry
                 const int HashingMultiplier = 16777619;
 
                 int hash = HashingBase;
-                hash = (hash * HashingMultiplier) ^ (!Object.ReferenceEquals(null, X) ? X.GetHashCode() : 0);
-                hash = (hash * HashingMultiplier) ^ (!Object.ReferenceEquals(null, Y) ? Y.GetHashCode() : 0);
-                hash = (hash * HashingMultiplier) ^ (!Object.ReferenceEquals(null, Z) ? Z.GetHashCode() : 0);
+                hash = (hash * HashingMultiplier) ^ (!ReferenceEquals(null, X) ? X.GetHashCode() : 0);
+                hash = (hash * HashingMultiplier) ^ (!ReferenceEquals(null, Y) ? Y.GetHashCode() : 0);
+                hash = (hash * HashingMultiplier) ^ (!ReferenceEquals(null, Z) ? Z.GetHashCode() : 0);
                 return hash;
             }
         }

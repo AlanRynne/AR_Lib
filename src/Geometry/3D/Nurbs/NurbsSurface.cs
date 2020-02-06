@@ -365,7 +365,7 @@ namespace AR_Lib.Geometry
                 var tmp = p - k + 1;
                 for (int i = 0; i <= r - k; i++)
                 {
-                    PK[k, i] = tmp * (PK[k - 1, i + 1] - PK[k - 1, i]) / (U[r1 + i + p + 1] - U[r1 + i + k]);
+                    PK[k, i] = tmp * (Point3d)(PK[k - 1, i + 1] - PK[k - 1, i]) / (U[r1 + i + p + 1] - U[r1 + i + k]);
                 }
             }
             return PK;

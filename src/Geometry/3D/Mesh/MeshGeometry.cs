@@ -126,7 +126,7 @@ namespace AR_Lib.Geometry
             Vector3d u = (w.Cross(ab)) * ac.LengthSquared;
             Vector3d v = (ac.Cross(w)) * ab.LengthSquared;
 
-            Point3d x = (u + v) / (2 * w.LengthSquared);
+            Point3d x = (Point3d)(u + v) / (2 * w.LengthSquared);
 
             return x + a;
         }
