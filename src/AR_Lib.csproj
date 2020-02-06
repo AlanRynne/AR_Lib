@@ -15,17 +15,13 @@
     <!-- Add resource files -->
 
     <ItemGroup>
-        <Content Remove="Data\Settings.json" />
-    </ItemGroup>
-
-    <ItemGroup>
         <EmbeddedResource Include="Data\Settings.json" />
     </ItemGroup>
 
     <!-- Export XML coments on build -->
 
-    <!-- <PropertyGroup>
-  <GenerateDocumentationFile>true</GenerateDocumentationFile>
-  </PropertyGroup> -->
+    <PropertyGroup>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
 
 </Project>

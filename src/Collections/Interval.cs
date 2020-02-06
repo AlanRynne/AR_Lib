@@ -4,22 +4,25 @@ namespace AR_Lib.Collections
 {
     public struct Interval
     {
-        private double _start;
-        private double _end;
+        private double start;
+        private double end;
 
-        public double Start { get => _start; set => _start = value; }
-        public double End { get => _end; set => _end = value; }
-        public double Domain => _end - _start;
+        public double Start { get => start; set => start = value; }
+        public double End { get => end; set => end = value; }
+        public double Domain => end - start;
         public bool HasInvertedDirection => Domain < 0 ? true : false;
 
 
         public Interval(double start, double end)
         {
-            if (start == end) throw new Exception("Cannot create Interval out of two equal numbers");
-            if (Double.IsNaN(start) || Double.IsInfinity(start)) throw new Exception("Start value is invalid");
-            if (Double.IsNaN(end) || Double.IsInfinity(end)) throw new Exception("End value is invalid");
-            _start = start;
-            _end = end;
+            if (start == end)
+                throw new Exception("Cannot create Interval out of two equal numbers");
+            if (double.IsNaN(start) || double.IsInfinity(start))
+                throw new Exception("Start value is invalid");
+            if (double.IsNaN(end) || double.IsInfinity(end))
+                throw new Exception("End value is invalid");
+            this.start = start;
+            this.end = end;
         }
 
         public Interval(Interval interval) : this(interval.Start, interval.End) { }
@@ -33,25 +36,27 @@ namespace AR_Lib.Collections
         public bool Contains(double number)
         {
 
-            double min = HasInvertedDirection ? _end : _start;
-            double max = HasInvertedDirection ? _start : _end;
+            double min = HasInvertedDirection ? end : start;
+            double max = HasInvertedDirection ? start : end;
 
             return (min < number && number < max) ? true : false;
         }
         public void FlipDirection()
         {
-            double temp = _start;
-            _start = _end;
-            _end = temp;
+            double temp = start;
+            start = end;
+            end = temp;
         }
 
-
+        
         public static Interval Unit => new Interval(0, 1);
 
         public static double CropNumber(double number, Interval interval)
         {
-            if (number <= interval.Start) return interval.Start;
-            if (number >= interval.End) return interval.End;
+            if (number <= interval.Start)
+                return interval.Start;
+            if (number >= interval.End)
+                return interval.End;
             return number;
         }
 
