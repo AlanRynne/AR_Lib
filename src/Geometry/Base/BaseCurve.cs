@@ -33,8 +33,8 @@ namespace AR_Lib.Geometry
         public virtual double T0 { get => _t0; set => _t0 = value; }
         public virtual double T1 { get => _t1; set => _t1 = value; }
 
-        public virtual bool IsValid => _isValid;
-        
+        public virtual bool IsValid => CheckValidity();
+
         protected Point3d _startPoint;
         protected Point3d _endPoint;
         protected double _t0;
@@ -56,7 +56,7 @@ namespace AR_Lib.Geometry
         public abstract Vector3d NormalAt(double t);
         public abstract Vector3d BinormalAt(double t);
         public abstract Plane FrameAt(double t);
-        public abstract void CheckValidity();
+        public abstract bool CheckValidity();
         protected abstract double ComputeLength();
 
     }

@@ -11,11 +11,10 @@ namespace AR_Lib.Geometry
             this._endPoint = endPoint;
         }
 
-        public override void CheckValidity()
+        public override bool CheckValidity()
         {
-            // Check validity should change IsValid state depending on conditions
-            // i.e.: a line with the same point at start and end.
-            throw new System.NotImplementedException();
+            if (this.Length < Settings.Tolerance) return false;
+            return true;
         }
 
         public override Point3d PointAt(double t) => _startPoint + t * (_endPoint - _startPoint);

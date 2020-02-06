@@ -40,11 +40,11 @@ namespace AR_Lib.Geometry
         #endregion
 
         #region Polyline specific methods
-        
+
         public void AddKnot(Point3d knot)
         {
             _knots.Add(knot); // Add knot to list
-            _segmentsNeedUpdate = true;            
+            _segmentsNeedUpdate = true;
         }
         public void AddKnot(Point3d knot, int index)
         {
@@ -61,12 +61,12 @@ namespace AR_Lib.Geometry
             }
 
         }
-        
-        public void RemoveKnot(int index) 
+
+        public void RemoveKnot(int index)
         {
             if(_isUnset) throw new Exception("Cannot erase knot from an Unset polyline");
             if(index < 0 || index > _segments.Count -1) throw new IndexOutOfRangeException("Knot index must be within the Knot list count");
-            
+
         }
         private void RebuildSegments()
         {
@@ -99,7 +99,7 @@ namespace AR_Lib.Geometry
             return length;
         }
 
-        public override void CheckValidity() => throw new NotImplementedException();
+        public override bool CheckValidity() => throw new NotImplementedException();
         #endregion
 
     }
