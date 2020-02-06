@@ -1,21 +1,34 @@
+using AR_Lib.Geometry.Interfaces;
+
 namespace AR_Lib.Geometry
 {
-    public class Sphere
+    public class Sphere: ISurface
     {
-        private Point3d _origin;
-        private double _radius;
-
-        public Point3d Origin { get => _origin; set => _origin = value; }
-        public double Radius { get => _radius; set => _radius = value; }
+        public Point3d Origin { get; set; }
+        public double Radius { get; set; }
 
         public double DistanceTo(Sphere sphere)
         {
-            return this.DistanceTo(sphere.Origin) - sphere.Radius;
+            return DistanceTo(sphere.Origin) - sphere.Radius;
         }
         public double DistanceTo(Point3d point)
         {
-            return _origin.DistanceTo(point) - _radius;
+            return Origin.DistanceTo(point) - Radius;
+        }
+
+        public Plane FrameAt(double u, double v)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Vector3d NormalAt(double u, double v)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Point3d PointAt(double u, double v)
+        {
+            throw new System.NotImplementedException();
         }
     }
-
 }
