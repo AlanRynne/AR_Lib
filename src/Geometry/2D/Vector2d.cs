@@ -4,28 +4,26 @@ namespace AR_Lib.Geometry
 {
     public class Vector2d
     {
-        private double y;
-        private double x;
-        public double X { get => x; set => x = value; }
-        public double Y { get => y; set => y = value; }
+        public double X { get; set; }
+        public double Y { get; set; }
 
         public Vector2d(Vector2d vector) : this(vector.X, vector.Y) { }
         public Vector2d(Point2d point) : this(point.X, point.Y) { }
         public Vector2d(double x, double y)
         {
-            this.x = x;
-            this.y = y;
+            this.X = x;
+            this.Y = y;
         }
 
-        public double LengthSquared => x * x + y * y;
+        public double LengthSquared => X * X + Y * Y;
         public double Length => Math.Sqrt(this.LengthSquared);
 
         public Vector2d Unit() => new Vector2d(this / this.Length);
         public void Unitize()
         {
             double length = this.Length;
-            this.x /= length;
-            this.y /= length;
+            this.X /= length;
+            this.Y /= length;
         }
 
 

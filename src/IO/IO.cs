@@ -29,11 +29,9 @@ namespace AR_Lib.IO
 
             // Get second line and extract number of vertices and faces
             string[] initialData = lines[1].Split(' ');
-            int nVertex = 0;
-            int nFaces = 0;
-            if (!Int32.TryParse(initialData[0], out nVertex))
+            if (!int.TryParse(initialData[0], out var nVertex))
                 return OFFResult.Incorrect_Format;
-            if (!Int32.TryParse(initialData[1], out nFaces))
+            if (!int.TryParse(initialData[1], out var nFaces))
                 return OFFResult.Incorrect_Format;
 
             // Check if length of lines correct
@@ -55,8 +53,7 @@ namespace AR_Lib.IO
                     // Iterate over the string fragments and convert them to numbers
                     foreach (string ptStr in pointStrings)
                     {
-                        double ptCoord;
-                        if (!Double.TryParse(ptStr, out ptCoord))
+                        if (!double.TryParse(ptStr, out var ptCoord))
                             return OFFResult.Incorrect_Vertex;
                         coords.Add(ptCoord);
                     }
@@ -70,14 +67,12 @@ namespace AR_Lib.IO
 
                     string[] faceStrings = lines[i].Split(' ');
                     // Get first int that represents vertex count of face
-                    int vertexCount;
-                    if (!Int32.TryParse(faceStrings[0], out vertexCount))
+                    if (!int.TryParse(faceStrings[0], out var vertexCount))
                         return OFFResult.Incorrect_Face;
 
                     for (int f = 1; f < faceStrings.Length; f++)
                     {
-                        int vertIndex;
-                        if (!Int32.TryParse(faceStrings[f], out vertIndex))
+                        if (!int.TryParse(faceStrings[f], out var vertIndex))
                             return OFFResult.Incorrect_Face;
                         vertexIndexes.Add(vertIndex);
                     }

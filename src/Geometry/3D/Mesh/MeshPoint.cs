@@ -9,11 +9,33 @@ namespace AR_Lib.HalfEdgeMesh
     /// </summary>
     public class MeshPoint
     {
+        /// <summary>
+        /// The index of the face this point lies in.
+        /// </summary>
         public int FaceIndex;
+
+        /// <summary>
+        /// The U coordinate at the face
+        /// </summary>
         public double U;
+
+        /// <summary>
+        /// The V coordinate at the face
+        /// </summary>
         public double V;
+
+        /// <summary>
+        /// The W coordinate at the face
+        /// </summary>
         public double W;
 
+        /// <summary>
+        /// Constructs a new MeshPoint
+        /// </summary>
+        /// <param name="faceIndex">Face Index</param>
+        /// <param name="u">U coordinate</param>
+        /// <param name="v">V coordinate</param>
+        /// <param name="w">Z coordinate</param>
         public MeshPoint(int faceIndex, double u, double v, double w)
         {
             FaceIndex = faceIndex;
@@ -22,6 +44,11 @@ namespace AR_Lib.HalfEdgeMesh
             W = w;
         }
 
+        /// <summary>
+        /// Constructs a new MeshPoint
+        /// </summary>
+        /// <param name="point">3D Point</param>
+        /// <param name="face">Mesh face</param>
         public MeshPoint(Point3d point, MeshFace face)
         {
             List<MeshVertex> adj = face.AdjacentVertices();

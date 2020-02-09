@@ -31,8 +31,7 @@ namespace AR_Lib.Curves
                 int count = 0;
                 foreach (double level in levels)
                 {
-                    Line l = new Line();
-                    if (GetFaceLevel(valueKey, level, face, out l))
+                    if (GetFaceLevel(valueKey, level, face, out var l))
                     {
                         resultLines[count].Add(l);
                     }

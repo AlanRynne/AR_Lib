@@ -41,12 +41,12 @@ namespace AR_Lib.Geometry
         /// Calculates the mean edge length of the mesh
         /// </summary>
         /// <returns>The mean edge length of the mesh</returns>
-        public static double MeanEdgeLength(Mesh Mesh)
+        public static double MeanEdgeLength(Mesh mesh)
         {
             double sum = 0.0;
-            foreach (MeshEdge e in Mesh.Edges)
+            foreach (MeshEdge e in mesh.Edges)
                 sum += Length(e);
-            return sum / Mesh.Edges.Count;
+            return sum / mesh.Edges.Count;
         }
 
         /// <summary>
@@ -68,10 +68,10 @@ namespace AR_Lib.Geometry
         /// Computes the total area of the mesh
         /// </summary>
         /// <returns>The mesh area.</returns>
-        public static double TotalArea(Mesh Mesh)
+        public static double TotalArea(Mesh mesh)
         {
             double sum = 0.0;
-            foreach (MeshFace f in Mesh.Faces)
+            foreach (MeshFace f in mesh.Faces)
                 sum += Area(f);
             return sum;
         }
@@ -375,12 +375,12 @@ namespace AR_Lib.Geometry
         /// <summary>
         /// Compute the total angle defect of the mesh.
         /// </summary>
-        /// <param name="Mesh">Mesh to compute angle defect.</param>
+        /// <param name="mesh">Mesh to compute angle defect.</param>
         /// <returns>Returns the total angle defect as a scalar value.</returns>
-        public static double TotalAngleDefect(Mesh Mesh)
+        public static double TotalAngleDefect(Mesh mesh)
         {
             double totalDefect = 0.0;
-            foreach (MeshVertex v in Mesh.Vertices)
+            foreach (MeshVertex v in mesh.Vertices)
                 totalDefect += AngleDefect(v);
             return totalDefect;
         }

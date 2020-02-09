@@ -4,6 +4,9 @@ using AR_Lib.Collections;
 
 namespace AR_Lib.Geometry
 {
+    /// <summary>
+    /// Represents a 2-dimensional polyline.
+    /// </summary>
     public class Polyline2d
     {
 
@@ -19,6 +22,11 @@ namespace AR_Lib.Geometry
 
         #region Constructor
 
+        /// <summary>
+        /// Creates a new 2d polyline
+        /// </summary>
+        /// <param name="vertices">Vertices of the polyline.</param>
+        /// <param name="closed">Determine if polyline should be closed or not.</param>
         public Polyline2d(List<Point2d> vertices, bool closed)
         {
             this.vertices = vertices;
@@ -30,6 +38,10 @@ namespace AR_Lib.Geometry
 
         #region Properties
 
+        /// <summary>
+        /// Gets or sets the polyline vertices.
+        /// </summary>
+        /// <value>List of vertices.</value>
         public List<Point2d> Vertices
         {
             get
@@ -42,6 +54,11 @@ namespace AR_Lib.Geometry
                 segmentsNeedUpdate = true;
             }
         }
+
+        /// <summary>
+        /// Gets the polyline segments.
+        /// </summary>
+        /// <value>List of segments.</value>
         public List<Line2d> Segments
         {
             get
@@ -51,8 +68,21 @@ namespace AR_Lib.Geometry
                 return segments;
             }
         }
+        /// <summary>
+        /// The domain of the polyline.
+        /// </summary>
         public Interval Domain => domain;
+
+        /// <summary>
+        /// Get the bounding box of the polyline.
+        /// </summary>
+        /// <returns>2D bounding box.</returns>
         public BoundingBox2d BoundingBox => new BoundingBox2d(this);
+
+        /// <summary>
+        /// Gets the length of the polyline
+        /// </summary>
+        /// <value></value>
         public double Length
         {
             get
@@ -65,6 +95,11 @@ namespace AR_Lib.Geometry
                 return length;
             }
         }
+
+        /// <summary>
+        /// Determines if the polyline is closed
+        /// </summary>
+        /// <value>True if closed.</value>
         public bool IsClosed
         {
             get => isClosed;
@@ -88,6 +123,10 @@ namespace AR_Lib.Geometry
 
         #endregion
 
+        /// <summary>
+        /// Computes the area of the polyline.
+        /// </summary>
+        /// <returns>Area as number.</returns>
         public double Area()
         {
             if (!isClosed)
@@ -112,7 +151,7 @@ namespace AR_Lib.Geometry
         /// Checks if the current polyline is CW or CCW.
         /// </summary>
         /// <returns>
-        /// 
+        ///
         /// TRUE if the polyline is CW.
         /// FALSE if the polyline is CCW.
         /// </returns>
@@ -144,7 +183,7 @@ namespace AR_Lib.Geometry
             // ccw <=> the edge leaving V[rmin] is left of the entering edge
             double result;
             if (rmin == 0)
-                result = new Line2d(vertices[vertices.Count - 1], vertices[0]).IsLeft(vertices[1]);
+                result = new Line2d(vertices[^1], vertices[0]).IsLeft(vertices[1]);
             else
                 result = new Line2d(vertices[rmin - 1], vertices[rmin]).IsLeft(vertices[rmin + 1]);
 
@@ -153,6 +192,9 @@ namespace AR_Lib.Geometry
             return result < 0 ? true : false;
         }
 
+        /// <summary>
+        /// Reparametrizes the current curve to a unit interval.
+        /// </summary>
         public void Reparametrize()
         {
 
@@ -163,7 +205,7 @@ namespace AR_Lib.Geometry
 
             segments.ForEach(segment =>
             {
-                double nextParam = currentParam + segment.Domain.Domain * ratio;
+                double nextParam = currentParam + segment.Domain.Length * ratio;
                 segment.Domain = new Interval(currentParam, nextParam);
                 currentParam = nextParam;
             });

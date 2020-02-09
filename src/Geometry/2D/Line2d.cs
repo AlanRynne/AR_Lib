@@ -2,26 +2,68 @@ using AR_Lib.Collections;
 
 namespace AR_Lib.Geometry
 {
+    /// <summary>
+    /// Represents a 2-dimensional line.
+    /// </summary>
     public class Line2d
     {
-        private Point2d startPoint;
-        private Point2d endPoint;
         private Interval domain;
 
-        public Point2d StartPoint { get => startPoint; set => startPoint = value; }
-        public Point2d EndPoint { get => endPoint; set => endPoint = value; }
+        /// <summary>
+        /// The start point of the line.
+        /// </summary>
+        /// <value>3D Point</value>
+        public Point2d StartPoint { get; set; }
+
+        /// <summary>
+        /// The end point of the line.
+        /// </summary>
+        /// <value>3D Point</value>
+        public Point2d EndPoint { get; set; }
+
+        /// <summary>
+        /// The line's domain.
+        /// </summary>
+        /// <value>Interval</value>
         public Interval Domain { get => domain; set => domain = value; }
+
+        /// <summary>
+        /// Returns the vector representation of the line.
+        /// </summary>
         public Vector2d Vector => this; // Implicit line to vector conversion (this property exists just for convenience and readability)
+
+        /// <summary>
+        /// Computes the length of the line.
+        /// </summary>
         public double Length => this.Vector.Length;
 
-
+        /// <summary>
+        /// Construct a new 2d line.
+        /// </summary>
+        /// <param name="startPoint">Start point of the line.</param>
+        /// <param name="endPoint">End point of the line.</param>
         public Line2d(Point2d startPoint, Point2d endPoint)
         {
-            this.startPoint = startPoint;
-            this.endPoint = endPoint;
+            this.StartPoint = startPoint;
+            this.EndPoint = endPoint;
             this.domain = new Interval(0, Length);
         }
+
+        /// <summary>
+        /// Construct a new 2d line.
+        /// </summary>
+        /// <param name="startPoint">The start point of the line</param>
+        /// <param name="direction">Direction. The length of the vector will determine the end point.</param>
+        /// <returns>New 2d line instance</returns>
         public Line2d(Point2d startPoint, Vector2d direction) : this(startPoint, startPoint + direction) { }
+
+        /// <summary>
+        /// Construct a new 2d line
+        /// </summary>
+        /// <param name="startPoint">Start point</param>
+        /// <param name="direction">Direction (length of vector will be disregarded)</param>
+        /// <param name="length">Desired length of the line.</param>
+        /// <returns>New 2d line instance</returns>
         public Line2d(Point2d startPoint, Vector2d direction, double length) : this(startPoint, direction.Unit() * length) { }
 
         /// <summary>
@@ -36,12 +78,15 @@ namespace AR_Lib.Geometry
         public double IsLeft(Point2d point)
         {
             Vector2d v1 = this;
-            Vector2d v2 = point - this.startPoint;
+            Vector2d v2 = point - this.StartPoint;
             return v1.PerpProduct(v2);
         }
 
-
-        public static implicit operator Vector2d(Line2d line) => line.endPoint - line.startPoint;
+        /// <summary>
+        /// Implicit conversion from line to vector.
+        /// </summary>
+        /// <param name="line">Line to be transformed into vector.</param>
+        public static implicit operator Vector2d(Line2d line) => line.EndPoint - line.StartPoint;
 
     }
 }

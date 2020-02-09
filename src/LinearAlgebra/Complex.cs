@@ -6,29 +6,25 @@ namespace AR_Lib.LinearAlgebra
     public class Complex
     {
         // Public fields
-        public double Real { get => _real; set => _real = value; }
-        public double Imaginary { get => _imaginary; set => _imaginary = value; }
-
-        // Private properties
-        double _real;
-        double _imaginary;
+        public double Real { get; set; }
+        public double Imaginary { get; set; }
 
         // Constructor
         public Complex(double real, double imaginary)
         {
-            _real = real;
-            _imaginary = imaginary;
+            Real = real;
+            Imaginary = imaginary;
         }
 
         // Methods
 
-        public double Arg() => Math.Atan2(_imaginary, _real);
+        public double Arg() => Math.Atan2(Imaginary, Real);
 
         public double Norm() => Math.Sqrt(Norm2());
 
-        public double Norm2() => _real * _real + _imaginary * _imaginary;
+        public double Norm2() => Real * Real + Imaginary * Imaginary;
 
-        public Complex Conjugate() => new Complex(_real, -_imaginary);
+        public Complex Conjugate() => new Complex(Real, -Imaginary);
 
         public Complex Inverse()
         {
@@ -45,25 +41,25 @@ namespace AR_Lib.LinearAlgebra
 
         public Complex Exp()
         {
-            double a = Math.Exp(_real);
-            double theta = _imaginary;
+            double a = Math.Exp(Real);
+            double theta = Imaginary;
             return new Complex(Math.Cos(theta) * a, Math.Sin(theta) * a);
         }
 
 
         // Private methods for operators
-        Complex Plus(Complex v) => new Complex(_real + v.Real, _imaginary + v.Imaginary);
+        Complex Plus(Complex v) => new Complex(Real + v.Real, Imaginary + v.Imaginary);
 
-        Complex Minus(Complex v) => new Complex(_real - v.Real, _imaginary - v.Imaginary);
+        Complex Minus(Complex v) => new Complex(Real - v.Real, Imaginary - v.Imaginary);
 
-        Complex TimesReal(double s) => new Complex(_real * s, _imaginary * s);
+        Complex TimesReal(double s) => new Complex(Real * s, Imaginary * s);
 
         Complex OverReal(double s) => TimesReal(1 / s);
 
         Complex TimesComplex(Complex v)
         {
-            double a = _real;
-            double b = _imaginary;
+            double a = Real;
+            double b = Imaginary;
             double c = v.Real;
             double d = v.Imaginary;
 

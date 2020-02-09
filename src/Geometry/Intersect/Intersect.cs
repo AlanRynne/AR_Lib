@@ -61,18 +61,18 @@ namespace AR_Lib
         /// Compute the intersection between a mesh face perimeter and a ray tangent to the face.
         /// </summary>
         /// <param name="ray">The tangent ray.</param>
-        /// <param name="Face">The mesh face.</param>
+        /// <param name="face">The mesh face.</param>
         /// <param name="result">The resulting intersection point.</param>
         /// <param name="halfEdge">The half-edge on where the intersection lies.</param>
         /// <returns></returns>
-        public static ISRayFacePerimeter RayFacePerimeter(Ray ray, MeshFace Face, out Point3d result, out MeshHalfEdge halfEdge)
+        public static ISRayFacePerimeter RayFacePerimeter(Ray ray, MeshFace face, out Point3d result, out MeshHalfEdge halfEdge)
         {
-            Vector3d faceNormal = MeshGeometry.FaceNormal(Face);
+            Vector3d faceNormal = MeshGeometry.FaceNormal(face);
             Vector3d biNormal = Vector3d.CrossProduct(ray.Direction, faceNormal);
 
             Plane perpPlane = new Plane(ray.Origin, ray.Direction, faceNormal, biNormal);
 
-            List<MeshVertex> vertices = Face.AdjacentVertices();
+            List<MeshVertex> vertices = face.AdjacentVertices();
 
             Point3d temp = new Point3d();
 

@@ -15,8 +15,8 @@ namespace AR_Lib.Tests
     /// </summary>
     public class JsonFileDataAttribute : DataAttribute
     {
-        private readonly string _filePath;
-        private readonly string _propertyName;
+        private readonly string filePath;
+        private readonly string propertyName;
 
         /// <summary>
         /// Load data from a JSON file as the data source for a theory
@@ -32,8 +32,8 @@ namespace AR_Lib.Tests
         /// <param name="propertyName">The name of the property on the JSON file that contains the data for the test</param>
         public JsonFileDataAttribute(string filePath, string propertyName)
         {
-            _filePath = filePath;
-            _propertyName = propertyName;
+            this.filePath = filePath;
+            this.propertyName = propertyName;
         }
 
         /// <inheritDoc />
@@ -43,9 +43,9 @@ namespace AR_Lib.Tests
             { throw new ArgumentNullException(nameof(testMethod)); }
 
             // Get the absolute path to the JSON file
-            var path = Path.IsPathRooted(_filePath)
-                ? _filePath
-                : Path.GetRelativePath(Directory.GetCurrentDirectory(), _filePath);
+            var path = Path.IsPathRooted(filePath)
+                ? filePath
+                : Path.GetRelativePath(Directory.GetCurrentDirectory(), filePath);
 
             if (!File.Exists(path))
             {
@@ -53,9 +53,9 @@ namespace AR_Lib.Tests
             }
 
             // Load the file
-            var fileData = File.ReadAllText(_filePath);
+            var fileData = File.ReadAllText(filePath);
 
-            if (string.IsNullOrEmpty(_propertyName))
+            if (string.IsNullOrEmpty(propertyName))
             {
                 //whole file is the data
                 return JsonConvert.DeserializeObject<List<object[]>>(fileData);
@@ -63,7 +63,7 @@ namespace AR_Lib.Tests
 
             // Only use the specified property as the data
             var allData = JObject.Parse(fileData);
-            var data = allData[_propertyName];
+            var data = allData[propertyName];
             return data.ToObject<List<object[]>>();
         }
     }

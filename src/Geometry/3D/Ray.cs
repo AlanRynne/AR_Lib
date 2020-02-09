@@ -5,19 +5,17 @@ namespace AR_Lib.Geometry
     /// </summary>
     public class Ray
     {
-        private Point3d _origin;
-        private Vector3d _direction;
 
         /// <summary>
         /// Gets/sets the origin point of the ray.
         /// </summary>
-        public Point3d Origin { get => _origin; set => _origin = value; }
+        public Point3d Origin { get; set; }
 
         /// <summary>
         /// Gets/sets the direction vector of the ray.
         /// </summary>
         /// <value></value>
-        public Vector3d Direction { get => _direction; set => _direction = value; }
+        public Vector3d Direction { get; set; }
 
         #region Constructors
 
@@ -28,8 +26,8 @@ namespace AR_Lib.Geometry
         /// <param name="direction">Vector representing the direction of the ray.</param>
         public Ray(Point3d origin, Vector3d direction)
         {
-            _origin = origin;
-            _direction = direction;
+            Origin = origin;
+            Direction = direction;
         }
 
         #endregion
@@ -43,7 +41,7 @@ namespace AR_Lib.Geometry
         /// <returns>Returns a point at the specified parameter of the Ray.</returns>
         public Point3d PointAt(double t)
         {
-            return _origin + t * _direction;
+            return Origin + t * Direction;
         }
 
         #endregion

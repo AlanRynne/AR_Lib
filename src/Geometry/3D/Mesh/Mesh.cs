@@ -11,11 +11,30 @@ namespace AR_Lib.HalfEdgeMesh
     public class Mesh
     {
         #region Public properties
+
+        /// <summary>
+        /// The vertices of the mesh
+        /// </summary>
         public List<MeshVertex> Vertices;
+        /// <summary>
+        /// The edges of the mesh
+        /// </summary>
         public List<MeshEdge> Edges;
+        /// <summary>
+        /// The faces of the mesh
+        /// </summary>
         public List<MeshFace> Faces;
+        /// <summary>
+        /// The corners of the mesh
+        /// </summary>
         public List<MeshCorner> Corners;
+        /// <summary>
+        /// The half-edges of the mesh
+        /// </summary>
         public List<MeshHalfEdge> HalfEdges;
+        /// <summary>
+        /// The boundaries of the mesh
+        /// </summary>
         public List<MeshFace> Boundaries;
 
         #endregion
@@ -23,6 +42,9 @@ namespace AR_Lib.HalfEdgeMesh
 
         #region Computed properties
 
+        /// <summary>
+        /// Computes the euler characteristic of the mesh
+        /// </summary>
         public int EulerCharacteristic => Vertices.Count - Edges.Count + Faces.Count;
 
         #endregion
@@ -300,6 +322,11 @@ namespace AR_Lib.HalfEdgeMesh
 
 
         #region Utility methods
+
+        /// <summary>
+        /// Get human readable description of this mesh
+        /// </summary>
+        /// <returns>Mesh description as text</returns>
         public string GetMeshInfo()
         {
             string head = "--- Mesh Info ---\n";
@@ -323,6 +350,10 @@ namespace AR_Lib.HalfEdgeMesh
 
         }
 
+        /// <summary>
+        /// Gets string representation of the mesh
+        /// </summary>
+        /// <returns>Mesh string</returns>
         public override string ToString()
         {
             string VEFH = "V: " + Vertices.Count + "; F: " + Faces.Count + "; E:" + Edges.Count + "; hE: " + HalfEdges.Count;
@@ -473,8 +504,10 @@ namespace AR_Lib.HalfEdgeMesh
 
                 if (!h.onBoundary)
                 {
-                    MeshCorner corner = new MeshCorner();
-                    corner.HalfEdge = h;
+                    MeshCorner corner = new MeshCorner
+                    {
+                        HalfEdge = h
+                    };
                     h.Corner = corner;
                     Corners.Add(corner);
                 }

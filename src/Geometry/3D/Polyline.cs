@@ -6,38 +6,37 @@ namespace AR_Lib.Geometry
 
     public class Polyline : BaseCurve
     {
-        private List<Point3d> _knots;
-        private List<Line> _segments;
-        private bool _isUnset;
-        private bool _segmentsNeedUpdate;
+        private List<Point3d> knots;
+        private List<Line> segments;
+        private bool segmentsNeedUpdate;
 
         public List<Line> Segments
         {
             get
             {
-                if (_segmentsNeedUpdate)
+                if (segmentsNeedUpdate)
                     RebuildSegments();
-                return _segments;
+                return segments;
             }
         }
-        public bool IsClosed => _knots[0] == _knots[_knots.Count - 1];
-        public bool IsUnset => _isUnset;
+        public bool IsClosed => knots[0] == knots[knots.Count - 1];
+        public bool IsUnset { get; }
 
         #region Constructors
 
         public Polyline()
         {
-            _knots = new List<Point3d>();
-            _segments = new List<Line>();
-            _isUnset = true;
-            _segmentsNeedUpdate = false;
+            knots = new List<Point3d>();
+            segments = new List<Line>();
+            IsUnset = true;
+            segmentsNeedUpdate = false;
         }
         public Polyline(List<Point3d> knots)
         {
-            _knots = knots;
-            _segments = new List<Line>();
-            _segmentsNeedUpdate = true;
-            _isUnset = false;
+            this.knots = knots;
+            segments = new List<Line>();
+            segmentsNeedUpdate = true;
+            IsUnset = false;
         }
 
         #endregion
@@ -46,46 +45,46 @@ namespace AR_Lib.Geometry
 
         public void AddKnot(Point3d knot)
         {
-            _knots.Add(knot); // Add knot to list
-            _segmentsNeedUpdate = true;
+            knots.Add(knot); // Add knot to list
+            segmentsNeedUpdate = true;
         }
         public void AddKnot(Point3d knot, int index)
         {
-            _knots.Insert(index, knot); // Add knot to list
-            _segmentsNeedUpdate = true;
+            knots.Insert(index, knot); // Add knot to list
+            segmentsNeedUpdate = true;
 
         }
         public void RemoveKnot(Point3d knot)
         {
-            if (_knots.Contains(knot))
+            if (knots.Contains(knot))
             {
-                _knots.Remove(knot);
-                _segmentsNeedUpdate = true;
+                knots.Remove(knot);
+                segmentsNeedUpdate = true;
             }
 
         }
 
         public void RemoveKnot(int index)
         {
-            if (_isUnset)
+            if (IsUnset)
                 throw new Exception("Cannot erase knot from an Unset polyline");
-            if (index < 0 || index > _segments.Count - 1)
+            if (index < 0 || index > segments.Count - 1)
                 throw new IndexOutOfRangeException("Knot index must be within the Knot list count");
 
         }
         private void RebuildSegments()
         {
-            _segments = new List<Line>(_knots.Count - 1);
+            segments = new List<Line>(knots.Count - 1);
             double t = 0;
-            for (int i = 1; i < _knots.Count; i++)
+            for (int i = 1; i < knots.Count; i++)
             {
-                Line l = new Line(_knots[i - 1], _knots[i]);
+                Line l = new Line(knots[i - 1], knots[i]);
                 // Assign parameter values
                 l.T0 = t;
                 t += l.Length;
                 l.T1 = t;
                 // Add segment to list.
-                _segments.Add(l);
+                segments.Add(l);
             }
         }
 
@@ -100,7 +99,7 @@ namespace AR_Lib.Geometry
         protected override double ComputeLength()
         {
             double length = 0;
-            _segments.ForEach(segment => length += segment.Length);
+            segments.ForEach(segment => length += segment.Length);
             return length;
         }
 

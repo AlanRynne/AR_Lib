@@ -16,7 +16,7 @@ namespace AR_Lib.Geometry
         public double Radius { get; set; }
         public Interval Domain { get; set; }
 
-        public double Height => Domain.Domain;
+        public double Height => Domain.Length;
 
         public Plane FrameAt(double u, double v)
         {

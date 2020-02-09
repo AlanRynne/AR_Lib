@@ -11,12 +11,10 @@ namespace AR_Lib.SpatialSearch
     /// </summary>
     public class PointCloud
     {
-        List<PointCloudMember> _points;
-
         /// <summary>
         /// Collection of points in the point cloud.
         /// </summary>
-        public List<PointCloudMember> Points { get => _points; private set => _points = value; }
+        public List<PointCloudMember> Points { get; private set; }
 
     }
 
@@ -25,12 +23,10 @@ namespace AR_Lib.SpatialSearch
     /// </summary>
     public class PointCloudMember : BasePoint
     {
-        private Color _color;
-
         /// <summary>
         /// Color at this point
         /// </summary>
         /// <value>The current color if set, defaults to white.</value>
-        public Color Color { get => _color; set => _color = value; }
+        public Color Color { get; set; }
     }
 }

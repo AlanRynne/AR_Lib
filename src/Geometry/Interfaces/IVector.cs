@@ -1,10 +1,10 @@
 namespace AR_Lib.Geometry.Interfaces
 {
+    /// <summary>
+    /// Base interface that all vector entities must implement.
+    /// </summary>
     public interface IVector
     {
 
-        Point3d PointAt(double u, double v);
-        Vector3d NormalAt(double u, double v);
-        Plane FrameAt(double u, double v);
     }
 }

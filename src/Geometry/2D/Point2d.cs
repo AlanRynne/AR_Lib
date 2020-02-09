@@ -7,9 +7,20 @@ namespace AR_Lib.Geometry
     /// </summary>
     public class Point2d
     {
+        /// <summary>
+        /// Gets or sets the X coordinate of the point
+        /// </summary>
         public double X;
+
+        /// <summary>
+        /// Gets or sets the Y coordinate of the point
+        /// </summary>
         public double Y;
 
+        /// <summary>
+        /// Constructs a new 2d point with all coordinates =0
+        /// </summary>
+        /// <returns>Origin 2d point</returns>
         public Point2d Origin => new Point2d(0, 0);
 
         /// <summary>
@@ -82,24 +93,98 @@ namespace AR_Lib.Geometry
 
         #region Operators
 
+        /// <summary>
+        /// Add two points together
+        /// </summary>
+        /// <param name="point">First point</param>
+        /// <param name="point2">Second point</param>
+        /// <returns>Addition result</returns>
         public static Vector2d operator +(Point2d point, Point2d point2) => new Vector2d(point.X + point2.X, point.Y + point2.Y);
+
+        /// <summary>
+        /// Substracts one point from another
+        /// </summary>
+        /// <param name="point">First point</param>
+        /// <param name="point2">Second point</param>
+        /// <returns>Substraction result</returns>
         public static Vector2d operator -(Point2d point, Point2d point2) => new Vector2d(point.X - point2.X, point.Y - point2.Y);
 
+        /// <summary>
+        /// Negates a given point
+        /// </summary>
+        /// <param name="point">Point to negate</param>
+        /// <returns>Negation result</returns>
         public static Point2d operator -(Point2d point) => new Point2d(-point.X, -point.Y);
 
+        /// <summary>
+        /// Multiplies a point by a number
+        /// </summary>
+        /// <param name="point">Point to multiply</param>
+        /// <param name="scalar">Operand</param>
+        /// <returns>Multiplication result</returns>
         public static Point2d operator *(Point2d point, double scalar) => new Point2d(point.X * scalar, point.Y * scalar);
+
+        /// <summary>
+        /// Multiplies a point by a number
+        /// </summary>
+        /// <param name="scalar">Operand</param>
+        /// <param name="point">Point to multiply</param>
+        /// <returns>Multiplication result</returns>
         public static Point2d operator *(double scalar, Point2d point) => new Point2d(point.X * scalar, point.Y * scalar);
 
+        /// <summary>
+        /// Divides a point by a number
+        /// </summary>
+        /// <param name="point">Point</param>
+        /// <param name="scalar">Operand</param>
+        /// <returns>Division result</returns>
         public static Point2d operator /(Point2d point, double scalar) => new Point2d(point.X / scalar, point.Y / scalar);
+
+        /// <summary>
+        /// Divides a point by a number
+        /// </summary>
+        /// <param name="scalar">Operand</param>
+        /// <param name="point">Point</param>
+        /// <returns>Division result</returns>
         public static Point2d operator /(double scalar, Point2d point) => new Point2d(point.X / scalar, point.Y / scalar);
 
+        /// <summary>
+        /// Equality comparison between points
+        /// </summary>
+        /// <param name="point">First point</param>
+        /// <param name="point2">Second point</param>
+        /// <returns>True if equal</returns>
         public static bool operator ==(Point2d point, Point2d point2) => point.Equals(point2);
+
+        /// <summary>
+        /// Inequality comparison between points
+        /// </summary>
+        /// <param name="point">First point</param>
+        /// <param name="point2">Second point</param>
+        /// <returns>True if NOT equal</returns>
         public static bool operator !=(Point2d point, Point2d point2) => !point.Equals(point2);
 
+
+        /// <summary>
+        /// Divides a point by a number
+        /// </summary>
+        /// <param name="point">Point</param>
+        /// <param name="v">Vector</param>
+        /// <returns>Division result</returns>
         public static Point2d operator +(Point2d point, Vector2d v) => new Point2d(point.X + v.X, point.Y + v.Y);
 
         // Implicit conversions
+
+        /// <summary>
+        /// Explicit conversion from 2-dimensional point to vector.
+        /// </summary>
+        /// <param name="v">Vector to convert</param>
         public static explicit operator Point2d(Vector2d v) => new Point2d(v.X, v.Y);
+
+        /// <summary>
+        /// Implicit conversion from 2-dimensional point to vector.
+        /// </summary>
+        /// <param name="pt">Point to convert.</param>
         public static implicit operator Vector2d(Point2d pt) => new Vector2d(pt);
 
         #endregion

@@ -6,21 +6,16 @@ namespace AR_Lib.LinearAlgebra
     public class Triplet
     {
         // Public fields
-        public List<TripletData> Values { get => _values; }
-        public int M { get => _m; }
-        public int N { get => _n; }
-
-        // Private properties
-        private List<TripletData> _values;
-        private int _m;
-        private int _n;
+        public List<TripletData> Values { get; }
+        public int M { get; }
+        public int N { get; }
 
         // Constructor
         public Triplet(int m, int n)
         {
-            _m = m;
-            _n = n;
-            _values = new List<TripletData>();
+            M = m;
+            N = n;
+            Values = new List<TripletData>();
         }
 
         // Methods
@@ -33,7 +28,7 @@ namespace AR_Lib.LinearAlgebra
                 Column = n
             };
 
-            _values.Add(tD);
+            Values.Add(tD);
         }
     }
 

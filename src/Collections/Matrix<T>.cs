@@ -16,7 +16,7 @@ namespace AR_Lib.Collections
 
         #region  Private properties
 
-        private T[,] _data;
+        private T[,] data;
 
         #endregion
 
@@ -27,36 +27,47 @@ namespace AR_Lib.Collections
         /// Columns
         /// </summary>
         /// <returns>Number of columns on the Matrix</returns>
-        public int N => _data.GetUpperBound(0) + 1;
+        public int N => data.GetUpperBound(0) + 1;
 
         /// <summary>
         /// Rows
         /// </summary>
         /// <returns>Number of rows on the Matrix</returns>
-        public int M => _data.GetUpperBound(1) + 1;
+        public int M => data.GetUpperBound(1) + 1;
 
         /// <summary>
         /// Assign or retrieve an entity from the Matrix
         /// </summary>
-        public ref T this[int row, int column] => ref _data[row, column];
+        public ref T this[int row, int column] => ref data[row, column];
 
+        /// <summary>
+        /// Get the row of a matrix at the specified index.
+        /// </summary>
+        /// <param name="n">Row index.</param>
+        /// <returns>Matrix row as list.</returns>
         public T[] Row(int n)
         {
             var row = new T[N];
             for (int i = 0; i < M; i++)
             {
-                row[i] = _data[n, i];
+                row[i] = data[n, i];
             }
             return row;
         }
+
+        /// <summary>
+        /// Get the column of a matrix at the specified index.
+        /// </summary>
+        /// <param name="m">Column index.</param>
+        /// <returns>Matrix column as list.</returns>
         public T[] Column(int m)
         {
-            var row = new T[M];
+            var col = new T[M];
             for (int i = 0; i < N; i++)
             {
-                row[i] = _data[i, m];
+                col[i] = data[i, m];
             }
-            return row;
+            return col;
         }
 
         #endregion
@@ -70,7 +81,7 @@ namespace AR_Lib.Collections
         /// <param name="n">Size of the square Matrix</param>
         public Matrix(int n)
         {
-            _data = new T[n, n];
+            data = new T[n, n];
         }
 
         /// <summary>
@@ -80,7 +91,7 @@ namespace AR_Lib.Collections
         /// <param name="m">Row size</param>
         public Matrix(int n, int m)
         {
-            _data = new T[n, m];
+            data = new T[n, m];
         }
 
         /// <summary>
@@ -89,7 +100,7 @@ namespace AR_Lib.Collections
         /// <param name="data">2D array of data</param>
         public Matrix(T[,] data)
         {
-            _data = data;
+            this.data = data;
         }
 
         #endregion
@@ -119,7 +130,7 @@ namespace AR_Lib.Collections
         /// <param name="incrementN">Positive or negative increment</param>
         public void IncrementColumns(int incrementN)
         {
-            ResizeMatrix(ref _data, N + incrementN, M);
+            ResizeMatrix(ref data, N + incrementN, M);
         }
 
         /// <summary>
@@ -129,7 +140,7 @@ namespace AR_Lib.Collections
         /// <param name="incrementM">Positive or negative increment</param>
         public void IncrementRows(int incrementM)
         {
-            ResizeMatrix(ref _data, N, M + incrementM);
+            ResizeMatrix(ref data, N, M + incrementM);
         }
 
         /// <summary>
