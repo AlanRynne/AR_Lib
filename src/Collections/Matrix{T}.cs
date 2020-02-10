@@ -68,7 +68,6 @@ namespace AR_Lib.Collections
 
         #endregion
 
-
         #region Constructors
 
         /// <summary>

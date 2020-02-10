@@ -77,24 +77,30 @@ namespace AR_Lib.Geometry
         protected double z;
         protected bool isUnset;
 
-        //Constructors
+        // Constructors
 
         /// <summary>
-        /// Constructs a new point with coordinates = 0.
+        /// Initializes a new instance of the <see cref="BasePoint"/> class.
         /// </summary>
         /// <returns>New origin point.</returns>
-        protected BasePoint() : this(0, 0, 0) { isUnset = true; }
+        protected BasePoint()
+            : this(0, 0, 0)
+        {
+            isUnset = true;
+        }
 
         /// <summary>
-        /// Constructs a new point with anther point.
+        /// Initializes a new instance of the <see cref="BasePoint"/> class.
         /// </summary>
         /// <param name="point">Point to copy coordinates from.</param>
         /// <returns></returns>
-        protected BasePoint(BasePoint point) : this(point.X, point.Y, point.Z)
+        protected BasePoint(BasePoint point)
+            : this(point.X, point.Y, point.Z)
         {
         }
+
         /// <summary>
-        /// Constructs a new point by cartesian coordinates.
+        /// Initializes a new instance of the <see cref="BasePoint"/> class by cartesian coordinates.
         /// </summary>
         /// <param name="xCoord">X coordinate.</param>
         /// <param name="yCoord">Y coordinate.</param>
@@ -107,13 +113,12 @@ namespace AR_Lib.Geometry
             isUnset = false;
         }
 
-
         // Mathematical operations
 
         /// <summary>
         /// Add a point to this point.
         /// </summary>
-        /// <param name="point">Point to add</param>
+        /// <param name="point">Point to add.</param>
         public void Add(BasePoint point)
         {
             x += point.X;
@@ -121,6 +126,7 @@ namespace AR_Lib.Geometry
             z += point.Z;
             isUnset = false;
         }
+
         /// <summary>
         /// Substract a point from this one.
         /// </summary>
@@ -132,6 +138,7 @@ namespace AR_Lib.Geometry
             z -= point.Z;
             isUnset = false;
         }
+
         /// <summary>
         /// Multiply this point by a number.
         /// </summary>
@@ -144,7 +151,7 @@ namespace AR_Lib.Geometry
         }
 
         /// <summary>
-        /// Divide this point by a number
+        /// Divide this point by a number.
         /// </summary>
         /// <param name="scalar">Number to divide by.</param>
         public void Divide(double scalar)
@@ -209,7 +216,5 @@ namespace AR_Lib.Geometry
                 return hash;
             }
         }
-
     }
-
 }

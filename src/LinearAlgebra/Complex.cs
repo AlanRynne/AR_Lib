@@ -8,17 +8,17 @@ namespace AR_Lib.LinearAlgebra
     public class Complex
     {
         /// <summary>
-        /// Gets or sets the Real component of the complex number
+        /// Gets or sets the Real component of the complex number.
         /// </summary>
         public double Real { get; set; }
 
         /// <summary>
-        /// Gets or sets the Imaginary component of the complex number
+        /// Gets or sets the Imaginary component of the complex number.
         /// </summary>
         public double Imaginary { get; set; }
 
         /// <summary>
-        /// Constructs a new complex number.
+        /// Initializes a new instance of the <see cref="Complex"/> class.
         /// </summary>
         /// <param name="real">Real component.</param>
         /// <param name="imaginary">Imaginary component.</param>
@@ -33,35 +33,36 @@ namespace AR_Lib.LinearAlgebra
         /// <summary>
         /// Computes the phase angle of this complex number.
         /// </summary>
+        /// <returns></returns>
         public double Arg() => Math.Atan2(Imaginary, Real);
 
         /// <summary>
         /// Computes the length of the complex number.
         /// </summary>
+        /// <returns></returns>
         public double Norm() => Math.Sqrt(Norm2());
 
         /// <summary>
         /// Computes the squared length of the complex number.
         /// </summary>
         /// <returns></returns>
-        public double Norm2() => Real * Real + Imaginary * Imaginary;
+        public double Norm2() => (Real * Real) + (Imaginary * Imaginary);
 
         /// <summary>
         /// Conjugates complex number (negates the imaginary component).
         /// </summary>
+        /// <returns></returns>
         public Complex Conjugate() => new Complex(Real, -Imaginary);
 
         /// <summary>
-        /// Computes the inverse of the complex number ((a + bi)^-1)
+        /// Computes the inverse of the complex number ((a + bi)^-1).
         /// </summary>
-        public Complex Inverse()
-        {
-            return Conjugate().OverReal(Norm2());
-        }
+        public Complex Inverse() => Conjugate().OverReal(Norm2());
 
         /// <summary>
         /// Computes the polar form ae^(iθ), where a is the norm and θ is the phase angle of this complex number.
         /// </summary>
+        /// <returns></returns>
         public Complex Polar()
         {
             double a = Norm();
@@ -69,6 +70,7 @@ namespace AR_Lib.LinearAlgebra
 
             return new Complex(Math.Cos(theta) * a, Math.Sin(theta) * a);
         }
+
         /// <summary>
         /// Exponentiates this complex number.
         /// </summary>
@@ -79,7 +81,6 @@ namespace AR_Lib.LinearAlgebra
             double theta = Imaginary;
             return new Complex(Math.Cos(theta) * a, Math.Sin(theta) * a);
         }
-
 
         // Private methods for operators
         private Complex Plus(Complex v) => new Complex(Real + v.Real, Imaginary + v.Imaginary);
@@ -97,8 +98,8 @@ namespace AR_Lib.LinearAlgebra
             var c = v.Real;
             var d = v.Imaginary;
 
-            var reNew = a * c - b * d;
-            var imNew = a * d - b * c;
+            var reNew = (a * c) - (b * d);
+            var imNew = (a * d) - (b * c);
 
             return new Complex(reNew, imNew);
         }
@@ -124,38 +125,36 @@ namespace AR_Lib.LinearAlgebra
         /// <summary>
         /// Multiplies a complex number with a number.
         /// </summary>
-        /// <param name="v">Multiplicand</param>
-        /// <param name="s">Multiplier</param>
+        /// <param name="v">Multiplicand.</param>
+        /// <param name="s">Multiplier.</param>
         public static Complex operator *(Complex v, double s) => v.TimesReal(s);
 
         /// <summary>
         /// Multiplies a complex number with a number.
         /// </summary>
-        /// <param name="v">Multiplicand</param>
-        /// <param name="s">Multiplier</param>
+        /// <param name="v">Multiplicand.</param>
+        /// <param name="s">Multiplier.</param>
         public static Complex operator *(double s, Complex v) => v.TimesReal(s);
 
         /// <summary>
         /// Multiplies to complex numbers.
         /// </summary>
-        /// <param name="v">Multiplicand</param>
-        /// <param name="w">Multiplier</param>
+        /// <param name="v">Multiplicand.</param>
+        /// <param name="w">Multiplier.</param>
         public static Complex operator *(Complex v, Complex w) => v.TimesComplex(w);
 
         /// <summary>
         /// Divides a complex number by a number.
         /// </summary>
-        /// <param name="v">Divisor</param>
-        /// <param name="s">Dividend</param>
+        /// <param name="v">Divisor.</param>
+        /// <param name="s">Dividend.</param>
         public static Complex operator /(Complex v, double s) => v.OverReal(s);
 
-
         /// <summary>
-        /// Divides two complex numbers
+        /// Divides two complex numbers.
         /// </summary>
-        /// <param name="v">Divisor</param>
-        /// <param name="w">Dividend</param>
+        /// <param name="v">Divisor.</param>
+        /// <param name="w">Dividend.</param>
         public static Complex operator /(Complex v, Complex w) => v.OverComplex(w);
-
     }
 }

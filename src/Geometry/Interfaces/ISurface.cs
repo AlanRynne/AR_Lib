@@ -8,23 +8,23 @@ namespace AR_Lib.Geometry.Interfaces
     public interface ISurface
     {
         /// <summary>
-        /// Gets or sets the domain in the U direction
+        /// Gets the domain in the U direction.
         /// </summary>
-        /// <value><see cref="Interval"/></value>
+        /// <value><see cref="Interval"/>.</value>
         Interval DomainU { get; }
 
         /// <summary>
-        /// Gets or sets the domain in the V direction
+        /// Gets the domain in the V direction.
         /// </summary>
-        /// <value><see cref="Interval"/></value>
+        /// <value><see cref="Interval"/>.</value>
         Interval DomainV { get; }
 
         /// <summary>
         /// Compute a point at the specified surface coordinates.
         /// </summary>
-        /// <param name="u">U coordinate</param>
-        /// <param name="v">V coordinate</param>
-        /// <returns><see cref="Point3d"/></returns>
+        /// <param name="u">U coordinate.</param>
+        /// <param name="v">V coordinate.</param>
+        /// <returns><see cref="Point3d"/>.</returns>
         Point3d PointAt(double u, double v);
 
         /// <summary>

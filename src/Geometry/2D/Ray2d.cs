@@ -1,7 +1,7 @@
 namespace AR_Lib.Geometry
 {
     /// <summary>
-    /// Represents a 2-dimensional ray
+    /// Represents a 2-dimensional ray.
     /// </summary>
     public class Ray2d
     {
@@ -16,7 +16,5 @@ namespace AR_Lib.Geometry
         /// </summary>
         /// <value>Direction vector.</value>
         public Vector2d Direction { get; set; }
-
-
     }
 }

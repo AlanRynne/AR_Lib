@@ -9,7 +9,6 @@ namespace AR_Lib.LinearAlgebra
     /// </summary>
     public static class LineFit2d
     {
-
         // Find the least squares linear fit.
         // Return the total error.
         // Found at: http://csharphelper.com/blog/2014/10/find-a-linear-least-squares-fit-for-a-set-of-points-in-c/
@@ -26,32 +25,34 @@ namespace AR_Lib.LinearAlgebra
         {
             // Perform the calculation.
             // Find the values S1, Sx, Sy, Sxx, and Sxy.
-            double S1 = points.Count;
-            double Sx = 0, Sy = 0, Sxx = 0, Sxy = 0;
+            double s1 = points.Count;
+            double sx = 0, sy = 0, sxx = 0, sxy = 0;
 
             foreach (Point2d pt in points)
             {
-                Sx += pt.X;
-                Sy += pt.Y;
-                Sxx += pt.X * pt.X;
-                Sxy += pt.X * pt.Y;
+                sx += pt.X;
+                sy += pt.Y;
+                sxx += pt.X * pt.X;
+                sxy += pt.X * pt.Y;
             }
 
             // Solve for m and b.
-            m = (Sxy * S1 - Sx * Sy) / (Sxx * S1 - Sx * Sx);
-            b = (Sxy * Sx - Sy * Sxx) / (Sx * Sx - S1 * Sxx);
+            m = ((sxy * s1) - (sx * sy)) / ((sxx * s1) - (sx * sx));
+            b = ((sxy * sx) - (sy * sxx)) / ((sx * sx) - (s1 * sxx));
 
             return Math.Sqrt(ErrorSquared(points, m, b));
         }
+
         // Return the error squared.
         private static double ErrorSquared(List<Point2d> points, double m, double b)
         {
             double total = 0;
             foreach (Point2d pt in points)
             {
-                double dy = pt.Y - (m * pt.X + b);
+                double dy = pt.Y - ((m * pt.X) + b);
                 total += dy * dy;
             }
+
             return total;
         }
     }

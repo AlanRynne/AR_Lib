@@ -6,28 +6,27 @@ namespace AR_Lib
 {
     public static partial class Intersect3D
     {
-        //INFO: IS prefix stands for Intersection Status
-
-        //INFO: IR prefix stands for Intersection Result
+        // INFO: IS prefix stands for Intersection Status
+        // INFO: IR prefix stands for Intersection Result
         public enum ISLinePlane
         {
             NoIntersection,
             Point,
-            OnPlane
+            OnPlane,
         }
 
         public enum ISRayFacePerimeter
         {
             NoIntersection,
             Point,
-            Error
+            Error,
         }
 
         public enum ISLineLine
         {
             NoIntersection,
             Point,
-            Error
+            Error,
         }
 
         public struct IRLineLine

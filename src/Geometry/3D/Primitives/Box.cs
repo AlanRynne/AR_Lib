@@ -8,7 +8,7 @@ namespace AR_Lib.Geometry.Primitives
     public class Box
     {
         /// <summary>
-        /// Constructs a new box from it's independent parts.
+        /// Initializes a new instance of the <see cref="Box"/> class.
         /// </summary>
         /// <param name="plane">Base plane of the box.</param>
         /// <param name="domainX">Range of values in the X axis.</param>
@@ -23,7 +23,7 @@ namespace AR_Lib.Geometry.Primitives
         }
 
         /// <summary>
-        /// Constructs a box from 2 corners. Both corners will form the diagonal of the box.
+        /// Initializes a new instance of the <see cref="Box"/> class from 2 corners. Both corners will form the diagonal of the box.
         /// </summary>
         /// <param name="lower">Lower left corner point.</param>
         /// <param name="upper">Upper right corner point.</param>
@@ -38,41 +38,43 @@ namespace AR_Lib.Geometry.Primitives
         /// <summary>
         /// Gets or sets the box's base plane.
         /// </summary>
-        /// <value><see cref="Plane"/></value>
+        /// <value><see cref="Plane"/>.</value>
         public Plane Plane { get; set; }
 
         /// <summary>
-        /// Gets or sets the box's X axis domain
+        /// Gets or sets the box's X axis domain.
         /// </summary>
-        /// <value><see cref="Interval"/></value>
+        /// <value><see cref="Interval"/>.</value>
         public Interval DomainX { get; set; }
+
         /// <summary>
-        /// Gets or sets the box's Y axis domain
+        /// Gets or sets the box's Y axis domain.
         /// </summary>
-        /// <value><see cref="Interval"/></value>
+        /// <value><see cref="Interval"/>.</value>
         public Interval DomainY { get; set; }
+
         /// <summary>
-        /// Gets or sets the box's Z axis domain
+        /// Gets or sets the box's Z axis domain.
         /// </summary>
-        /// <value><see cref="Interval"/></value>
+        /// <value><see cref="Interval"/>.</value>
         public Interval DomainZ { get; set; }
 
         /// <summary>
         /// Gets the corner point with lowest values.
         /// </summary>
-        /// <returns><see cref="Point3d"/></returns>
+        /// <returns><see cref="Point3d"/>.</returns>
         public Point3d Min => new Point3d(DomainX.Start, DomainY.Start, DomainZ.Start);
+
         /// <summary>
         /// Gets the corner point with highest values.
         /// </summary>
-        /// <returns><see cref="Point3d"/></returns>
+        /// <returns><see cref="Point3d"/>.</returns>
         public Point3d Max => new Point3d(DomainX.End, DomainY.End, DomainZ.End);
 
         /// <summary>
         /// Gets the center point of the box.
         /// </summary>
-        /// <returns><see cref="Point3d"/></returns>
+        /// <returns><see cref="Point3d"/>.</returns>
         public Point3d Center => new Point3d(DomainX.RemapFromUnit(0.5), DomainY.RemapFromUnit(0.5), DomainZ.RemapFromUnit(0.5));
-
     }
 }
