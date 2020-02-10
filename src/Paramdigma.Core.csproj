@@ -37,7 +37,7 @@
 
     <PropertyGroup>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <CodeAnalysisRuleSet>CustomCodeAnalysisRules.ruleset</CodeAnalysisRuleSet>
+        <CodeAnalysisRuleSet>Paramdigma.Core.Rules.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
 
 </Project>
