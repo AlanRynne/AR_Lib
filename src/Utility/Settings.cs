@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace AR_Lib
+namespace Paramdigma.Core
 {
     /// <summary>
     /// Multi-layered struct that holds the library settings.

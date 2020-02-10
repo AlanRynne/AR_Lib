@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using AR_Lib.Geometry;
+using Paramdigma.Core.Geometry;
 
-namespace AR_Lib.HalfEdgeMesh
+namespace Paramdigma.Core.HalfEdgeMesh
 {
     /// <summary>
     /// Represents a point on a mesh as it's face index and barycentric coordinatees.

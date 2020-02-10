@@ -1,8 +1,8 @@
-using AR_Lib.Geometry;
+using Paramdigma.Core.Geometry;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace AR_Lib.Tests.Geometry
+namespace Paramdigma.Core.Tests.Geometry
 {
     public class Point3dEqualDataset : IEnumerable<object[]>
     {

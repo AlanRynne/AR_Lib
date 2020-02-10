@@ -1,4 +1,4 @@
-namespace AR_Lib.Geometry
+namespace Paramdigma.Core.Geometry
 {
     /// <summary>
     /// Infinite 3d ray starting at a point.

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using AR_Lib.HalfEdgeMesh;
+using Paramdigma.Core.HalfEdgeMesh;
 
 #pragma warning disable 1591
 
-namespace AR_Lib.IO
+namespace Paramdigma.Core.IO
 {
     /// <summary>Writter class.</summary>
     public static class OFFWritter

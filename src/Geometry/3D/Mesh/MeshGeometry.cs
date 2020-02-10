@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using AR_Lib.HalfEdgeMesh;
+using Paramdigma.Core.HalfEdgeMesh;
 
-namespace AR_Lib.Geometry
+namespace Paramdigma.Core.Geometry
 {
     /// <summary>
     /// Represents the geometry of a HE_Mesh such as positions at vertices.

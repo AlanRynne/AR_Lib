@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using AR_Lib.Geometry;
+using Paramdigma.Core.Geometry;
 
-namespace AR_Lib.HalfEdgeMesh
+namespace Paramdigma.Core.HalfEdgeMesh
 {
     /// <summary>
     /// Represents a vertex of a mesh.

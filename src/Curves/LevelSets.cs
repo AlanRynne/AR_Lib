@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using AR_Lib.Geometry;
-using AR_Lib.HalfEdgeMesh;
+using Paramdigma.Core.Geometry;
+using Paramdigma.Core.HalfEdgeMesh;
 
-namespace AR_Lib.Curves
+namespace Paramdigma.Core.Curves
 {
     /// <summary>
     /// Compute the level sets of a given function.

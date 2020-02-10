@@ -1,7 +1,7 @@
-using AR_Lib.Geometry;
+using Paramdigma.Core.Geometry;
 using Xunit;
 
-namespace AR_Lib.Tests.Geometry
+namespace Paramdigma.Core.Tests.Geometry
 {
     public class Vector3dTests
     {

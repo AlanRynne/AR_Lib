@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using AR_Lib;
-using AR_Lib.Geometry;
+using Paramdigma.Core;
+using Paramdigma.Core.Geometry;
 
-namespace AR_Lib.HalfEdgeMesh
+namespace Paramdigma.Core.HalfEdgeMesh
 {
     /// <summary>
     /// Represents a Half-Edge Mesh data structure.

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using AR_Lib.Geometry;
+using Paramdigma.Core.Geometry;
 
-namespace AR_Lib.HalfEdgeMesh
+namespace Paramdigma.Core.HalfEdgeMesh
 {
     /// <summary>
     /// Half-edge mesh face class.

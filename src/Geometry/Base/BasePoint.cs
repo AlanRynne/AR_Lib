@@ -2,7 +2,7 @@
 
 #pragma warning disable 1591
 
-namespace AR_Lib.Geometry
+namespace Paramdigma.Core.Geometry
 {
     /// <summary>
     /// Abstract class representing a generic vector entity. All vector related entities must inherit from it.

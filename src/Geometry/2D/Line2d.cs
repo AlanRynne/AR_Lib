@@ -1,6 +1,6 @@
-using AR_Lib.Collections;
+using Paramdigma.Core.Collections;
 
-namespace AR_Lib.Geometry
+namespace Paramdigma.Core.Geometry
 {
     /// <summary>
     /// Represents a 2-dimensional line.

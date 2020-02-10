@@ -1,6 +1,6 @@
-using AR_Lib.Collections;
+using Paramdigma.Core.Collections;
 
-namespace AR_Lib.Geometry.Interfaces
+namespace Paramdigma.Core.Geometry.Interfaces
 {
     /// <summary>
     /// Base interface that all surface interface must implement.

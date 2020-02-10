@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using AR_Lib;
-using AR_Lib.Geometry;
-using AR_Lib.HalfEdgeMesh;
+using Paramdigma.Core;
+using Paramdigma.Core.Geometry;
+using Paramdigma.Core.HalfEdgeMesh;
 
-namespace AR_Lib.Curves
+namespace Paramdigma.Core.Curves
 {
     /// <summary>
     /// Static class to compute geodeesics on triangular meshes.

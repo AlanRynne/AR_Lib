@@ -1,12 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using AR_Lib.Curves;
-using AR_Lib.Geometry;
-using AR_Lib.HalfEdgeMesh;
-using AR_Lib.LinearAlgebra;
+using Paramdigma.Core.Curves;
+using Paramdigma.Core.Geometry;
+using Paramdigma.Core.HalfEdgeMesh;
+using Paramdigma.Core.LinearAlgebra;
 
-namespace AR_Lib
+namespace Paramdigma.Core
 {
     // INFO: Error enums for all classes are in file IntersectErrors.cs
 

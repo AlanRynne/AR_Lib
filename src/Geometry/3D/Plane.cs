@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AR_Lib.Geometry
+namespace Paramdigma.Core.Geometry
 {
     // TODO: Must ensure that vectors are always perpendicular to each other
 

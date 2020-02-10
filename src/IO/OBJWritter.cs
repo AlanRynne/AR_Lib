@@ -3,7 +3,7 @@ using System.Collections;
 
 #pragma warning disable 1591
 
-namespace AR_Lib.IO
+namespace Paramdigma.Core.IO
 {
     /// <summary>
     /// OBJ File Writter.

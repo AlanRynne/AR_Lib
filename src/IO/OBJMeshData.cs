@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 
-using AR_Lib.Geometry;
+using Paramdigma.Core.Geometry;
 
 #pragma warning disable 1591
 
-namespace AR_Lib.IO
+namespace Paramdigma.Core.IO
 {
     public struct OBJMeshData
     {

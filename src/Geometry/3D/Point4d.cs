@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using AR_Lib.Geometry;
-using AR_Lib.LinearAlgebra;
+using Paramdigma.Core.Geometry;
+using Paramdigma.Core.LinearAlgebra;
 
-namespace AR_Lib.Geometry
+namespace Paramdigma.Core.Geometry
 {
     /// <summary>
     /// Represents a 4-dimensional point.

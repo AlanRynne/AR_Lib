@@ -1,8 +1,8 @@
-using AR_Lib.Geometry;
+using Paramdigma.Core.Geometry;
 
 #pragma warning disable 1591
 
-namespace AR_Lib
+namespace Paramdigma.Core
 {
     /// <summary>
     /// Class contains all 3D related intersection methods.

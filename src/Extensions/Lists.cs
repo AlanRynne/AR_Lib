@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AR_Lib.Extensions
+namespace Paramdigma.Core.Extensions
 {/// <summary>
  /// Static class holding some utility methods regarding object collections.
  /// </summary>

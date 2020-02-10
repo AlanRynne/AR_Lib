@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AR_Lib.LinearAlgebra
+namespace Paramdigma.Core.LinearAlgebra
 {
     /// <summary>
     /// Represents a complex number (a number with real + imaginary components).

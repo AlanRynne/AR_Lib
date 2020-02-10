@@ -1,6 +1,6 @@
 #pragma warning disable 1591
 
-namespace AR_Lib.IO
+namespace Paramdigma.Core.IO
 {
     /// <summary>
     /// Enum containing the result of the OFF conversion.

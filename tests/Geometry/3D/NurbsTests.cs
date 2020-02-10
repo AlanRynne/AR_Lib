@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using AR_Lib.Collections;
-using AR_Lib.Geometry;
+using Paramdigma.Core.Collections;
+using Paramdigma.Core.Geometry;
 using Xunit;
 
-namespace AR_Lib.Tests
+namespace Paramdigma.Core.Tests
 {
     public class NurbsTests
     {

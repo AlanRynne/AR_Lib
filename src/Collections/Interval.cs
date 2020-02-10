@@ -1,6 +1,6 @@
 using System;
 
-namespace AR_Lib.Collections
+namespace Paramdigma.Core.Collections
 {
     /// <summary>
     /// Represents an range between two numbers.

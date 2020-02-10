@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using AR_Lib.Geometry;
+using Paramdigma.Core.Geometry;
 
-namespace AR_Lib.LinearAlgebra
+namespace Paramdigma.Core.LinearAlgebra
 {
     /// <summary>
     /// Fit a line through a set of 2-dimensional points.

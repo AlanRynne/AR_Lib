@@ -2,7 +2,7 @@
 
 #pragma warning disable 1591
 
-namespace AR_Lib.Geometry
+namespace Paramdigma.Core.Geometry
 {
     /// <summary>
     /// Represents a generic curve. This class is abstract and all curve classes should inherit from it.

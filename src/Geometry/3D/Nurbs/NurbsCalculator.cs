@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using AR_Lib.Collections;
+using Paramdigma.Core.Collections;
 
-namespace AR_Lib.Geometry
+namespace Paramdigma.Core.Geometry
 {
     /// <summary>
     /// Contains all methods related to 'The Nurbs Book 2nd Edition' implementation of NURBS curves and surfaces.

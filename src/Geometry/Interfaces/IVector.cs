@@ -1,4 +1,4 @@
-namespace AR_Lib.Geometry.Interfaces
+namespace Paramdigma.Core.Geometry.Interfaces
 {
     /// <summary>
     /// Base interface that all vector entities must implement.

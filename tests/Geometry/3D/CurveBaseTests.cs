@@ -1,4 +1,4 @@
-namespace AR_Lib.Tests.Geometry
+namespace Paramdigma.Core.Tests.Geometry
 {
     public abstract class CurveBaseTests<T>
     {

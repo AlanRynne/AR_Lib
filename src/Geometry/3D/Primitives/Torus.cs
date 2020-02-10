@@ -1,7 +1,7 @@
-using AR_Lib.Collections;
-using AR_Lib.Geometry.Interfaces;
+using Paramdigma.Core.Collections;
+using Paramdigma.Core.Geometry.Interfaces;
 
-namespace AR_Lib.Geometry.Primitives
+namespace Paramdigma.Core.Geometry.Primitives
 {
     /// <summary>
     /// Represents a toroidal surface.

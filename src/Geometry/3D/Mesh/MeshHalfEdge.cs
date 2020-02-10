@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AR_Lib.HalfEdgeMesh
+namespace Paramdigma.Core.HalfEdgeMesh
 {
     /// <summary>
     /// Represents a mesh half-edge.

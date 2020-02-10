@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #pragma warning disable 1591
 
-namespace AR_Lib.LinearAlgebra
+namespace Paramdigma.Core.LinearAlgebra
 {
     /// <summary>
     /// Represents a set of data in a sparse matrix.

@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using AR_Lib.Geometry;
+using Paramdigma.Core.Geometry;
 using Xunit;
 
-namespace AR_Lib.Tests.Geometry
+namespace Paramdigma.Core.Tests.Geometry
 {
     public class Polyline2dUnitSquareAndSegments : IEnumerable<object[]>
     {

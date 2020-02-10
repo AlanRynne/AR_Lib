@@ -1,7 +1,7 @@
-using AR_Lib.Collections;
-using AR_Lib.Geometry.Interfaces;
+using Paramdigma.Core.Collections;
+using Paramdigma.Core.Geometry.Interfaces;
 
-namespace AR_Lib.Geometry
+namespace Paramdigma.Core.Geometry
 {
     /// <summary>
     /// Represents a spherical surface.

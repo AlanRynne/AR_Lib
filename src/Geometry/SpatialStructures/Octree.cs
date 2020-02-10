@@ -1,4 +1,4 @@
-namespace AR_Lib.SpatialSearch
+namespace Paramdigma.Core.SpatialSearch
 {
     /// <summary>
     /// Class for computing Octree spatial searches.

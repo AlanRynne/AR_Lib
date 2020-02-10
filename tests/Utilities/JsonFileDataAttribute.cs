@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit.Sdk;
 
-namespace AR_Lib.Tests
+namespace Paramdigma.Core.Tests
 {
     /// <summary>
     /// Data Attribute to extract text data out of JSON files

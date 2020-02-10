@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
-using AR_Lib.Geometry;
+using Paramdigma.Core.Geometry;
 
-namespace AR_Lib.SpatialSearch
+namespace Paramdigma.Core.SpatialSearch
 {
     /// <summary>
     /// Represents a collection of points with a color assigned to them.

@@ -1,4 +1,4 @@
-﻿namespace AR_Lib.HalfEdgeMesh
+﻿namespace Paramdigma.Core.HalfEdgeMesh
 {
     /// <summary>
     /// Represents a corner of a given mesh face.

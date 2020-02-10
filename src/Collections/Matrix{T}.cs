@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace AR_Lib.Collections
+namespace Paramdigma.Core.Collections
 {
     /// <summary>
     /// 2-Dimensional generic matrix.

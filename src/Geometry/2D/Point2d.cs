@@ -1,6 +1,6 @@
 using System;
 
-namespace AR_Lib.Geometry
+namespace Paramdigma.Core.Geometry
 {
     /// <summary>
     /// 2-Dimensional point.

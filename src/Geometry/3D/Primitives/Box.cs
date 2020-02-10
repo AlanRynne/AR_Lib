@@ -1,6 +1,6 @@
-using AR_Lib.Collections;
+using Paramdigma.Core.Collections;
 
-namespace AR_Lib.Geometry.Primitives
+namespace Paramdigma.Core.Geometry.Primitives
 {
     /// <summary>
     /// Represents a 3D box.

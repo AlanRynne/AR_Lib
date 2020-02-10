@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 
-using AR_Lib.Geometry;
+using Paramdigma.Core.Geometry;
 
 #pragma warning disable 1591
 
-namespace AR_Lib.IO
+namespace Paramdigma.Core.IO
 {
     /// <summary>
     /// Struct containing the resulting mesh data extracted from an .OFF file.
