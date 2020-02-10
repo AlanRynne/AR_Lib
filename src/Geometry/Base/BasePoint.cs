@@ -9,8 +9,6 @@ namespace Paramdigma.Core.Geometry
     /// </summary>
     public abstract class BasePoint
     {
-        // Public properties
-
         /// <summary>
         /// Gets or sets x Coordinate.
         /// </summary>
@@ -18,14 +16,14 @@ namespace Paramdigma.Core.Geometry
         {
             get
             {
-                return x;
+                return this.x;
             }
 
             set
             {
-                if (isUnset)
-                    isUnset = false;
-                x = Math.Round(value, Settings.MaxDecimals);
+                if (this.IsUnset)
+                    this.IsUnset = false;
+                this.x = value;
             }
         }
 
@@ -36,14 +34,14 @@ namespace Paramdigma.Core.Geometry
         {
             get
             {
-                return y;
+                return this.y;
             }
 
             set
             {
-                if (isUnset)
-                    isUnset = false;
-                y = Math.Round(value, Settings.MaxDecimals);
+                if (this.IsUnset)
+                    this.IsUnset = false;
+                y = value;
             }
         }
 
@@ -54,30 +52,26 @@ namespace Paramdigma.Core.Geometry
         {
             get
             {
-                return z;
+                return this.z;
             }
 
             set
             {
-                if (isUnset)
-                    isUnset = false;
-                z = Math.Round(value, Settings.MaxDecimals);
+                if (this.IsUnset)
+                    this.IsUnset = false;
+                this.z = value;
             }
         }
 
         /// <summary>
-        /// Gets a value indicating whether the current point is unset.
+        /// Gets or sets a value indicating whether the current point is unset.
         /// </summary>
         /// <value>True if Unset.</value>
-        public bool IsUnset { get => isUnset; }
+        public bool IsUnset { get; set; }
 
-        // Private parameters
-        protected double x;
-        protected double y;
-        protected double z;
-        protected bool isUnset;
-
-        // Constructors
+        private double x;
+        private double y;
+        private double z;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BasePoint"/> class.
@@ -86,7 +80,7 @@ namespace Paramdigma.Core.Geometry
         protected BasePoint()
             : this(0, 0, 0)
         {
-            isUnset = true;
+            this.IsUnset = true;
         }
 
         /// <summary>
@@ -107,13 +101,11 @@ namespace Paramdigma.Core.Geometry
         /// <param name="zCoord">Z coordinate.</param>
         protected BasePoint(double xCoord, double yCoord, double zCoord)
         {
-            X = xCoord;
-            Y = yCoord;
-            Z = zCoord;
-            isUnset = false;
+            this.x = xCoord;
+            this.y = yCoord;
+            this.z = zCoord;
+            this.IsUnset = false;
         }
-
-        // Mathematical operations
 
         /// <summary>
         /// Add a point to this point.
@@ -121,10 +113,10 @@ namespace Paramdigma.Core.Geometry
         /// <param name="point">Point to add.</param>
         public void Add(BasePoint point)
         {
-            x += point.X;
-            y += point.Y;
-            z += point.Z;
-            isUnset = false;
+            this.x += point.X;
+            this.y += point.Y;
+            this.z += point.Z;
+            IsUnset = false;
         }
 
         /// <summary>
@@ -136,7 +128,7 @@ namespace Paramdigma.Core.Geometry
             this.x -= point.X;
             this.y -= point.Y;
             this.z -= point.Z;
-            this.isUnset = false;
+            this.IsUnset = false;
         }
 
         /// <summary>
@@ -156,9 +148,9 @@ namespace Paramdigma.Core.Geometry
         /// <param name="scalar">Number to divide by.</param>
         public void Divide(double scalar)
         {
-            x /= scalar;
-            y /= scalar;
-            z /= scalar;
+            this.x /= scalar;
+            this.y /= scalar;
+            this.z /= scalar;
         }
 
         /// <summary>
@@ -166,16 +158,16 @@ namespace Paramdigma.Core.Geometry
         /// </summary>
         public void Negate()
         {
-            x = -x;
-            y = -y;
-            z = -z;
+            this.x = -this.x;
+            this.y = -this.y;
+            this.z = -this.z;
         }
 
         /// <summary>
         /// Returns the string representation of this point.
         /// </summary>
         /// <returns></returns>
-        public override string ToString() => "{ " + x + ", " + y + ", " + z + " }";
+        public override string ToString() => "{ " + this.x + ", " + this.y + ", " + this.z + " }";
 
         /// <summary>
         /// Converts a point to an array of numbers.
@@ -183,17 +175,18 @@ namespace Paramdigma.Core.Geometry
         /// <returns>Array with cartesian coordinates of point.</returns>
         public double[] ToArray() => new double[] { x, y, z };
 
-        // Override Methods
-
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (!(obj is BasePoint))
+            {
                 return false;
+            }
+
             var pt = (BasePoint)obj;
-            return Math.Abs(X - pt.X) <= Settings.Tolerance
-                && Math.Abs(Y - pt.Y) <= Settings.Tolerance
-                && Math.Abs(Z - pt.Z) <= Settings.Tolerance;
+            return Math.Abs(this.X - pt.X) <= Settings.Tolerance
+                && Math.Abs(this.Y - pt.Y) <= Settings.Tolerance
+                && Math.Abs(this.Z - pt.Z) <= Settings.Tolerance;
         }
 
         /// <inheritdoc/>
@@ -204,10 +197,10 @@ namespace Paramdigma.Core.Geometry
                 // Choose large primes to avoid hashing collisions
                 const int hashingBase = (int)2166136261;
                 const int hashingMultiplier = 16777619;
-                double tol = Settings.Tolerance * 2;
-                double tX = (int)(X * (1 / tol)) * tol;
-                double tY = (int)(Y * (1 / tol)) * tol;
-                double tZ = (int)(Z * (1 / tol)) * tol;
+                var tol = Settings.Tolerance * 2;
+                var tX = (int)(this.X * (1 / tol)) * tol;
+                var tY = (int)(this.Y * (1 / tol)) * tol;
+                var tZ = (int)(this.Z * (1 / tol)) * tol;
 
                 int hash = hashingBase;
                 hash = (hash * hashingMultiplier) ^ tX.GetHashCode();

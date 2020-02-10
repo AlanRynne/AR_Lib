@@ -12,8 +12,8 @@ namespace Paramdigma.Core.Geometry
         /// <param name="endPoint">End point.</param>
         public Line(Point3d startPoint, Point3d endPoint)
         {
-            this.startPoint = startPoint;
-            this.endPoint = endPoint;
+            this.StartPoint = startPoint;
+            this.EndPoint = endPoint;
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Paramdigma.Core.Geometry
         /// </summary>
         /// <param name="t">Parameter of the point. Must be between 0 and 1.</param>
         /// <returns>Point at specified parameter.</returns>
-        public override Point3d PointAt(double t) => startPoint + (t * (endPoint - startPoint));
+        public override Point3d PointAt(double t) => this.StartPoint + (t * (this.EndPoint - this.StartPoint));
 
         /// <summary>
         /// Computes the tangent at the given parameter.
@@ -36,7 +36,7 @@ namespace Paramdigma.Core.Geometry
         /// <returns>Tangent at specified parameter.</returns>
         public override Vector3d TangentAt(double t)
         {
-            Vector3d tangent = endPoint - startPoint;
+            Vector3d tangent = this.EndPoint - this.StartPoint;
             tangent.Unitize();
             return tangent;
         }
@@ -77,6 +77,6 @@ namespace Paramdigma.Core.Geometry
         /// Computes the length of the line.
         /// </summary>
         /// <returns>Line length.</returns>
-        protected override double ComputeLength() => startPoint.DistanceTo(endPoint);
+        protected override double ComputeLength() => this.StartPoint.DistanceTo(this.EndPoint);
     }
 }

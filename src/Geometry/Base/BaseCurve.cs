@@ -14,48 +14,36 @@ namespace Paramdigma.Core.Geometry
         /// <summary>
         /// Gets or sets the curve's start point.
         /// </summary>
-        public virtual Point3d StartPoint { get => startPoint; set => startPoint = value; }
+        public virtual Point3d StartPoint { get; set; }
 
         /// <summary>
         /// Gets or sets the curves end point.
         /// </summary>
-        public virtual Point3d EndPoint { get => endPoint; set => endPoint = value; }
+        public virtual Point3d EndPoint { get; set; }
 
         /// <summary>
         /// Gets or sets the curves initial parameter.
         /// </summary>
-        public virtual double T0 { get => t0; set => t0 = value; }
+        public virtual double T0 { get; set; }
 
         /// <summary>
         /// Gets or sets the curves final parameter.
         /// </summary>
-        public virtual double T1 { get => t1; set => t1 = value; }
+        public virtual double T1 { get; set; }
 
         /// <summary>
         /// Gets a value indicating whether the curve is valid.
         /// </summary>
         /// <returns>True if Valid.</returns>
-        public virtual bool IsValid => CheckValidity();
+        public virtual bool IsValid => this.CheckValidity();
 
-        protected Point3d startPoint;
-
-        protected Point3d endPoint;
-
-        protected double t0;
-
-        protected double t1;
-
-        public double Length => ComputeLength();
-
-        // Private fields
-        protected bool isValid;
+        public double Length => this.ComputeLength();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseCurve"/> class.
         /// </summary>
         protected BaseCurve()
         {
-            isValid = false;
         }
 
         /// <summary>

@@ -7,9 +7,9 @@ using Paramdigma.Core.Geometry;
 namespace Paramdigma.Core.IO
 {
     /// <summary>
-    /// Struct containing the resulting mesh data extracted from an .OFF file.
+    /// Class containing the resulting mesh data extracted from an .OFF file.
     /// </summary>
-    public struct OFFMeshData
+    public class OFFMeshData
     {
         /// <summary>
         /// Gets or sets the mesh vertices.

@@ -57,8 +57,8 @@ namespace Paramdigma.Core.Geometry
             get => weight; set
             {
                 weight = value;
-                if (isUnset)
-                    isUnset = false;
+                if (IsUnset)
+                    this.IsUnset = false;
             }
         }
 

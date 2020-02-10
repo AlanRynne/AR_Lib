@@ -80,12 +80,12 @@ namespace Paramdigma.Core.HalfEdgeMesh
         /// <param name="halfEdgeMesh">Existing Half-Edge Mesh.</param>
         public Mesh(Mesh halfEdgeMesh)
         {
-            Vertices = new List<MeshVertex>(halfEdgeMesh.Vertices);
-            Edges = new List<MeshEdge>(halfEdgeMesh.Edges);
-            Faces = new List<MeshFace>(halfEdgeMesh.Faces);
-            Corners = new List<MeshCorner>(halfEdgeMesh.Corners);
-            HalfEdges = new List<MeshHalfEdge>(halfEdgeMesh.HalfEdges);
-            Boundaries = new List<MeshFace>(halfEdgeMesh.Boundaries);
+            this.Vertices = new List<MeshVertex>(halfEdgeMesh.Vertices);
+            this.Edges = new List<MeshEdge>(halfEdgeMesh.Edges);
+            this.Faces = new List<MeshFace>(halfEdgeMesh.Faces);
+            this.Corners = new List<MeshCorner>(halfEdgeMesh.Corners);
+            this.HalfEdges = new List<MeshHalfEdge>(halfEdgeMesh.HalfEdges);
+            this.Boundaries = new List<MeshFace>(halfEdgeMesh.Boundaries);
         }
 
         /// <summary>
@@ -136,7 +136,14 @@ namespace Paramdigma.Core.HalfEdgeMesh
         /// <returns>True if there are non-manifold edges, false if not.</returns>
         public bool HasNonManifoldEdges()
         {
-            // HACK: Implement HasNonManifoldEdges(). Currently it always returns FALSE
+            foreach (var edge in this.Edges)
+            {
+                if (edge.AdjacentFaces().Count > 2)
+                {
+                    return true;
+                }
+            }
+
             return false;
         }
 
@@ -146,42 +153,42 @@ namespace Paramdigma.Core.HalfEdgeMesh
         public void IndexElements()
         {
             int index = -1;
-            foreach (MeshVertex v in Vertices)
+            foreach (var v in this.Vertices)
             {
                 index++;
                 v.Index = index;
             }
 
             index = -1;
-            foreach (MeshFace f in Faces)
+            foreach (var f in this.Faces)
             {
                 index++;
                 f.Index = index;
             }
 
             index = -1;
-            foreach (MeshHalfEdge hE in HalfEdges)
+            foreach (var hE in this.HalfEdges)
             {
                 index++;
                 hE.Index = index;
             }
 
             index = -1;
-            foreach (MeshEdge e in Edges)
+            foreach (var e in this.Edges)
             {
                 index++;
                 e.Index = index;
             }
 
             index = -1;
-            foreach (MeshCorner c in Corners)
+            foreach (var c in this.Corners)
             {
                 index++;
                 c.Index = index;
             }
 
             index = -1;
-            foreach (MeshFace b in Boundaries)
+            foreach (var b in this.Boundaries)
             {
                 index++;
                 b.Index = index;
