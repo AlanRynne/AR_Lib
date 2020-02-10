@@ -6,17 +6,23 @@
         <TargetFramework>netstandard2.1</TargetFramework>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <PackageId>Paramdigma.Core</PackageId>
+        <Version>0.0.1</Version>
+        <Authors>Alan Rynne</Authors>
+        <Company>Paramdigma</Company>
+    </PropertyGroup>
     <!-- Add Nuget Packages and other  dependencies -->
 
     <ItemGroup>
         <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-          <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
         </PackageReference>
         <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
         <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-          <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
         </PackageReference>
     </ItemGroup>
 
@@ -31,7 +37,7 @@
 
     <PropertyGroup>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <CodeAnalysisRuleSet>CustomCodeAnalysisRules.ruleset</CodeAnalysisRuleSet>
+        <CodeAnalysisRuleSet>Paramdigma.Core.Rules.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
 
 </Project>

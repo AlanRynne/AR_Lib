@@ -14,7 +14,7 @@ namespace Paramdigma.Core.Geometry
         {
             var C = a[n];
             for (int i = n - 1; i >= 0; i--)
-                C = C * u0 + a[i];
+                C = (C * u0) + a[i];
             return C;
         }
 
@@ -28,7 +28,7 @@ namespace Paramdigma.Core.Geometry
             var u1 = 1.0 - u;
             for (int k = 1; k <= n; k++)
                 for (int j = n; j >= k; j--)
-                    temp[j] = u1 * temp[j] + u * temp[j - 1];
+                    temp[j] = (u1 * temp[j]) + (u * temp[j - 1]);
 
             return temp[n];
         }
@@ -52,7 +52,7 @@ namespace Paramdigma.Core.Geometry
                 for (int k = 0; k < j; k++)
                 {
                     var temp = B[k];
-                    B[k] = saved + u1 * temp;
+                    B[k] = saved + (u1 * temp);
                     saved = u * temp;
                 }
                 B[j] = saved;
@@ -140,7 +140,7 @@ namespace Paramdigma.Core.Geometry
                 for (int r = 0; r < j; r++)
                 {
                     var temp = N[r] / (right[r + 1] + left[j - r]);
-                    N[r] = saved + right[r + 1] * temp;
+                    N[r] = saved + (right[r + 1] * temp);
                     saved = left[j - r] * temp;
                 }
                 N[j] = saved;
@@ -166,7 +166,7 @@ namespace Paramdigma.Core.Geometry
                 {
                     ndu[j, r] = right[r + 1] + left[j - r];
                     var temp = ndu[r, j - 1] / ndu[j, r];
-                    ndu[r, j] = saved + right[r + 1] * temp;
+                    ndu[r, j] = saved + (right[r + 1] * temp);
                     saved = left[j - r] * temp;
                 }
                 ndu[j, j] = saved;
@@ -361,8 +361,7 @@ namespace Paramdigma.Core.Geometry
             {
                 CK[k] = new Vector3d();
                 for (int j = 0; j <= p; j++)
-                    CK[k] = CK[k] + (nders[k, j] * (Vector3d)P[span - p + j]);
-
+                    CK[k] += nders[k, j] * (Vector3d)P[span - p + j];
             }
             return CK;
         }
