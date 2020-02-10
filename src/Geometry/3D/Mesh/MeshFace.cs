@@ -9,14 +9,14 @@ namespace AR_Lib.HalfEdgeMesh
     public class MeshFace
     {
         /// <summary>
-        /// One of the  half-edges surrounding the face.
+        /// Gets or sets one of the  half-edges surrounding the face.
         /// </summary>
-        public MeshHalfEdge HalfEdge;
+        public MeshHalfEdge HalfEdge { get; set; }
 
         /// <summary>
-        /// The face index on the mesh face list.
+        /// Gets or sets the face index on the mesh face list.
         /// </summary>
-        public int Index;
+        public int Index { get; set; }
 
         /// <summary>
         /// Gets the area of the face.

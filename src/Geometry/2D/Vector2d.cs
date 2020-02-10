@@ -94,7 +94,10 @@ namespace AR_Lib.Geometry
         /// </summary>
         /// <param name="vector">Vector to compute perp-product with.</param>
         /// <returns>Perp product result.</returns>
-        public double PerpProduct(Vector2d vector) => (X * vector.Y) - (Y * vector.X);
+        public double PerpProduct(Vector2d vector)
+        {
+            return (X * vector.Y) - (Y * vector.X);
+        }
 
         /// <summary>
         /// Sums two vectors together.
@@ -120,8 +123,8 @@ namespace AR_Lib.Geometry
         /// <summary>
         /// Multiplies a vector with a number.
         /// </summary>
-        /// <param name="v">Vector.</param>
         /// <param name="scalar">Number to multiply vector with.</param>
+        /// <param name="v">Vector.</param>
         public static Vector2d operator *(double scalar, Vector2d v) => new Vector2d(v.X * scalar, v.Y * scalar);
 
         /// <summary>
@@ -157,7 +160,7 @@ namespace AR_Lib.Geometry
         /// <returns></returns>
         public override string ToString()
         {
-            return @"Vector3d [{X}, {Y}]";
+            return "Vector3d [{X}, {Y}]";
         }
 
         /// <summary>
@@ -170,7 +173,7 @@ namespace AR_Lib.Geometry
             if (obj is Vector2d)
             {
                 Vector2d vect = obj as Vector2d;
-                return this.X == vect.X && this.Y == vect.Y ? true : false;
+                return this.X == vect.X && this.Y == vect.Y;
             }
 
             return false;

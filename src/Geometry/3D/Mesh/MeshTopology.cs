@@ -32,49 +32,49 @@ namespace AR_Lib.HalfEdgeMesh
         }
 
         /// <summary>
-        /// Vertex-Vertex topological connections.
+        /// Gets vertex-Vertex topological connections.
         /// </summary>
-        public Dictionary<int, List<int>> VertexVertex;
+        public Dictionary<int, List<int>> VertexVertex { get; }
 
         /// <summary>
-        /// Vertex-Face topological connections.
+        /// Gets vertex-Face topological connections.
         /// </summary>
-        public Dictionary<int, List<int>> VertexFaces;
+        public Dictionary<int, List<int>> VertexFaces { get; }
 
         /// <summary>
-        /// Vertex-Edge topological connections.
+        /// Gets vertex-Edge topological connections.
         /// </summary>
-        public Dictionary<int, List<int>> VertexEdges;
+        public Dictionary<int, List<int>> VertexEdges { get; }
 
         /// <summary>
-        /// Edge-Edge topological connections.
+        /// Gets edge-Edge topological connections.
         /// </summary>
-        public Dictionary<int, List<int>> EdgeEdge;
+        public Dictionary<int, List<int>> EdgeEdge { get; }
 
         /// <summary>
-        /// Edge-Vertex topological connections.
+        /// Gets edge-Vertex topological connections.
         /// </summary>
-        public Dictionary<int, List<int>> EdgeVertex;
+        public Dictionary<int, List<int>> EdgeVertex { get; }
 
         /// <summary>
-        /// Edge-Face topological connections.
+        /// Gets edge-Face topological connections.
         /// </summary>
-        public Dictionary<int, List<int>> EdgeFace;
+        public Dictionary<int, List<int>> EdgeFace { get; }
 
         /// <summary>
-        /// Face-Vertex topological connections.
+        /// Gets face-Vertex topological connections.
         /// </summary>
-        public Dictionary<int, List<int>> FaceVertex;
+        public Dictionary<int, List<int>> FaceVertex { get; }
 
         /// <summary>
-        /// Face-Edge topological connections.
+        /// Gets face-Edge topological connections.
         /// </summary>
-        public Dictionary<int, List<int>> FaceEdge;
+        public Dictionary<int, List<int>> FaceEdge { get; }
 
         /// <summary>
-        /// Face-Face topological connections.
+        /// Gets face-Face topological connections.
         /// </summary>
-        public Dictionary<int, List<int>> FaceFace;
+        public Dictionary<int, List<int>> FaceFace { get; }
 
         /// <summary>
         /// Computes vertex adjacency for the whole mesh and stores it in the appropriate dictionaries.

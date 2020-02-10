@@ -10,12 +10,12 @@ namespace AR_Lib.Geometry
         /// <summary>
         /// Gets or sets the X coordinate of the point.
         /// </summary>
-        public double X;
+        public double X { get; set; }
 
         /// <summary>
         /// Gets or sets the Y coordinate of the point.
         /// </summary>
-        public double Y;
+        public double Y { get; set; }
 
         /// <summary>
         ///  Gets a new 2d point with all coordinates =0.

@@ -8,11 +8,16 @@ namespace AR_Lib.IO
 {
     public struct OBJMeshData
     {
-        public List<Point3d> Vertices;
-        public List<List<int>> Faces;
-        public List<List<int>> Edges;
-        public List<List<double>> TextureCoords;
-        public List<List<int>> FaceTextureCoords;
-        public List<Vector3d> Normals;
+        public List<Point3d> Vertices { get; }
+
+        public List<List<int>> Faces { get; }
+
+        public List<List<int>> Edges { get; }
+
+        public List<List<double>> TextureCoords { get; }
+
+        public List<List<int>> FaceTextureCoords { get; }
+
+        public List<Vector3d> Normals { get; }
     }
 }

@@ -8,9 +8,7 @@
         "build",
         "${workspaceFolder}/tests/AR_Lib.Tests.csproj"
       ],
-      "problemMatcher": [
-        "$msCompile"
-      ]
+      "problemMatcher": []
     },
     {
       "label": "build-docs",

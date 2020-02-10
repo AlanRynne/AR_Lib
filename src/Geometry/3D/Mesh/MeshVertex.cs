@@ -10,17 +10,17 @@ namespace AR_Lib.HalfEdgeMesh
     public class MeshVertex : Point3d
     {
         /// <summary>
-        /// The half-edge this vertex is attached to.
+        /// Gets or sets the half-edge this vertex is attached to.
         /// </summary>
-        public MeshHalfEdge HalfEdge;
+        public MeshHalfEdge HalfEdge { get; set; }
 
         /// <summary>
-        /// The index of the vertex.
+        /// Gets or sets the index of the vertex.
         /// </summary>
-        public int Index;
+        public int Index { get; set; }
 
         /// <summary>
-        /// Gets or sets dictionary of user values.
+        /// Gets dictionary of user values.
         /// </summary>
         /// <value></value>
         public Dictionary<string, double> UserValues
@@ -28,19 +28,11 @@ namespace AR_Lib.HalfEdgeMesh
             get
             {
                 // Set private property to auto initialize if null.
-                if (userValues == null)
-                    return new Dictionary<string, double>();
-                else
-                    return userValues;
-            }
-
-            set
-            {
-                userValues = value;
+                return userValues ?? new Dictionary<string, double>();
             }
         }
 
-        private Dictionary<string, double> userValues;
+        private readonly Dictionary<string, double> userValues;
 
         // Constructor
 
@@ -48,7 +40,6 @@ namespace AR_Lib.HalfEdgeMesh
         /// Initializes a new instance of the <see cref="MeshVertex"/> class.
         /// </summary>
         public MeshVertex()
-            : base()
         {
             userValues = new Dictionary<string, double>();
         }

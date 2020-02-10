@@ -8,12 +8,12 @@
         /// <summary>
         /// Gets or sets the corner's first half-edge.
         /// </summary>
-        public MeshHalfEdge HalfEdge;
+        public MeshHalfEdge HalfEdge { get; set; }
 
         /// <summary>
         /// Gets or sets the index of the mesh corner.
         /// </summary>
-        public int Index;
+        public int Index { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MeshCorner"/> class.

@@ -7,8 +7,6 @@ namespace AR_Lib.Geometry
     /// </summary>
     public class Line2d
     {
-        private Interval domain;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Line2d"/> class.
         /// </summary>
@@ -18,7 +16,7 @@ namespace AR_Lib.Geometry
         {
             this.StartPoint = startPoint;
             this.EndPoint = endPoint;
-            this.domain = new Interval(0, Length);
+            this.Domain = new Interval(0, Length);
         }
 
         /// <summary>
@@ -60,7 +58,7 @@ namespace AR_Lib.Geometry
         /// Gets or sets the line's domain.
         /// </summary>
         /// <value>Interval.</value>
-        public Interval Domain { get => domain; set => domain = value; }
+        public Interval Domain { get; set; }
 
         /// <summary>
         /// Gets the vector representation of the line.

@@ -79,10 +79,7 @@ namespace AR_Lib.Geometry
             get
             {
                 double length = 0;
-                Segments.ForEach(segment =>
-                {
-                    length += segment.Length;
-                });
+                Segments.ForEach(segment => length += segment.Length);
                 return length;
             }
         }
@@ -185,7 +182,7 @@ namespace AR_Lib.Geometry
 
             if (result == 0)
                 throw new Exception("Polyline is degenerate, cannot compute orientation.");
-            return result < 0 ? true : false;
+            return result < 0;
         }
 
         /// <summary>

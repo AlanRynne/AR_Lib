@@ -40,10 +40,10 @@ namespace AR_Lib.Geometry.Primitives
         public double MinorRadius { get; set; }
 
         /// <inheritdoc/>
-        public Interval DomainU => throw new System.NotImplementedException();
+        public Interval DomainU { get; set; }
 
         /// <inheritdoc/>
-        public Interval DomainV => throw new System.NotImplementedException();
+        public Interval DomainV { get; set; }
 
         /// <inheritdoc/>
         public Plane FrameAt(double u, double v) => throw new System.NotImplementedException();

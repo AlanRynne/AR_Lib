@@ -224,7 +224,7 @@ namespace AR_Lib
 
             // get the difference of the two closest points
             Vector3d dP = w + (sc * u) - (tc * v); // =  S1(sc) - S2(tc)
-
+            result = default;
             result.Distance = dP.Length; // return the closest distance
             result.TA = sc;
             result.TB = tc;

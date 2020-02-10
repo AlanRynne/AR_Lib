@@ -12,13 +12,13 @@ namespace AR_Lib.IO
     public struct OFFMeshData
     {
         /// <summary>
-        /// Mesh vertices.
+        /// Gets or sets the mesh vertices.
         /// </summary>
-        public List<Point3d> Vertices;
+        public List<Point3d> Vertices { get; set; }
 
         /// <summary>
-        /// Mesh face indices.
+        /// Gets or sets the mesh face indices.
         /// </summary>
-        public List<List<int>> Faces;
+        public List<List<int>> Faces { get; set; }
     }
 }

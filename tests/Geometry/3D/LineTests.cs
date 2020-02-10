@@ -9,6 +9,7 @@ namespace AR_Lib.Tests.Geometry
     public class Line3dTests : CurveBaseTests<Line>
     {
         internal Line TestLine = new Line(Point3d.WorldOrigin, new Point3d(1, 1, 1));
+
         [Fact]
         public override void CanCheck_Validity()
         {

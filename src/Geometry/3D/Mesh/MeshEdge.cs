@@ -10,14 +10,14 @@ namespace AR_Lib.HalfEdgeMesh
     public class MeshEdge
     {
         /// <summary>
-        /// The half-edge linked to this edge.
+        /// Gets or sets the half-edge linked to this edge.
         /// </summary>
-        public MeshHalfEdge HalfEdge;
+        public MeshHalfEdge HalfEdge { get; set; }
 
         /// <summary>
-        /// The index of this Mesh Edge.
+        /// Gets or sets the index of this Mesh Edge.
         /// </summary>
-        public int Index;
+        public int Index { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MeshEdge"/> class.

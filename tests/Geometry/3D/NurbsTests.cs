@@ -13,8 +13,13 @@ namespace AR_Lib.Tests
         {
             var m = new Matrix<Point3d>(size);
             for (int i = 0; i < size; i++)
+            {
                 for (int j = 0; j < size; j++)
+                {
                     m[i, j] = new Point3d(i, j, 0);
+                }
+            }
+
             return m;
         }
 
@@ -22,7 +27,7 @@ namespace AR_Lib.Tests
         [InlineData(0.0, 0.0)]
         public void Decasteljau2_Works(double u, double v)
         {
-            var n = 5;
+            const int n = 5;
             var points = FlatGrid(n);
             var pt = NurbsCalculator.DeCasteljau2(points, 3, 3, u, v);
 
@@ -50,7 +55,7 @@ namespace AR_Lib.Tests
             double[] U3 = NurbsCalculator.CreateUnitKnotVector(3, 3);
             var watch = new Stopwatch();
             watch.Start();
-            int n = 100;
+            const int n = 100;
             for (int i = 0; i <= n; i++)
             {
                 var pt = NurbsCalculator.CurvePoint(3, 1, U, new Point3d[] { p0, p1, p2, p3 }, (double)i / n);
@@ -63,19 +68,14 @@ namespace AR_Lib.Tests
             }
             watch.Stop();
             Console.WriteLine(watch.Elapsed);
-
         }
 
         [Fact]
         public void TestKnotVectore()
         {
-            //Given
             var U = NurbsCalculator.CreateUnitKnotVector(3, 1);
             var U2 = NurbsCalculator.CreateUnitKnotVector(3, 2);
             var U3 = NurbsCalculator.CreateUnitKnotVector(3, 3);
-            //When
-
-            //Then
         }
     }
 }

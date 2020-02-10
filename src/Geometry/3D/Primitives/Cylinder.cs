@@ -45,10 +45,10 @@ namespace AR_Lib.Geometry
         public double Height => HeightRange.Length;
 
         /// <inheritdoc/>
-        public Interval DomainU => throw new System.NotImplementedException();
+        public Interval DomainU { get; set; }
 
         /// <inheritdoc/>
-        public Interval DomainV => throw new System.NotImplementedException();
+        public Interval DomainV { get; set; }
 
         /// <inheritdoc/>
         public Plane FrameAt(double u, double v)

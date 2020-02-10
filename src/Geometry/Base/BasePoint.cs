@@ -133,10 +133,10 @@ namespace AR_Lib.Geometry
         /// <param name="point">Point to substract.</param>
         public void Substract(BasePoint point)
         {
-            x -= point.X;
-            y -= point.Y;
-            z -= point.Z;
-            isUnset = false;
+            this.x -= point.X;
+            this.y -= point.Y;
+            this.z -= point.Z;
+            this.isUnset = false;
         }
 
         /// <summary>
@@ -145,9 +145,9 @@ namespace AR_Lib.Geometry
         /// <param name="scalar">Number to multiply by.</param>
         public void Multiply(double scalar)
         {
-            x *= scalar;
-            y *= scalar;
-            z *= scalar;
+            this.x *= scalar;
+            this.y *= scalar;
+            this.z *= scalar;
         }
 
         /// <summary>

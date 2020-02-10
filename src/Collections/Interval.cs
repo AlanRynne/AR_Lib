@@ -60,7 +60,7 @@ namespace AR_Lib.Collections
         /// <summary>
         /// Gets a value indicating whether an interval has it's direciton inverted (Start > End).
         /// </summary>
-        public bool HasInvertedDirection => this.Length < 0 ? true : false;
+        public bool HasInvertedDirection => this.Length < 0;
 
         /// <summary>
         /// Crop a number so that it's contained on the given interval.
@@ -97,7 +97,7 @@ namespace AR_Lib.Collections
         /// </summary>
         /// <param name="number">Number to crop.</param>
         /// <returns>Cropped number.</returns>
-        public double Crop(double number) => Interval.CropNumber(number, this);
+        public double Crop(double number) => CropNumber(number, this);
 
         /// <summary>
         /// Remap a number from this interval to a given one.
@@ -105,7 +105,7 @@ namespace AR_Lib.Collections
         /// <param name="number">Number to remap.</param>
         /// <param name="toInterval">Interval to remap number to.</param>
         /// <returns>Remapped number inside given interval.</returns>
-        public double Remap(double number, Interval toInterval) => Interval.RemapNumber(number, this, toInterval);
+        public double Remap(double number, Interval toInterval) => RemapNumber(number, this, toInterval);
 
         /// <summary>
         /// Remap a number from this interval to a unit interval.
@@ -119,7 +119,7 @@ namespace AR_Lib.Collections
         /// </summary>
         /// <param name="number">Number to remap.</param>
         /// <returns>Remapped number.</returns>
-        public double RemapFromUnit(double number) => Interval.Unit.Remap(number, this);
+        public double RemapFromUnit(double number) => Unit.Remap(number, this);
 
         /// <summary>
         /// Check if a number is contained inside this interval.
@@ -130,7 +130,7 @@ namespace AR_Lib.Collections
         {
             double min = this.HasInvertedDirection ? this.End : this.Start;
             double max = this.HasInvertedDirection ? this.Start : this.End;
-            return (min < number && number < max) ? true : false;
+            return min < number && number < max;
         }
 
         /// <summary>

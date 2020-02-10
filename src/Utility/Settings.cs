@@ -8,7 +8,7 @@ namespace AR_Lib
     /// <summary>
     /// Multi-layered struct that holds the library settings.
     /// </summary>
-    public class Settings
+    public static class Settings
     {
         /// <summary>
         /// Gets the minimum value allowed when using this library.

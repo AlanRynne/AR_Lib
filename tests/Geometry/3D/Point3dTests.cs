@@ -8,9 +8,9 @@ namespace AR_Lib.Tests.Geometry
         [Fact]
         public void CanBe_Added()
         {
-            var a = 3.3;
-            var b = 2.2;
-            var c = 4.11;
+            const double a = 3.3;
+            const double b = 2.2;
+            const double c = 4.11;
             var ptA = new Point3d(a, b, c);
             var ptB = new Point3d(b, c, a);
             var s = ptA - ptB;
@@ -21,9 +21,9 @@ namespace AR_Lib.Tests.Geometry
         [Fact]
         public void CanBe_Substracted()
         {
-            var a = 3.3;
-            var b = 2.2;
-            var c = 4.11;
+            const double a = 3.3;
+            const double b = 2.2;
+            const double c = 4.11;
             var ptA = new Point3d(a, b, c);
             var ptB = new Point3d(b, c, a);
             var ptResult = new Point3d(a - b, b - c, c - a);
@@ -33,10 +33,10 @@ namespace AR_Lib.Tests.Geometry
         [Fact]
         public void CanBe_Multiplied()
         {
-            var a = 3.3;
-            var b = 2.2;
-            var c = 4.11;
-            var m = 1.45;
+            const double a = 3.3;
+            const double b = 2.2;
+            const double c = 4.11;
+            const double m = 1.45;
             var ptA = new Point3d(a, b, c);
             var ptResult = new Point3d(a * m, b * m, c * m);
             Assert.True(ptA * m == ptResult);
@@ -45,10 +45,10 @@ namespace AR_Lib.Tests.Geometry
         [Fact]
         public void CanBe_Divided()
         {
-            var a = 3.3;
-            var b = 2.2;
-            var c = 4.11;
-            var m = 1.45;
+            const double a = 3.3;
+            const double b = 2.2;
+            const double c = 4.11;
+            const double m = 1.45;
             var ptA = new Point3d(a, b, c);
             var ptResult = new Point3d(a / m, b / m, c / m);
             Assert.True(ptA / m == ptResult);
@@ -57,21 +57,20 @@ namespace AR_Lib.Tests.Geometry
         [Fact]
         public void CanBe_Negated()
         {
-            var a = 3.3;
-            var b = 2.2;
-            var c = 4.11;
+            const double a = 3.3;
+            const double b = 2.2;
+            const double c = 4.11;
             var ptA = new Point3d(a, b, c);
             var ptResult = new Point3d(-a, -b, -c);
             Assert.True(-ptA == ptResult);
         }
 
-
         [Theory]
         [ClassData(typeof(Point3dEqualDataset))]
         public void EqualsAndHashCode_HaveConsistentResults(Point3d pt, Point3d pt2)
         {
-            bool b1 = pt == pt2;
-            bool b2 = pt.GetHashCode() == pt2.GetHashCode();
+            var b1 = pt == pt2;
+            var b2 = pt.GetHashCode() == pt2.GetHashCode();
 
             Assert.True(b1 && b1 == b2);
         }

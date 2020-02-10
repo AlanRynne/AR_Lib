@@ -133,8 +133,8 @@ namespace AR_Lib.LinearAlgebra
         /// <summary>
         /// Multiplies a complex number with a number.
         /// </summary>
-        /// <param name="v">Multiplicand.</param>
         /// <param name="s">Multiplier.</param>
+        /// <param name="v">Multiplicand.</param>
         public static Complex operator *(double s, Complex v) => v.TimesReal(s);
 
         /// <summary>

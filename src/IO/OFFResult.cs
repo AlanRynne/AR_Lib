@@ -8,11 +8,11 @@ namespace AR_Lib.IO
     public enum OFFResult
     {
         OK,
-        Incorrect_Format,
-        Incorrect_Vertex,
-        Incorrect_Face,
-        Non_Matching_Vertices_Size,
-        Non_Matching_Faces_Size,
-        File_Not_Found,
+        IncorrectFormat,
+        IncorrectVertex,
+        IncorrectFace,
+        NonMatchingVerticesSize,
+        NonMatchingFacesSize,
+        FileNotFound,
     }
 }

@@ -21,13 +21,10 @@ namespace AR_Lib.Geometry
         public double Radius { get; set; }
 
         /// <inheritdoc/>
-        public Interval DomainU => throw new System.NotImplementedException();
+        public Interval DomainU { get; set; }
 
         /// <inheritdoc/>
-        public Interval DomainV => throw new System.NotImplementedException();
-
-        /// <inheritdoc/>
-        public double DistanceTo(Sphere sphere) => DistanceTo(sphere.Plane.Origin) - sphere.Radius;
+        public Interval DomainV { get; set; }
 
         /// <inheritdoc/>
         public double DistanceTo(Point3d point) => Plane.DistanceTo(point) - Radius;

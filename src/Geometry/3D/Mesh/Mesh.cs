@@ -11,34 +11,34 @@ namespace AR_Lib.HalfEdgeMesh
     public class Mesh
     {
         /// <summary>
-        /// The vertices of the mesh.
+        /// Gets or sets the vertices of the mesh.
         /// </summary>
-        public List<MeshVertex> Vertices;
+        public List<MeshVertex> Vertices { get; set; }
 
         /// <summary>
-        /// The edges of the mesh.
+        /// Gets or sets the edges of the mesh.
         /// </summary>
-        public List<MeshEdge> Edges;
+        public List<MeshEdge> Edges { get; set; }
 
         /// <summary>
-        /// The faces of the mesh.
+        /// Gets or sets the faces of the mesh.
         /// </summary>
-        public List<MeshFace> Faces;
+        public List<MeshFace> Faces { get; set; }
 
         /// <summary>
-        /// The corners of the mesh.
+        /// Gets or sets the corners of the mesh.
         /// </summary>
-        public List<MeshCorner> Corners;
+        public List<MeshCorner> Corners { get; set; }
 
         /// <summary>
-        /// The half-edges of the mesh.
+        /// Gets or sets the half-edges of the mesh.
         /// </summary>
-        public List<MeshHalfEdge> HalfEdges;
+        public List<MeshHalfEdge> HalfEdges { get; set; }
 
         /// <summary>
-        /// The boundaries of the mesh.
+        /// Gets or sets the boundaries of the mesh.
         /// </summary>
-        public List<MeshFace> Boundaries;
+        public List<MeshFace> Boundaries { get; set; }
 
         /// <summary>
         /// Gets the euler characteristic of the mesh.
@@ -257,37 +257,19 @@ namespace AR_Lib.HalfEdgeMesh
         /// Check if a mesh is triangular.
         /// </summary>
         /// <returns>Returns true if all faces are triangular.</returns>
-        public bool IsTriangularMesh()
-        {
-            if (IsMesh() == IsMeshResult.Triangular)
-                return true;
-            else
-                return false;
-        }
+        public bool IsTriangularMesh() => IsMesh() == IsMeshResult.Triangular;
 
         /// <summary>
         /// Check if a mesh is quad.
         /// </summary>
         /// <returns>Returns true if all faces are quads.</returns>
-        public bool IsQuadMesh()
-        {
-            if (IsMesh() == IsMeshResult.Quad)
-                return true;
-            else
-                return false;
-        }
+        public bool IsQuadMesh() => IsMesh() == IsMeshResult.Quad;
 
         /// <summary>
         /// Check if a mesh is n-gonal.
         /// </summary>
         /// <returns>Returns true if the mesh contains ANY ngons.</returns>
-        public bool IsNgonMesh()
-        {
-            if (IsMesh() == IsMeshResult.Ngon)
-                return true;
-            else
-                return false;
-        }
+        public bool IsNgonMesh() => IsMesh() == IsMeshResult.Ngon;
 
         /// <summary>
         /// Returns an enum corresponding to the mesh face topology  (triangular, quad or ngon).
@@ -322,7 +304,7 @@ namespace AR_Lib.HalfEdgeMesh
         /// <returns>Mesh description as text.</returns>
         public string GetMeshInfo()
         {
-            string head = "--- Mesh Info ---\n";
+            const string head = "--- Mesh Info ---\n";
 
             string vef = "V: " + Vertices.Count + "; F: " + Faces.Count + "; E:" + Edges.Count + "\n";
             string hec = "Half-edges: " + HalfEdges.Count + "; Corners: " + Corners.Count + "\n";
@@ -337,7 +319,7 @@ namespace AR_Lib.HalfEdgeMesh
             string quads = "Quad faces: " + faceData.Quads + "\n";
             string ngons = "Ngon faces: " + faceData.Ngons + "\n";
 
-            string tail = "-----       -----\n\n";
+            const string tail = "-----       -----\n\n";
 
             return head + vef + hec + bounds + euler + isoVert + isoFace + manifold + triangles + quads + ngons + tail;
         }
@@ -429,7 +411,7 @@ namespace AR_Lib.HalfEdgeMesh
                         h.Edge = twin.Edge;
                         hasTwinHalfEdge[h] = true;
                         hasTwinHalfEdge[twin] = true;
-                        edgeCount[key] += 1;
+                        edgeCount[key]++;
                     }
                     else
                     {

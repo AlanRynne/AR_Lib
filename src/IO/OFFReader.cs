@@ -6,8 +6,6 @@ using AR_Lib.Geometry;
 
 namespace AR_Lib.IO
 {
-    // OFF format
-
     /// <summary>OFF Reader class.</summary>
     public static class OFFReader
     {
@@ -18,37 +16,45 @@ namespace AR_Lib.IO
 
             // Check if first line states OFF format
             if (lines[0] != "OFF")
-                return OFFResult.Incorrect_Format;
+            {
+                return OFFResult.IncorrectFormat;
+            }
 
             // Get second line and extract number of vertices and faces
-            string[] initialData = lines[1].Split(' ');
+            var initialData = lines[1].Split(' ');
             if (!int.TryParse(initialData[0], out var nVertex))
-                return OFFResult.Incorrect_Format;
+            {
+                return OFFResult.IncorrectFormat;
+            }
+
             if (!int.TryParse(initialData[1], out var nFaces))
-                return OFFResult.Incorrect_Format;
+            {
+                return OFFResult.IncorrectFormat;
+            }
 
             // Check if length of lines correct
             if (nVertex + nFaces + 2 != lines.Length)
-                return OFFResult.Incorrect_Format;
+            {
+                return OFFResult.IncorrectFormat;
+            }
 
             // Iterate through all the lines containing the mesh data
-            int start = 2;
-            List<Point3d> vertices = new List<Point3d>();
-            List<List<int>> faces = new List<List<int>>();
+            const int start = 2;
+            var vertices = new List<Point3d>();
+            var faces = new List<List<int>>();
 
-            for (int i = start; i < lines.Length; i++)
+            for (var i = start; i < lines.Length; i++)
             {
                 if (i < (nVertex + start))
                 {
                     // Extract vertices
-                    List<double> coords = new List<double>();
-                    string[] pointStrings = lines[i].Split(' ');
+                    var coords = new List<double>();
 
                     // Iterate over the string fragments and convert them to numbers
-                    foreach (string ptStr in pointStrings)
+                    foreach (string ptStr in lines[i].Split(' '))
                     {
                         if (!double.TryParse(ptStr, out var ptCoord))
-                            return OFFResult.Incorrect_Vertex;
+                            return OFFResult.IncorrectVertex;
                         coords.Add(ptCoord);
                     }
 
@@ -58,18 +64,23 @@ namespace AR_Lib.IO
                 {
                     // Extract faces
                     // In OFF, faces come with a first number determining the number of vertices in that face
-                    List<int> vertexIndexes = new List<int>();
+                    var vertexIndexes = new List<int>();
 
-                    string[] faceStrings = lines[i].Split(' ');
+                    var faceStrings = lines[i].Split(' ');
 
                     // Get first int that represents vertex count of face
                     if (!int.TryParse(faceStrings[0], out var vertexCount))
-                        return OFFResult.Incorrect_Face;
+                    {
+                        return OFFResult.IncorrectFace;
+                    }
 
                     for (int f = 1; f < faceStrings.Length; f++)
                     {
                         if (!int.TryParse(faceStrings[f], out var vertIndex))
-                            return OFFResult.Incorrect_Face;
+                        {
+                            return OFFResult.IncorrectFace;
+                        }
+
                         vertexIndexes.Add(vertIndex);
                     }
 

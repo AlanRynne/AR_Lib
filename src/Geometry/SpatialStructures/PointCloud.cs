@@ -14,6 +14,6 @@ namespace AR_Lib.SpatialSearch
         /// <summary>
         /// Gets collection of points in the point cloud.
         /// </summary>
-        public List<PointCloudMember> Points { get; private set; }
+        public List<PointCloudMember> Points { get; }
     }
 }

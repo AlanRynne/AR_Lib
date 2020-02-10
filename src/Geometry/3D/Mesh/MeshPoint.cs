@@ -10,24 +10,24 @@ namespace AR_Lib.HalfEdgeMesh
     public class MeshPoint
     {
         /// <summary>
-        /// The index of the face this point lies in.
+        /// Gets or sets the index of the face this point lies in.
         /// </summary>
-        public int FaceIndex;
+        public int FaceIndex { get; set; }
 
         /// <summary>
-        /// The U coordinate at the face.
+        /// Gets or sets the U coordinate at the face.
         /// </summary>
-        public double U;
+        public double U { get; set; }
 
         /// <summary>
-        /// The V coordinate at the face.
+        /// Gets or sets the V coordinate at the face.
         /// </summary>
-        public double V;
+        public double V { get; set; }
 
         /// <summary>
-        /// The W coordinate at the face.
+        /// Gets or sets the W coordinate at the face.
         /// </summary>
-        public double W;
+        public double W { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MeshPoint"/> class.

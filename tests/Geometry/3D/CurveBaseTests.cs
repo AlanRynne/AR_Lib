@@ -15,6 +15,5 @@ namespace AR_Lib.Tests.Geometry
         public abstract void CanGet_BiNormal();
 
         public abstract void CanGet_PerpFrame();
-
     }
 }

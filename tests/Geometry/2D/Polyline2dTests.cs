@@ -8,30 +8,41 @@ namespace AR_Lib.Tests.Geometry
     public class Polyline2dUnitSquareAndSegments : IEnumerable<object[]>
     {
         private readonly Point2d pt1 = new Point2d(0, 0);
+
         private readonly Point2d pt2 = new Point2d(1, 0);
+
         private readonly Point2d pt3 = new Point2d(1, 1);
+
         private readonly Point2d pt4 = new Point2d(0, 1);
+
         public IEnumerator<object[]> GetEnumerator()
         {
             yield return new object[] { new Polyline2d(new List<Point2d> { pt1, pt2, pt3, pt4 }, false), 3 };
             yield return new object[] { new Polyline2d(new List<Point2d> { pt1, pt2, pt3, pt4 }, true), 4 };
         }
+
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 
     public class Polyline2dDataSet : IEnumerable<object[]>
     {
         private readonly Point2d pt1 = new Point2d(0, 0);
+
         private readonly Point2d pt2 = new Point2d(1, 0);
+
         private readonly Point2d pt3 = new Point2d(1, 1);
+
         private readonly Point2d pt4 = new Point2d(0, 1);
+
         public IEnumerator<object[]> GetEnumerator()
         {
             yield return new object[] { new Polyline2d(new List<Point2d> { pt1, pt2, pt3, pt4 }, false) };
             yield return new object[] { new Polyline2d(new List<Point2d> { pt1, pt2, pt3, pt4 }, true) };
         }
+
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
+
     public class Polyline2dTests
     {
         [Theory]
@@ -46,7 +57,6 @@ namespace AR_Lib.Tests.Geometry
         [ClassData(typeof(Polyline2dUnitSquareAndSegments))]
         public void DefaultDomain_IsParametrizedByArcLength(Polyline2d polyline, double expectedLength)
         {
-
             Assert.True(polyline.Domain.End == expectedLength);
         }
 

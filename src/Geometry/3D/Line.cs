@@ -20,12 +20,7 @@ namespace AR_Lib.Geometry
         /// Checks if line is valid.
         /// </summary>
         /// <returns>True if valid.</returns>
-        public override bool CheckValidity()
-        {
-            if (this.Length < Settings.Tolerance)
-                return false;
-            return true;
-        }
+        public override bool CheckValidity() => this.Length >= Settings.Tolerance;
 
         /// <summary>
         /// Computes thepoint at the given parameter.

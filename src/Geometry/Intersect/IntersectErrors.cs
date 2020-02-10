@@ -34,11 +34,15 @@ namespace AR_Lib
 
         public struct IRLineLine
         {
-            public double Distance;
-            public double TA;
-            public double TB;
-            public Point3d PointA;
-            public Point3d PointB;
+            public double Distance { get; set; }
+
+            public double TA { get; set; }
+
+            public double TB { get; set; }
+
+            public Point3d PointA { get; set; }
+
+            public Point3d PointB { get; set; }
         }
     }
 }

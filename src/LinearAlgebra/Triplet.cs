@@ -46,8 +46,10 @@ namespace AR_Lib.LinearAlgebra
 
     public struct TripletData
     {
-        public int Row;
-        public int Column;
-        public double Value;
+        public int Row { get; set; }
+
+        public int Column { get; set; }
+
+        public double Value { get; set; }
     }
 }

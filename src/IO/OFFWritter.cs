@@ -18,7 +18,7 @@ namespace AR_Lib.IO
         {
             string[] offLines = new string[mesh.Vertices.Count + mesh.Faces.Count + 2];
 
-            string offHead = "OFF";
+            const string offHead = "OFF";
             offLines[0] = offHead;
             string offCount = mesh.Vertices.Count + " " + mesh.Faces.Count + " 0";
             offLines[1] = offCount;

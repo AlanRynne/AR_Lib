@@ -128,8 +128,8 @@ namespace AR_Lib.Geometry
         /// <summary>
         /// Multiplies a point with a number.
         /// </summary>
-        /// <param name="point">Point.</param>
         /// <param name="scalar">Number.</param>
+        /// <param name="point">Point.</param>
         /// <returns><see cref="Point3d"/>.</returns>
         public static Point3d operator *(double scalar, Point3d point) => new Point3d(point.X * scalar, point.Y * scalar, point.Z * scalar);
 
@@ -144,8 +144,8 @@ namespace AR_Lib.Geometry
         /// <summary>
         /// Divides a point with a number.
         /// </summary>
-        /// <param name="point">Point.</param>
         /// <param name="scalar">Number.</param>
+        /// <param name="point">Point.</param>
         /// <returns><see cref="Point3d"/>.</returns>
         public static Point3d operator /(double scalar, Point3d point) => new Point3d(point.X / scalar, point.Y / scalar, point.Z / scalar);
 
