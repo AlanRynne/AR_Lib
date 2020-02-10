@@ -1,5 +1,7 @@
 using AR_Lib.Geometry;
 
+#pragma warning disable 1591
+
 namespace AR_Lib
 {
     public static partial class Intersect3D

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+#pragma warning disable 1591
 namespace AR_Lib.LinearAlgebra
 {
     public class Triplet

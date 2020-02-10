@@ -2,30 +2,79 @@
 
 namespace AR_Lib.HalfEdgeMesh
 {
+    /// <summary>
+    /// Represents a mesh half-edge.
+    /// </summary>
     public class MeshHalfEdge
     {
 
-        public MeshVertex Vertex; //Vertex at the base of half-edge
-        public MeshEdge Edge; // Corresponding Edge
-        public MeshFace Face; // Adjacent face
-        public MeshCorner Corner; // Corresponding corner
-        public MeshHalfEdge Next; // Next haf-edge in face
-        public MeshHalfEdge Prev; // Previous half-edge in face
-        public MeshHalfEdge Twin; // Opposite half-edge
-        public bool onBoundary; // Check if it is on boundary or not
+        /// <summary>
+        /// The vertex linked to this half-edge.
+        /// </summary>
+        public MeshVertex Vertex;
+
+        /// <summary>
+        /// The edge linked to this half-edge.
+        /// </summary>
+        public MeshEdge Edge;
+
+        /// <summary>
+        /// The face linked to this half-edge
+        /// </summary>
+        public MeshFace Face;
+
+        /// <summary>
+        /// The corner linked to this half-edge
+        /// </summary>
+        public MeshCorner Corner;
+
+        /// <summary>
+        /// The next half-edge in a face.
+        /// </summary>
+        public MeshHalfEdge Next;
+
+        /// <summary>
+        /// The previous half-edge in a face.
+        /// </summary>
+        public MeshHalfEdge Prev;
+
+        /// <summary>
+        /// The opposite half-edge.
+        /// </summary>
+        public MeshHalfEdge Twin;
+
+        /// <summary>
+        /// Checks if the half-edge lies on a boundary.
+        /// </summary>
+        public bool onBoundary;
+
+        /// <summary>
+        /// The half-edge index.
+        /// </summary>
         public int Index; // Half-edge index
 
-        // Constructor
+        /// <summary>
+        /// Constructs an empty mesh half-edge instance.
+        /// </summary>
         public MeshHalfEdge()
         {
             Index = -1;
         }
 
-        // Calculated fields
+        /// <summary>
+        /// Gets the previous vertex of the half-edge.
+        /// </summary>
         public MeshVertex PreviousVertex => Twin.Vertex;
+
+        /// <summary>
+        /// Gets the opposite face of the half-edge.
+        /// </summary>
         public MeshFace AdjacentFace => Twin.Face;
 
-        // Utility methods
+
+        /// <summary>
+        /// Gets the string representation of the half-edge.
+        /// </summary>
         public override string ToString()
         {
             return "Half-edge " + this.Index;

@@ -1,3 +1,5 @@
+using AR_Lib.Collections;
+
 namespace AR_Lib.Geometry.Interfaces
 {
     /// <summary>
@@ -6,11 +8,23 @@ namespace AR_Lib.Geometry.Interfaces
     public interface ISurface
     {
         /// <summary>
+        /// Gets or sets the domain in the U direction
+        /// </summary>
+        /// <value><see cref="Interval"/></value>
+        Interval DomainU { get; }
+
+        /// <summary>
+        /// Gets or sets the domain in the V direction
+        /// </summary>
+        /// <value><see cref="Interval"/></value>
+        Interval DomainV { get; }
+
+        /// <summary>
         /// Compute a point at the specified surface coordinates.
         /// </summary>
         /// <param name="u">U coordinate</param>
         /// <param name="v">V coordinate</param>
-        /// <returns>3D point.</returns>
+        /// <returns><see cref="Point3d"/></returns>
         Point3d PointAt(double u, double v);
 
         /// <summary>

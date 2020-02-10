@@ -7,10 +7,10 @@ namespace AR_Lib.Tests.Geometry
 {
     public class Polyline2dUnitSquareAndSegments : IEnumerable<object[]>
     {
-        Point2d pt1 = new Point2d(0, 0);
-        Point2d pt2 = new Point2d(1, 0);
-        Point2d pt3 = new Point2d(1, 1);
-        Point2d pt4 = new Point2d(0, 1);
+        private readonly Point2d pt1 = new Point2d(0, 0);
+        private readonly Point2d pt2 = new Point2d(1, 0);
+        private readonly Point2d pt3 = new Point2d(1, 1);
+        private readonly Point2d pt4 = new Point2d(0, 1);
         public IEnumerator<object[]> GetEnumerator()
         {
             yield return new object[] { new Polyline2d(new List<Point2d> { pt1, pt2, pt3, pt4 }, false), 3 };
@@ -21,10 +21,10 @@ namespace AR_Lib.Tests.Geometry
 
     public class Polyline2dDataSet : IEnumerable<object[]>
     {
-        Point2d pt1 = new Point2d(0, 0);
-        Point2d pt2 = new Point2d(1, 0);
-        Point2d pt3 = new Point2d(1, 1);
-        Point2d pt4 = new Point2d(0, 1);
+        private readonly Point2d pt1 = new Point2d(0, 0);
+        private readonly Point2d pt2 = new Point2d(1, 0);
+        private readonly Point2d pt3 = new Point2d(1, 1);
+        private readonly Point2d pt4 = new Point2d(0, 1);
         public IEnumerator<object[]> GetEnumerator()
         {
             yield return new object[] { new Polyline2d(new List<Point2d> { pt1, pt2, pt3, pt4 }, false) };
@@ -56,7 +56,7 @@ namespace AR_Lib.Tests.Geometry
         {
             polyline.Reparametrize();
 
-            Assert.True(polyline.Domain.End == polyline.Segments[polyline.Segments.Count - 1].Domain.End);
+            Assert.True(polyline.Domain.End == polyline.Segments[^1].Domain.End);
             Assert.True(polyline.Domain.End == 1);
         }
     }

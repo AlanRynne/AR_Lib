@@ -10,30 +10,58 @@ namespace AR_Lib
         /// </summary>
         public class MeshEdge
         {
+            /// <summary>
+            /// The half-edge linked to this edge.
+            /// </summary>
             public MeshHalfEdge HalfEdge;
+            /// <summary>
+            /// The index of this Mesh Edge.
+            /// </summary>
             public int Index;
 
+            /// <summary>
+            /// Constructs a new empty Mesh Edge
+            /// </summary>
             public MeshEdge()
             {
                 Index = -1;
             }
 
+            /// <summary>
+            /// Checks if the mesh edge lies on a boundary.
+            /// </summary>
             public bool OnBoundary => (this.HalfEdge.onBoundary || this.HalfEdge.Twin.onBoundary);
 
+            /// <summary>
+            /// Gets the adjacent vertices of this given edge.
+            /// </summary>
+            /// <returns></returns>
             public List<MeshVertex> AdjacentVertices()
             {
-                List<MeshVertex> vertices = new List<MeshVertex>();
-                vertices.Add(this.HalfEdge.Vertex);
-                vertices.Add(this.HalfEdge.Twin.Vertex);
+                List<MeshVertex> vertices = new List<MeshVertex>
+                {
+                    this.HalfEdge.Vertex,
+                    this.HalfEdge.Twin.Vertex
+                };
                 return vertices;
             }
+
+            /// <summary>
+            /// Gets the adjacent faces of this edge.
+            /// </summary>
             public List<MeshFace> AdjacentFaces()
             {
-                List<MeshFace> faces = new List<MeshFace>();
-                faces.Add(this.HalfEdge.AdjacentFace);
-                faces.Add(this.HalfEdge.Twin.AdjacentFace);
+                List<MeshFace> faces = new List<MeshFace>
+                {
+                    this.HalfEdge.AdjacentFace,
+                    this.HalfEdge.Twin.AdjacentFace
+                };
                 return faces;
             }
+
+            /// <summary>
+            /// Gets the adjacent edges of this edge.
+            /// </summary>
             public List<MeshEdge> AdjacentEdges()
             {
                 List<MeshEdge> edges = new List<MeshEdge>();

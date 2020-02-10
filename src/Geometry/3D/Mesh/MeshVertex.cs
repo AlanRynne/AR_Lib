@@ -5,45 +5,77 @@ using AR_Lib.Geometry;
 namespace AR_Lib.HalfEdgeMesh
 {
     /// <summary>
-    /// Vertex class
-    /// Inherits from AR_Point
+    /// Represents a vertex of a mesh.
     /// </summary>
     public class MeshVertex : Point3d
     {
-
-        public MeshHalfEdge HalfEdge; //One of the half-edges connected to the vertex
+        /// <summary>
+        /// The half-edge this vertex is attached to.
+        /// </summary>
+        public MeshHalfEdge HalfEdge;
+        /// <summary>
+        /// The index of the vertex.
+        /// </summary>
         public int Index;
 
+        /// <summary>
+        /// Dictionary of user values
+        /// </summary>
+        /// <value></value>
         public Dictionary<string, double> UserValues
         {
             get
             {
                 // Set private property to auto initialize if null.
-                if (_userValues == null)
+                if (userValues == null)
                     return new Dictionary<string, double>();
                 else
-                    return _userValues;
+                    return userValues;
             }
             set
             {
-                _userValues = value;
+                userValues = value;
             }
         }
 
-        private Dictionary<string, double> _userValues;
+        private Dictionary<string, double> userValues;
 
         // Constructor
-        public MeshVertex() : base() { _userValues = new Dictionary<string, double>(); }
-        public MeshVertex(Point3d pt) : base(pt) { _userValues = new Dictionary<string, double>(); }
-        public MeshVertex(double X, double Y, double Z) : base(X, Y, Z) { _userValues = new Dictionary<string, double>(); }
+
+        /// <summary>
+        /// Constructs an empty mesh vertex.
+        /// </summary>
+        public MeshVertex() : base() { userValues = new Dictionary<string, double>(); }
+
+        /// <summary>
+        /// Constructs a new mesh vertex from a 3D point.
+        /// </summary>
+        /// <param name="pt">Point to copy coordinates from.</param>
+        public MeshVertex(Point3d pt) : base(pt) { userValues = new Dictionary<string, double>(); }
+
+        /// <summary>
+        /// Constructs a new mesh vertex from it's cartesian coordiantes.
+        /// </summary>
+        /// <param name="x">X Coordiante.</param>
+        /// <param name="y">Y Coordinate.</param>
+        /// <param name="z">Z Coordinate.</param>
+        public MeshVertex(double x, double y, double z) : base(x, y, z) { userValues = new Dictionary<string, double>(); }
 
         // Calculate the valence of a vertex
-        public int Degree() => AdjacentHalfEdges().Count;
 
-        // Check if vertex is isolated, meaning corresponding half-edge is null
+        /// <summary>
+        /// Computes the valence of the vertex
+        /// </summary>
+        public int Valence() => AdjacentHalfEdges().Count;
+
+        /// <summary>
+        /// Check if vertex is isolated, meaning corresponding half-edge is null
+        /// </summary>
         public bool IsIsolated() => this.HalfEdge == null;
 
-        // Check if vertex is on mesh boundary
+        /// <summary>
+        /// Check if vertex is on mesh boundary
+        /// </summary>
         public bool OnBoundary()
         {
             foreach (MeshHalfEdge halfEdge in AdjacentHalfEdges())
@@ -54,7 +86,9 @@ namespace AR_Lib.HalfEdgeMesh
             return false;
         }
 
-        // Returns a list with all adjacent HE_HalfEdge of this vertex
+        /// <summary>
+        /// Returns a list with all adjacent HE_HalfEdge of this vertex
+        /// </summary>
         public List<MeshHalfEdge> AdjacentHalfEdges()
         {
             MeshHalfEdge _halfEdge = this.HalfEdge;
@@ -70,7 +104,9 @@ namespace AR_Lib.HalfEdgeMesh
 
         }
 
-        // Returns a list with all adjacent HE_Face of a vertex
+        /// <summary>
+        /// Returns a list with all adjacent HE_Face of a vertex
+        /// </summary>
         public List<MeshFace> AdjacentFaces()
         {
             MeshHalfEdge _halfEdge = this.HalfEdge;
@@ -86,7 +122,9 @@ namespace AR_Lib.HalfEdgeMesh
             return _faces;
         }
 
-        // Returns a list with all the adjacent HE_Vertex of this vertex
+        /// <summary>
+        /// Returns a list with all the adjacent HE_Vertex of this vertex
+        /// </summary>
         public List<MeshVertex> AdjacentVertices()
         {
             List<MeshVertex> _vertices = new List<MeshVertex>();
@@ -100,7 +138,9 @@ namespace AR_Lib.HalfEdgeMesh
             return _vertices;
         }
 
-        // Returns a list with all the adjacent HE_Edge of this vertex
+        /// <summary>
+        /// Returns a list with all the adjacent HE_Edge of this vertex
+        /// </summary>
         public List<MeshEdge> AdjacentEdges()
         {
             List<MeshEdge> _edges = new List<MeshEdge>();
@@ -115,7 +155,9 @@ namespace AR_Lib.HalfEdgeMesh
             return _edges;
         }
 
-        // Returns a list with all the adjacent HE_Corners of this vertex
+        /// <summary>
+        /// Returns a list with all the adjacent HE_Corners of this vertex
+        /// </summary>
         public List<MeshCorner> AdjacentCorners()
         {
             List<MeshCorner> _corners = new List<MeshCorner>();
@@ -131,6 +173,9 @@ namespace AR_Lib.HalfEdgeMesh
             return _corners;
         }
 
+        /// <summary>
+        /// Returns the string representation of this vertex.
+        /// </summary>
         public override string ToString()
         {
             return "V " + Index;

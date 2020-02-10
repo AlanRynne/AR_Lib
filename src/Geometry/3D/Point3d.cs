@@ -1,25 +1,58 @@
 ﻿using System;
-using AR_Lib.HalfEdgeMesh;
 
 namespace AR_Lib
 {
     namespace Geometry
     {
+        /// <summary>
+        /// Represents a 3-dimensional point in cartesian coordinates.
+        /// </summary>
         public class Point3d : BasePoint
         {
             #region Constructors
+
+            /// <summary>
+            /// Constructs an Unset point 3d
+            /// </summary>
+            /// <returns><see cref="Point3d"/></returns>
             public Point3d() : base() { }
 
+            /// <summary>
+            /// Constructs a new point by cartesian coordinates
+            /// </summary>
+            /// <param name="xCoord">X coordinate</param>
+            /// <param name="yCoord">Y coordinate</param>
+            /// <param name="zCoord">Z coordinate</param>
+            /// <returns></returns>
             public Point3d(double xCoord, double yCoord, double zCoord) : base(xCoord, yCoord, zCoord) { }
 
-            public Point3d(Point2d point) { throw new NotImplementedException(); }
+            /// <summary>
+            /// Constructs a new point from a 2-dimensional point.
+            /// </summary>
+            /// <param name="point">2d point to convert.</param>
+            /// <returns><see cref="Point3d"/></returns>
+            public Point3d(Point2d point) : base(point.X, point.Y, 0) { }
 
+            /// <summary>
+            /// Constructs a new point from a 3-dimensional point.
+            /// </summary>
+            /// <param name="point">3d point to copy.</param>
+            /// <returns><see cref="Point3d"/></returns>
             public Point3d(Point3d point) : base(point) { }
 
+            /// <summary>
+            /// Constructs a new point from a 4-dimensional point by dividing the cartesian coordinates by the weight.
+            /// </summary>
+            /// <param name="point">4d point to convert.</param>
+            /// <returns><see cref="Point3d"/></returns>
             public Point3d(Point4d point) : this(point.X / point.Weight, point.Y / point.Weight, point.Z / point.Weight) { }
 
             #endregion
 
+            /// <summary>
+            /// Returns a new Unset point
+            /// </summary>
+            /// <returns><see cref="Point3d"/></returns>
             public static Point3d Unset => new Point3d();
 
             /// Returns a point with X,Y,Z = 0, and Unset = False
@@ -30,46 +63,117 @@ namespace AR_Lib
 
             #region Overriden methods
 
-            public override bool Equals(object obj)
-            {
-                return base.Equals(obj);
-            }
+            /// <inheritdoc/>
+            public override bool Equals(object obj) => base.Equals(obj);
 
-            public override int GetHashCode()
-            {
-                return base.GetHashCode();
-            }
+            /// <inheritdoc/>
+            public override int GetHashCode() => base.GetHashCode();
 
-            public override string ToString()
-            {
-                return "Point3d" + base.ToString();
-            }
+            /// <inheritdoc/>
+            public override string ToString() => "Point3d" + base.ToString();
 
             #endregion
 
             #region Operators
 
+            /// <summary>
+            /// Adds a vector to a point
+            /// </summary>
+            /// <param name="point">Point</param>
+            /// <param name="v">Vector</param>
+            /// <returns><see cref="Point3d"/></returns>
             public static Point3d operator +(Point3d point, Vector3d v) => new Point3d(point.X + v.X, point.Y + v.Y, point.Z + v.Z);
+
+            /// <summary>
+            /// Substracts a point from another point.
+            /// </summary>
+            /// <param name="point">Point A</param>
+            /// <param name="point2">Point B</param>
+            /// <returns><see cref="Point3d"/></returns>
             public static Vector3d operator -(Point3d point, Point3d point2) => new Vector3d(point.X - point2.X, point.Y - point2.Y, point.Z - point2.Z);
+
+            /// <summary>
+            /// Substracts a vector from a point.
+            /// </summary>
+            /// <param name="point">Point</param>
+            /// <param name="vector">Vector</param>
+            /// <returns><see cref="Point3d"/></returns>
             public static Vector3d operator -(Point3d point, Vector3d vector) => new Vector3d(point.X - vector.X, point.Y - vector.Y, point.Z - vector.Z);
 
+            /// <summary>
+            /// Negates a point
+            /// </summary>
+            /// <param name="point">Point</param>
+            /// <returns><see cref="Point3d"/></returns>
             public static Point3d operator -(Point3d point) => new Point3d(-point.X, -point.Y, -point.Z);
 
+            /// <summary>
+            /// Multiplies a point with a number
+            /// </summary>
+            /// <param name="point">Point</param>
+            /// <param name="scalar">Number</param>
+            /// <returns><see cref="Point3d"/></returns>
             public static Point3d operator *(Point3d point, double scalar) => new Point3d(point.X * scalar, point.Y * scalar, point.Z * scalar);
+
+            /// <summary>
+            /// Multiplies a point with a number
+            /// </summary>
+            /// <param name="point">Point</param>
+            /// <param name="scalar">Number</param>
+            /// <returns><see cref="Point3d"/></returns>
             public static Point3d operator *(double scalar, Point3d point) => new Point3d(point.X * scalar, point.Y * scalar, point.Z * scalar);
 
+            /// <summary>
+            /// Divides a point with a number
+            /// </summary>
+            /// <param name="point">Point</param>
+            /// <param name="scalar">Number</param>
+            /// <returns><see cref="Point3d"/></returns>
             public static Point3d operator /(Point3d point, double scalar) => new Point3d(point.X / scalar, point.Y / scalar, point.Z / scalar);
+
+            /// <summary>
+            /// Divides a point with a number
+            /// </summary>
+            /// <param name="point">Point</param>
+            /// <param name="scalar">Number</param>
+            /// <returns><see cref="Point3d"/></returns>
             public static Point3d operator /(double scalar, Point3d point) => new Point3d(point.X / scalar, point.Y / scalar, point.Z / scalar);
 
+            /// <summary>
+            /// Checks equality between two points.
+            /// </summary>
+            /// <param name="point">Point A</param>
+            /// <param name="point2">Point B</param>
+            /// <returns><see cref="Point3d"/></returns>
             public static bool operator ==(Point3d point, Point3d point2) => point.Equals(point2);
+
+            /// <summary>
+            /// Checks inequality between two points.
+            /// </summary>
+            /// <param name="point">Point A</param>
+            /// <param name="point2">Point B</param>
+            /// <returns><see cref="Point3d"/></returns>
             public static bool operator !=(Point3d point, Point3d point2) => !point.Equals(point2);
 
 
             // Implicit conversions
+
+            /// <summary>
+            /// Explicit conversion from vector to point.
+            /// </summary>
+            /// <param name="v">3d Vector to convert.</param>
             public static explicit operator Point3d(Vector3d v) => new Point3d(v.X, v.Y, v.Z);
+
+            /// <summary>
+            /// Implicit conversion from point to vector
+            /// </summary>
+            /// <param name="pt">3d Point to convert.</param>
             public static implicit operator Vector3d(Point3d pt) => new Vector3d(pt.X, pt.Y, pt.Z);
 
-            // Explicit conversions
+            /// <summary>
+            /// Explicit conversion from 4-dimensional point to 3-dimensional point. (X/W,Y/W,Z/W)
+            /// </summary>
+            /// <param name="point">3d Point to convert.</param>
             public static explicit operator Point3d(Point4d point) => new Point3d(point);
 
             #endregion

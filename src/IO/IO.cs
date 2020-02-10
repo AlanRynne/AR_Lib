@@ -6,11 +6,12 @@ using System.Collections;
 using AR_Lib.Geometry;
 using AR_Lib.HalfEdgeMesh;
 
+#pragma warning disable 1591
+
 namespace AR_Lib.IO
 {
     #region To/From Files
 
-    /// CSV format
     public static class CSVReader { }
     public static class CSVWritter { }
 
@@ -19,9 +20,9 @@ namespace AR_Lib.IO
     /// <summary>OFF Reader class</summary>
     public static class OFFReader
     {
-        public static OFFResult ReadMeshFromFile(string FilePath, out OFFMeshData data)
+        public static OFFResult ReadMeshFromFile(string filePath, out OFFMeshData data)
         {
-            string[] lines = File.ReadAllLines(FilePath);
+            string[] lines = File.ReadAllLines(filePath);
             data = new OFFMeshData();
             // Check if first line states OFF format
             if (lines[0] != "OFF")

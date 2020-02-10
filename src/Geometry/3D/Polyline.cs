@@ -1,15 +1,22 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace AR_Lib.Geometry
 {
-
-    public class Polyline : BaseCurve
+    /// <summary>
+    /// Represents a polyline of 3-dimensional points.
+    /// </summary>
+    public class Polyline : BaseCurve, IEnumerable<Point3d>
     {
-        private List<Point3d> knots;
+        private readonly List<Point3d> knots;
         private List<Line> segments;
         private bool segmentsNeedUpdate;
 
+        /// <summary>
+        /// Gets the segment lines of the polyline
+        /// </summary>
+        /// <value><see cref="Line"/></value>
         public List<Line> Segments
         {
             get
@@ -19,41 +26,68 @@ namespace AR_Lib.Geometry
                 return segments;
             }
         }
-        public bool IsClosed => knots[0] == knots[knots.Count - 1];
-        public bool IsUnset { get; }
+        /// <summary>
+        /// Checks if the polyline is closed (first point == last point)
+        /// </summary>
+        public bool IsClosed => knots[0] == knots[^1];
+
+        /// <summary>
+        /// Check if the polyline is unset
+        /// </summary>
+        public bool IsUnset => knots.Count == 0;
 
         #region Constructors
 
+        /// <summary>
+        /// Constructs an empty polyline.
+        /// </summary>
         public Polyline()
         {
             knots = new List<Point3d>();
             segments = new List<Line>();
-            IsUnset = true;
             segmentsNeedUpdate = false;
         }
+
+        /// <summary>
+        /// Constructs a new polyline from a list of points.
+        /// </summary>
+        /// <param name="knots">List of points</param>
         public Polyline(List<Point3d> knots)
         {
             this.knots = knots;
             segments = new List<Line>();
             segmentsNeedUpdate = true;
-            IsUnset = false;
         }
 
         #endregion
 
         #region Polyline specific methods
 
+        /// <summary>
+        /// Add a new knot vertex at the end of the polyline
+        /// </summary>
+        /// <param name="knot">Point to add</param>
         public void AddKnot(Point3d knot)
         {
             knots.Add(knot); // Add knot to list
             segmentsNeedUpdate = true;
         }
+
+        /// <summary>
+        /// Add a new knot vertex at the specified index.
+        /// </summary>
+        /// <param name="knot">Point to add.</param>
+        /// <param name="index">Location to add at.</param>
         public void AddKnot(Point3d knot, int index)
         {
             knots.Insert(index, knot); // Add knot to list
             segmentsNeedUpdate = true;
 
         }
+        /// <summary>
+        /// Delete a specific knot if it exists in the polyline.
+        /// </summary>
+        /// <param name="knot">Point to delete.</param>
         public void RemoveKnot(Point3d knot)
         {
             if (knots.Contains(knot))
@@ -63,7 +97,10 @@ namespace AR_Lib.Geometry
             }
 
         }
-
+        /// <summary>
+        /// Delete a knot at a specific index.
+        /// </summary>
+        /// <param name="index">Index to delete knot at.</param>
         public void RemoveKnot(int index)
         {
             if (IsUnset)
@@ -72,15 +109,18 @@ namespace AR_Lib.Geometry
                 throw new IndexOutOfRangeException("Knot index must be within the Knot list count");
 
         }
+
         private void RebuildSegments()
         {
             segments = new List<Line>(knots.Count - 1);
             double t = 0;
             for (int i = 1; i < knots.Count; i++)
             {
-                Line l = new Line(knots[i - 1], knots[i]);
-                // Assign parameter values
-                l.T0 = t;
+                Line l = new Line(knots[i - 1], knots[i])
+                {
+                    // Assign parameter values
+                    T0 = t
+                };
                 t += l.Length;
                 l.T1 = t;
                 // Add segment to list.
@@ -91,11 +131,23 @@ namespace AR_Lib.Geometry
         #endregion
 
         #region  Overriden Methods
+
+        /// <inheritdoc/>
         public override Vector3d BinormalAt(double t) => throw new NotImplementedException();
+
+        /// <inheritdoc/>
         public override Vector3d NormalAt(double t) => throw new NotImplementedException();
+
+        /// <inheritdoc/>
         public override Point3d PointAt(double t) => throw new NotImplementedException();
+
+        /// <inheritdoc/>
         public override Vector3d TangentAt(double t) => throw new NotImplementedException();
+
+        /// <inheritdoc/>
         public override Plane FrameAt(double t) => throw new NotImplementedException();
+
+        /// <inheritdoc/>
         protected override double ComputeLength()
         {
             double length = 0;
@@ -103,7 +155,13 @@ namespace AR_Lib.Geometry
             return length;
         }
 
+        /// <inheritdoc/>
         public override bool CheckValidity() => throw new NotImplementedException();
+
+        /// <inheritdoc/>
+        public IEnumerator<Point3d> GetEnumerator() => ((IEnumerable<Point3d>)knots).GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable<Point3d>)knots).GetEnumerator();
+
         #endregion
 
     }

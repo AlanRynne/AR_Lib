@@ -7,24 +7,49 @@ using AR_Lib.LinearAlgebra;
 
 namespace AR_Lib.Geometry
 {
+    /// <summary>
+    /// Represents a 4-dimensional point.
+    /// </summary>
     public class Point4d : BasePoint
     {
+
+        /// <summary>
+        /// Gets or sets the weight of this point.
+        /// </summary>
         public double Weight { get => weight; set { weight = value; if (isUnset) isUnset = false; } }
 
         private double weight;
 
         #region Constructors
 
+        /// <summary>
+        /// Constructs an empty 4-dimensional point.
+        /// </summary>
+        /// <returns>Point with all values to zero.</returns>
         public Point4d() : base()
         {
             weight = 0;
         }
 
+        /// <summary>
+        /// Constructs a 4-dimensional point by cartesian coordinates and weight.
+        /// </summary>
+        /// <param name="x">X Coordinate.</param>
+        /// <param name="y">Y Coordinate.</param>
+        /// <param name="z">Z Coordinate.</param>
+        /// <param name="w">Weight.</param>
+        /// <returns>New 4-dimensional point with the specified values.</returns>
         public Point4d(double x, double y, double z, double w) : base(x, y, z)
         {
             weight = w;
         }
 
+        /// <summary>
+        /// Constructs a 4-dimensional point from a 3-dimensiona point and a weight.
+        /// </summary>
+        /// <param name="pt">Point</param>
+        /// <param name="w">Weight</param>
+        /// <returns>New 4-dimensional point with the specified values.</returns>
         public Point4d(Point3d pt, double w) : base(pt)
         {
             weight = w;
@@ -34,26 +59,41 @@ namespace AR_Lib.Geometry
 
         #region Operators
 
+        /// <inheritdoc/>
         public static Point4d operator +(Point4d point, Point4d point2) => new Point4d(point.X + point2.X, point.Y + point2.Y, point.Z + point2.Z, point.Weight + point2.Weight);
+
+        /// <inheritdoc/>
         public static Point4d operator -(Point4d point, Point4d point2) => new Point4d(point.X - point2.X, point.Y - point2.Y, point.Z - point2.Z, point.Weight - point2.Weight);
 
+        /// <inheritdoc/>
         public static Point4d operator -(Point4d point) => new Point4d(-point.X, -point.Y, -point.Z, point.Weight);
 
+        /// <inheritdoc/>
         public static Point4d operator *(Point4d point, double scalar) => new Point4d(point.X * scalar, point.Y * scalar, point.Z * scalar, point.Weight * scalar);
+
+        /// <inheritdoc/>
         public static Point4d operator *(double scalar, Point4d point) => new Point4d(point.X * scalar, point.Y * scalar, point.Z * scalar, point.Weight * scalar);
 
+        /// <inheritdoc />
         public static Point4d operator /(Point4d point, double scalar) => new Point4d(point.X / scalar, point.Y / scalar, point.Z / scalar, point.Weight / scalar);
+
+        /// <inheritdoc/>
         public static Point4d operator /(double scalar, Point4d point) => new Point4d(point.X / scalar, point.Y / scalar, point.Z / scalar, point.Weight / scalar);
 
+        /// <inheritdoc />
         public static bool operator ==(Point4d point, Point4d point2) => point.Equals(point2);
+
+        /// <inheritdoc/>
         public static bool operator !=(Point4d point, Point4d point2) => !point.Equals(point2);
 
+        /// <inheritdoc/>
         public static Point4d operator +(Point4d point, Vector3d v) => new Point4d(point.X + v.X, point.Y + v.Y, point.Z + v.Z, point.Weight);
 
         #endregion
 
         #region Overriden methods
 
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj is Point4d pt)
@@ -65,6 +105,7 @@ namespace AR_Lib.Geometry
 
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             //TODO: Non consistent getHashCode implementation

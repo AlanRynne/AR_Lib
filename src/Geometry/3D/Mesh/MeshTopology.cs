@@ -3,14 +3,22 @@ using System.Collections.Generic;
 
 namespace AR_Lib.HalfEdgeMesh
 {
+    /// <summary>
+    /// Topology exporer for meshes. Contains all methods to explore mesh connections between members.
+    /// </summary>
     public class MeshTopology
     {
         // Per Vertex adjacency index lists
         // Returns 2 dimensional array: 1 array per vertex index containing an array with the corresponding adjacent member index
-        private Mesh mesh;
-        public MeshTopology(Mesh _mesh)
+        private readonly Mesh mesh;
+
+        /// <summary>
+        /// Construct the topology for a specific mesh.
+        /// </summary>
+        /// <param name="mesh">Mesh to construct topology connections from.</param>
+        public MeshTopology(Mesh mesh)
         {
-            mesh = _mesh;
+            this.mesh = mesh;
 
             VertexVertex = new Dictionary<int, List<int>>();
             VertexFaces = new Dictionary<int, List<int>>();
@@ -23,18 +31,50 @@ namespace AR_Lib.HalfEdgeMesh
             EdgeEdge = new Dictionary<int, List<int>>();
         }
 
+        /// <summary>
+        /// Vertex-Vertex topological connections.
+        /// </summary>
         public Dictionary<int, List<int>> VertexVertex;
+        /// <summary>
+        /// Vertex-Face topological connections.
+        /// </summary>
         public Dictionary<int, List<int>> VertexFaces;
+        /// <summary>
+        /// Vertex-Edge topological connections.
+        /// </summary>
         public Dictionary<int, List<int>> VertexEdges;
 
+        /// <summary>
+        /// Edge-Edge topological connections.
+        /// </summary>
         public Dictionary<int, List<int>> EdgeEdge;
+
+        /// <summary>
+        /// Edge-Vertex topological connections.
+        /// </summary>
         public Dictionary<int, List<int>> EdgeVertex;
+
+        /// <summary>
+        /// Edge-Face topological connections.
+        /// </summary>
         public Dictionary<int, List<int>> EdgeFace;
 
+        /// <summary>
+        /// Face-Vertex topological connections.
+        /// </summary>
         public Dictionary<int, List<int>> FaceVertex;
+        /// <summary>
+        /// Face-Edge topological connections.
+        /// </summary>
         public Dictionary<int, List<int>> FaceEdge;
+        /// <summary>
+        /// Face-Face topological connections.
+        /// </summary>
         public Dictionary<int, List<int>> FaceFace;
 
+        /// <summary>
+        /// Computes vertex adjacency for the whole mesh and stores it in the appropriate dictionaries.
+        /// </summary>
         public void ComputeVertexAdjacency()
         {
             foreach (MeshVertex vertex in mesh.Vertices)
@@ -75,6 +115,9 @@ namespace AR_Lib.HalfEdgeMesh
             }
         }
 
+        /// <summary>
+        /// Computes face adjacency for the whole mesh and stores it in the appropriate dictionaries.
+        /// </summary>
         public void ComputeFaceAdjacency()
         {
             foreach (MeshFace face in mesh.Faces)
@@ -115,6 +158,9 @@ namespace AR_Lib.HalfEdgeMesh
             }
         }
 
+        /// <summary>
+        /// Computes edge adjacency for the whole mesh and stores it in the appropriate dictionaries.
+        /// </summary>
         public void ComputeEdgeAdjacency()
         {
             foreach (MeshEdge edge in mesh.Edges)
@@ -152,6 +198,10 @@ namespace AR_Lib.HalfEdgeMesh
             }
         }
 
+        /// <summary>
+        /// Gets the string representation of a given topology dictionary.
+        /// </summary>
+        /// <param name="dict">Dictionary to convert.</param>
         public string TopologyDictToString(Dictionary<int, List<int>> dict)
         {
             string finalString = "";

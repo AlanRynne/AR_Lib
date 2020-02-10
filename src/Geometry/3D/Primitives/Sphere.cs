@@ -1,34 +1,43 @@
+using AR_Lib.Collections;
 using AR_Lib.Geometry.Interfaces;
 
 namespace AR_Lib.Geometry
 {
+    /// <summary>
+    /// Represents a spherical surface
+    /// </summary>
     public class Sphere : ISurface
     {
-        public Point3d Origin { get; set; }
+        /// <summary>
+        /// Gets or sets the base plane of the sphere.
+        /// </summary>
+        /// <value><see cref="Plane"/></value>
+        public Plane Plane { get; set; }
+        /// <summary>
+        /// Gets or sets the radius of the sphere.
+        /// </summary>
+        /// <value><see cref="double"/></value>
         public double Radius { get; set; }
 
-        public double DistanceTo(Sphere sphere)
-        {
-            return DistanceTo(sphere.Origin) - sphere.Radius;
-        }
-        public double DistanceTo(Point3d point)
-        {
-            return Origin.DistanceTo(point) - Radius;
-        }
+        /// <inheritdoc/>
+        public Interval DomainU => throw new System.NotImplementedException();
 
-        public Plane FrameAt(double u, double v)
-        {
-            throw new System.NotImplementedException();
-        }
+        /// <inheritdoc/>
+        public Interval DomainV => throw new System.NotImplementedException();
 
-        public Vector3d NormalAt(double u, double v)
-        {
-            throw new System.NotImplementedException();
-        }
+        /// <inheritdoc/>
+        public double DistanceTo(Sphere sphere) => DistanceTo(sphere.Plane.Origin) - sphere.Radius;
 
-        public Point3d PointAt(double u, double v)
-        {
-            throw new System.NotImplementedException();
-        }
+        /// <inheritdoc/>
+        public double DistanceTo(Point3d point) => Plane.DistanceTo(point) - Radius;
+
+        /// <inheritdoc/>
+        public Plane FrameAt(double u, double v) => throw new System.NotImplementedException();
+
+        /// <inheritdoc/>
+        public Vector3d NormalAt(double u, double v) => throw new System.NotImplementedException();
+
+        /// <inheritdoc/>
+        public Point3d PointAt(double u, double v) => throw new System.NotImplementedException();
     }
 }

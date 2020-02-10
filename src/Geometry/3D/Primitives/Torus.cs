@@ -1,9 +1,19 @@
+using AR_Lib.Collections;
 using AR_Lib.Geometry.Interfaces;
 
 namespace AR_Lib.Geometry.Primitives
 {
+    /// <summary>
+    /// Represents a toroidal surface.
+    /// </summary>
     public class Torus : ISurface
     {
+        /// <summary>
+        /// Constructs a new torus from a plane and two radii.
+        /// </summary>
+        /// <param name="plane">The torus base plane</param>
+        /// <param name="majorRadius">The torus major radius</param>
+        /// <param name="minorRadius">The torus minor radius</param>
         public Torus(Plane plane, double majorRadius, double minorRadius)
         {
             Plane = plane;
@@ -11,25 +21,37 @@ namespace AR_Lib.Geometry.Primitives
             MinorRadius = minorRadius;
         }
 
+        /// <summary>
+        /// Gets or sets the torus base plane.
+        /// </summary>
+        /// <value><see cref="Plane"/></value>
         public Plane Plane { get; set; }
 
+        /// <summary>
+        /// Gets or sets the torus major radius
+        /// </summary>
+        /// <value><see cref="double"/></value>
         public double MajorRadius { get; set; }
 
+        /// <summary>
+        /// Gets or sets the torus minor radius.
+        /// </summary>
+        /// <value><see cref="double"/></value>
         public double MinorRadius { get; set; }
 
-        public Plane FrameAt(double u, double v)
-        {
-            throw new System.NotImplementedException();
-        }
+        /// <inheritdoc/>
+        public Interval DomainU => throw new System.NotImplementedException();
 
-        public Vector3d NormalAt(double u, double v)
-        {
-            throw new System.NotImplementedException();
-        }
+        /// <inheritdoc/>
+        public Interval DomainV => throw new System.NotImplementedException();
 
-        public Point3d PointAt(double u, double v)
-        {
-            throw new System.NotImplementedException();
-        }
+        /// <inheritdoc/>
+        public Plane FrameAt(double u, double v) => throw new System.NotImplementedException();
+
+        /// <inheritdoc/>
+        public Vector3d NormalAt(double u, double v) => throw new System.NotImplementedException();
+
+        /// <inheritdoc/>
+        public Point3d PointAt(double u, double v) => throw new System.NotImplementedException();
     }
 }

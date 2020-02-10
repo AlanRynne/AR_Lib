@@ -1,38 +1,34 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-
-using AR_Lib.Geometry;
-
+﻿using System.Collections.Generic;
+#pragma warning disable 1591
 namespace AR_Lib.Geometry
 {
-
-    // Excemptions
-    public class InvalidCurveException : Exception
-    {
-        public InvalidCurveException()
-        {
-        }
-
-        public InvalidCurveException(string message) : base(message)
-        {
-        }
-
-        public InvalidCurveException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
-
-    }
-
+    /// <summary>
+    /// Represents a generic curve. This class is abstract and all curve classes should inherit from it.
+    /// </summary>
     public abstract class BaseCurve
     {
         // Public properties
-        public virtual Point3d StartPoint { get => _startPoint; set => _startPoint = value; }
-        public virtual Point3d EndPoint { get => _endPoint; set => _endPoint = value; }
-        public virtual double T0 { get => _t0; set => _t0 = value; }
-        public virtual double T1 { get => _t1; set => _t1 = value; }
 
+        /// <summary>
+        /// The curve's start point.
+        /// </summary>
+        public virtual Point3d StartPoint { get => _startPoint; set => _startPoint = value; }
+        /// <summary>
+        /// The curves end point
+        /// </summary>
+        public virtual Point3d EndPoint { get => _endPoint; set => _endPoint = value; }
+        /// <summary>
+        /// The curves initial parameter.
+        /// </summary>
+        public virtual double T0 { get => _t0; set => _t0 = value; }
+        /// <summary>
+        /// The curves final parameter.
+        /// </summary>
+        public virtual double T1 { get => _t1; set => _t1 = value; }
+        /// <summary>
+        /// Checks if the curve is valid.
+        /// </summary>
+        /// <returns>True if Valid.</returns>
         public virtual bool IsValid => CheckValidity();
 
         protected Point3d _startPoint;
@@ -44,19 +40,58 @@ namespace AR_Lib.Geometry
         // Private fields
         protected bool _isValid;
 
+        /// <summary>
+        /// Base constructor implementation.
+        /// </summary>
         protected BaseCurve()
         {
             _isValid = false;
         }
 
 
-        // Abstract methods
+        /// <summary>
+        /// Compute a point along the curve at a specified parameter.
+        /// </summary>
+        /// <param name="t">Parameter</param>
+        /// <returns>Point at the parameter specified.</returns>
         public abstract Point3d PointAt(double t);
+        /// <summary>
+        /// Compute the tangent vector along the curve at a specified parameter.
+        /// </summary>
+        /// <param name="t">Parameter</param>
+        /// <returns>Tangent vector at the parameter specified.</returns>
         public abstract Vector3d TangentAt(double t);
+        /// <summary>
+        /// Compute normal vector along the curve at a specified parameter.
+        /// </summary>
+        /// <param name="t">Parameter</param>
+        /// <returns>Normal vector at the parameter specified.</returns>
         public abstract Vector3d NormalAt(double t);
+
+        /// <summary>
+        /// Compute a binormal vector along the curve at a specified parameter.
+        /// </summary>
+        /// <param name="t">Parameter</param>
+        /// <returns>Binormal vector at the parameter specified.</returns>
         public abstract Vector3d BinormalAt(double t);
+
+        /// <summary>
+        /// Compute the perpendicular frame along the curve at a specified parameter.
+        /// </summary>
+        /// <param name="t">Parameter</param>
+        /// <returns>Perpendicular plane at the parameter specified.</returns>
         public abstract Plane FrameAt(double t);
+
+        /// <summary>
+        /// Checks the validity of the curve.
+        /// </summary>
+        /// <returns>True if valid.</returns>
         public abstract bool CheckValidity();
+
+        /// <summary>
+        /// Computes the length of the curve.
+        /// </summary>
+        /// <returns>Length as number.</returns>
         protected abstract double ComputeLength();
 
     }

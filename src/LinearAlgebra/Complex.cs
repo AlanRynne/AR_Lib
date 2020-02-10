@@ -2,14 +2,26 @@
 
 namespace AR_Lib.LinearAlgebra
 {
-    // Class representing a complex number
+    /// <summary>
+    /// Represents a complex number (a number with real + imaginary components).
+    /// </summary>
     public class Complex
     {
-        // Public fields
+        /// <summary>
+        /// Gets or sets the Real component of the complex number
+        /// </summary>
         public double Real { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Imaginary component of the complex number
+        /// </summary>
         public double Imaginary { get; set; }
 
-        // Constructor
+        /// <summary>
+        /// Constructs a new complex number.
+        /// </summary>
+        /// <param name="real">Real component.</param>
+        /// <param name="imaginary">Imaginary component.</param>
         public Complex(double real, double imaginary)
         {
             Real = real;
@@ -18,19 +30,38 @@ namespace AR_Lib.LinearAlgebra
 
         // Methods
 
+        /// <summary>
+        /// Computes the phase angle of this complex number.
+        /// </summary>
         public double Arg() => Math.Atan2(Imaginary, Real);
 
+        /// <summary>
+        /// Computes the length of the complex number.
+        /// </summary>
         public double Norm() => Math.Sqrt(Norm2());
 
+        /// <summary>
+        /// Computes the squared length of the complex number.
+        /// </summary>
+        /// <returns></returns>
         public double Norm2() => Real * Real + Imaginary * Imaginary;
 
+        /// <summary>
+        /// Conjugates complex number (negates the imaginary component).
+        /// </summary>
         public Complex Conjugate() => new Complex(Real, -Imaginary);
 
+        /// <summary>
+        /// Computes the inverse of the complex number ((a + bi)^-1)
+        /// </summary>
         public Complex Inverse()
         {
             return Conjugate().OverReal(Norm2());
         }
 
+        /// <summary>
+        /// Computes the polar form ae^(iθ), where a is the norm and θ is the phase angle of this complex number.
+        /// </summary>
         public Complex Polar()
         {
             double a = Norm();
@@ -38,7 +69,10 @@ namespace AR_Lib.LinearAlgebra
 
             return new Complex(Math.Cos(theta) * a, Math.Sin(theta) * a);
         }
-
+        /// <summary>
+        /// Exponentiates this complex number.
+        /// </summary>
+        /// <returns></returns>
         public Complex Exp()
         {
             double a = Math.Exp(Real);
@@ -48,40 +82,79 @@ namespace AR_Lib.LinearAlgebra
 
 
         // Private methods for operators
-        Complex Plus(Complex v) => new Complex(Real + v.Real, Imaginary + v.Imaginary);
+        private Complex Plus(Complex v) => new Complex(Real + v.Real, Imaginary + v.Imaginary);
 
-        Complex Minus(Complex v) => new Complex(Real - v.Real, Imaginary - v.Imaginary);
+        private Complex Minus(Complex v) => new Complex(Real - v.Real, Imaginary - v.Imaginary);
 
-        Complex TimesReal(double s) => new Complex(Real * s, Imaginary * s);
+        private Complex TimesReal(double s) => new Complex(Real * s, Imaginary * s);
 
-        Complex OverReal(double s) => TimesReal(1 / s);
+        private Complex OverReal(double s) => TimesReal(1 / s);
 
-        Complex TimesComplex(Complex v)
+        private Complex TimesComplex(Complex v)
         {
-            double a = Real;
-            double b = Imaginary;
-            double c = v.Real;
-            double d = v.Imaginary;
+            var a = Real;
+            var b = Imaginary;
+            var c = v.Real;
+            var d = v.Imaginary;
 
-            double reNew = a * c - b * d;
-            double imNew = a * d - b * c;
+            var reNew = a * c - b * d;
+            var imNew = a * d - b * c;
 
             return new Complex(reNew, imNew);
         }
 
-        Complex OverComplex(Complex v) => TimesComplex(v.Inverse());
+        private Complex OverComplex(Complex v) => TimesComplex(v.Inverse());
 
         // Operators
 
+        /// <summary>
+        /// Adds to complex numbers.
+        /// </summary>
+        /// <param name="v">First complex number.</param>
+        /// <param name="w">Second complex number.</param>
         public static Complex operator +(Complex v, Complex w) => v.Plus(w);
+
+        /// <summary>
+        /// Substracts one complex number from another.
+        /// </summary>
+        /// <param name="v">First complex number.</param>
+        /// <param name="w">Second complex number.</param>
         public static Complex operator -(Complex v, Complex w) => v.Minus(w);
 
+        /// <summary>
+        /// Multiplies a complex number with a number.
+        /// </summary>
+        /// <param name="v">Multiplicand</param>
+        /// <param name="s">Multiplier</param>
         public static Complex operator *(Complex v, double s) => v.TimesReal(s);
+
+        /// <summary>
+        /// Multiplies a complex number with a number.
+        /// </summary>
+        /// <param name="v">Multiplicand</param>
+        /// <param name="s">Multiplier</param>
         public static Complex operator *(double s, Complex v) => v.TimesReal(s);
+
+        /// <summary>
+        /// Multiplies to complex numbers.
+        /// </summary>
+        /// <param name="v">Multiplicand</param>
+        /// <param name="w">Multiplier</param>
         public static Complex operator *(Complex v, Complex w) => v.TimesComplex(w);
 
+        /// <summary>
+        /// Divides a complex number by a number.
+        /// </summary>
+        /// <param name="v">Divisor</param>
+        /// <param name="s">Dividend</param>
         public static Complex operator /(Complex v, double s) => v.OverReal(s);
-        public static Complex operator /(double s, Complex v) => v.OverReal(s);
+
+
+        /// <summary>
+        /// Divides two complex numbers
+        /// </summary>
+        /// <param name="v">Divisor</param>
+        /// <param name="w">Dividend</param>
         public static Complex operator /(Complex v, Complex w) => v.OverComplex(w);
 
     }

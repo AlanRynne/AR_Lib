@@ -1,17 +1,37 @@
 ﻿using System;
-
+#pragma warning disable 1591
 namespace AR_Lib.Geometry
 {
+    /// <summary>
+    /// Abstract class representing a generic vector entity. All vector related entities must inherit from it.
+    /// </summary>
     public abstract class BasePoint
     {
         // Public properties
+
+        /// <summary>
+        /// X Coordinate.
+        /// </summary>
         public double X
         {
             get { return x; }
             set { if (isUnset) isUnset = false; x = Math.Round(value, Settings.MaxDecimals); }
         }
+
+        /// <summary>
+        /// Y Coordinate.
+        /// </summary>
         public double Y { get { return y; } set { if (isUnset) isUnset = false; y = Math.Round(value, Settings.MaxDecimals); } }
+
+        /// <summary>
+        /// Z Coordinate
+        /// </summary>
         public double Z { get { return z; } set { if (isUnset) isUnset = false; z = Math.Round(value, Settings.MaxDecimals); } }
+
+        /// <summary>
+        /// Determines if the current point is unset.
+        /// </summary>
+        /// <value>True if Unset.</value>
         public bool IsUnset { get => isUnset; }
 
         // Private parameters
@@ -22,12 +42,26 @@ namespace AR_Lib.Geometry
 
         //Constructors
 
+        /// <summary>
+        /// Constructs a new point with coordinates = 0.
+        /// </summary>
+        /// <returns>New origin point.</returns>
         protected BasePoint() : this(0, 0, 0) { isUnset = true; }
 
+        /// <summary>
+        /// Constructs a new point with anther point.
+        /// </summary>
+        /// <param name="point">Point to copy coordinates from.</param>
+        /// <returns></returns>
         protected BasePoint(BasePoint point) : this(point.X, point.Y, point.Z)
         {
         }
-
+        /// <summary>
+        /// Constructs a new point by cartesian coordinates.
+        /// </summary>
+        /// <param name="xCoord">X coordinate.</param>
+        /// <param name="yCoord">Y coordinate.</param>
+        /// <param name="zCoord">Z coordinate.</param>
         protected BasePoint(double xCoord, double yCoord, double zCoord)
         {
             X = xCoord;
@@ -39,6 +73,10 @@ namespace AR_Lib.Geometry
 
         // Mathematical operations
 
+        /// <summary>
+        /// Add a point to this point.
+        /// </summary>
+        /// <param name="point">Point to add</param>
         public void Add(BasePoint point)
         {
             x += point.X;
@@ -46,7 +84,10 @@ namespace AR_Lib.Geometry
             z += point.Z;
             isUnset = false;
         }
-
+        /// <summary>
+        /// Substract a point from this one.
+        /// </summary>
+        /// <param name="point">Point to substract.</param>
         public void Substract(BasePoint point)
         {
             x -= point.X;
@@ -54,7 +95,10 @@ namespace AR_Lib.Geometry
             z -= point.Z;
             isUnset = false;
         }
-
+        /// <summary>
+        /// Multiply this point by a number.
+        /// </summary>
+        /// <param name="scalar">Number to multiply by.</param>
         public void Multiply(double scalar)
         {
             x *= scalar;
@@ -62,6 +106,10 @@ namespace AR_Lib.Geometry
             z *= scalar;
         }
 
+        /// <summary>
+        /// Divide this point by a number
+        /// </summary>
+        /// <param name="scalar">Number to divide by.</param>
         public void Divide(double scalar)
         {
             x /= scalar;
@@ -69,6 +117,9 @@ namespace AR_Lib.Geometry
             z /= scalar;
         }
 
+        /// <summary>
+        /// Negates this point.
+        /// </summary>
         public void Negate()
         {
             x = -x;
@@ -76,10 +127,21 @@ namespace AR_Lib.Geometry
             z = -z;
         }
 
+        /// <summary>
+        /// Returns the string representation of this point.
+        /// </summary>
+        /// <returns>Returns the string representation of this point.</returns>
         public override string ToString() => "{ " + x + ", " + y + ", " + z + " }";
+
+        /// <summary>
+        /// Converts a point to an array of numbers.
+        /// </summary>
+        /// <returns>Array with cartesian coordinates of point.</returns>
         public double[] ToArray() => new double[] { x, y, z };
 
         // Override Methods
+
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (!(obj is BasePoint))
@@ -90,6 +152,7 @@ namespace AR_Lib.Geometry
                 && Math.Abs(Z - pt.Z) <= Settings.Tolerance;
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             unchecked
