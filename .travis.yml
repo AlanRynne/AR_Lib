@@ -7,10 +7,10 @@ dotnet: 3.0
 script:
   - dotnet restore
   - dotnet build -c Release
-  - dotnet test
+  - dotnet test  /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=../coverage/opencover.xml
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash) -f "coverage/opencover.xml"
 
 branches:
   only:
