@@ -1,15 +1,18 @@
-dist: trusty
-sudo: required
 language: csharp
 mono: none
-# Use net core 2.0.0 for compatibility reasons
-dotnet: 2.0.0
+sudo: required
+dist: xenial
+dotnet: 3.0
+
 script:
   - dotnet restore
   - dotnet build -c Release
-  - dotnet test AR_Lib.Tests
+  - dotnet test  /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=../coverage/opencover.xml
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -f "coverage/opencover.xml"
 
 branches:
   only:
-  - master
-  - development
+    - master
+    - development
