@@ -4,19 +4,20 @@ using AR_Lib.Geometry.Interfaces;
 namespace AR_Lib.Geometry
 {
     /// <summary>
-    /// Represents a spherical surface
+    /// Represents a spherical surface.
     /// </summary>
     public class Sphere : ISurface
     {
         /// <summary>
         /// Gets or sets the base plane of the sphere.
         /// </summary>
-        /// <value><see cref="Plane"/></value>
+        /// <value><see cref="Plane"/>.</value>
         public Plane Plane { get; set; }
+
         /// <summary>
         /// Gets or sets the radius of the sphere.
         /// </summary>
-        /// <value><see cref="double"/></value>
+        /// <value><see cref="double"/>.</value>
         public double Radius { get; set; }
 
         /// <inheritdoc/>

@@ -1,13 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+
 #pragma warning disable 1591
+
 namespace AR_Lib.LinearAlgebra
 {
+    /// <summary>
+    /// Represents a set of data in a sparse matrix.
+    /// </summary>
     public class Triplet
     {
         // Public fields
+
+        /// <summary>
+        /// Gets values held by this triplet.
+        /// </summary>
+        /// <value></value>
         public List<TripletData> Values { get; }
+
         public int M { get; }
+
         public int N { get; }
 
         // Constructor
@@ -25,7 +37,7 @@ namespace AR_Lib.LinearAlgebra
             {
                 Value = value,
                 Row = m,
-                Column = n
+                Column = n,
             };
 
             Values.Add(tD);

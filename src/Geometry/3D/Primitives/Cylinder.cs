@@ -9,11 +9,11 @@ namespace AR_Lib.Geometry
     public class Cylinder : ISurface
     {
         /// <summary>
-        /// Construct a new cylinder from it's individual components.
+        /// Initializes a new instance of the <see cref="Cylinder"/> class from it's individual components.
         /// </summary>
         /// <param name="plane">The plane of the cylinder.</param>
         /// <param name="radius">The radius of the cylinder.</param>
-        /// <param name="domain">The </param>
+        /// <param name="domain">The cylinder height range.</param>
         public Cylinder(Plane plane, double radius, Interval domain)
         {
             Plane = plane;
@@ -22,21 +22,21 @@ namespace AR_Lib.Geometry
         }
 
         /// <summary>
-        /// Gets or sets the base plane of the cylinder
+        /// Gets or sets the base plane of the cylinder.
         /// </summary>
-        /// <value><see cref="Plane"/></value>
+        /// <value><see cref="Plane"/>.</value>
         public Plane Plane { get; set; }
 
         /// <summary>
-        /// Gets or sets the radius of the cylinder
+        /// Gets or sets the radius of the cylinder.
         /// </summary>
-        /// <value><see cref="double"/></value>
+        /// <value><see cref="double"/>.</value>
         public double Radius { get; set; }
 
         /// <summary>
         /// Gets or sets the height range of the cylinder.
         /// </summary>
-        /// <value><see cref="Interval"/></value>
+        /// <value><see cref="Interval"/>.</value>
         public Interval HeightRange { get; set; }
 
         /// <summary>

@@ -5,22 +5,20 @@ namespace AR_Lib.Geometry
     /// </summary>
     public class Ray
     {
-
         /// <summary>
-        /// Gets/sets the origin point of the ray.
+        /// Gets or sets the origin point of the ray.
         /// </summary>
         public Point3d Origin { get; set; }
 
         /// <summary>
-        /// Gets/sets the direction vector of the ray.
+        /// Gets or sets the direction vector of the ray.
         /// </summary>
-        /// <value></value>
         public Vector3d Direction { get; set; }
 
         #region Constructors
 
         /// <summary>
-        /// Initialize an Ray instance with origin and direction.
+        /// Initializes a new instance of the <see cref="Ray"/> class with origin and direction.
         /// </summary>
         /// <param name="origin">Point representing the origin of the ray.</param>
         /// <param name="direction">Vector representing the direction of the ray.</param>
@@ -41,10 +39,9 @@ namespace AR_Lib.Geometry
         /// <returns>Returns a point at the specified parameter of the Ray.</returns>
         public Point3d PointAt(double t)
         {
-            return Origin + t * Direction;
+            return Origin + (t * Direction);
         }
 
         #endregion
     }
-
 }

@@ -147,12 +147,12 @@ namespace AR_Lib
             double c = v.Dot(v); // always >= 0
             double d = u.Dot(w);
             double e = v.Dot(w);
-            double D = (a * c) - (b * b); // always >= 0
-            double sc, sN, sD = D; // sc = sN / sD, default sD = D >= 0
-            double tc, tN, tD = D; // tc = tN / tD, default tD = D >= 0
+            double d2 = (a * c) - (b * b); // always >= 0
+            double sc, sN, sD = d2; // sc = sN / sD, default sD = D >= 0
+            double tc, tN, tD = d2; // tc = tN / tD, default tD = D >= 0
 
             // compute the line parameters of the two closest points
-            if (D < Settings.Tolerance)
+            if (d2 < Settings.Tolerance)
             { // the lines are almost parallel
                 sN = 0.0; // force using point P0 on segment S1
                 sD = 1.0; // to prevent possible division by 0.0 later

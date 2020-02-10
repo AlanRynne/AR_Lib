@@ -37,6 +37,5 @@ namespace AR_Lib
             public Point3d pointA;
             public Point3d pointB;
         }
-
     }
 }

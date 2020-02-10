@@ -1,4 +1,3 @@
-
 using System;
 
 namespace AR_Lib.Geometry

@@ -28,7 +28,7 @@ namespace AR_Lib.HalfEdgeMesh
         }
 
         /// <summary>
-        /// Checks if the mesh edge lies on a boundary.
+        /// Gets a value indicating whether the mesh edge lies on a boundary.
         /// </summary>
         public bool OnBoundary => this.HalfEdge.OnBoundary || this.HalfEdge.Twin.OnBoundary;
 

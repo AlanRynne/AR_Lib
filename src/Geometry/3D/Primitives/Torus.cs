@@ -9,11 +9,11 @@ namespace AR_Lib.Geometry.Primitives
     public class Torus : ISurface
     {
         /// <summary>
-        /// Constructs a new torus from a plane and two radii.
+        /// Initializes a new instance of the <see cref="Torus"/> class from a plane and two radii.
         /// </summary>
-        /// <param name="plane">The torus base plane</param>
-        /// <param name="majorRadius">The torus major radius</param>
-        /// <param name="minorRadius">The torus minor radius</param>
+        /// <param name="plane">The torus base plane.</param>
+        /// <param name="majorRadius">The torus major radius.</param>
+        /// <param name="minorRadius">The torus minor radius.</param>
         public Torus(Plane plane, double majorRadius, double minorRadius)
         {
             Plane = plane;
@@ -24,19 +24,19 @@ namespace AR_Lib.Geometry.Primitives
         /// <summary>
         /// Gets or sets the torus base plane.
         /// </summary>
-        /// <value><see cref="Plane"/></value>
+        /// <value><see cref="Plane"/>.</value>
         public Plane Plane { get; set; }
 
         /// <summary>
-        /// Gets or sets the torus major radius
+        /// Gets or sets the torus major radius.
         /// </summary>
-        /// <value><see cref="double"/></value>
+        /// <value><see cref="double"/>.</value>
         public double MajorRadius { get; set; }
 
         /// <summary>
         /// Gets or sets the torus minor radius.
         /// </summary>
-        /// <value><see cref="double"/></value>
+        /// <value><see cref="double"/>.</value>
         public double MinorRadius { get; set; }
 
         /// <inheritdoc/>

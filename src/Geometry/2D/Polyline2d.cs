@@ -98,7 +98,7 @@ namespace AR_Lib.Geometry
         }
 
         /// <summary>
-        /// Determines if the polyline is closed.
+        /// Gets or sets a value indicating whether the polyline is closed.
         /// </summary>
         /// <value>True if closed.</value>
         public bool IsClosed

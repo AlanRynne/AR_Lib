@@ -10,6 +10,41 @@ namespace AR_Lib.Geometry
         private Interval domain;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Line2d"/> class.
+        /// </summary>
+        /// <param name="startPoint">Start point of the line.</param>
+        /// <param name="endPoint">End point of the line.</param>
+        public Line2d(Point2d startPoint, Point2d endPoint)
+        {
+            this.StartPoint = startPoint;
+            this.EndPoint = endPoint;
+            this.domain = new Interval(0, Length);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Line2d"/> class.
+        /// </summary>
+        /// <param name="startPoint">The start point of the line.</param>
+        /// <param name="direction">Direction. The length of the vector will determine the end point.</param>
+        /// <returns>New 2d line instance.</returns>
+        public Line2d(Point2d startPoint, Vector2d direction)
+            : this(startPoint, startPoint + direction)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Line2d"/> class.
+        /// </summary>
+        /// <param name="startPoint">Start point.</param>
+        /// <param name="direction">Direction (length of vector will be disregarded).</param>
+        /// <param name="length">Desired length of the line.</param>
+        /// <returns>New 2d line instance.</returns>
+        public Line2d(Point2d startPoint, Vector2d direction, double length)
+            : this(startPoint, direction.Unit() * length)
+        {
+        }
+
+        /// <summary>
         /// Gets or sets the start point of the line.
         /// </summary>
         /// <value>3D Point.</value>
@@ -38,39 +73,10 @@ namespace AR_Lib.Geometry
         public double Length => this.Vector.Length;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Line2d"/> class.
+        /// Implicit conversion from line to vector.
         /// </summary>
-        /// <param name="startPoint">Start point of the line.</param>
-        /// <param name="endPoint">End point of the line.</param>
-        public Line2d(Point2d startPoint, Point2d endPoint)
-        {
-            this.StartPoint = startPoint;
-            this.EndPoint = endPoint;
-            this.domain = new Interval(0, Length);
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Line2d"/> class.
-        /// </summary>
-        /// <param name="startPoint">The start point of the line.</param>
-        /// <param name="direction">Direction. The length of the vector will determine the end point.</param>
-        /// <returns>New 2d line instance.</returns>
-        public Line2d(Point2d startPoint, Vector2d direction)
-            : this(startPoint, startPoint + direction)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Line2d"/> class.
-        /// </summary>
-        /// <param name="startPoint">Start point.</param>
-        /// <param name="direction">Direction (length of vector will be disregarded)</param>
-        /// <param name="length">Desired length of the line.</param>
-        /// <returns>New 2d line instance.</returns>
-        public Line2d(Point2d startPoint, Vector2d direction, double length)
-            : this(startPoint, direction.Unit() * length)
-        {
-        }
+        /// <param name="line">Line to be transformed into vector.</param>
+        public static implicit operator Vector2d(Line2d line) => line.EndPoint - line.StartPoint;
 
         /// <summary>
         /// Computes if a given point is at the left, right or on the current line.
@@ -87,12 +93,5 @@ namespace AR_Lib.Geometry
             Vector2d v2 = point - this.StartPoint;
             return v1.PerpProduct(v2);
         }
-
-        /// <summary>
-        /// Implicit conversion from line to vector.
-        /// </summary>
-        /// <param name="line">Line to be transformed into vector.</param>
-        public static implicit operator Vector2d(Line2d line) => line.EndPoint - line.StartPoint;
-
     }
 }

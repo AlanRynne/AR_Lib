@@ -5,6 +5,6 @@ namespace AR_Lib.SpatialSearch
     /// </summary>
     public class Octree
     {
-        //TODO: This class is empty!
+        // TODO: This class is empty!
     }
 }

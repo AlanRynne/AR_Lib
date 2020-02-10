@@ -96,7 +96,6 @@ namespace AR_Lib.Geometry
         /// <returns>Perp product result.</returns>
         public double PerpProduct(Vector2d vector) => (X * vector.Y) - (Y * vector.X);
 
-
         #region Operators
 
         /// <summary>

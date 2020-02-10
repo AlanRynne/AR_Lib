@@ -7,6 +7,7 @@
         <Rule Id="SA1648" Action="None" />
         <Rule Id="SA1124" Action="None" />
         <Rule Id="SA1633" Action="None" />
+        <Rule Id="SA1401" Action="None" />
 
     </Rules>
 </RuleSet>

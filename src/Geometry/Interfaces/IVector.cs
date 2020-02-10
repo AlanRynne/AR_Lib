@@ -5,6 +5,5 @@ namespace AR_Lib.Geometry.Interfaces
     /// </summary>
     public interface IVector
     {
-
     }
 }

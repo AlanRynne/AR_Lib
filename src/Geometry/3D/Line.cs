@@ -12,8 +12,8 @@ namespace AR_Lib.Geometry
         /// <param name="endPoint">End point.</param>
         public Line(Point3d startPoint, Point3d endPoint)
         {
-            this._startPoint = startPoint;
-            this._endPoint = endPoint;
+            this.startPoint = startPoint;
+            this.endPoint = endPoint;
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace AR_Lib.Geometry
         /// </summary>
         /// <param name="t">Parameter of the point. Must be between 0 and 1.</param>
         /// <returns>Point at specified parameter.</returns>
-        public override Point3d PointAt(double t) => _startPoint + (t * (_endPoint - _startPoint));
+        public override Point3d PointAt(double t) => startPoint + (t * (endPoint - startPoint));
 
         /// <summary>
         /// Computes the tangent at the given parameter.
@@ -41,7 +41,7 @@ namespace AR_Lib.Geometry
         /// <returns>Tangent at specified parameter.</returns>
         public override Vector3d TangentAt(double t)
         {
-            Vector3d tangent = _endPoint - _startPoint;
+            Vector3d tangent = endPoint - startPoint;
             tangent.Unitize();
             return tangent;
         }
@@ -82,6 +82,6 @@ namespace AR_Lib.Geometry
         /// Computes the length of the line.
         /// </summary>
         /// <returns>Line length.</returns>
-        protected override double ComputeLength() => _startPoint.DistanceTo(_endPoint);
+        protected override double ComputeLength() => startPoint.DistanceTo(endPoint);
     }
 }
