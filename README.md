@@ -23,7 +23,7 @@ The core idea is to create a complete package of 3D entities and functions that 
 - Autocad
 - CLI
 - NuGet Package
-- Possibly others...
+- Possibly others
 
 > I have also started developing a set of _Grasshopper components_ that is also available online at:
 >
