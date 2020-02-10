@@ -6,7 +6,7 @@
       "type": "process",
       "args": [
         "build",
-        "${workspaceFolder}/tests/AR_Lib.Tests.csproj"
+        "${workspaceFolder}/tests/Paramdigma.Core.Tests.csproj"
       ],
       "problemMatcher": []
     },
