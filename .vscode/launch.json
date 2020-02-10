@@ -13,8 +13,8 @@
     "args": [
       "test",
       "/p:CollectCoverage=true",
-      "/p:CoverletOutputFormat=opencover",
-      "/p:CoverletOutput=../coverage/opencover.xml",
+      "/p:CoverletOutputFormat=cobertura",
+      "/p:CoverletOutput=../coverage/cobertura.xml",
     ],
     "cwd": "${workspaceFolder}/tests",
     "console": "internalConsole",
