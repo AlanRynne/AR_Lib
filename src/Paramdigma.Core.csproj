@@ -10,7 +10,7 @@
         <PackageId>Paramdigma.Core</PackageId>
         <Version>0.0.1</Version>
         <Authors>Alan Rynne</Authors>
-        <Company>Parmdigma</Company>
+        <Company>Paramdigma</Company>
     </PropertyGroup>
     <!-- Add Nuget Packages and other  dependencies -->
 
