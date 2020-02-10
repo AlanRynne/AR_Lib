@@ -13,8 +13,6 @@ namespace AR_Lib.Geometry
     {
         private double weight;
 
-        #region Constructors
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Point4d"/> class.
         /// </summary>
@@ -51,8 +49,6 @@ namespace AR_Lib.Geometry
             weight = w;
         }
 
-        #endregion
-
         /// <summary>
         /// Gets or sets the weight of this point.
         /// </summary>
@@ -65,7 +61,6 @@ namespace AR_Lib.Geometry
                     isUnset = false;
             }
         }
-        #region Operators
 
         /// <inheritdoc/>
         public static Point4d operator +(Point4d point, Point4d point2) => new Point4d(point.X + point2.X, point.Y + point2.Y, point.Z + point2.Z, point.Weight + point2.Weight);
@@ -97,10 +92,6 @@ namespace AR_Lib.Geometry
         /// <inheritdoc/>
         public static Point4d operator +(Point4d point, Vector3d v) => new Point4d(point.X + v.X, point.Y + v.Y, point.Z + v.Z, point.Weight);
 
-        #endregion
-
-        #region Overriden methods
-
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
@@ -120,8 +111,6 @@ namespace AR_Lib.Geometry
             // TODO: Non consistent getHashCode implementation
             return base.GetHashCode() ^ weight.GetHashCode();
         }
-
-        #endregion
 
         // TODO: Add hasWeightedCoordinates boolean and implement a weightCoordinates() method
     }

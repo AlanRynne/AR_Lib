@@ -98,8 +98,6 @@ namespace AR_Lib.Geometry
             }
         }
 
-        #region Operators
-
         /// <summary>
         /// Add two points together.
         /// </summary>
@@ -192,7 +190,5 @@ namespace AR_Lib.Geometry
         /// </summary>
         /// <param name="pt">Point to convert.</param>
         public static implicit operator Vector2d(Point2d pt) => new Vector2d(pt);
-
-        #endregion
     }
 }

@@ -32,7 +32,7 @@ namespace AR_Lib.Geometry
         public virtual double T1 { get => t1; set => t1 = value; }
 
         /// <summary>
-        /// Checks if the curve is valid.
+        /// Gets a value indicating whether the curve is valid.
         /// </summary>
         /// <returns>True if Valid.</returns>
         public virtual bool IsValid => CheckValidity();

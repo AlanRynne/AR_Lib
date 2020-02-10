@@ -39,6 +39,7 @@ namespace AR_Lib.Geometry
         /// <summary>
         /// Calculates the mean edge length of the mesh.
         /// </summary>
+        /// <param name="mesh">Mesh.</param>
         /// <returns>The mean edge length of the mesh.</returns>
         public static double MeanEdgeLength(Mesh mesh)
         {
@@ -66,6 +67,7 @@ namespace AR_Lib.Geometry
         /// <summary>
         /// Computes the total area of the mesh.
         /// </summary>
+        /// <param name="mesh">Mesh.</param>
         /// <returns>The mesh area.</returns>
         public static double TotalArea(Mesh mesh)
         {

@@ -7,8 +7,6 @@ namespace AR_Lib.Geometry
     /// </summary>
     public class Point3d : BasePoint
     {
-        #region Constructors
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Point3d"/> class.
         /// </summary>
@@ -60,8 +58,6 @@ namespace AR_Lib.Geometry
         {
         }
 
-        #endregion
-
         /// <summary>
         /// Gets a new Unset point.
         /// </summary>
@@ -81,8 +77,6 @@ namespace AR_Lib.Geometry
         /// <returns></returns>
         public double DistanceTo(Point3d point) => Math.Sqrt(Math.Pow(point.X - X, 2) + Math.Pow(point.Y - Y, 2) + Math.Pow(point.Z - Z, 2));
 
-        #region Overriden methods
-
         /// <inheritdoc/>
         public override bool Equals(object obj) => base.Equals(obj);
 
@@ -91,10 +85,6 @@ namespace AR_Lib.Geometry
 
         /// <inheritdoc/>
         public override string ToString() => "Point3d" + base.ToString();
-
-        #endregion
-
-        #region Operators
 
         /// <summary>
         /// Adds a vector to a point.
@@ -194,7 +184,5 @@ namespace AR_Lib.Geometry
         /// </summary>
         /// <param name="point">3d Point to convert.</param>
         public static explicit operator Point3d(Point4d point) => new Point3d(point);
-
-        #endregion
     }
 }

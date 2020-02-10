@@ -6,8 +6,6 @@ using AR_Lib.Geometry;
 
 namespace AR_Lib.IO
 {
-    #region To/From Files
-
     public struct OBJMeshData
     {
         public List<Point3d> Vertices;
@@ -17,6 +15,4 @@ namespace AR_Lib.IO
         public List<List<int>> FaceTextureCoords;
         public List<Vector3d> Normals;
     }
-
-    #endregion
 }

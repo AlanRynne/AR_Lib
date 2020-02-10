@@ -8,8 +8,6 @@ namespace AR_Lib.Geometry
     /// </summary>
     public class Vector3d : BasePoint
     {
-        #region Constructors
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Vector3d"/> class.
         /// </summary>
@@ -48,10 +46,6 @@ namespace AR_Lib.Geometry
             : base(xCoord, yCoord, zCoord)
         {
         }
-
-        #endregion
-
-        #region Utility properties/methods
 
         /// <summary>
         /// Gets the Euclidiean length squared of this vector.
@@ -102,10 +96,6 @@ namespace AR_Lib.Geometry
         /// <param name="v">Vector.</param>
         /// <returns>Cross product vector.</returns>
         public Vector3d Cross(Vector3d v) => CrossProduct(this, v);
-
-        #endregion
-
-        #region Static Methods
 
         /// <summary>
         /// Gets the scalar product (dot product) of two given vectors
@@ -161,10 +151,6 @@ namespace AR_Lib.Geometry
         /// </summary>
         /// <returns>Vector {0,1,0}.</returns>
         public static Vector3d UnitZ => new Vector3d(0, 0, 1);
-
-        #endregion
-
-        #region Operators
 
         /// <summary>
         /// Adds one vector to another.
@@ -229,10 +215,6 @@ namespace AR_Lib.Geometry
         /// <returns>Result of the comparison between v and w.</returns>
         public static bool operator !=(Vector3d v, Vector3d w) => !v.Equals(w);
 
-        #endregion
-
-        #region Overridden methods
-
         /// <inheritdoc/>
         public override bool Equals(object obj) => base.Equals(obj);
 
@@ -244,8 +226,5 @@ namespace AR_Lib.Geometry
 
         /// <inheritdoc/>
         public override int GetHashCode() => base.GetHashCode();
-
-        #endregion
-
     }
 }

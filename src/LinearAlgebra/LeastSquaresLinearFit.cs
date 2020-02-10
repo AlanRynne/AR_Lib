@@ -7,7 +7,7 @@ namespace AR_Lib.LinearAlgebra
     /// <summary>
     /// Fit a line through a set of 2-dimensional points.
     /// </summary>
-    public static class LineFit2d
+    public static class LeastSquaresLinearFit
     {
         // Find the least squares linear fit.
         // Return the total error.
@@ -17,8 +17,8 @@ namespace AR_Lib.LinearAlgebra
         /// Find the least squares best fitting line to the given points.
         /// </summary>
         /// <param name="points">The points to fit the line through.</param>
-        /// <param name="m"></param>
-        /// <param name="b"></param>
+        /// <param name="m">Height.</param>
+        /// <param name="b">Slope.</param>
         /// <returns></returns>
         public static double FindLinearLeastSquaresFit(
             List<Point2d> points, out double m, out double b)

@@ -4,6 +4,9 @@ using AR_Lib.Geometry;
 
 namespace AR_Lib
 {
+    /// <summary>
+    /// Class contains all 3D related intersection methods.
+    /// </summary>
     public static partial class Intersect3D
     {
         // INFO: IS prefix stands for Intersection Status
@@ -32,10 +35,10 @@ namespace AR_Lib
         public struct IRLineLine
         {
             public double Distance;
-            public double tA;
-            public double tB;
-            public Point3d pointA;
-            public Point3d pointB;
+            public double TA;
+            public double TB;
+            public Point3d PointA;
+            public Point3d PointB;
         }
     }
 }

@@ -12,26 +12,25 @@ namespace AR_Lib.Collections
         // Matrix Class
         // This class was obtained from:
         // https://codereview.stackexchange.com/questions/194732/class-matrix-implementation
-        #region  Private properties
-
         private T[,] data;
-
-        #endregion
-
-        #region Computed properties
 
         /// <summary>
         /// Gets columns.
         /// </summary>
         /// <returns>Number of columns on the Matrix.</returns>
-        public int N => data.GetUpperBound(0) + 1;
+        public int N => this.data.GetUpperBound(0) + 1;
 
         /// <summary>
         /// Gets rows.
         /// </summary>
         /// <returns>Number of rows on the Matrix.</returns>
-        public int M => data.GetUpperBound(1) + 1;
+        public int M => this.data.GetUpperBound(1) + 1;
 
+        /// <summary>
+        /// Gets a specific item in the matrix.
+        /// </summary>
+        /// <param name="row">Row.</param>
+        /// <param name="column">Column.</param>
         public ref T this[int row, int column] => ref data[row, column];
 
         /// <summary>
@@ -66,10 +65,6 @@ namespace AR_Lib.Collections
             return col;
         }
 
-        #endregion
-
-        #region Constructors
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Matrix{T}"/> class.
         /// </summary>
@@ -98,10 +93,6 @@ namespace AR_Lib.Collections
             this.data = data;
         }
 
-        #endregion
-
-        #region Public Methods
-
         // ----- ORDERING METHODS -----
 
         /// <summary>
@@ -112,8 +103,6 @@ namespace AR_Lib.Collections
             // TODO: Implement FlipMatrix()
             throw new NotImplementedException();
         }
-
-        // ----- SIZE MODIFICATION METHODS -----
 
         /// <summary>
         /// Increment Matrix column size by a specified amount.
@@ -155,8 +144,6 @@ namespace AR_Lib.Collections
             IncrementRows(rowIncrement);
         }
 
-        // ----- TOPOLOGY RELATED METHODS -----
-
         /// <summary>
         /// Obtains all neighbour entities surrounding the specified matrix coordinates.
         /// </summary>
@@ -196,10 +183,6 @@ namespace AR_Lib.Collections
             throw new NotImplementedException();
         }
 
-        #endregion
-
-        #region Private Methods
-
         /// <summary>
         /// Resizes any given 2 dimensional array.
         /// It accepts smaller and bigger array outputs.
@@ -218,8 +201,5 @@ namespace AR_Lib.Collections
                 Array.Copy(original, co * columnCount, newArray, co * columnCount2, columnCount);
             original = newArray;
         }
-
-        #endregion
-
     }
 }

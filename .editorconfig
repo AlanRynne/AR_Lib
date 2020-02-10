@@ -90,10 +90,10 @@ end_of_line=lf
 [*.{cs,csx,cake,vb}]
 # "this." and "Me." qualifiers
 # https://docs.microsoft.com/visualstudio/ide/editorconfig-language-conventions#this-and-me
-dotnet_style_qualification_for_field=false
-dotnet_style_qualification_for_property=false
-dotnet_style_qualification_for_method=false
-dotnet_style_qualification_for_event=false
+dotnet_style_qualification_for_field=true:silent
+dotnet_style_qualification_for_property=true:silent
+dotnet_style_qualification_for_method=true:silent
+dotnet_style_qualification_for_event=true:silent
 # Language keywords instead of framework type names for type references
 # https://docs.microsoft.com/visualstudio/ide/editorconfig-language-conventions#language-keywords
 dotnet_style_predefined_type_for_locals_parameters_members=true:warning

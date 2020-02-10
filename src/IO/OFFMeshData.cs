@@ -6,16 +6,19 @@ using AR_Lib.Geometry;
 
 namespace AR_Lib.IO
 {
-    #region To/From Files
-
     /// <summary>
     /// Struct containing the resulting mesh data extracted from an .OFF file.
     /// </summary>
     public struct OFFMeshData
     {
-        public List<Point3d> vertices;
-        public List<List<int>> faces;
-    }
+        /// <summary>
+        /// Mesh vertices.
+        /// </summary>
+        public List<Point3d> Vertices;
 
-    #endregion
+        /// <summary>
+        /// Mesh face indices.
+        /// </summary>
+        public List<List<int>> Faces;
+    }
 }

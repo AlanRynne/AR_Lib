@@ -96,8 +96,6 @@ namespace AR_Lib.Geometry
         /// <returns>Perp product result.</returns>
         public double PerpProduct(Vector2d vector) => (X * vector.Y) - (Y * vector.X);
 
-        #region Operators
-
         /// <summary>
         /// Sums two vectors together.
         /// </summary>
@@ -153,10 +151,6 @@ namespace AR_Lib.Geometry
         /// <param name="w">Vector B.</param>
         public static bool operator !=(Vector2d v, Vector2d w) => !v.Equals(w);
 
-        #endregion
-
-        #region Overridden methods
-
         /// <summary>
         /// Gets the string representation of the vector.
         /// </summary>
@@ -200,7 +194,5 @@ namespace AR_Lib.Geometry
                 return hash;
             }
         }
-
-        #endregion
     }
 }

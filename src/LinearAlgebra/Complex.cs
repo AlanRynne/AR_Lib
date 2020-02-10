@@ -57,6 +57,7 @@ namespace AR_Lib.LinearAlgebra
         /// <summary>
         /// Computes the inverse of the complex number ((a + bi)^-1).
         /// </summary>
+        /// <returns></returns>
         public Complex Inverse() => Conjugate().OverReal(Norm2());
 
         /// <summary>

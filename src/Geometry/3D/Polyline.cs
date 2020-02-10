@@ -37,8 +37,6 @@ namespace AR_Lib.Geometry
         /// </summary>
         public bool IsUnset => knots.Count == 0;
 
-        #region Constructors
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Polyline"/> class.
         /// </summary>
@@ -59,10 +57,6 @@ namespace AR_Lib.Geometry
             segments = new List<Line>();
             segmentsNeedUpdate = true;
         }
-
-        #endregion
-
-        #region Polyline specific methods
 
         /// <summary>
         /// Add a new knot vertex at the end of the polyline.
@@ -129,10 +123,6 @@ namespace AR_Lib.Geometry
             }
         }
 
-        #endregion
-
-        #region  Overriden Methods
-
         /// <inheritdoc/>
         public override Vector3d BinormalAt(double t) => throw new NotImplementedException();
 
@@ -164,7 +154,5 @@ namespace AR_Lib.Geometry
 
         /// <inheritdoc/>
         IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable<Point3d>)knots).GetEnumerator();
-
-        #endregion
     }
 }

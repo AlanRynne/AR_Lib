@@ -226,10 +226,10 @@ namespace AR_Lib
             Vector3d dP = w + (sc * u) - (tc * v); // =  S1(sc) - S2(tc)
 
             result.Distance = dP.Length; // return the closest distance
-            result.tA = sc;
-            result.tB = tc;
-            result.pointA = lineA.PointAt(sc);
-            result.pointB = lineB.PointAt(tc);
+            result.TA = sc;
+            result.TB = tc;
+            result.PointA = lineA.PointAt(sc);
+            result.PointB = lineB.PointAt(tc);
 
             if (result.Distance <= Settings.Tolerance)
                 return ISLineLine.Point;

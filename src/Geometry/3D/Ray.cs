@@ -15,8 +15,6 @@ namespace AR_Lib.Geometry
         /// </summary>
         public Vector3d Direction { get; set; }
 
-        #region Constructors
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Ray"/> class with origin and direction.
         /// </summary>
@@ -28,10 +26,6 @@ namespace AR_Lib.Geometry
             Direction = direction;
         }
 
-        #endregion
-
-        #region Public methods
-
         /// <summary>
         /// Computes a point in the ray at the given parameter.
         /// </summary>
@@ -41,7 +35,5 @@ namespace AR_Lib.Geometry
         {
             return Origin + (t * Direction);
         }
-
-        #endregion
     }
 }

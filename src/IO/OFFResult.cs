@@ -2,8 +2,6 @@
 
 namespace AR_Lib.IO
 {
-    #region To/From Files
-
     /// <summary>
     /// Enum containing the result of the OFF conversion.
     /// </summary>
@@ -17,6 +15,4 @@ namespace AR_Lib.IO
         Non_Matching_Faces_Size,
         File_Not_Found,
     }
-
-    #endregion
 }

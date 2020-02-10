@@ -10,8 +10,6 @@ namespace AR_Lib.HalfEdgeMesh
     /// </summary>
     public class Mesh
     {
-        #region Public properties
-
         /// <summary>
         /// The vertices of the mesh.
         /// </summary>
@@ -42,18 +40,10 @@ namespace AR_Lib.HalfEdgeMesh
         /// </summary>
         public List<MeshFace> Boundaries;
 
-        #endregion
-
-        #region Computed properties
-
         /// <summary>
         /// Gets the euler characteristic of the mesh.
         /// </summary>
-        public int EulerCharacteristic => Vertices.Count - Edges.Count + Faces.Count;
-
-        #endregion
-
-        #region Constructors
+        public int EulerCharacteristic => this.Vertices.Count - Edges.Count + Faces.Count;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Mesh"/> class.
@@ -98,10 +88,6 @@ namespace AR_Lib.HalfEdgeMesh
             Boundaries = new List<MeshFace>(halfEdgeMesh.Boundaries);
         }
 
-        #endregion
-
-        #region Error checking methods
-
         /// <summary>
         /// Check if the mesh has isolated vertices.
         /// </summary>
@@ -132,7 +118,9 @@ namespace AR_Lib.HalfEdgeMesh
                 foreach (MeshHalfEdge e in adjacent)
                 {
                     if (e.OnBoundary)
+                    {
                         boundaryEdges++;
+                    }
                 }
 
                 if (boundaryEdges == adjacent.Count)
@@ -151,10 +139,6 @@ namespace AR_Lib.HalfEdgeMesh
             // HACK: Implement HasNonManifoldEdges(). Currently it always returns FALSE
             return false;
         }
-
-        #endregion
-
-        #region Indexing methods
 
         /// <summary>
         /// Assign an index number to each mesh member.
@@ -269,10 +253,6 @@ namespace AR_Lib.HalfEdgeMesh
             return index;
         }
 
-        #endregion
-
-        #region Topology methods
-
         /// <summary>
         /// Check if a mesh is triangular.
         /// </summary>
@@ -336,10 +316,6 @@ namespace AR_Lib.HalfEdgeMesh
             ERROR,
         }
 
-        #endregion
-
-        #region Utility methods
-
         /// <summary>
         /// Get human readable description of this mesh.
         /// </summary>
@@ -376,9 +352,6 @@ namespace AR_Lib.HalfEdgeMesh
             return "HE_Mesh{" + vefh + "}";
         }
 
-        #endregion
-
-        #region Private methods
         private void CreateVertices(List<Point3d> points)
         {
             List<MeshVertex> verts = new List<MeshVertex>(points.Count);
@@ -572,7 +545,5 @@ namespace AR_Lib.HalfEdgeMesh
             public int Quads;
             public int Ngons;
         }
-
-        #endregion
     }
 }

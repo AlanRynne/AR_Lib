@@ -9,8 +9,6 @@ namespace AR_Lib.Geometry
     /// </summary>
     public class Plane
     {
-        #region Properties
-
         /// <summary>
         /// Gets or sets the plane origin.
         /// </summary>
@@ -52,10 +50,6 @@ namespace AR_Lib.Geometry
         /// </summary>
         /// <returns></returns>
         public static Plane WorldYZ => new Plane(Point3d.WorldOrigin, Vector3d.UnitY, Vector3d.UnitZ);
-
-        #endregion
-
-        #region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Plane"/> class.
@@ -142,10 +136,6 @@ namespace AR_Lib.Geometry
         {
             throw new NotImplementedException();
         }
-
-        #endregion
-
-        #region Public methods
 
         // TODO: Add utility methods to Plane class  (flip Axis, relative coordinates...)
 
@@ -240,7 +230,5 @@ namespace AR_Lib.Geometry
         /// </summary>
         /// <returns>Plane string.</returns>
         public override string ToString() => base.ToString();
-
-        #endregion
     }
 }

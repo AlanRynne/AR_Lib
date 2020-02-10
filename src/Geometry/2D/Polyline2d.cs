@@ -9,17 +9,11 @@ namespace AR_Lib.Geometry
     /// </summary>
     public class Polyline2d
     {
-        #region Fields
-
         private List<Point2d> vertices;
         private List<Line2d> segments;
         private Interval domain;
         private bool isClosed;
         private bool segmentsNeedUpdate;
-
-        #endregion
-
-        #region Constructor
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Polyline2d"/> class.
@@ -32,10 +26,6 @@ namespace AR_Lib.Geometry
             this.IsClosed = closed; // Call the property (not the field), to have if add the first point at the end if necessary.
             RebuildSegments();
         }
-
-        #endregion
-
-        #region Properties
 
         /// <summary>
         /// Gets or sets the polyline vertices.
@@ -122,8 +112,6 @@ namespace AR_Lib.Geometry
                 RebuildSegments();
             }
         }
-
-        #endregion
 
         /// <summary>
         /// Computes the area of the polyline.

@@ -1,6 +1,5 @@
-using System.IO;
 using System.Collections.Generic;
-
+using System.IO;
 using AR_Lib.Geometry;
 
 #pragma warning disable 1591
@@ -79,8 +78,8 @@ namespace AR_Lib.IO
             }
 
             // Set data output
-            data.vertices = vertices;
-            data.faces = faces;
+            data.Vertices = vertices;
+            data.Faces = faces;
 
             return OFFResult.OK;
         }

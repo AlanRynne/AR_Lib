@@ -8,8 +8,6 @@ namespace AR_Lib.HalfEdgeMesh
     /// </summary>
     public class MeshFace
     {
-        #region Properties & Fields
-
         /// <summary>
         /// One of the  half-edges surrounding the face.
         /// </summary>
@@ -32,10 +30,6 @@ namespace AR_Lib.HalfEdgeMesh
         /// <returns>Returns the perpendicular vector to the face.</returns>
         public Vector3d Normal => MeshGeometry.FaceNormal(this);
 
-        #endregion
-
-        #region Constructors
-
         /// <summary>
         /// Initializes a new instance of the <see cref="MeshFace"/> class.
         /// </summary>
@@ -44,10 +38,6 @@ namespace AR_Lib.HalfEdgeMesh
             HalfEdge = null;
             Index = -1;
         }
-
-        #endregion
-
-        #region Topology related methods
 
         /// <summary>
         /// Get all adjacent edges to this face.
@@ -142,10 +132,6 @@ namespace AR_Lib.HalfEdgeMesh
         /// <returns>Returns true if the face is a boundary face, false if not.</returns>
         public bool IsBoundaryLoop() => this.HalfEdge.OnBoundary;
 
-        #endregion
-
-        #region Overriden Methods
-
         /// <summary>
         /// Convert the mesh face to string.
         /// </summary>
@@ -162,7 +148,5 @@ namespace AR_Lib.HalfEdgeMesh
 
             return text;
         }
-
-        #endregion
     }
 }

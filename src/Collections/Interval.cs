@@ -55,12 +55,12 @@ namespace AR_Lib.Collections
         /// <summary>
         /// Gets the space between the start and end of the interval.
         /// </summary>
-        public double Length => End - Start;
+        public double Length => this.End - this.Start;
 
         /// <summary>
         /// Gets a value indicating whether an interval has it's direciton inverted (Start > End).
         /// </summary>
-        public bool HasInvertedDirection => Length < 0 ? true : false;
+        public bool HasInvertedDirection => this.Length < 0 ? true : false;
 
         /// <summary>
         /// Crop a number so that it's contained on the given interval.
@@ -128,8 +128,8 @@ namespace AR_Lib.Collections
         /// <returns>True if number is contained.</returns>
         public bool Contains(double number)
         {
-            double min = HasInvertedDirection ? End : Start;
-            double max = HasInvertedDirection ? Start : End;
+            double min = this.HasInvertedDirection ? this.End : this.Start;
+            double max = this.HasInvertedDirection ? this.Start : this.End;
             return (min < number && number < max) ? true : false;
         }
 
@@ -138,9 +138,9 @@ namespace AR_Lib.Collections
         /// </summary>
         public void FlipDirection()
         {
-            double temp = Start;
-            Start = End;
-            End = temp;
+            double temp = this.Start;
+            this.Start = this.End;
+            this.End = temp;
         }
     }
 }
