@@ -2,15 +2,15 @@
 
 ![Target Framework](https://img.shields.io/badge/Target%20Framework-.NetStandard2.1-blueviolet.svg)
 ![Project Status](https://img.shields.io/badge/Status-Under%20Development-red.svg)
-[![License](https://img.shields.io/github/license/AlanRynne/AR_Lib.svg)](https://github.com/AlanRynne/AR_Lib/blob/development/LICENSE)
-![Main language](https://img.shields.io/github/languages/top/AlanRynne/AR_Lib.svg)
-![Code Size](https://img.shields.io/github/languages/code-size/AlanRynne/AR_Lib.svg)
+[![License](https://img.shields.io/github/license/Paramdigma/Core.svg)](https://github.com/Paramdigma/Core/blob/development/LICENSE)
+![Main language](https://img.shields.io/github/languages/top/Paramdigma/Core.svg)
+![Code Size](https://img.shields.io/github/languages/code-size/Paramdigma/Core.svg)
 
-| Service       | Master                                                                                                                                                                   | Development                                                                                                                                                                        |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| CI Status     | [![Build Status](https://travis-ci.com/AlanRynne/AR_Lib.svg?branch=master)](https://travis-ci.com/AlanRynne/AR_Lib)                                                      | [![Build Status](https://travis-ci.com/AlanRynne/AR_Lib.svg?branch=development)](https://travis-ci.com/AlanRynne/AR_Lib)                                                           |
-| Code Quality  | [![CodeFactor](https://www.codefactor.io/repository/github/alanrynne/ar_lib/badge/master)](https://www.codefactor.io/repository/github/alanrynne/ar_lib/overview/master) | [![CodeFactor](https://www.codefactor.io/repository/github/alanrynne/ar_lib/badge/development)](https://www.codefactor.io/repository/github/alanrynne/ar_lib/overview/development) |
-| Test Coverage | [![codecov](https://codecov.io/gh/AlanRynne/AR_Lib/branch/master/graph/badge.svg)](https://codecov.io/gh/AlanRynne/AR_Lib/branch/master)                                 | [![codecov](https://codecov.io/gh/AlanRynne/AR_Lib/branch/development/graph/badge.svg)](https://codecov.io/gh/AlanRynne/AR_Lib/branch/development)                                 |
+| Service       | Master                                                                                                                                                                 | Development                                                                                                                                                                      |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| CI Status     | [![Build Status](https://travis-ci.com/AlanRynne/AR_Lib.svg?branch=master)](https://travis-ci.com/Paramdigma/Core)                                                     | [![Build Status](https://travis-ci.com/Paramdigma/Core.svg?branch=development)](https://travis-ci.com/Paramdigma/Core)                                                           |
+| Code Quality  | [![CodeFactor](https://www.codefactor.io/repository/github/Paramdigma/Core/badge/master)](https://www.codefactor.io/repository/github/Paramdigma/Core/overview/master) | [![CodeFactor](https://www.codefactor.io/repository/github/Paramdigma/Core/badge/development)](https://www.codefactor.io/repository/github/Paramdigma/Core/overview/development) |
+| Test Coverage | [![codecov](https://codecov.io/gh/Paramdigma/Core/branch/master/graph/badge.svg)](https://codecov.io/gh/Paramdigma/Core/branch/master)                                 | [![codecov](https://codecov.io/gh/Paramdigma/Core/branch/development/graph/badge.svg)](https://codecov.io/gh/Paramdigma/Core/branch/development)                                 |
 
 ## Objective
 
