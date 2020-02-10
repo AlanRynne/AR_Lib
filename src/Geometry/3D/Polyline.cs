@@ -14,9 +14,9 @@ namespace AR_Lib.Geometry
         private bool segmentsNeedUpdate;
 
         /// <summary>
-        /// Gets the segment lines of the polyline
+        /// Gets the segment lines of the polyline.
         /// </summary>
-        /// <value><see cref="Line"/></value>
+        /// <value><see cref="Line"/>.</value>
         public List<Line> Segments
         {
             get
@@ -26,20 +26,21 @@ namespace AR_Lib.Geometry
                 return segments;
             }
         }
+
         /// <summary>
-        /// Checks if the polyline is closed (first point == last point)
+        /// Gets a value indicating whether the polyline is closed (first point == last point).
         /// </summary>
         public bool IsClosed => knots[0] == knots[^1];
 
         /// <summary>
-        /// Check if the polyline is unset
+        /// Gets a value indicating whether the polyline is unset.
         /// </summary>
         public bool IsUnset => knots.Count == 0;
 
         #region Constructors
 
         /// <summary>
-        /// Constructs an empty polyline.
+        /// Initializes a new instance of the <see cref="Polyline"/> class.
         /// </summary>
         public Polyline()
         {
@@ -49,9 +50,9 @@ namespace AR_Lib.Geometry
         }
 
         /// <summary>
-        /// Constructs a new polyline from a list of points.
+        /// Initializes a new instance of the <see cref="Polyline"/> class from a list of points.
         /// </summary>
-        /// <param name="knots">List of points</param>
+        /// <param name="knots">List of points.</param>
         public Polyline(List<Point3d> knots)
         {
             this.knots = knots;
@@ -64,9 +65,9 @@ namespace AR_Lib.Geometry
         #region Polyline specific methods
 
         /// <summary>
-        /// Add a new knot vertex at the end of the polyline
+        /// Add a new knot vertex at the end of the polyline.
         /// </summary>
-        /// <param name="knot">Point to add</param>
+        /// <param name="knot">Point to add.</param>
         public void AddKnot(Point3d knot)
         {
             knots.Add(knot); // Add knot to list
@@ -82,8 +83,8 @@ namespace AR_Lib.Geometry
         {
             knots.Insert(index, knot); // Add knot to list
             segmentsNeedUpdate = true;
-
         }
+
         /// <summary>
         /// Delete a specific knot if it exists in the polyline.
         /// </summary>
@@ -95,8 +96,8 @@ namespace AR_Lib.Geometry
                 knots.Remove(knot);
                 segmentsNeedUpdate = true;
             }
-
         }
+
         /// <summary>
         /// Delete a knot at a specific index.
         /// </summary>
@@ -107,7 +108,6 @@ namespace AR_Lib.Geometry
                 throw new Exception("Cannot erase knot from an Unset polyline");
             if (index < 0 || index > segments.Count - 1)
                 throw new IndexOutOfRangeException("Knot index must be within the Knot list count");
-
         }
 
         private void RebuildSegments()
@@ -119,10 +119,11 @@ namespace AR_Lib.Geometry
                 Line l = new Line(knots[i - 1], knots[i])
                 {
                     // Assign parameter values
-                    T0 = t
+                    T0 = t,
                 };
                 t += l.Length;
                 l.T1 = t;
+
                 // Add segment to list.
                 segments.Add(l);
             }
@@ -160,10 +161,10 @@ namespace AR_Lib.Geometry
 
         /// <inheritdoc/>
         public IEnumerator<Point3d> GetEnumerator() => ((IEnumerable<Point3d>)knots).GetEnumerator();
+
+        /// <inheritdoc/>
         IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable<Point3d>)knots).GetEnumerator();
 
         #endregion
-
     }
-
 }

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using AR_Lib.Geometry;
 using AR_Lib.LinearAlgebra;
 
-
 namespace AR_Lib.Geometry
 {
     /// <summary>
@@ -12,51 +11,60 @@ namespace AR_Lib.Geometry
     /// </summary>
     public class Point4d : BasePoint
     {
-
-        /// <summary>
-        /// Gets or sets the weight of this point.
-        /// </summary>
-        public double Weight { get => weight; set { weight = value; if (isUnset) isUnset = false; } }
-
         private double weight;
 
         #region Constructors
 
         /// <summary>
-        /// Constructs an empty 4-dimensional point.
+        /// Initializes a new instance of the <see cref="Point4d"/> class.
         /// </summary>
         /// <returns>Point with all values to zero.</returns>
-        public Point4d() : base()
+        public Point4d()
+            : base()
         {
             weight = 0;
         }
 
         /// <summary>
-        /// Constructs a 4-dimensional point by cartesian coordinates and weight.
+        /// Initializes a new instance of the <see cref="Point4d"/> class by cartesian coordinates and weight.
         /// </summary>
         /// <param name="x">X Coordinate.</param>
         /// <param name="y">Y Coordinate.</param>
         /// <param name="z">Z Coordinate.</param>
         /// <param name="w">Weight.</param>
         /// <returns>New 4-dimensional point with the specified values.</returns>
-        public Point4d(double x, double y, double z, double w) : base(x, y, z)
+        public Point4d(double x, double y, double z, double w)
+            : base(x, y, z)
         {
             weight = w;
         }
 
         /// <summary>
-        /// Constructs a 4-dimensional point from a 3-dimensiona point and a weight.
+        /// Initializes a new instance of the <see cref="Point4d"/> class from a 3-dimensional point and a weight.
         /// </summary>
-        /// <param name="pt">Point</param>
-        /// <param name="w">Weight</param>
+        /// <param name="pt">Point.</param>
+        /// <param name="w">Weight.</param>
         /// <returns>New 4-dimensional point with the specified values.</returns>
-        public Point4d(Point3d pt, double w) : base(pt)
+        public Point4d(Point3d pt, double w)
+            : base(pt)
         {
             weight = w;
         }
 
         #endregion
 
+        /// <summary>
+        /// Gets or sets the weight of this point.
+        /// </summary>
+        public double Weight
+        {
+            get => weight; set
+            {
+                weight = value;
+                if (isUnset)
+                    isUnset = false;
+            }
+        }
         #region Operators
 
         /// <inheritdoc/>
@@ -101,21 +109,20 @@ namespace AR_Lib.Geometry
                 return base.Equals(obj) && this.Weight == pt.Weight;
             }
             else
+            {
                 return false;
-
+            }
         }
 
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            //TODO: Non consistent getHashCode implementation
+            // TODO: Non consistent getHashCode implementation
             return base.GetHashCode() ^ weight.GetHashCode();
         }
 
         #endregion
 
-        //TODO: Add hasWeightedCoordinates boolean and implement a weightCoordinates() method
-
+        // TODO: Add hasWeightedCoordinates boolean and implement a weightCoordinates() method
     }
-
 }

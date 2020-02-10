@@ -3,37 +3,37 @@ using System;
 namespace AR_Lib.Collections
 {
     /// <summary>
-    /// Represents an range between two numbers
+    /// Represents an range between two numbers.
     /// </summary>
     public struct Interval
     {
         /// <summary>
-        /// The starting value of the interval
+        /// Gets or sets the starting value of the interval.
         /// </summary>
-        /// <value>Value will always be lower unless interval is inverted</value>
+        /// <value>Value will always be lower unless interval is inverted.</value>
         public double Start { get; set; }
 
         /// <summary>
-        /// The ending value of the interval
+        /// Gets or sets the ending value of the interval.
         /// </summary>
-        /// <value>Value will always be the biggest unless interval is inverted</value>
+        /// <value>Value will always be the biggest unless interval is inverted.</value>
         public double End { get; set; }
 
         /// <summary>
-        /// Space between the start and end of the interval.
+        /// Gets the space between the start and end of the interval.
         /// </summary>
         public double Length => End - Start;
 
         /// <summary>
-        /// Determine if an interval has it's direciton inverted (Start > End)
+        /// Gets a value indicating whether an interval has it's direciton inverted (Start > End).
         /// </summary>
         public bool HasInvertedDirection => Length < 0 ? true : false;
 
         /// <summary>
-        /// Constructs a new interval instance from a start and end value
+        /// Initializes a new instance of the <see cref="Interval"/> struct from a start and end value.
         /// </summary>
-        /// <param name="start">Starting value of the interval</param>
-        /// <param name="end">Ending value of the interval</param>
+        /// <param name="start">Starting value of the interval.</param>
+        /// <param name="end">Ending value of the interval.</param>
         public Interval(double start, double end)
         {
             if (start == end)
@@ -47,32 +47,35 @@ namespace AR_Lib.Collections
         }
 
         /// <summary>
-        /// Constructs an interval from another interval.
+        /// Initializes a new instance of the <see cref="Interval"/> struct from another interval.
         /// </summary>
-        /// <param name="interval">Interval to duplicate</param>
-        /// <returns>A new interval instance with the same values</returns>
-        public Interval(Interval interval) : this(interval.Start, interval.End) { }
+        /// <param name="interval">Interval to duplicate.</param>
+        /// <returns>A new interval instance with the same values.</returns>
+        public Interval(Interval interval)
+            : this(interval.Start, interval.End)
+        {
+        }
 
         /// <summary>
-        /// Crop a number so that it is contained inside this interval
+        /// Crop a number so that it is contained inside this interval.
         /// </summary>
-        /// <param name="number">Number to crop</param>
-        /// <returns>Cropped number</returns>
+        /// <param name="number">Number to crop.</param>
+        /// <returns>Cropped number.</returns>
         public double Crop(double number) => Interval.CropNumber(number, this);
 
         /// <summary>
-        /// Remap a number from this interval to a given one
+        /// Remap a number from this interval to a given one.
         /// </summary>
-        /// <param name="number">Number to remap</param>
-        /// <param name="toInterval">Interval to remap number to</param>
-        /// <returns>Remapped number inside given interval</returns>
+        /// <param name="number">Number to remap.</param>
+        /// <param name="toInterval">Interval to remap number to.</param>
+        /// <returns>Remapped number inside given interval.</returns>
         public double Remap(double number, Interval toInterval) => Interval.RemapNumber(number, this, toInterval);
 
         /// <summary>
         /// Remap a number from this interval to a unit interval.
         /// </summary>
-        /// <param name="number">Number to remap</param>
-        /// <returns>Value remaped from 0 to 1</returns>
+        /// <param name="number">Number to remap.</param>
+        /// <returns>Value remaped from 0 to 1.</returns>
         public double RemapToUnit(double number) => this.Remap(number, Interval.Unit);
 
         /// <summary>
@@ -85,14 +88,12 @@ namespace AR_Lib.Collections
         /// <summary>
         /// Check if a number is contained inside this interval.
         /// </summary>
-        /// <param name="number">Number to check containment</param>
-        /// <returns>True if number is contained</returns>
+        /// <param name="number">Number to check containment.</param>
+        /// <returns>True if number is contained.</returns>
         public bool Contains(double number)
         {
-
             double min = HasInvertedDirection ? End : Start;
             double max = HasInvertedDirection ? Start : End;
-
             return (min < number && number < max) ? true : false;
         }
 
@@ -107,9 +108,9 @@ namespace AR_Lib.Collections
         }
 
         /// <summary>
-        /// Constructs a new unit interval
+        /// Gets a new unit interval.
         /// </summary>
-        /// <returns>New interval from 0.0 to 1.0</returns>
+        /// <returns>New interval from 0.0 to 1.0.</returns>
         public static Interval Unit => new Interval(0, 1);
 
         /// <summary>
@@ -139,8 +140,7 @@ namespace AR_Lib.Collections
             double cropped = fromInterval.Contains(number) ? number : fromInterval.Crop(number);
             double proportion = (cropped - fromInterval.Start) / Math.Abs(fromInterval.Length);
 
-            return toInterval.Start + toInterval.Length * proportion;
+            return toInterval.Start + (toInterval.Length * proportion);
         }
-
     }
 }

@@ -13,9 +13,10 @@ namespace AR_Lib.IO
     #region To/From Files
 
     public static class CSVReader { }
+
     public static class CSVWritter { }
 
-    /// OFF format
+    // OFF format
 
     /// <summary>OFF Reader class</summary>
     public static class OFFReader
@@ -23,7 +24,8 @@ namespace AR_Lib.IO
         public static OFFResult ReadMeshFromFile(string filePath, out OFFMeshData data)
         {
             string[] lines = File.ReadAllLines(filePath);
-            data = new OFFMeshData();
+            data = default;
+
             // Check if first line states OFF format
             if (lines[0] != "OFF")
                 return OFFResult.Incorrect_Format;

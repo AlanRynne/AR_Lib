@@ -5,6 +5,5 @@ namespace AR_Lib.Geometry
     /// </summary>
     public class NurbsSurface
     {
-
     }
 }

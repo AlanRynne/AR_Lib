@@ -6,13 +6,13 @@ namespace AR_Lib.Geometry
     public class Ray2d
     {
         /// <summary>
-        /// The origin of the ray.
+        /// Gets or sets the origin of the ray.
         /// </summary>
         /// <value>Origin point.</value>
         public Point2d Origin { get; set; }
 
         /// <summary>
-        /// The direction of the ray as a unit vector.
+        /// Gets or sets the direction of the ray as a unit vector.
         /// </summary>
         /// <value>Direction vector.</value>
         public Vector2d Direction { get; set; }

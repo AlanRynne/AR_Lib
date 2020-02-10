@@ -15,12 +15,18 @@ namespace AR_Lib.Curves
         /// Computes a geodesic on a mesh given a starting point and an initial direction.
         /// Returns true if successfull and false if something went wrong.
         /// </summary>
+        /// <param name="meshPoint">Point.</param>
+        /// <param name="vector">Direction.</param>
+        /// <param name="mesh">Mesh.</param>
+        /// <param name="maxIter">Maximum iterations.</param>
+        /// <param name="geodesic">Geodesic curves.</param>
+        /// <returns>True if successful.</returns>
         public static bool StartDir(MeshPoint meshPoint, Vector3d vector, Mesh mesh, int maxIter, out List<Point3d> geodesic)
         {
             // Get initial face on the mesh
             MeshFace initialFace = mesh.Faces[meshPoint.FaceIndex];
-            // Start iteration
 
+            // Start iteration
             // Create variables for current iteration step
             MeshFace thisFace = initialFace;
             Point3d thisPoint = new Point3d();
@@ -54,12 +60,12 @@ namespace AR_Lib.Curves
 
                 // Increase counter
                 iter++;
-            } while (iter < maxIter);
+            }
+            while (iter < maxIter);
 
             // Assign outputs
             geodesic = geodPoints;
             return true;
-
         }
     }
 }

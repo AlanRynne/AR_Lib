@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 using AR_Lib.Geometry;
 
 namespace AR_Lib.HalfEdgeMesh
@@ -15,27 +15,27 @@ namespace AR_Lib.HalfEdgeMesh
         public int FaceIndex;
 
         /// <summary>
-        /// The U coordinate at the face
+        /// The U coordinate at the face.
         /// </summary>
         public double U;
 
         /// <summary>
-        /// The V coordinate at the face
+        /// The V coordinate at the face.
         /// </summary>
         public double V;
 
         /// <summary>
-        /// The W coordinate at the face
+        /// The W coordinate at the face.
         /// </summary>
         public double W;
 
         /// <summary>
-        /// Constructs a new MeshPoint
+        /// Initializes a new instance of the <see cref="MeshPoint"/> class.
         /// </summary>
-        /// <param name="faceIndex">Face Index</param>
-        /// <param name="u">U coordinate</param>
-        /// <param name="v">V coordinate</param>
-        /// <param name="w">Z coordinate</param>
+        /// <param name="faceIndex">Face Index.</param>
+        /// <param name="u">U coordinate.</param>
+        /// <param name="v">V coordinate.</param>
+        /// <param name="w">Z coordinate.</param>
         public MeshPoint(int faceIndex, double u, double v, double w)
         {
             FaceIndex = faceIndex;
@@ -45,10 +45,10 @@ namespace AR_Lib.HalfEdgeMesh
         }
 
         /// <summary>
-        /// Constructs a new MeshPoint
+        /// Initializes a new instance of the <see cref="MeshPoint"/> class.
         /// </summary>
-        /// <param name="point">3D Point</param>
-        /// <param name="face">Mesh face</param>
+        /// <param name="point">3D Point.</param>
+        /// <param name="face">Mesh face.</param>
         public MeshPoint(Point3d point, MeshFace face)
         {
             List<MeshVertex> adj = face.AdjacentVertices();
@@ -66,7 +66,5 @@ namespace AR_Lib.HalfEdgeMesh
         {
             return "MeshPoint{ " + FaceIndex + "; " + U + ", " + V + ", " + W + " }";
         }
-
-
     }
 }

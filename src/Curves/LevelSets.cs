@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using AR_Lib.HalfEdgeMesh;
 using AR_Lib.Geometry;
+using AR_Lib.HalfEdgeMesh;
 
 namespace AR_Lib.Curves
 {
@@ -25,6 +25,7 @@ namespace AR_Lib.Curves
             {
                 resultLines.Add(new List<Line>());
             }
+
             int iter = 0;
             foreach (MeshFace face in mesh.Faces)
             {
@@ -38,6 +39,7 @@ namespace AR_Lib.Curves
 
                     count++;
                 }
+
                 iter++;
             }
 
@@ -50,7 +52,7 @@ namespace AR_Lib.Curves
         /// <param name="valueKey">Key of the value to be computed per vertex.</param>
         /// <param name="level">Level value to be computed.</param>
         /// <param name="face">Face to computee the level in.</param>
-        /// <param name="line">Resulting level line on the face</param>
+        /// <param name="line">Resulting level line on the face.</param>
         /// <returns>True if successful, false if not.</returns>
         public static bool GetFaceLevel(string valueKey, double level, MeshFace face, out Line line)
         {
@@ -91,17 +93,16 @@ namespace AR_Lib.Curves
                         intersectionPoints.Add(levelPoint);
                     }
                 }
+
                 line = new Line(intersectionPoints[0], intersectionPoints[1]);
                 return true;
             }
-
-
         }
 
         /// <summary>
-        /// Compute the gradient on a given mesh given some per-vertex values
+        /// Compute the gradient on a given mesh given some per-vertex values.
         /// </summary>
-        /// <param name="valueKey">Key of the values in the vertex.UserData dictionary</param>
+        /// <param name="valueKey">Key of the values in the vertex.UserData dictionary.</param>
         /// <param name="mesh">Mesh to compute the gradient.</param>
         /// <returns>A list containing all the gradient vectors per-face.</returns>
         public static List<Vector3d> ComputeGradientField(string valueKey, Mesh mesh)
@@ -114,11 +115,11 @@ namespace AR_Lib.Curves
         }
 
         /// <summary>
-        /// Compute the gradient on a given mesh face given some per-vertex values
+        /// Compute the gradient on a given mesh face given some per-vertex values.
         /// </summary>
-        /// <param name="valueKey">Key of the values in the vertex.UserData dictionary</param>
+        /// <param name="valueKey">Key of the values in the vertex.UserData dictionary.</param>
         /// <param name="face">Face to compute thee gradient.</param>
-        /// <returns>A vector representing the gradient on that mesh face</returns>
+        /// <returns>A vector representing the gradient on that mesh face.</returns>
         public static Vector3d ComputeFaceGradient(string valueKey, MeshFace face)
         {
             List<MeshVertex> adjacentVertices = face.AdjacentVertices();
@@ -131,11 +132,10 @@ namespace AR_Lib.Curves
             double gk = adjacentVertices[2].UserValues[valueKey];
 
             Vector3d faceNormal = face.Normal / (2 * face.Area);
-            Vector3d rotatedGradient = (gi * (k - j) + gj * (i - k) + gk * (j - i)) / (2 * face.Area);
+            Vector3d rotatedGradient = ((gi * (k - j)) + (gj * (i - k)) + (gk * (j - i))) / (2 * face.Area);
             Vector3d gradient = rotatedGradient.Cross(faceNormal);
 
             return gradient;
         }
-
     }
 }

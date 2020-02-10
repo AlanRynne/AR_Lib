@@ -2,54 +2,53 @@
 
 namespace AR_Lib.Geometry
 {
-    //TODO: Must ensure that vectors are always perpendicular to each other
+    // TODO: Must ensure that vectors are always perpendicular to each other
 
     /// <summary>
-    /// Represents a 3-Dimensional plane
+    /// Represents a 3-Dimensional plane.
     /// </summary>
     public class Plane
     {
-
         #region Properties
 
         /// <summary>
-        /// Gets or sets the plane origin
+        /// Gets or sets the plane origin.
         /// </summary>
         /// <value></value>
         public Point3d Origin { get; set; }
 
         /// <summary>
-        /// Gets or sets the plane X axis
+        /// Gets or sets the plane X axis.
         /// </summary>
         /// <value></value>
         public Vector3d XAxis { get; set; }
 
         /// <summary>
-        /// Gets or sets the plane Y axis
+        /// Gets or sets the plane Y axis.
         /// </summary>
         /// <value></value>
         public Vector3d YAxis { get; set; }
 
         /// <summary>
-        /// Gets or sets the plane Z axis
+        /// Gets or sets the plane Z axis.
         /// </summary>
         /// <value></value>
         public Vector3d ZAxis { get; set; }
 
         /// <summary>
-        /// Plane with axis' UnitX and UnitY.
+        /// Gets plane with axis' UnitX and UnitY.
         /// </summary>
         /// <returns></returns>
         public static Plane WorldXY => new Plane(Point3d.WorldOrigin, Vector3d.UnitX, Vector3d.UnitY);
 
         /// <summary>
-        /// Plane with axis' UnitX and UnitZ.
+        /// Gets plane with axis' UnitX and UnitZ.
         /// </summary>
         /// <returns></returns>
         public static Plane WorldXZ => new Plane(Point3d.WorldOrigin, Vector3d.UnitX, Vector3d.UnitZ);
 
         /// <summary>
-        /// Plane with axis' UnitY and UnitZ.
+        /// Gets plane with axis' UnitY and UnitZ.
         /// </summary>
         /// <returns></returns>
         public static Plane WorldYZ => new Plane(Point3d.WorldOrigin, Vector3d.UnitY, Vector3d.UnitZ);
@@ -59,33 +58,42 @@ namespace AR_Lib.Geometry
         #region Constructors
 
         /// <summary>
-        /// Constructs a new plane given another Plane instance.
+        /// Initializes a new instance of the <see cref="Plane"/> class.
         /// Basically it makes a shallow copy. If you need a deep copy, use Clone() method.
         /// </summary>
         /// <param name="plane">Plane to copy values from.</param>
-        public Plane(Plane plane) : this(plane.Origin, plane.XAxis, plane.YAxis, plane.ZAxis) { }
+        public Plane(Plane plane)
+            : this(plane.Origin, plane.XAxis, plane.YAxis, plane.ZAxis)
+        {
+        }
 
         /// <summary>
-        /// Constructs an XY Plane with it's origin at the specified point.
+        /// Initializes a new instance of the <see cref="Plane"/> class given it's origin at the specified point.
         /// </summary>
         /// <param name="origin">Point to act as origin.</param>
-        public Plane(Point3d origin) : this(origin, Vector3d.UnitX, Vector3d.UnitY) { }
+        public Plane(Point3d origin)
+        : this(origin, Vector3d.UnitX, Vector3d.UnitY)
+        {
+        }
 
         /// <summary>
-        /// Constructs a new Plane instance given a point and two vectors.
+        /// Initializes a new instance of the <see cref="Plane"/> class given a point and two vectors.
         /// Vectors do not necessarily have to be perpendicular.
         /// Will throw an error if vectors are parallel or close to parallel.
         /// </summary>
-        /// <param name="origin">An origin point</param>
+        /// <param name="origin">An origin point.</param>
         /// <param name="xAxis">Vector to act as X axis.</param>
         /// <param name="yAxis">Vector to act as Y axis.</param>
-        public Plane(Point3d origin, Vector3d xAxis, Vector3d yAxis) : this(origin, xAxis, yAxis, xAxis.Cross(yAxis)) { }
+        public Plane(Point3d origin, Vector3d xAxis, Vector3d yAxis)
+        : this(origin, xAxis, yAxis, xAxis.Cross(yAxis))
+        {
+        }
 
         /// <summary>
-        /// Constructs a new Plane instance given a point and three vectors.
+        /// Initializes a new instance of the <see cref="Plane"/> class given a point and three vectors.
         /// Will throw an error if vectors are not perpendicular to each other.
         /// </summary>
-        /// <param name="origin">An origin point</param>
+        /// <param name="origin">An origin point.</param>
         /// <param name="xAxis">Vector to act as X axis.</param>
         /// <param name="yAxis">Vector to act as Y axis.</param>
         /// <param name="zAxis">Vector to act as Z axis.</param>
@@ -98,11 +106,11 @@ namespace AR_Lib.Geometry
         }
 
         /// <summary>
-        /// Constructs a Plane instance given 3 non co-linear points.
+        /// Initializes a new instance of the <see cref="Plane"/> class given 3 non co-linear points.
         /// </summary>
-        /// <param name="ptA">First point. Will be considered the plane origin</param>
+        /// <param name="ptA">First point. Will be considered the plane origin.</param>
         /// <param name="ptB">Second point. Marks the X axis direction of the plane.</param>
-        /// <param name="ptC">Third point. Roughly points the direction of the Y axis</param>
+        /// <param name="ptC">Third point. Roughly points the direction of the Y axis.</param>
         public Plane(Point3d ptA, Point3d ptB, Point3d ptC)
         {
             Vector3d tempX = ptB - ptA;
@@ -112,6 +120,7 @@ namespace AR_Lib.Geometry
 
             Vector3d normal = tempX.Cross(tempY);
             double colinearCheck = Math.Abs(1 - tempY.Dot(tempX));
+
             // Ensure points are not co-linear
             if (tempY.Dot(tempX) == 1)
                 throw new System.Exception("Cannot create plane out of co-linear points.");
@@ -120,17 +129,15 @@ namespace AR_Lib.Geometry
             XAxis = tempX;
             YAxis = normal.Cross(XAxis);
             ZAxis = normal;
-
-
         }
 
         /// <summary>
-        /// Constructs a new plane given its equation Ax + By + Cz + D = 0
+        /// Initializes a new instance of the <see cref="Plane"/> class given its equation Ax + By + Cz + D = 0.
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <param name="c"></param>
-        /// <param name="d"></param>
+        /// <param name="a">A.</param>
+        /// <param name="b">B.</param>
+        /// <param name="c">C.</param>
+        /// <param name="d">D.</param>
         public Plane(double a, double b, double c, double d)
         {
             throw new NotImplementedException();
@@ -140,7 +147,7 @@ namespace AR_Lib.Geometry
 
         #region Public methods
 
-        //TODO: Add utility methods to Plane class  (flip Axis, relative coordinates...)
+        // TODO: Add utility methods to Plane class  (flip Axis, relative coordinates...)
 
         /// <summary>
         /// Flips the plane by interchanging the X and Y axis and negating the Z axis.
@@ -154,20 +161,21 @@ namespace AR_Lib.Geometry
         }
 
         /// <summary>
-        /// Computes the point at the specified Plane parameters
+        /// Computes the point at the specified Plane parameters.
         /// </summary>
-        /// <param name="u">U coordinate</param>
-        /// <param name="v">V coordinate</param>
+        /// <param name="u">U coordinate.</param>
+        /// <param name="v">V coordinate.</param>
+        /// <returns></returns>
         public Point3d PointAt(double u, double v) => PointAt(u, v, 0);
 
         /// <summary>
-        /// Computes a 3D point in the coordinate space of this plane
+        /// Computes a 3D point in the coordinate space of this plane.
         /// </summary>
-        /// <param name="u">Coordinate for the X axis</param>
-        /// <param name="v">Coordinate for the Y axis</param>
-        /// <param name="w">Coordinate for the Z axis</param>
-        /// <returns>Computed point</returns>
-        public Point3d PointAt(double u, double v, double w) => Origin + (u * XAxis + v * YAxis + w * ZAxis);
+        /// <param name="u">Coordinate for the X axis.</param>
+        /// <param name="v">Coordinate for the Y axis.</param>
+        /// <param name="w">Coordinate for the Z axis.</param>
+        /// <returns>Computed point.</returns>
+        public Point3d PointAt(double u, double v, double w) => Origin + ((u * XAxis) + (v * YAxis) + (w * ZAxis));
 
         /// <summary>
         /// Remap a given point to this plane's coordinate system.
@@ -187,9 +195,9 @@ namespace AR_Lib.Geometry
         /// <summary>
         /// Remap a given point to the XY Plane coordiante system.
         /// </summary>
-        /// <param name="point">Point to remap</param>
+        /// <param name="point">Point to remap.</param>
         /// <returns>Point with relative coordinates to the plane.</returns>
-        public Point3d RemapToWorldXYSpace(Point3d point) => Origin + point.X * XAxis + point.Y * YAxis + point.Z * ZAxis;
+        public Point3d RemapToWorldXYSpace(Point3d point) => Origin + (point.X * XAxis) + (point.Y * YAxis) + (point.Z * ZAxis);
 
         /// <summary>
         /// Project a point to the plane.
@@ -213,9 +221,9 @@ namespace AR_Lib.Geometry
         public double DistanceTo(Point3d point) => ((Vector3d)(point - Origin)).Dot(ZAxis);
 
         /// <summary>
-        /// Returns the parametric equation for this plane
+        /// Returns the parametric equation for this plane.
         /// </summary>
-        /// <returns>List with equation values</returns>
+        /// <returns>List with equation values.</returns>
         public double[] GetPlaneEquation()
         {
             throw new NotImplementedException();
@@ -230,10 +238,9 @@ namespace AR_Lib.Geometry
         /// <summary>
         /// Returns the string representation of the plane.
         /// </summary>
-        /// <returns>Plane string</returns>
+        /// <returns>Plane string.</returns>
         public override string ToString() => base.ToString();
 
         #endregion
-
     }
 }

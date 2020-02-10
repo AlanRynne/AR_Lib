@@ -1,5 +1,7 @@
 ﻿using System;
+
 #pragma warning disable 1591
+
 namespace AR_Lib.Geometry
 {
     /// <summary>
@@ -10,26 +12,61 @@ namespace AR_Lib.Geometry
         // Public properties
 
         /// <summary>
-        /// X Coordinate.
+        /// Gets or sets x Coordinate.
         /// </summary>
         public double X
         {
-            get { return x; }
-            set { if (isUnset) isUnset = false; x = Math.Round(value, Settings.MaxDecimals); }
+            get
+            {
+                return x;
+            }
+
+            set
+            {
+                if (isUnset)
+                    isUnset = false;
+                x = Math.Round(value, Settings.MaxDecimals);
+            }
         }
 
         /// <summary>
-        /// Y Coordinate.
+        /// Gets or sets y Coordinate.
         /// </summary>
-        public double Y { get { return y; } set { if (isUnset) isUnset = false; y = Math.Round(value, Settings.MaxDecimals); } }
+        public double Y
+        {
+            get
+            {
+                return y;
+            }
+
+            set
+            {
+                if (isUnset)
+                    isUnset = false;
+                y = Math.Round(value, Settings.MaxDecimals);
+            }
+        }
 
         /// <summary>
-        /// Z Coordinate
+        /// Gets or sets z Coordinate.
         /// </summary>
-        public double Z { get { return z; } set { if (isUnset) isUnset = false; z = Math.Round(value, Settings.MaxDecimals); } }
+        public double Z
+        {
+            get
+            {
+                return z;
+            }
+
+            set
+            {
+                if (isUnset)
+                    isUnset = false;
+                z = Math.Round(value, Settings.MaxDecimals);
+            }
+        }
 
         /// <summary>
-        /// Determines if the current point is unset.
+        /// Gets a value indicating whether the current point is unset.
         /// </summary>
         /// <value>True if Unset.</value>
         public bool IsUnset { get => isUnset; }
@@ -130,7 +167,7 @@ namespace AR_Lib.Geometry
         /// <summary>
         /// Returns the string representation of this point.
         /// </summary>
-        /// <returns>Returns the string representation of this point.</returns>
+        /// <returns></returns>
         public override string ToString() => "{ " + x + ", " + y + ", " + z + " }";
 
         /// <summary>

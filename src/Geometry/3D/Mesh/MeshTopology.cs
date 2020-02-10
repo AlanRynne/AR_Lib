@@ -13,7 +13,7 @@ namespace AR_Lib.HalfEdgeMesh
         private readonly Mesh mesh;
 
         /// <summary>
-        /// Construct the topology for a specific mesh.
+        /// Initializes a new instance of the <see cref="MeshTopology"/> class.
         /// </summary>
         /// <param name="mesh">Mesh to construct topology connections from.</param>
         public MeshTopology(Mesh mesh)
@@ -35,10 +35,12 @@ namespace AR_Lib.HalfEdgeMesh
         /// Vertex-Vertex topological connections.
         /// </summary>
         public Dictionary<int, List<int>> VertexVertex;
+
         /// <summary>
         /// Vertex-Face topological connections.
         /// </summary>
         public Dictionary<int, List<int>> VertexFaces;
+
         /// <summary>
         /// Vertex-Edge topological connections.
         /// </summary>
@@ -63,10 +65,12 @@ namespace AR_Lib.HalfEdgeMesh
         /// Face-Vertex topological connections.
         /// </summary>
         public Dictionary<int, List<int>> FaceVertex;
+
         /// <summary>
         /// Face-Edge topological connections.
         /// </summary>
         public Dictionary<int, List<int>> FaceEdge;
+
         /// <summary>
         /// Face-Face topological connections.
         /// </summary>
@@ -90,6 +94,7 @@ namespace AR_Lib.HalfEdgeMesh
                         VertexVertex[vertex.Index].Add(adjacent.Index);
                     }
                 }
+
                 foreach (MeshFace adjacent in vertex.AdjacentFaces())
                 {
                     if (!VertexFaces.ContainsKey(vertex.Index))
@@ -101,6 +106,7 @@ namespace AR_Lib.HalfEdgeMesh
                         VertexFaces[vertex.Index].Add(adjacent.Index);
                     }
                 }
+
                 foreach (MeshEdge adjacent in vertex.AdjacentEdges())
                 {
                     if (!VertexEdges.ContainsKey(vertex.Index))
@@ -133,6 +139,7 @@ namespace AR_Lib.HalfEdgeMesh
                         FaceVertex[face.Index].Add(adjacent.Index);
                     }
                 }
+
                 foreach (MeshFace adjacent in face.AdjacentFaces())
                 {
                     if (!FaceFace.ContainsKey(face.Index))
@@ -144,6 +151,7 @@ namespace AR_Lib.HalfEdgeMesh
                         FaceFace[face.Index].Add(adjacent.Index);
                     }
                 }
+
                 foreach (MeshEdge adjacent in face.AdjacentEdges())
                 {
                     if (!FaceEdge.ContainsKey(face.Index))
@@ -171,8 +179,8 @@ namespace AR_Lib.HalfEdgeMesh
                         EdgeVertex.Add(edge.Index, new List<int>() { adjacent.Index });
                     else
                         EdgeVertex[edge.Index].Add(adjacent.Index);
-
                 }
+
                 foreach (MeshFace adjacent in edge.AdjacentFaces())
                 {
                     if (!EdgeFace.ContainsKey(edge.Index))
@@ -184,6 +192,7 @@ namespace AR_Lib.HalfEdgeMesh
                         EdgeFace[edge.Index].Add(adjacent.Index);
                     }
                 }
+
                 foreach (MeshEdge adjacent in edge.AdjacentEdges())
                 {
                     if (!EdgeEdge.ContainsKey(edge.Index))
@@ -202,9 +211,10 @@ namespace AR_Lib.HalfEdgeMesh
         /// Gets the string representation of a given topology dictionary.
         /// </summary>
         /// <param name="dict">Dictionary to convert.</param>
+        /// <returns></returns>
         public string TopologyDictToString(Dictionary<int, List<int>> dict)
         {
-            string finalString = "";
+            string finalString = string.Empty;
 
             foreach (KeyValuePair<int, List<int>> pair in dict)
             {
@@ -213,13 +223,12 @@ namespace AR_Lib.HalfEdgeMesh
                 {
                     tmpString += i + " ";
                 }
+
                 tmpString += "\n";
                 finalString += tmpString;
             }
+
             return finalString;
         }
-
     }
-
-
 }

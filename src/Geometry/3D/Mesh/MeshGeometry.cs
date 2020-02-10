@@ -5,11 +5,10 @@ using AR_Lib.HalfEdgeMesh;
 namespace AR_Lib.Geometry
 {
     /// <summary>
-    /// Represents the geometry of a HE_Mesh such as positions at vertices
+    /// Represents the geometry of a HE_Mesh such as positions at vertices.
     /// </summary>
     public static class MeshGeometry
     {
-
         /// <summary>
         /// Calculate the vector of a specified half-edge.
         /// </summary>
@@ -34,13 +33,13 @@ namespace AR_Lib.Geometry
             MeshHalfEdge halfEdge = edge.HalfEdge;
             Point3d a = halfEdge.Vertex;
             Point3d b = halfEdge.Twin.Vertex;
-            return ((a + b) / 2);
+            return (a + b) / 2;
         }
 
         /// <summary>
-        /// Calculates the mean edge length of the mesh
+        /// Calculates the mean edge length of the mesh.
         /// </summary>
-        /// <returns>The mean edge length of the mesh</returns>
+        /// <returns>The mean edge length of the mesh.</returns>
         public static double MeanEdgeLength(Mesh mesh)
         {
             double sum = 0.0;
@@ -50,9 +49,9 @@ namespace AR_Lib.Geometry
         }
 
         /// <summary>
-        /// Computes the area of the specified face
+        /// Computes the area of the specified face.
         /// </summary>
-        /// <returns>The face area</returns>
+        /// <returns>The face area.</returns>
         /// <param name="face">Face.</param>
         public static double Area(MeshFace face)
         {
@@ -65,7 +64,7 @@ namespace AR_Lib.Geometry
         }
 
         /// <summary>
-        /// Computes the total area of the mesh
+        /// Computes the total area of the mesh.
         /// </summary>
         /// <returns>The mesh area.</returns>
         public static double TotalArea(Mesh mesh)
@@ -77,7 +76,7 @@ namespace AR_Lib.Geometry
         }
 
         /// <summary>
-        /// Compute the normal vector of the specified face
+        /// Compute the normal vector of the specified face.
         /// </summary>
         /// <returns>The normal.</returns>
         /// <param name="face">Face.</param>
@@ -92,7 +91,7 @@ namespace AR_Lib.Geometry
         }
 
         /// <summary>
-        /// Compute the centroid of the specified face
+        /// Compute the centroid of the specified face.
         /// </summary>
         /// <returns>The centroid.</returns>
         /// <param name="face">Face.</param>
@@ -129,8 +128,8 @@ namespace AR_Lib.Geometry
             Vector3d ab = b - a;
             Vector3d w = ab.Cross(ac);
 
-            Vector3d u = (w.Cross(ab)) * ac.LengthSquared;
-            Vector3d v = (ac.Cross(w)) * ab.LengthSquared;
+            Vector3d u = w.Cross(ab) * ac.LengthSquared;
+            Vector3d v = ac.Cross(w) * ab.LengthSquared;
 
             Point3d x = (Point3d)(u + v) / (2 * w.LengthSquared);
 
@@ -138,7 +137,7 @@ namespace AR_Lib.Geometry
         }
 
         /// <summary>
-        /// Compute the orthonormal bases of the specified face
+        /// Compute the orthonormal bases of the specified face.
         /// </summary>
         /// <returns>Array containing the 2 Vector3d.</returns>
         /// <param name="face">Face.</param>
@@ -152,14 +151,14 @@ namespace AR_Lib.Geometry
         }
 
         /// <summary>
-        /// Compute the angle (in radians) at the specified corner
+        /// Compute the angle (in radians) at the specified corner.
         /// </summary>
-        /// <returns>The angle (in radians(</returns>
+        /// <returns>The angle (in radians).</returns>
         /// <param name="corner">Corner.</param>
         public static double Angle(MeshCorner corner)
         {
             Vector3d u = Vector(corner.HalfEdge.Prev).Unit();
-            Vector3d v = (-Vector(corner.HalfEdge.Next).Unit());
+            Vector3d v = -Vector(corner.HalfEdge.Next).Unit();
 
             return Math.Acos(Math.Max(-1, Math.Min(1.0, u.Dot(v))));
         }
@@ -171,14 +170,13 @@ namespace AR_Lib.Geometry
         /// <param name="hE">H e.</param>
         public static double Cotan(MeshHalfEdge hE)
         {
-            if (hE.onBoundary)
+            if (hE.OnBoundary)
                 return 0.0;
 
             Vector3d u = Vector(hE.Prev);
             Vector3d v = -Vector(hE.Next);
 
             return u.Dot(v) / u.Cross(v).Length;
-
         }
 
         /// <summary>
@@ -188,7 +186,7 @@ namespace AR_Lib.Geometry
         /// <param name="hE">H e.</param>
         public static double DihedralAngle(MeshHalfEdge hE)
         {
-            if (hE.onBoundary || hE.Twin.onBoundary)
+            if (hE.OnBoundary || hE.Twin.OnBoundary)
                 return 0.0;
 
             Vector3d n1 = FaceNormal(hE.Face);
@@ -229,13 +227,14 @@ namespace AR_Lib.Geometry
                 double cotAlpha = Cotan(hE.Prev);
                 double cotBeta = Cotan(hE);
 
-                area += (u2 * cotAlpha + v2 * cotBeta) / 8;
+                area += ((u2 * cotAlpha) + (v2 * cotBeta)) / 8;
             }
+
             return area;
         }
 
         /// <summary>
-        /// Computes the equally weighted normal arround the specified vertex
+        /// Computes the equally weighted normal arround the specified vertex.
         /// </summary>
         /// <returns>The normal vector at that vertex.</returns>
         /// <param name="vertex">Vertex.</param>
@@ -249,7 +248,7 @@ namespace AR_Lib.Geometry
         }
 
         /// <summary>
-        /// Computes the area weighted normal arround the specified vertex
+        /// Computes the area weighted normal arround the specified vertex.
         /// </summary>
         /// <returns>The normal vector at that vertex.</returns>
         /// <param name="vertex">Vertex.</param>
@@ -261,13 +260,14 @@ namespace AR_Lib.Geometry
                 Vector3d normal = FaceNormal(f);
                 double area = Area(f);
 
-                n += (normal * area);
+                n += normal * area;
             }
+
             return n.Unit();
         }
 
         /// <summary>
-        /// Computes the angle weighted normal arround the specified vertex
+        /// Computes the angle weighted normal arround the specified vertex.
         /// </summary>
         /// <returns>The normal vector at that vertex.</returns>
         /// <param name="vertex">Vertex.</param>
@@ -279,13 +279,14 @@ namespace AR_Lib.Geometry
                 Vector3d normal = FaceNormal(c.HalfEdge.Face);
                 double angle = Angle(c);
 
-                n += (normal * angle);
+                n += normal * angle;
             }
+
             return n.Unit();
         }
 
         /// <summary>
-        /// Computes the gauss curvature weighted normal arround the specified vertex
+        /// Computes the gauss curvature weighted normal arround the specified vertex.
         /// </summary>
         /// <returns>The normal vector at that vertex.</returns>
         /// <param name="vertex">Vertex.</param>
@@ -295,13 +296,14 @@ namespace AR_Lib.Geometry
             foreach (MeshHalfEdge hE in vertex.AdjacentHalfEdges())
             {
                 double weight = 0.5 * DihedralAngle(hE) / Length(hE.Edge);
-                n -= (Vector(hE) * weight);
+                n -= Vector(hE) * weight;
             }
+
             return n.Unit();
         }
 
         /// <summary>
-        /// Computes the mean curvature weighted normal arround the specified vertex
+        /// Computes the mean curvature weighted normal arround the specified vertex.
         /// </summary>
         /// <returns>The normal vector at that vertex.</returns>
         /// <param name="vertex">Vertex.</param>
@@ -310,14 +312,15 @@ namespace AR_Lib.Geometry
             Vector3d n = new Vector3d();
             foreach (MeshHalfEdge hE in vertex.AdjacentHalfEdges())
             {
-                double weight = 0.5 * Cotan(hE) + Cotan(hE.Twin);
-                n -= (Vector(hE) * weight);
+                double weight = (0.5 * Cotan(hE)) + Cotan(hE.Twin);
+                n -= Vector(hE) * weight;
             }
+
             return n.Unit();
         }
 
         /// <summary>
-        /// Computes the sphere inscribed normal arround the specified vertex
+        /// Computes the sphere inscribed normal arround the specified vertex.
         /// </summary>
         /// <returns>The normal vector at that vertex.</returns>
         /// <param name="vertex">Vertex.</param>
@@ -329,30 +332,31 @@ namespace AR_Lib.Geometry
                 Vector3d u = Vector(c.HalfEdge.Prev);
                 Vector3d v = -Vector(c.HalfEdge.Next);
 
-                n += ((u.Cross(v) / (u.LengthSquared * v.LengthSquared)));
+                n += u.Cross(v) / (u.LengthSquared * v.LengthSquared);
             }
+
             return n.Unit();
         }
 
         /// <summary>
-        /// Computes the angle defect at the given vertex
+        /// Computes the angle defect at the given vertex.
         /// </summary>
         /// <param name="vertex">Vertex to compute angle defect.</param>
-        /// <returns>Number representing the deviation of the current vertex from $2\PI$</returns>
+        /// <returns>Number representing the deviation of the current vertex from $2\PI$.</returns>
         public static double AngleDefect(MeshVertex vertex)
         {
             double angleSum = 0.0;
             foreach (MeshCorner c in vertex.AdjacentCorners())
                 angleSum += Angle(c);
-            //if (vertex.OnBoundary()) angleSum = Math.PI - angleSum;
 
-            return vertex.OnBoundary() ? Math.PI - angleSum : 2 * Math.PI - angleSum;
+            // if (vertex.OnBoundary()) angleSum = Math.PI - angleSum;
+            return vertex.OnBoundary() ? Math.PI - angleSum : (2 * Math.PI) - angleSum;
         }
 
         /// <summary>
-        /// Compute the Gaussian curvature at the given vertex
+        /// Compute the Gaussian curvature at the given vertex.
         /// </summary>
-        /// <param name="vertex">Vertex to compute Gaussian curvature</param>
+        /// <param name="vertex">Vertex to compute Gaussian curvature.</param>
         /// <returns>Number representing the gaussian curvature at that vertex.</returns>
         public static double ScalarGaussCurvature(MeshVertex vertex)
         {
@@ -360,9 +364,9 @@ namespace AR_Lib.Geometry
         }
 
         /// <summary>
-        /// Compute the Mean curvature at the given vertex
+        /// Compute the Mean curvature at the given vertex.
         /// </summary>
-        /// <param name="vertex">Vertex to compute Mean curvature</param>
+        /// <param name="vertex">Vertex to compute Mean curvature.</param>
         /// <returns>Number representing the Mean curvature at that vertex.</returns>
         public static double ScalarMeanCurvature(MeshVertex vertex)
         {
@@ -392,21 +396,20 @@ namespace AR_Lib.Geometry
         /// <returns>Returns an array of 2 values {k1, k2}.</returns>
         public static double[] PrincipalCurvatures(MeshVertex vertex)
         {
-            double A = CircumcentricDualarea(vertex);
-            double H = ScalarMeanCurvature(vertex) / A;
-            double K = AngleDefect(vertex) / A;
+            double a = CircumcentricDualarea(vertex);
+            double h = ScalarMeanCurvature(vertex) / a;
+            double k = AngleDefect(vertex) / a;
 
-            double discriminant = H * H - K;
+            double discriminant = (h * h) - k;
             if (discriminant > 0)
                 discriminant = Math.Sqrt(discriminant);
             else
                 discriminant = 0;
 
-            double k1 = H - discriminant;
-            double k2 = H + discriminant;
+            double k1 = h - discriminant;
+            double k2 = h + discriminant;
 
             return new double[] { k1, k2 };
         }
-
     }
 }

@@ -7,7 +7,6 @@ namespace AR_Lib.HalfEdgeMesh
     /// </summary>
     public class MeshHalfEdge
     {
-
         /// <summary>
         /// The vertex linked to this half-edge.
         /// </summary>
@@ -19,12 +18,12 @@ namespace AR_Lib.HalfEdgeMesh
         public MeshEdge Edge;
 
         /// <summary>
-        /// The face linked to this half-edge
+        /// The face linked to this half-edge.
         /// </summary>
         public MeshFace Face;
 
         /// <summary>
-        /// The corner linked to this half-edge
+        /// The corner linked to this half-edge.
         /// </summary>
         public MeshCorner Corner;
 
@@ -46,15 +45,15 @@ namespace AR_Lib.HalfEdgeMesh
         /// <summary>
         /// Checks if the half-edge lies on a boundary.
         /// </summary>
-        public bool onBoundary;
+        public bool OnBoundary;
 
         /// <summary>
         /// The half-edge index.
         /// </summary>
-        public int Index; // Half-edge index
+        public int Index;
 
         /// <summary>
-        /// Constructs an empty mesh half-edge instance.
+        /// Initializes a new instance of the <see cref="MeshHalfEdge"/> class.
         /// </summary>
         public MeshHalfEdge()
         {
@@ -71,10 +70,10 @@ namespace AR_Lib.HalfEdgeMesh
         /// </summary>
         public MeshFace AdjacentFace => Twin.Face;
 
-
         /// <summary>
         /// Gets the string representation of the half-edge.
         /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return "Half-edge " + this.Index;

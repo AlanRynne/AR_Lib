@@ -20,21 +20,27 @@ namespace AR_Lib.Geometry
         public double Y { get; set; }
 
         /// <summary>
-        /// Construct a new vector from another vector.
+        /// Initializes a new instance of the <see cref="Vector2d"/> class from another vector.
         /// </summary>
         /// <param name="vector">Vector to duplicate.</param>
         /// <returns>New vector with same values.</returns>
-        public Vector2d(Vector2d vector) : this(vector.X, vector.Y) { }
+        public Vector2d(Vector2d vector)
+            : this(vector.X, vector.Y)
+        {
+        }
 
         /// <summary>
-        /// Construct a new vector from a point.
+        /// Initializes a new instance of the <see cref="Vector2d"/> class from a point.
         /// </summary>
         /// <param name="point">Point to convert.</param>
         /// <returns>New vector with same values.</returns>
-        public Vector2d(Point2d point) : this(point.X, point.Y) { }
+        public Vector2d(Point2d point)
+        : this(point.X, point.Y)
+        {
+        }
 
         /// <summary>
-        /// Construct a new vector from it's coordinates.
+        /// Initializes a new instance of the <see cref="Vector2d"/> class.
         /// </summary>
         /// <param name="x">X coordinate.</param>
         /// <param name="y">Y coordinate.</param>
@@ -47,10 +53,10 @@ namespace AR_Lib.Geometry
         /// <summary>
         /// Gets the squared length of the vector.
         /// </summary>
-        public double LengthSquared => X * X + Y * Y;
+        public double LengthSquared => (X * X) + (Y * Y);
 
         /// <summary>
-        /// Gets the length of the vector
+        /// Gets the length of the vector.
         /// </summary>
         public double Length => Math.Sqrt(this.LengthSquared);
 
@@ -70,10 +76,10 @@ namespace AR_Lib.Geometry
             this.Y /= length;
         }
 
-
         /// <summary>
         /// Returns a CCW perpendicular vector to the current instance.
         /// </summary>
+        /// <returns></returns>
         public Vector2d Perp() => new Vector2d(-Y, X);
 
         /// <summary>
@@ -81,63 +87,64 @@ namespace AR_Lib.Geometry
         /// </summary>
         /// <param name="vector">Vector to compute dot-product with.</param>
         /// <returns>Dot product result.</returns>
-        public double DotProduct(Vector2d vector) => X * vector.X + Y * vector.Y;
+        public double DotProduct(Vector2d vector) => (X * vector.X) + (Y * vector.Y);
 
         /// <summary>
         /// Computes the perp product between this vector and the given one.
         /// </summary>
         /// <param name="vector">Vector to compute perp-product with.</param>
         /// <returns>Perp product result.</returns>
-        public double PerpProduct(Vector2d vector) => X * vector.Y - Y * vector.X;
+        public double PerpProduct(Vector2d vector) => (X * vector.Y) - (Y * vector.X);
 
 
         #region Operators
 
         /// <summary>
-        /// Sums two vectors together
+        /// Sums two vectors together.
         /// </summary>
-        /// <param name="v">Vector A</param>
-        /// <param name="v2">Vector B</param>
+        /// <param name="v">Vector A.</param>
+        /// <param name="v2">Vector B.</param>
         public static Vector2d operator +(Vector2d v, Vector2d v2) => new Vector2d(v.X + v2.X, v.Y + v2.Y);
 
         /// <summary>
-        /// Substracts one vector from another
+        /// Substracts one vector from another.
         /// </summary>
-        /// <param name="v">Vector A</param>
-        /// <param name="v2">Vector B</param>
+        /// <param name="v">Vector A.</param>
+        /// <param name="v2">Vector B.</param>
         public static Vector2d operator -(Vector2d v, Vector2d v2) => new Vector2d(v.X - v2.X, v.Y - v2.Y);
 
         /// <summary>
-        /// Multiplies a vector with a number
+        /// Multiplies a vector with a number.
         /// </summary>
-        /// <param name="v">Vector</param>
-        /// <param name="scalar">Number to multiply vector with</param>
+        /// <param name="v">Vector.</param>
+        /// <param name="scalar">Number to multiply vector with.</param>
         public static Vector2d operator *(Vector2d v, double scalar) => new Vector2d(v.X * scalar, v.Y * scalar);
+
         /// <summary>
-        /// Multiplies a vector with a number
+        /// Multiplies a vector with a number.
         /// </summary>
-        /// <param name="v">Vector</param>
-        /// <param name="scalar">Number to multiply vector with</param>
+        /// <param name="v">Vector.</param>
+        /// <param name="scalar">Number to multiply vector with.</param>
         public static Vector2d operator *(double scalar, Vector2d v) => new Vector2d(v.X * scalar, v.Y * scalar);
 
         /// <summary>
         /// Negates the values of the vector.
         /// </summary>
-        /// <param name="v">Vector</param>
+        /// <param name="v">Vector.</param>
         public static Vector2d operator -(Vector2d v) => new Vector2d(-v.X, -v.Y);
 
         /// <summary>
-        /// Divides a vector with a number
+        /// Divides a vector with a number.
         /// </summary>
-        /// <param name="v">Vector</param>
-        /// <param name="scalar">Number to divide vector with</param>
+        /// <param name="v">Vector.</param>
+        /// <param name="scalar">Number to divide vector with.</param>
         public static Vector2d operator /(Vector2d v, double scalar) => new Vector2d(v.X / scalar, v.Y / scalar);
 
         /// <summary>
         /// Checks for equality between two vectors.
         /// </summary>
-        /// <param name="v">Vector A</param>
-        /// <param name="w">Vector B</param>
+        /// <param name="v">Vector A.</param>
+        /// <param name="w">Vector B.</param>
         public static bool operator ==(Vector2d v, Vector2d w) => v.Equals(w);
 
         /// <summary>
@@ -154,6 +161,7 @@ namespace AR_Lib.Geometry
         /// <summary>
         /// Gets the string representation of the vector.
         /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return @"Vector3d [{X}, {Y}]";
@@ -171,12 +179,14 @@ namespace AR_Lib.Geometry
                 Vector2d vect = obj as Vector2d;
                 return this.X == vect.X && this.Y == vect.Y ? true : false;
             }
+
             return false;
         }
 
         /// <summary>
-        /// Get the hashCode of the vector
+        /// Get the hashCode of the vector.
         /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -186,8 +196,8 @@ namespace AR_Lib.Geometry
                 const int HashingMultiplier = 16777619;
 
                 int hash = HashingBase;
-                hash = (hash * HashingMultiplier) ^ (!Object.ReferenceEquals(null, X) ? X.GetHashCode() : 0);
-                hash = (hash * HashingMultiplier) ^ (!Object.ReferenceEquals(null, Y) ? Y.GetHashCode() : 0);
+                hash = (hash * HashingMultiplier) ^ (!ReferenceEquals(null, X) ? X.GetHashCode() : 0);
+                hash = (hash * HashingMultiplier) ^ (!ReferenceEquals(null, Y) ? Y.GetHashCode() : 0);
                 return hash;
             }
         }

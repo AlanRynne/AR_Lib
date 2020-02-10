@@ -10,18 +10,24 @@
 
     <ItemGroup>
         <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+        <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+          <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
     </ItemGroup>
 
     <!-- Add resource files -->
 
     <ItemGroup>
-        <EmbeddedResource Include="Data\Settings.json" />
+        <EmbeddedResource Include="Data/Settings.json" />
     </ItemGroup>
+
 
     <!-- Export XML coments on build -->
 
     <PropertyGroup>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <CodeAnalysisRuleSet>CustomCodeAnalysisRules.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
 
 </Project>

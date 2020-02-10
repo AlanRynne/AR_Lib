@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
 using AR_Lib.Geometry;
 
 namespace AR_Lib.HalfEdgeMesh
@@ -13,13 +13,14 @@ namespace AR_Lib.HalfEdgeMesh
         /// The half-edge this vertex is attached to.
         /// </summary>
         public MeshHalfEdge HalfEdge;
+
         /// <summary>
         /// The index of the vertex.
         /// </summary>
         public int Index;
 
         /// <summary>
-        /// Dictionary of user values
+        /// Gets or sets dictionary of user values.
         /// </summary>
         /// <value></value>
         public Dictionary<string, double> UserValues
@@ -32,6 +33,7 @@ namespace AR_Lib.HalfEdgeMesh
                 else
                     return userValues;
             }
+
             set
             {
                 userValues = value;
@@ -43,143 +45,164 @@ namespace AR_Lib.HalfEdgeMesh
         // Constructor
 
         /// <summary>
-        /// Constructs an empty mesh vertex.
+        /// Initializes a new instance of the <see cref="MeshVertex"/> class.
         /// </summary>
-        public MeshVertex() : base() { userValues = new Dictionary<string, double>(); }
+        public MeshVertex()
+            : base()
+        {
+            userValues = new Dictionary<string, double>();
+        }
 
         /// <summary>
-        /// Constructs a new mesh vertex from a 3D point.
+        /// Initializes a new instance of the <see cref="MeshVertex"/> class from a 3D point.
         /// </summary>
         /// <param name="pt">Point to copy coordinates from.</param>
-        public MeshVertex(Point3d pt) : base(pt) { userValues = new Dictionary<string, double>(); }
+        public MeshVertex(Point3d pt)
+            : base(pt)
+        {
+            userValues = new Dictionary<string, double>();
+        }
 
         /// <summary>
-        /// Constructs a new mesh vertex from it's cartesian coordiantes.
+        /// Initializes a new instance of the <see cref="MeshVertex"/> class from it's cartesian coordiantes.
         /// </summary>
         /// <param name="x">X Coordiante.</param>
         /// <param name="y">Y Coordinate.</param>
         /// <param name="z">Z Coordinate.</param>
-        public MeshVertex(double x, double y, double z) : base(x, y, z) { userValues = new Dictionary<string, double>(); }
+        public MeshVertex(double x, double y, double z)
+            : base(x, y, z)
+        {
+            userValues = new Dictionary<string, double>();
+        }
 
         // Calculate the valence of a vertex
 
         /// <summary>
-        /// Computes the valence of the vertex
+        /// Computes the valence of the vertex.
         /// </summary>
+        /// <returns></returns>
         public int Valence() => AdjacentHalfEdges().Count;
 
         /// <summary>
-        /// Check if vertex is isolated, meaning corresponding half-edge is null
+        /// Check if vertex is isolated, meaning corresponding half-edge is null.
         /// </summary>
+        /// <returns></returns>
         public bool IsIsolated() => this.HalfEdge == null;
 
         /// <summary>
-        /// Check if vertex is on mesh boundary
+        /// Check if vertex is on mesh boundary.
         /// </summary>
+        /// <returns></returns>
         public bool OnBoundary()
         {
             foreach (MeshHalfEdge halfEdge in AdjacentHalfEdges())
             {
-                if (halfEdge.onBoundary)
+                if (halfEdge.OnBoundary)
                     return true;
             }
+
             return false;
         }
 
         /// <summary>
-        /// Returns a list with all adjacent HE_HalfEdge of this vertex
+        /// Returns a list with all adjacent HE_HalfEdge of this vertex.
         /// </summary>
+        /// <returns></returns>
         public List<MeshHalfEdge> AdjacentHalfEdges()
         {
-            MeshHalfEdge _halfEdge = this.HalfEdge;
-            List<MeshHalfEdge> _halfEdges = new List<MeshHalfEdge>();
+            MeshHalfEdge halfEdge = this.HalfEdge;
+            List<MeshHalfEdge> halfEdges = new List<MeshHalfEdge>();
             do
             {
-                _halfEdges.Add(_halfEdge);
-                _halfEdge = _halfEdge.Twin.Next;
+                halfEdges.Add(halfEdge);
+                halfEdge = halfEdge.Twin.Next;
             }
-            while (_halfEdge != this.HalfEdge);
+            while (halfEdge != this.HalfEdge);
 
-            return _halfEdges;
-
+            return halfEdges;
         }
 
         /// <summary>
-        /// Returns a list with all adjacent HE_Face of a vertex
+        /// Returns a list with all adjacent HE_Face of a vertex.
         /// </summary>
+        /// <returns></returns>
         public List<MeshFace> AdjacentFaces()
         {
-            MeshHalfEdge _halfEdge = this.HalfEdge;
-            List<MeshFace> _faces = new List<MeshFace>();
+            MeshHalfEdge halfEdge = this.HalfEdge;
+            List<MeshFace> faces = new List<MeshFace>();
             do
             {
-                if (!_halfEdge.onBoundary)
-                    _faces.Add(_halfEdge.Face);
-                _halfEdge = _halfEdge.Twin.Next;
+                if (!halfEdge.OnBoundary)
+                    faces.Add(halfEdge.Face);
+                halfEdge = halfEdge.Twin.Next;
             }
-            while (_halfEdge != this.HalfEdge);
+            while (halfEdge != this.HalfEdge);
 
-            return _faces;
+            return faces;
         }
 
         /// <summary>
-        /// Returns a list with all the adjacent HE_Vertex of this vertex
+        /// Returns a list with all the adjacent HE_Vertex of this vertex.
         /// </summary>
+        /// <returns></returns>
         public List<MeshVertex> AdjacentVertices()
         {
-            List<MeshVertex> _vertices = new List<MeshVertex>();
-            MeshHalfEdge _halfEdge = this.HalfEdge;
+            List<MeshVertex> vertices = new List<MeshVertex>();
+            MeshHalfEdge halfEdge = this.HalfEdge;
             do
             {
-                _vertices.Add(_halfEdge.Twin.Vertex);
-                _halfEdge = _halfEdge.Twin.Next;
-            } while (_halfEdge != this.HalfEdge);
+                vertices.Add(halfEdge.Twin.Vertex);
+                halfEdge = halfEdge.Twin.Next;
+            }
+            while (halfEdge != this.HalfEdge);
 
-            return _vertices;
+            return vertices;
         }
 
         /// <summary>
-        /// Returns a list with all the adjacent HE_Edge of this vertex
+        /// Returns a list with all the adjacent HE_Edge of this vertex.
         /// </summary>
+        /// <returns></returns>
         public List<MeshEdge> AdjacentEdges()
         {
-            List<MeshEdge> _edges = new List<MeshEdge>();
-            MeshHalfEdge _halfEdge = this.HalfEdge;
+            List<MeshEdge> edges = new List<MeshEdge>();
+            MeshHalfEdge halfEdge = this.HalfEdge;
             do
             {
-                _edges.Add(_halfEdge.Edge);
-                _halfEdge = _halfEdge.Twin.Next;
+                edges.Add(halfEdge.Edge);
+                halfEdge = halfEdge.Twin.Next;
+            }
+            while (halfEdge != this.HalfEdge);
 
-            } while (_halfEdge != this.HalfEdge);
-
-            return _edges;
+            return edges;
         }
 
         /// <summary>
-        /// Returns a list with all the adjacent HE_Corners of this vertex
+        /// Returns a list with all the adjacent HE_Corners of this vertex.
         /// </summary>
+        /// <returns></returns>
         public List<MeshCorner> AdjacentCorners()
         {
-            List<MeshCorner> _corners = new List<MeshCorner>();
-            MeshHalfEdge _halfEdge = this.HalfEdge;
+            List<MeshCorner> corners = new List<MeshCorner>();
+            MeshHalfEdge halfEdge = this.HalfEdge;
             do
             {
-                if (!_halfEdge.onBoundary)
-                    _corners.Add(_halfEdge.Next.Corner);
-                _halfEdge = _halfEdge.Twin.Next;
+                if (!halfEdge.OnBoundary)
+                    corners.Add(halfEdge.Next.Corner);
+                halfEdge = halfEdge.Twin.Next;
+            }
+            while (halfEdge != this.HalfEdge);
 
-            } while (_halfEdge != this.HalfEdge);
-
-            return _corners;
+            return corners;
         }
 
         /// <summary>
         /// Returns the string representation of this vertex.
         /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return "V " + Index;
         }
     }
-
 }

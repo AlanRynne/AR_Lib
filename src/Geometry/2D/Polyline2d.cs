@@ -9,7 +9,6 @@ namespace AR_Lib.Geometry
     /// </summary>
     public class Polyline2d
     {
-
         #region Fields
 
         private List<Point2d> vertices;
@@ -23,7 +22,7 @@ namespace AR_Lib.Geometry
         #region Constructor
 
         /// <summary>
-        /// Creates a new 2d polyline
+        /// Initializes a new instance of the <see cref="Polyline2d"/> class.
         /// </summary>
         /// <param name="vertices">Vertices of the polyline.</param>
         /// <param name="closed">Determine if polyline should be closed or not.</param>
@@ -48,6 +47,7 @@ namespace AR_Lib.Geometry
             {
                 return vertices;
             }
+
             set
             {
                 vertices = value;
@@ -68,19 +68,20 @@ namespace AR_Lib.Geometry
                 return segments;
             }
         }
+
         /// <summary>
-        /// The domain of the polyline.
+        /// Gets the domain of the polyline.
         /// </summary>
         public Interval Domain => domain;
 
         /// <summary>
-        /// Get the bounding box of the polyline.
+        /// Gets the bounding box of the polyline.
         /// </summary>
         /// <returns>2D bounding box.</returns>
         public BoundingBox2d BoundingBox => new BoundingBox2d(this);
 
         /// <summary>
-        /// Gets the length of the polyline
+        /// Gets the length of the polyline.
         /// </summary>
         /// <value></value>
         public double Length
@@ -97,7 +98,7 @@ namespace AR_Lib.Geometry
         }
 
         /// <summary>
-        /// Determines if the polyline is closed
+        /// Determines if the polyline is closed.
         /// </summary>
         /// <value>True if closed.</value>
         public bool IsClosed
@@ -116,6 +117,7 @@ namespace AR_Lib.Geometry
                 {
                     vertices.Add(vertices[0]);
                 }
+
                 isClosed = value;
                 RebuildSegments();
             }
@@ -130,8 +132,8 @@ namespace AR_Lib.Geometry
         public double Area()
         {
             if (!isClosed)
-                return 0; // Return 0 if polyline is not closed
-            List<Point2d> V = vertices;
+                return 0;
+            List<Point2d> v = vertices;
             int n = vertices.Count;
             double area = 0;
             int i, j, k;
@@ -141,9 +143,10 @@ namespace AR_Lib.Geometry
 
             for (i = 1, j = 2, k = 0; i < n; i++, j++, k++)
             {
-                area += V[i].X * (V[j].Y - V[k].Y);
+                area += v[i].X * (v[j].Y - v[k].Y);
             }
-            area += V[n].X * (V[1].Y - V[n - 1].Y);  // wrap-around term
+
+            area += v[n].X * (v[1].Y - v[n - 1].Y);  // wrap-around term
             return area / 2.0;
         }
 
@@ -160,6 +163,7 @@ namespace AR_Lib.Geometry
         {
             if (!isClosed)
                 throw new Exception("Cannot compute orientation in an Open polyline");
+
             // first find rightmost lowest vertex of the polygon
             int rmin = 0;
             double xmin = vertices[0].X;
@@ -170,10 +174,14 @@ namespace AR_Lib.Geometry
                 if (vertices[i].Y > ymin)
                     continue;
                 if (vertices[i].Y == ymin)
-                {   // just as low
-                    if (vertices[i].X < xmin)  // and to left
+                {
+                    // just as low
+                    if (vertices[i].X < xmin)
+                    {// and to left
                         continue;
+                    }
                 }
+
                 rmin = i;      // a new rightmost lowest vertex
                 xmin = vertices[i].X;
                 ymin = vertices[i].Y;
@@ -197,7 +205,6 @@ namespace AR_Lib.Geometry
         /// </summary>
         public void Reparametrize()
         {
-
             double maxParameter = domain.End;
             double ratio = 1 / domain.End;
 
@@ -205,7 +212,7 @@ namespace AR_Lib.Geometry
 
             segments.ForEach(segment =>
             {
-                double nextParam = currentParam + segment.Domain.Length * ratio;
+                double nextParam = currentParam + (segment.Domain.Length * ratio);
                 segment.Domain = new Interval(currentParam, nextParam);
                 currentParam = nextParam;
             });
@@ -224,9 +231,10 @@ namespace AR_Lib.Geometry
                 Line2d line = BuildSegment(ref currentParam, vertA, vertB);
                 segments.Add(line);
             }
-            domain = new Interval(0, currentParam);
 
+            domain = new Interval(0, currentParam);
         }
+
         private Line2d BuildSegment(ref double currentParam, Point2d vertA, Point2d vertB)
         {
             Line2d line = new Line2d(vertA, vertB);
