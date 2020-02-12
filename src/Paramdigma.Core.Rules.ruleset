@@ -2,7 +2,7 @@
 <RuleSet Name="StyleCop rules for Core Application" Description="Custom Rules" ToolsVersion="10.0">
     <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.CSharp.ReadabilityRules">
         <Rule Id="SA1101" Action="None" />
-        <!-- <Rule Id="SA1124" Action="None" /> -->
+        <Rule Id="SA1124" Action="Info" />
 
         <!-- Code ordering rules -->
         <Rule Id="SA1200" Action="None" /> <!-- Using must be inside namespace -->
@@ -30,16 +30,16 @@
         <Rule Id="SA1648" Action="None" />
     </Rules>
     <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
-        <Rule Id="CA1021" Action="Error" />
+        <Rule Id="CA1021" Action="Warning" />
         <Rule Id="CA1062" Action="None" />
-        <Rule Id="CA1303" Action="None" />
-        <Rule Id="CA1305" Action="None" />
+        <Rule Id="CA1303" Action="Info" />
+        <Rule Id="CA1305" Action="Info" />
         <Rule Id="CA1307" Action="None" />
         <Rule Id="CA1710" Action="Info" />
         <Rule Id="CA1814" Action="None" /> <!-- Jagged arrays -->
         <Rule Id="CA1815" Action="Info" />
+        <Rule Id="CA1822" Action="Info" />
         <Rule Id="CA2225" Action="None" />
         <Rule Id="CA2227" Action="None" />
-        <Rule Id="CA1822" Action="Info" />
     </Rules>
 </RuleSet>

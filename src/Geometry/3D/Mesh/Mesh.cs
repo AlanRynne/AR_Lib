@@ -13,32 +13,50 @@ namespace Paramdigma.Core.HalfEdgeMesh
         /// <summary>
         /// Gets or sets the vertices of the mesh.
         /// </summary>
-        public List<MeshVertex> Vertices { get; set; }
+        public List<MeshVertex> Vertices
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Gets or sets the edges of the mesh.
         /// </summary>
-        public List<MeshEdge> Edges { get; set; }
+        public List<MeshEdge> Edges
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Gets or sets the faces of the mesh.
         /// </summary>
-        public List<MeshFace> Faces { get; set; }
+        public List<MeshFace> Faces
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Gets or sets the corners of the mesh.
         /// </summary>
-        public List<MeshCorner> Corners { get; set; }
+        public List<MeshCorner> Corners
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Gets or sets the half-edges of the mesh.
         /// </summary>
-        public List<MeshHalfEdge> HalfEdges { get; set; }
+        public List<MeshHalfEdge> HalfEdges
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Gets or sets the boundaries of the mesh.
         /// </summary>
-        public List<MeshFace> Boundaries { get; set; }
+        public List<MeshFace> Boundaries
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Gets the euler characteristic of the mesh.
@@ -68,10 +86,10 @@ namespace Paramdigma.Core.HalfEdgeMesh
         {
             // There are 3 steps for this process
             // - Iterate through vertices, create vertex objects
-            CreateVertices(vertices);
+            this.CreateVertices(vertices);
 
             // - Iterate through faces, creating face, edge, and halfedge objects (and connecting where possible)
-            CreateFaces(faceIndexes);
+            this.CreateFaces(faceIndexes);
         }
 
         /// <summary>

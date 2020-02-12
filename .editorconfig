@@ -237,7 +237,7 @@ csharp_space_between_square_brackets=false
 # Wrapping options
 # https://docs.microsoft.com/visualstudio/ide/editorconfig-formatting-conventions#wrap-options
 csharp_preserve_single_line_statements=false
-csharp_preserve_single_line_blocks=true
+csharp_preserve_single_line_blocks=false
 
 ##########################################
 # .NET Naming Conventions
@@ -350,7 +350,7 @@ dotnet_naming_symbols.stylecop_local_fields_group.applicable_accessibilities=loc
 dotnet_naming_symbols.stylecop_local_fields_group.applicable_kinds=local
 dotnet_naming_rule.stylecop_local_fields_must_be_camel_case_rule.symbols=stylecop_local_fields_group
 dotnet_naming_rule.stylecop_local_fields_must_be_camel_case_rule.style=camel_case_style
-dotnet_naming_rule.stylecop_local_fields_must_be_camel_case_rule.severity=silent
+dotnet_naming_rule.stylecop_local_fields_must_be_camel_case_rule.severity=warning
 
 # This rule should never fire.  However, it's included for at least two purposes:
 # First, it helps to understand, reason about, and root-case certain types of issues, such as bugs in .editorconfig parsers.

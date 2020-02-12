@@ -9,158 +9,276 @@ namespace Paramdigma.Core.Geometry
     /// </summary>
     public static class NurbsCalculator
     {
-#pragma warning disable
-        public static Point3d Horner1(Point3d[] a, int n, double u0)
+        /// <summary>
+        /// Compute a point on a power basis curve.
+        /// </summary>
+        /// <param name="points">Curve points.</param>
+        /// <param name="degree">Curve degree.</param>
+        /// <param name="t">Parameter.</param>
+        /// <returns>Computed point on curve.</returns>
+        public static Point3d Horner1(Point3d[] points, int degree, double t)
         {
-            var C = a[n];
-            for (int i = n - 1; i >= 0; i--)
-                C = (C * u0) + a[i];
-            return C;
+            var c = points[degree];
+            for (int i = degree - 1; i >= 0; i--)
+                c = (c * t) + points[i];
+            return c;
         }
 
-        public static double Bernstein(int i, int n, double u)
+        /// <summary>
+        /// Compute the value of a Bernstein polynomial.
+        /// </summary>
+        /// <param name="index">Index of point to compute polynomial of.</param>
+        /// <param name="degree">Degree of curve.</param>
+        /// <param name="t">Parameter.</param>
+        /// <returns></returns>
+        public static double Bernstein(int index, int degree, double t)
         {
             var temp = new List<double>();
-            for (int j = 0; j <= n; j++)
+            for (int j = 0; j <= degree; j++)
+            {
                 temp.Add(0.0);
-            temp[n - i] = 1.0;
+            }
 
-            var u1 = 1.0 - u;
-            for (int k = 1; k <= n; k++)
-                for (int j = n; j >= k; j--)
-                    temp[j] = (u1 * temp[j]) + (u * temp[j - 1]);
+            temp[degree - index] = 1.0;
 
-            return temp[n];
+            var u1 = 1.0 - t;
+            for (var k = 1; k <= degree; k++)
+            {
+                for (var j = degree; j >= k; j--)
+                {
+                    temp[j] = (u1 * temp[j]) + (t * temp[j - 1]);
+                }
+            }
+
+            return temp[degree];
         }
 
-        public static Point3d Horner2(Matrix<Point3d> a, int n, int m, double u0, double v0)
+        /// <summary>
+        /// Compute point on a power basis surface.
+        /// </summary>
+        /// <param name="controlPoints">Control point matrix.</param>
+        /// <param name="degreeU">Surface degree in the U direction.</param>
+        /// <param name="degreeV">Surface degree in the V direction.</param>
+        /// <param name="u">U parameter to compute.</param>
+        /// <param name="v">V parameter to compute.</param>
+        /// <returns>Computed point on the surface.</returns>
+        public static Point3d Horner2(Matrix<Point3d> controlPoints, int degreeU, int degreeV, double u, double v)
         {
-            var b = new Point3d[n];
-            for (int i = 0; i <= n; i++)
-                b[i] = Horner1(a.Row(i), m, v0);
-            return Horner1(b, n, u0);
+            var b = new Point3d[degreeU];
+            for (int i = 0; i <= degreeU; i++)
+                b[i] = Horner1(controlPoints.Row(i), degreeV, v);
+            return Horner1(b, degreeU, u);
         }
 
-        public static double[] AllBernstein(int n, double u)
+        /// <summary>
+        /// Compute all nth-degree Bernstein polynomials.
+        /// </summary>
+        /// <param name="degree">Curve degree.</param>
+        /// <param name="t">Parameter.</param>
+        /// <returns></returns>
+        public static double[] AllBernstein(int degree, double t)
         {
-            var B = new double[n + 1];
-            B[0] = 1.0;
-            double u1 = 1.0 - u;
-            for (int j = 1; j <= n; j++)
+            var b = new double[degree + 1];
+            b[0] = 1.0;
+            double u1 = 1.0 - t;
+            for (int j = 1; j <= degree; j++)
             {
                 var saved = 0.0;
                 for (int k = 0; k < j; k++)
                 {
-                    var temp = B[k];
-                    B[k] = saved + (u1 * temp);
-                    saved = u * temp;
+                    var temp = b[k];
+                    b[k] = saved + (u1 * temp);
+                    saved = t * temp;
                 }
-                B[j] = saved;
+
+                b[j] = saved;
             }
-            return B;
+
+            return b;
         }
 
-        public static Point3d PointOnBezierCurve(List<Point3d> P, int n, double u)
+        /// <summary>
+        /// Compute point on Bezier curve.
+        /// </summary>
+        /// <param name="controlPoints">Control ponts of the curve.</param>
+        /// <param name="degree">Curve degree.</param>
+        /// <param name="t">Parameter to compute.</param>
+        /// <returns></returns>
+        public static Point3d PointOnBezierCurve(List<Point3d> controlPoints, int degree, double t)
         {
-            Point3d C = new Point3d();
+            Point3d c = new Point3d();
 
-            double[] B = AllBernstein(n, u);
-            for (int k = 0; k <= n; k++)
-                C += B[k] * P[k];
+            double[] b = AllBernstein(degree, t);
+            for (int k = 0; k <= degree; k++)
+                c += b[k] * controlPoints[k];
 
-            return C;
+            return c;
         }
 
-        public static Point3d DeCasteljau1(Point3d[] P, int n, double u)
+        /// <summary>
+        /// Compute point on a Bézier curve by deCasteljau.
+        /// </summary>
+        /// <param name="controlPoints">Control points of the curve.</param>
+        /// <param name="degree">Curve degree.</param>
+        /// <param name="t">Parameter of point to compute.</param>
+        /// <returns>Computed point along the Bézier curve.</returns>
+        public static Point3d DeCasteljau1(Point3d[] controlPoints, int degree, double t)
         {
-            var Q = new Point3d[n + 1];
-            for (int i = 0; i <= n; i++)
-                Q[i] = new Point3d(P[i]);
-            for (int k = 1; k <= n; k++)
-                for (int i = 0; i <= n - k; i++)
-                    Q[i] = ((1.0 - u) * Q[i]) + (u * Q[i + 1]);
-            return Q[0];
-        }
-
-        public static Point3d DeCasteljau2(Matrix<Point3d> P, int n, int m, double u0, double v0)
-        {
-            var Q = new List<Point3d>();
-            if (n <= m)
+            var q = new Point3d[degree + 1];
+            for (var i = 0; i <= degree; i++)
             {
-                for (int j = 0; j <= m; j++)
-                    Q.Add(DeCasteljau1(P.Row(j), n, u0));
-                return DeCasteljau1(Q.ToArray(), m, v0);
+                q[i] = new Point3d(controlPoints[i]);
+            }
+
+            for (var k = 1; k <= degree; k++)
+            {
+                for (var i = 0; i <= degree - k; i++)
+                {
+                    q[i] = ((1.0 - t) * q[i]) + (t * q[i + 1]);
+                }
+            }
+
+            return q[0];
+        }
+
+        /// <summary>
+        /// Compute a point on a Bézier surface by deCasteljau.
+        /// </summary>
+        /// <param name="controlPoints">Control points of the curve.</param>
+        /// <param name="degreeU">Surface degree in the U direction.</param>
+        /// <param name="degreeV">Surface degree in the V direction.</param>
+        /// <param name="u">U parameter to compute.</param>
+        /// <param name="v">V parameter to compute.</param>
+        /// <returns>The computed point.</returns>
+        public static Point3d DeCasteljau2(Matrix<Point3d> controlPoints, int degreeU, int degreeV, double u, double v)
+        {
+            var q = new List<Point3d>();
+            if (degreeU <= degreeV)
+            {
+                for (var j = 0; j <= degreeV; j++)
+                {
+                    q.Add(DeCasteljau1(controlPoints.Row(j), degreeU, u));
+                }
+
+                return DeCasteljau1(q.ToArray(), degreeV, v);
             }
             else
             {
-                for (int i = 0; i <= n; i++)
-                    Q.Add(DeCasteljau1(P.Column(i), n, u0));
-                return DeCasteljau1(Q.ToArray(), n, u0);
+                for (int i = 0; i <= degreeU; i++)
+                    q.Add(DeCasteljau1(controlPoints.Column(i), degreeU, u));
+                return DeCasteljau1(q.ToArray(), degreeU, u);
             }
         }
 
-        public static int FindSpan(int n, int p, double u, IList<double> U)
+        /// <summary>
+        /// Determine the knot span index.
+        /// </summary>
+        /// <param name="n">Degree.</param>
+        /// <param name="degree">????.</param>
+        /// <param name="t">Paramter.</param>
+        /// <param name="knotVector">Knot vector.</param>
+        /// <returns>The knot span index.</returns>
+        public static int FindSpan(int n, int degree, double t, IList<double> knotVector)
         {
-            if (u == U[n + 1])
-                return n;
-            int low = p;
-            int high = n + 1;
-            int mid = (low + high) / 2;
-            while (u < U[mid] || u >= U[mid + 1])
+            if (t == knotVector[n + 1])
             {
-                if (u < U[mid])
+                return n;
+            }
+
+            var low = degree;
+            var high = n + 1;
+            var mid = (low + high) / 2;
+            while (t < knotVector[mid] || t >= knotVector[mid + 1])
+            {
+                if (t < knotVector[mid])
+                {
                     high = mid;
+                }
                 else
+                {
                     low = mid;
+                }
+
                 mid = (low + high) / 2;
             }
+
             return mid;
         }
 
-        public static double[,] AllBasisFuns(int span, double u, int p, IList<double> U)
+        /// <summary>
+        /// Compute all non-zero basis functions of all degrees from 0 to "degree".
+        /// </summary>
+        /// <param name="span">Knot span index.</param>
+        /// <param name="param">Parameter to compute.</param>
+        /// <param name="degree">Degree.</param>
+        /// <param name="knotVector">The knot vector.</param>
+        /// <returns>List with all non-zero basis functions up to the specified degree.</returns>
+        public static double[,] AllBasisFuns(int span, double param, int degree, IList<double> knotVector)
         {
-            var N = new double[p + 1, p + 1];
-            for (int i = 0; i <= p; i++)
+            var n = new double[degree + 1, degree + 1];
+            for (int i = 0; i <= degree; i++)
+            {
                 for (int j = 0; j <= i; j++)
-                    N[j, i] = OneBasisFun(p, U.Count - 1, U, span - i + j, u);
-            return N;
+                    n[j, i] = OneBasisFun(degree, knotVector.Count - 1, knotVector, span - i + j, param);
+            }
+
+            return n;
         }
 
-        public static double[] BasisFuns(int i, double u, int p, IList<double> U)
+        /// <summary>
+        /// Computes the basis functions of a span.
+        /// </summary>
+        /// <param name="span">Knot span.</param>
+        /// <param name="param">Parameter to compute.</param>
+        /// <param name="degree">Degree.</param>
+        /// <param name="knotVector">Knot vector.</param>
+        /// <returns>List of the basis functions of the specific span.</returns>
+        public static double[] BasisFuns(int span, double param, int degree, IList<double> knotVector)
         {
-            var N = new double[p + 1];
-            var left = new double[p + 1];
-            var right = new double[p + 1];
-            N[0] = 1.0;
-            for (int j = 1; j <= p; j++)
+            var basisFunctions = new double[degree + 1];
+            var left = new double[degree + 1];
+            var right = new double[degree + 1];
+            basisFunctions[0] = 1.0;
+            for (var j = 1; j <= degree; j++)
             {
-                left[j] = u - U[i + 1 - j];
-                right[j] = U[i + j] - u;
+                left[j] = param - knotVector[span + 1 - j];
+                right[j] = knotVector[span + j] - param;
                 var saved = 0.0;
-                for (int r = 0; r < j; r++)
+                for (var r = 0; r < j; r++)
                 {
-                    var temp = N[r] / (right[r + 1] + left[j - r]);
-                    N[r] = saved + (right[r + 1] * temp);
+                    var temp = basisFunctions[r] / (right[r + 1] + left[j - r]);
+                    basisFunctions[r] = saved + (right[r + 1] * temp);
                     saved = left[j - r] * temp;
                 }
-                N[j] = saved;
+
+                basisFunctions[j] = saved;
             }
-            return N;
+
+            return basisFunctions;
         }
 
-        public static Matrix<double> DersBasisFuns(int i, double u, int p, int n, IList<double> U)
+        /// <summary>
+        /// Compute nonzero basis functions and their derivatives at a specified parameter.
+        /// </summary>
+        /// <param name="span">Knot span.</param>
+        /// <param name="param">Parameter.</param>
+        /// <param name="degree">Degree.</param>
+        /// <param name="n">Derivatives to compute.</param>
+        /// <param name="knotVector">Knot vector.</param>
+        /// <returns>Multidimensional array holding the basis functions and their derivatives for that parameter.</returns>
+        public static Matrix<double> DersBasisFuns(int span, double param, int degree, int n, IList<double> knotVector)
         {
-            var ders = new Matrix<double>(n, p);
-            var ndu = new double[p + 1, p + 1];
-            var a = new double[2, p + 1];
-            var left = new double[p + 1];
-            var right = new double[p + 1];
+            var ders = new Matrix<double>(n, degree);
+            var ndu = new double[degree + 1, degree + 1];
+            var a = new double[2, degree + 1];
+            var left = new double[degree + 1];
+            var right = new double[degree + 1];
 
             ndu[0, 0] = 1.0;
-            for (int j = 1; j <= p; j++)
+            for (int j = 1; j <= degree; j++)
             {
-                left[j] = u - U[i + 1 - j];
-                right[j] = U[i + j] - u;
+                left[j] = param - knotVector[span + 1 - j];
+                right[j] = knotVector[span + j] - param;
                 var saved = 0.0;
                 for (int r = 0; r < j; r++)
                 {
@@ -169,13 +287,14 @@ namespace Paramdigma.Core.Geometry
                     ndu[r, j] = saved + (right[r + 1] * temp);
                     saved = left[j - r] * temp;
                 }
+
                 ndu[j, j] = saved;
             }
 
-            for (int j = 0; j <= p; j++)
-                ders[0, j] = ndu[j, p];
+            for (int j = 0; j <= degree; j++)
+                ders[0, j] = ndu[j, degree];
 
-            for (int r = 0; r <= p; r++)
+            for (int r = 0; r <= degree; r++)
             {
                 var s1 = 0;
                 var s2 = 1;
@@ -184,7 +303,7 @@ namespace Paramdigma.Core.Geometry
                 {
                     var d = 0.0;
                     var rk = r - k;
-                    var pk = p - k;
+                    var pk = degree - k;
                     if (r >= k)
                     {
                         a[s2, 0] = a[s1, 0] / ndu[pk + 1, rk];
@@ -192,18 +311,20 @@ namespace Paramdigma.Core.Geometry
                     }
 
                     int j1 = (rk >= -1) ? 1 : -rk;
-                    int j2 = (r - 1 <= pk) ? k - 1 : p - r;
+                    int j2 = (r - 1 <= pk) ? k - 1 : degree - r;
 
                     for (int j = j1; j <= j2; j++)
                     {
                         a[s2, j] = (a[s1, j] - a[s1, j - 1]) / ndu[pk + 1, rk + j];
                         d += a[s2, j] * ndu[rk + j, pk];
                     }
+
                     if (r <= pk)
                     {
                         a[s2, k] = -a[s1, k - 1] / ndu[pk + 1, r];
                         d += a[s2, k] * ndu[r, pk];
                     }
+
                     ders[k, r] = d;
 
                     // Switch rows
@@ -212,225 +333,267 @@ namespace Paramdigma.Core.Geometry
                     s2 = temp;
                 }
             }
-            var r0 = p;
-            for (int k = 1; k <= n; k++)
+
+            var r0 = degree;
+            for (var k = 1; k <= n; k++)
             {
-                for (int j = 0; j <= p; j++)
+                for (var j = 0; j <= degree; j++)
                     ders[k, j] *= r0;
-                r0 *= p - k;
+                r0 *= degree - k;
             }
+
             return ders;
         }
 
-        public static double OneBasisFun(int p, int m, IList<double> U, int i, double u)
+        /// <summary>
+        /// Compute the basis function 'Nip'.
+        /// </summary>
+        /// <param name="degree">Degree.</param>
+        /// <param name="m">The high index of the knot vector.</param>
+        /// <param name="knotVector">Knot vector.</param>
+        /// <param name="span">Knot span index.</param>
+        /// <param name="param">Parameter to compute.</param>
+        /// <returns></returns>
+        public static double OneBasisFun(int degree, int m, IList<double> knotVector, int span, double param)
         {
-            if ((i == 0 && u == U[0]) || (i == (m - p - 1) && u == U[m]))
+            if ((span == 0 && param == knotVector[0]) || (span == (m - degree - 1) && param == knotVector[m]))
                 return 1.0;
-            if (u < U[i] || u >= U[i + p + 1])
+
+            if (param < knotVector[span] || param >= knotVector[span + degree + 1])
                 return 0.0;
+
             // Initialize zeroth-degree functions
-            var N = new double[p + 1];
-            for (int j = 0; j <= p; j++)
+            var n = new double[degree + 1];
+            for (int j = 0; j <= degree; j++)
             {
-                if (u >= U[i + j] && u < U[i + j + 1])
-                    N[j] = 1.0;
+                if (param >= knotVector[span + j] && param < knotVector[span + j + 1])
+                    n[j] = 1.0;
                 else
-                    N[j] = 0.0;
+                    n[j] = 0.0;
             }
-            for (int k = 1; k <= p; k++)
+
+            for (int k = 1; k <= degree; k++)
             {
-                double saved = N[0] == 0.0 ? 0.0 : (u - U[i]) * N[0] / (U[i + k] - U[i]);
-                for (int j = 0; j < (p - k + 1); j++)
+                double saved = n[0] == 0.0 ? 0.0 : (param - knotVector[span]) * n[0] / (knotVector[span + k] - knotVector[span]);
+                for (int j = 0; j < (degree - k + 1); j++)
                 {
-                    var Uleft = U[i + j + 1];
-                    var Uright = U[i + j + k + 1];
-                    if (N[j + 1] == 0.0)
+                    var uLeft = knotVector[span + j + 1];
+                    var uRight = knotVector[span + j + k + 1];
+                    if (n[j + 1] == 0.0)
                     {
-                        N[j] = saved;
+                        n[j] = saved;
                         saved = 0.0;
                     }
                     else
                     {
-                        var temp = N[j + 1] / (Uright - Uleft);
-                        N[j] = saved + ((Uright - u) * temp);
-                        saved = (u - Uleft) * temp;
+                        var temp = n[j + 1] / (uRight - uLeft);
+                        n[j] = saved + ((uRight - param) * temp);
+                        saved = (param - uLeft) * temp;
                     }
                 }
             }
-            return N[0];
+
+            return n[0];
         }
 
-        public static double[] DersOneBasisFun(int p, int m, IList<double> U, int i, double u, int n)
+        /// <summary>
+        /// Compute derivatives of basis function 'Nip'.
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="m"></param>
+        /// <param name="knotVector"></param>
+        /// <param name="i"></param>
+        /// <param name="u"></param>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public static double[] DersOneBasisFun(int p, int m, IList<double> knotVector, int i, double u, int n)
         {
             // TODO: Check unused m parameter.
             var ders = new double[n + 1];
-            if (u < U[i] || u >= U[i + p + 1])
+            if (u < knotVector[i] || u >= knotVector[i + p + 1])
             {
                 for (int k = 0; k <= n; k++)
                     ders[k] = 0.0;
                 return ders;
             }
-            var N = new double[p + 1, p + 1];
+
+            var tmpN = new double[p + 1, p + 1];
             for (int j = 0; j <= p; j++)
             {
-                if (u >= U[i + j] && u < U[i + j + 1])
-                    N[j, 0] = 1.0;
+                if (u >= knotVector[i + j] && u < knotVector[i + j + 1])
+                    tmpN[j, 0] = 1.0;
             }
+
             for (int k = 1; k <= p; k++)
             {
                 double saved;
-                if (N[0, k - 1] == 0.0)
+                if (tmpN[0, k - 1] == 0.0)
                     saved = 0.0;
                 else
-                    saved = (u - U[i]) * N[0, k - 1] / (U[i + k] - U[i]);
+                    saved = (u - knotVector[i]) * tmpN[0, k - 1] / (knotVector[i + k] - knotVector[i]);
 
                 for (int j = 0; j < p - k + 1; j++)
                 {
-                    double Uleft = U[i + j + 1];
-                    double Uright = U[i + j + k + 1];
-                    if (N[j + 1, k - 1] == 0.0)
+                    double uLeft = knotVector[i + j + 1];
+                    double uRight = knotVector[i + j + k + 1];
+                    if (tmpN[j + 1, k - 1] == 0.0)
                     {
-                        N[j, k] = saved;
+                        tmpN[j, k] = saved;
                         saved = 0.0;
                     }
                     else
                     {
-                        double temp = N[j + 1, k - 1] / (Uright - Uleft);
-                        N[j, k] = saved + ((Uright - u) * temp);
-                        saved = (u - Uleft) * temp;
+                        double temp = tmpN[j + 1, k - 1] / (uRight - uLeft);
+                        tmpN[j, k] = saved + ((uRight - u) * temp);
+                        saved = (u - uLeft) * temp;
                     }
                 }
             }
-            ders[0] = N[0, p];
 
-            double[] ND = new double[n + 1];
+            ders[0] = tmpN[0, p];
+
+            double[] tempND = new double[n + 1];
             for (int k = 1; k <= n; k++)
             {
                 for (int j = 0; j <= k; j++)
                 {
-                    ND[j] = N[j, p - k];
+                    tempND[j] = tmpN[j, p - k];
                 }
+
                 for (int jj = 1; jj <= k; jj++)
                 {
                     double saved;
-                    if (ND[0] == 0.0)
+                    if (tempND[0] == 0.0)
                         saved = 0.0;
                     else
-                        saved = ND[0] / (U[i + p - k + jj] - U[i]);
+                        saved = tempND[0] / (knotVector[i + p - k + jj] - knotVector[i]);
                     for (int j = 0; j < k - jj + 1; j++)
                     {
-                        double Uleft = U[i + j + 1];
-                        double Uright = U[i + j + p + jj + 1];
-                        if (ND[j + 1] == 0.0)
+                        double uLeft = knotVector[i + j + 1];
+                        double uRight = knotVector[i + j + p + jj + 1];
+                        if (tempND[j + 1] == 0.0)
                         {
-                            ND[j] = (p - k + jj) * saved;
+                            tempND[j] = (p - k + jj) * saved;
                             saved = 0.0;
                         }
                         else
                         {
-                            double temp = ND[j + 1] / (Uright - Uleft);
-                            ND[j] = (p - k + jj) * (saved - temp);
+                            double temp = tempND[j + 1] / (uRight - uLeft);
+                            tempND[j] = (p - k + jj) * (saved - temp);
                             saved = temp;
                         }
                     }
                 }
-                ders[k] = ND[0];
+
+                ders[k] = tempND[0];
             }
+
             return ders;
         }
 
-        public static Point3d CurvePoint(int n, int p, IList<double> U, IList<Point3d> P, double u)
+        public static Point3d CurvePoint(int n, int p, IList<double> knotVector, IList<Point3d> controlPoints, double u)
         {
-            int span = FindSpan(n, p, u, U);
-            double[] N = BasisFuns(span, u, p, U);
-            Point3d C = Point3d.Unset;
+            int span = FindSpan(n, p, u, knotVector);
+            double[] basisFuns = BasisFuns(span, u, p, knotVector);
+            Point3d c = Point3d.Unset;
             for (int i = 0; i <= p; i++)
-                C += N[i] * P[span - p + i];
-            return C;
+                c += basisFuns[i] * controlPoints[span - p + i];
+            return c;
         }
 
-        public static Vector3d[] CurveDerivsAlg1(int n, int p, IList<double> U, IList<Point3d> P, double u, int d)
+        public static Vector3d[] CurveDerivsAlg1(int n, int p, IList<double> knotVector, IList<Point3d> controlPoints, double u, int d)
         {
-            var CK = new Vector3d[d + 1];
+            var ck = new Vector3d[d + 1];
             var du = Math.Min(d, p);
             for (int k = p + 1; k <= d; k++)
-                CK[k] = new Vector3d();
-            var span = FindSpan(n, p, u, U);
-            var nders = DersBasisFuns(span, u, p, du, U);
+                ck[k] = new Vector3d();
+            var span = FindSpan(n, p, u, knotVector);
+            var nders = DersBasisFuns(span, u, p, du, knotVector);
             for (int k = 0; k <= du; k++)
             {
-                CK[k] = new Vector3d();
+                ck[k] = new Vector3d();
                 for (int j = 0; j <= p; j++)
-                    CK[k] += nders[k, j] * (Vector3d)P[span - p + j];
+                    ck[k] += nders[k, j] * (Vector3d)controlPoints[span - p + j];
             }
-            return CK;
+
+            return ck;
         }
 
-        public static Point3d[,] CurveDerivCpts(int n, int p, IList<double> U, IList<Point3d> P, int d, int r1, int r2)
+        public static Point3d[,] CurveDerivCpts(int n, int p, IList<double> knotVector, IList<Point3d> controlPoints, int d, int r1, int r2)
         {
             var r = r2 - r1;
-            var PK = new Point3d[d + 1, r];
+            var pk = new Point3d[d + 1, r];
             for (int i = 0; i <= r; i++)
-                PK[0, i] = P[r1 + i];
+                pk[0, i] = controlPoints[r1 + i];
             for (int k = 1; k <= d; k++)
             {
                 var tmp = p - k + 1;
                 for (int i = 0; i <= r - k; i++)
                 {
-                    PK[k, i] = tmp * (Point3d)(PK[k - 1, i + 1] - PK[k - 1, i]) / (U[r1 + i + p + 1] - U[r1 + i + k]);
+                    pk[k, i] = tmp * (Point3d)(pk[k - 1, i + 1] - pk[k - 1, i]) / (knotVector[r1 + i + p + 1] - knotVector[r1 + i + k]);
                 }
             }
-            return PK;
+
+            return pk;
         }
 
-        public static Vector3d[] CurveDerivsAlg2(int n, int p, IList<double> U, IList<Point3d> P, double u, int d)
+        public static Vector3d[] CurveDerivsAlg2(int n, int p, IList<double> knotVector, IList<Point3d> controlPoints, double u, int d)
         {
             var du = Math.Min(d, p);
-            var CK = new Vector3d[d + 1];
+            var ck = new Vector3d[d + 1];
             for (int k = p + 1; k <= d; k++)
-                CK[k] = new Vector3d();
-            var span = FindSpan(n, p, u, U);
-            var N = AllBasisFuns(span, u, p, U);
-            var PK = CurveDerivCpts(n, p, U, P, du, span - p, span);
+                ck[k] = new Vector3d();
+            var span = FindSpan(n, p, u, knotVector);
+            var basisFuns = AllBasisFuns(span, u, p, knotVector);
+            var pk = CurveDerivCpts(n, p, knotVector, controlPoints, du, span - p, span);
             for (int k = 0; k <= du; k++)
             {
-                CK[k] = new Vector3d();
+                ck[k] = new Vector3d();
                 for (int j = 0; j <= p - k; j++)
-                    CK[k] = CK[k] + (N[j, p - k] * (Vector3d)PK[k, j]);
+                    ck[k] += basisFuns[j, p - k] * (Vector3d)pk[k, j];
             }
-            return CK;
+
+            return ck;
         }
 
-        public static Point3d SurfacePoint(int n, int p, IList<double> U, int m, int q, IList<double> V, Matrix<Point3d> P, double u, double v)
+        public static Point3d SurfacePoint(int n, int p, IList<double> knotVectorU, int m, int q, IList<double> knotVectorV, Matrix<Point3d> controlPoints, double u, double v)
         {
-            var uspan = FindSpan(n, p, u, U);
-            var Nu = BasisFuns(uspan, u, p, U);
-            var vspan = FindSpan(m, q, v, V);
-            var Nv = BasisFuns(vspan, v, q, V);
+            var uspan = FindSpan(n, p, u, knotVectorU);
+            var nU = BasisFuns(uspan, u, p, knotVectorU);
+            var vspan = FindSpan(m, q, v, knotVectorV);
+            var nV = BasisFuns(vspan, v, q, knotVectorV);
             var uind = uspan - p;
-            var S = Point3d.Unset;
+            var surfPt = Point3d.Unset;
             for (int l = 0; l <= q; l++)
             {
                 var temp = Point3d.Unset;
                 var vind = vspan - q - l;
                 for (int k = 0; k <= p; k++)
-                    temp += Nu[k] * P[uind + k, vind];
-                S += Nv[l] * temp;
+                    temp += nU[k] * controlPoints[uind + k, vind];
+                surfPt += nV[l] * temp;
             }
-            return S;
+
+            return surfPt;
         }
-        public static double[] CreateUnitKnotVector(int n, int p)
+
+        /// <summary>
+        /// Constructs a Unit knot vector given a point count and degree.
+        /// </summary>
+        /// <param name="controlPointCount">Ammount of control points in the curve.</param>
+        /// <param name="degree">Degree of the curve.</param>
+        /// <returns></returns>
+        public static double[] CreateUnitKnotVector(int controlPointCount, int degree)
         {
-            if (p > n)
+            if (degree > controlPointCount)
                 throw new Exception("Degree cannot be bigger than 'ControlPoints - 1'");
-            var U = new double[n + p + 2];
-            for (int i = 0; i <= p; i++)
-                U[i] = 0.0;
-            for (int i = p + 1; i < n + 1; i++)
-                U[i] = ((double)i - p) / (n - p + 1);
-            for (int i = n + 1; i < n + p + 2; i++)
-                U[i] = 1.0;
-            return U;
+            var knotVector = new double[controlPointCount + degree + 2];
+            for (int i = 0; i <= degree; i++)
+                knotVector[i] = 0.0;
+            for (int i = degree + 1; i < controlPointCount + 1; i++)
+                knotVector[i] = ((double)i - degree) / (controlPointCount - degree + 1);
+            for (int i = controlPointCount + 1; i < controlPointCount + degree + 2; i++)
+                knotVector[i] = 1.0;
+            return knotVector;
         }
     }
 }
