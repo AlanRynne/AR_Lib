@@ -11,13 +11,19 @@ namespace Paramdigma.Core.Geometry
         /// Gets or sets the X Coordininate of the vector.
         /// </summary>
         /// <value>X coordinate.</value>
-        public double X { get; set; }
+        public double X
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Gets or sets the Y coordinate of the vector.
         /// </summary>
         /// <value>Y coordinate.</value>
-        public double Y { get; set; }
+        public double Y
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Vector2d"/> class from another vector.
@@ -160,7 +166,7 @@ namespace Paramdigma.Core.Geometry
         /// <returns></returns>
         public override string ToString()
         {
-            return "Vector3d [{X}, {Y}]";
+            return $"Vector3d [{X}, {Y}]";
         }
 
         /// <summary>
@@ -170,13 +176,14 @@ namespace Paramdigma.Core.Geometry
         /// <returns>True if equal.</returns>
         public override bool Equals(object obj)
         {
-            if (obj is Vector2d)
+            if (!(obj is Vector2d))
             {
-                Vector2d vect = obj as Vector2d;
-                return this.X == vect.X && this.Y == vect.Y;
+                return false;
             }
 
-            return false;
+            Vector2d vect = obj as Vector2d;
+            return Math.Abs(X - vect.X) <= Settings.Tolerance
+                && Math.Abs(Y - vect.Y) <= Settings.Tolerance;
         }
 
         /// <summary>
@@ -188,12 +195,16 @@ namespace Paramdigma.Core.Geometry
             unchecked
             {
                 // Choose large primes to avoid hashing collisions
+                // Choose large primes to avoid hashing collisions
                 const int hashingBase = (int)2166136261;
                 const int hashingMultiplier = 16777619;
+                double tol = Settings.Tolerance * 2;
+                double tX = (int)(X * (1 / tol)) * tol;
+                double tY = (int)(Y * (1 / tol)) * tol;
 
                 int hash = hashingBase;
-                hash = (hash * hashingMultiplier) ^ (!ReferenceEquals(null, X) ? X.GetHashCode() : 0);
-                hash = (hash * hashingMultiplier) ^ (!ReferenceEquals(null, Y) ? Y.GetHashCode() : 0);
+                hash = (hash * hashingMultiplier) ^ tX.GetHashCode();
+                hash = (hash * hashingMultiplier) ^ tY.GetHashCode();
                 return hash;
             }
         }

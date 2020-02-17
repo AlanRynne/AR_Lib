@@ -13,25 +13,37 @@ namespace Paramdigma.Core.Geometry
         /// Gets or sets the plane origin.
         /// </summary>
         /// <value></value>
-        public Point3d Origin { get; set; }
+        public Point3d Origin
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Gets or sets the plane X axis.
         /// </summary>
         /// <value></value>
-        public Vector3d XAxis { get; set; }
+        public Vector3d XAxis
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Gets or sets the plane Y axis.
         /// </summary>
         /// <value></value>
-        public Vector3d YAxis { get; set; }
+        public Vector3d YAxis
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Gets or sets the plane Z axis.
         /// </summary>
         /// <value></value>
-        public Vector3d ZAxis { get; set; }
+        public Vector3d ZAxis
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Gets plane with axis' UnitX and UnitY.
@@ -57,7 +69,7 @@ namespace Paramdigma.Core.Geometry
         /// </summary>
         /// <param name="plane">Plane to copy values from.</param>
         public Plane(Plane plane)
-            : this(plane.Origin, plane.XAxis, plane.YAxis, plane.ZAxis)
+            : this(new Point3d(plane.Origin), new Vector3d(plane.XAxis), new Vector3d(plane.YAxis), new Vector3d(plane.ZAxis))
         {
         }
 

@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<coverage line-rate="0.2262" branch-rate="0.1386" version="1.9" timestamp="1581939049" lines-covered="613" lines-valid="2709" branches-covered="89" branches-valid="642">
+<coverage line-rate="0.2495" branch-rate="0.1426" version="1.9" timestamp="1581943549" lines-covered="677" lines-valid="2713" branches-covered="91" branches-valid="638">
   <sources>
     <source></source>
   </sources>
   <packages>
-    <package name="Paramdigma.Core" line-rate="0.2262" branch-rate="0.1386" complexity="1047">
+    <package name="Paramdigma.Core" line-rate="0.2495" branch-rate="0.1426" complexity="1044">
       <classes>
         <class name="Paramdigma.Core.Intersect3D" filename="/Users/alan/GitHub/Paramdigma.Core/src/Geometry/Intersect/Intersect.cs" line-rate="0" branch-rate="0" complexity="52">
           <methods>
@@ -590,7 +590,7 @@
           <methods>
             <method name="get_Tolerance" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="17" hits="125" branch="False" />
+                <line number="17" hits="168" branch="False" />
               </lines>
             </method>
             <method name="get_MaxDecimals" signature="()" line-rate="1" branch-rate="1">
@@ -640,7 +640,7 @@
             </method>
           </methods>
           <lines>
-            <line number="17" hits="125" branch="False" />
+            <line number="17" hits="168" branch="False" />
             <line number="25" hits="3" branch="False" />
             <line number="26" hits="3" branch="False" />
             <line number="27" hits="3" branch="False" />
@@ -4020,12 +4020,12 @@
           <methods>
             <method name="get_X" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="15" hits="607" branch="False" />
+                <line number="15" hits="611" branch="False" />
               </lines>
             </method>
             <method name="get_Y" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="23" hits="562" branch="False" />
+                <line number="23" hits="566" branch="False" />
               </lines>
             </method>
             <method name="get_Origin" signature="()" line-rate="1" branch-rate="1">
@@ -4120,12 +4120,12 @@
             </method>
             <method name="op_Explicit" signature="(Paramdigma.Core.Geometry.Vector2d)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="184" hits="1" branch="False" />
+                <line number="184" hits="3" branch="False" />
               </lines>
             </method>
             <method name="op_Implicit" signature="(Paramdigma.Core.Geometry.Point2d)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="190" hits="4" branch="False" />
+                <line number="190" hits="6" branch="False" />
               </lines>
             </method>
             <method name=".ctor" signature="()" line-rate="1" branch-rate="1">
@@ -4137,11 +4137,11 @@
             </method>
             <method name=".ctor" signature="(System.Double,System.Double)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="45" hits="101" branch="False" />
-                <line number="46" hits="101" branch="False" />
-                <line number="47" hits="101" branch="False" />
-                <line number="48" hits="101" branch="False" />
-                <line number="49" hits="101" branch="False" />
+                <line number="45" hits="103" branch="False" />
+                <line number="46" hits="103" branch="False" />
+                <line number="47" hits="103" branch="False" />
+                <line number="48" hits="103" branch="False" />
+                <line number="49" hits="103" branch="False" />
               </lines>
             </method>
             <method name=".ctor" signature="(Paramdigma.Core.Geometry.Point2d)" line-rate="1" branch-rate="1">
@@ -4153,8 +4153,8 @@
             </method>
           </methods>
           <lines>
-            <line number="15" hits="607" branch="False" />
-            <line number="23" hits="562" branch="False" />
+            <line number="15" hits="611" branch="False" />
+            <line number="23" hits="566" branch="False" />
             <line number="30" hits="1" branch="False" />
             <line number="67" hits="58" branch="False" />
             <line number="68" hits="58" branch="False" />
@@ -4193,16 +4193,16 @@
             <line number="160" hits="10" branch="False" />
             <line number="168" hits="1" branch="False" />
             <line number="176" hits="3" branch="False" />
-            <line number="184" hits="1" branch="False" />
-            <line number="190" hits="4" branch="False" />
+            <line number="184" hits="3" branch="False" />
+            <line number="190" hits="6" branch="False" />
             <line number="36" hits="1" branch="False" />
             <line number="37" hits="1" branch="False" />
             <line number="38" hits="1" branch="False" />
-            <line number="45" hits="101" branch="False" />
-            <line number="46" hits="101" branch="False" />
-            <line number="47" hits="101" branch="False" />
-            <line number="48" hits="101" branch="False" />
-            <line number="49" hits="101" branch="False" />
+            <line number="45" hits="103" branch="False" />
+            <line number="46" hits="103" branch="False" />
+            <line number="47" hits="103" branch="False" />
+            <line number="48" hits="103" branch="False" />
+            <line number="49" hits="103" branch="False" />
             <line number="56" hits="1" branch="False" />
             <line number="57" hits="1" branch="False" />
             <line number="58" hits="1" branch="False" />
@@ -4624,236 +4624,228 @@
             <line number="18" hits="0" branch="False" />
           </lines>
         </class>
-        <class name="Paramdigma.Core.Geometry.Vector2d" filename="/Users/alan/GitHub/Paramdigma.Core/src/Geometry/2D/Vector2d.cs" line-rate="0.5489999999999999" branch-rate="0.25" complexity="29">
+        <class name="Paramdigma.Core.Geometry.Vector2d" filename="/Users/alan/GitHub/Paramdigma.Core/src/Geometry/2D/Vector2d.cs" line-rate="1" branch-rate="0.75" complexity="26">
           <methods>
             <method name="get_X" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="14" hits="451" branch="False" />
+                <line number="16" hits="547" branch="False" />
               </lines>
             </method>
             <method name="get_Y" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="20" hits="451" branch="False" />
+                <line number="25" hits="547" branch="False" />
               </lines>
             </method>
             <method name="get_LengthSquared" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="56" hits="142" branch="False" />
+                <line number="62" hits="143" branch="False" />
               </lines>
             </method>
             <method name="get_Length" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="61" hits="142" branch="False" />
+                <line number="67" hits="143" branch="False" />
               </lines>
             </method>
             <method name="Unit" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="67" hits="1" branch="False" />
+                <line number="73" hits="1" branch="False" />
               </lines>
             </method>
-            <method name="Unitize" signature="()" line-rate="0" branch-rate="1">
+            <method name="Unitize" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="73" hits="0" branch="False" />
-                <line number="74" hits="0" branch="False" />
-                <line number="75" hits="0" branch="False" />
-                <line number="76" hits="0" branch="False" />
-                <line number="77" hits="0" branch="False" />
+                <line number="79" hits="1" branch="False" />
+                <line number="80" hits="1" branch="False" />
+                <line number="81" hits="1" branch="False" />
+                <line number="82" hits="1" branch="False" />
+                <line number="83" hits="1" branch="False" />
               </lines>
             </method>
-            <method name="Perp" signature="()" line-rate="0" branch-rate="1">
+            <method name="Perp" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="83" hits="0" branch="False" />
+                <line number="89" hits="1" branch="False" />
               </lines>
             </method>
-            <method name="DotProduct" signature="(Paramdigma.Core.Geometry.Vector2d)" line-rate="0" branch-rate="1">
+            <method name="DotProduct" signature="(Paramdigma.Core.Geometry.Vector2d)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="90" hits="0" branch="False" />
+                <line number="96" hits="1" branch="False" />
               </lines>
             </method>
             <method name="PerpProduct" signature="(Paramdigma.Core.Geometry.Vector2d)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="98" hits="1" branch="False" />
-                <line number="99" hits="1" branch="False" />
-                <line number="100" hits="1" branch="False" />
+                <line number="104" hits="2" branch="False" />
+                <line number="105" hits="2" branch="False" />
+                <line number="106" hits="2" branch="False" />
               </lines>
             </method>
-            <method name="op_Addition" signature="(Paramdigma.Core.Geometry.Vector2d,Paramdigma.Core.Geometry.Vector2d)" line-rate="0" branch-rate="1">
+            <method name="op_Addition" signature="(Paramdigma.Core.Geometry.Vector2d,Paramdigma.Core.Geometry.Vector2d)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="107" hits="0" branch="False" />
+                <line number="113" hits="2" branch="False" />
               </lines>
             </method>
-            <method name="op_Subtraction" signature="(Paramdigma.Core.Geometry.Vector2d,Paramdigma.Core.Geometry.Vector2d)" line-rate="0" branch-rate="1">
+            <method name="op_Subtraction" signature="(Paramdigma.Core.Geometry.Vector2d,Paramdigma.Core.Geometry.Vector2d)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="114" hits="0" branch="False" />
+                <line number="120" hits="2" branch="False" />
               </lines>
             </method>
             <method name="op_Multiply" signature="(Paramdigma.Core.Geometry.Vector2d,System.Double)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="121" hits="1" branch="False" />
+                <line number="127" hits="2" branch="False" />
               </lines>
             </method>
-            <method name="op_Multiply" signature="(System.Double,Paramdigma.Core.Geometry.Vector2d)" line-rate="0" branch-rate="1">
+            <method name="op_Multiply" signature="(System.Double,Paramdigma.Core.Geometry.Vector2d)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="128" hits="0" branch="False" />
+                <line number="134" hits="1" branch="False" />
               </lines>
             </method>
-            <method name="op_UnaryNegation" signature="(Paramdigma.Core.Geometry.Vector2d)" line-rate="0" branch-rate="1">
+            <method name="op_UnaryNegation" signature="(Paramdigma.Core.Geometry.Vector2d)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="134" hits="0" branch="False" />
+                <line number="140" hits="1" branch="False" />
               </lines>
             </method>
             <method name="op_Division" signature="(Paramdigma.Core.Geometry.Vector2d,System.Double)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="141" hits="1" branch="False" />
+                <line number="147" hits="2" branch="False" />
               </lines>
             </method>
             <method name="op_Equality" signature="(Paramdigma.Core.Geometry.Vector2d,Paramdigma.Core.Geometry.Vector2d)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="148" hits="2" branch="False" />
+                <line number="154" hits="15" branch="False" />
               </lines>
             </method>
-            <method name="op_Inequality" signature="(Paramdigma.Core.Geometry.Vector2d,Paramdigma.Core.Geometry.Vector2d)" line-rate="0" branch-rate="1">
+            <method name="op_Inequality" signature="(Paramdigma.Core.Geometry.Vector2d,Paramdigma.Core.Geometry.Vector2d)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="155" hits="0" branch="False" />
+                <line number="161" hits="1" branch="False" />
               </lines>
             </method>
-            <method name="ToString" signature="()" line-rate="0" branch-rate="1">
+            <method name="ToString" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="162" hits="0" branch="False" />
-                <line number="163" hits="0" branch="False" />
-                <line number="164" hits="0" branch="False" />
+                <line number="168" hits="1" branch="False" />
+                <line number="169" hits="1" branch="False" />
+                <line number="170" hits="1" branch="False" />
               </lines>
             </method>
-            <method name="Equals" signature="(System.Object)" line-rate="0.8571" branch-rate="0.5">
+            <method name="Equals" signature="(System.Object)" line-rate="1" branch-rate="0.75">
               <lines>
-                <line number="172" hits="2" branch="False" />
-                <line number="173" hits="2" branch="True" condition-coverage="50% (1/2)">
+                <line number="178" hits="17" branch="False" />
+                <line number="179" hits="17" branch="True" condition-coverage="100% (2/2)">
                   <conditions>
-                    <condition number="12" type="jump" coverage="50%" />
+                    <condition number="15" type="jump" coverage="100%" />
                   </conditions>
                 </line>
-                <line number="174" hits="2" branch="False" />
-                <line number="175" hits="2" branch="False" />
-                <line number="176" hits="2" branch="True" condition-coverage="50% (1/2)">
+                <line number="180" hits="1" branch="False" />
+                <line number="181" hits="1" branch="False" />
+                <line number="184" hits="16" branch="False" />
+                <line number="185" hits="16" branch="True" condition-coverage="50% (1/2)">
                   <conditions>
-                    <condition number="34" type="jump" coverage="50%" />
+                    <condition number="52" type="jump" coverage="50%" />
                   </conditions>
                 </line>
-                <line number="179" hits="0" branch="False" />
-                <line number="180" hits="2" branch="False" />
+                <line number="186" hits="16" branch="False" />
+                <line number="187" hits="17" branch="False" />
               </lines>
             </method>
-            <method name="GetHashCode" signature="()" line-rate="0" branch-rate="0">
+            <method name="GetHashCode" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="187" hits="0" branch="False" />
-                <line number="189" hits="0" branch="False" />
-                <line number="194" hits="0" branch="False" />
-                <line number="195" hits="0" branch="True" condition-coverage="0% (0/2)">
-                  <conditions>
-                    <condition number="26" type="jump" coverage="0%" />
-                  </conditions>
-                </line>
-                <line number="196" hits="0" branch="True" condition-coverage="0% (0/2)">
-                  <conditions>
-                    <condition number="65" type="jump" coverage="0%" />
-                  </conditions>
-                </line>
-                <line number="197" hits="0" branch="False" />
-                <line number="199" hits="0" branch="False" />
+                <line number="194" hits="2" branch="False" />
+                <line number="196" hits="2" branch="False" />
+                <line number="201" hits="2" branch="False" />
+                <line number="202" hits="2" branch="False" />
+                <line number="203" hits="2" branch="False" />
+                <line number="205" hits="2" branch="False" />
+                <line number="206" hits="2" branch="False" />
+                <line number="207" hits="2" branch="False" />
+                <line number="208" hits="2" branch="False" />
+                <line number="210" hits="2" branch="False" />
               </lines>
             </method>
             <method name=".ctor" signature="(Paramdigma.Core.Geometry.Vector2d)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="28" hits="1" branch="False" />
-                <line number="29" hits="1" branch="False" />
-                <line number="30" hits="1" branch="False" />
+                <line number="34" hits="2" branch="False" />
+                <line number="35" hits="2" branch="False" />
+                <line number="36" hits="2" branch="False" />
               </lines>
             </method>
             <method name=".ctor" signature="(Paramdigma.Core.Geometry.Point2d)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="38" hits="4" branch="False" />
-                <line number="39" hits="4" branch="False" />
-                <line number="40" hits="4" branch="False" />
+                <line number="44" hits="6" branch="False" />
+                <line number="45" hits="6" branch="False" />
+                <line number="46" hits="6" branch="False" />
               </lines>
             </method>
             <method name=".ctor" signature="(System.Double,System.Double)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="47" hits="154" branch="False" />
-                <line number="48" hits="154" branch="False" />
-                <line number="49" hits="154" branch="False" />
-                <line number="50" hits="154" branch="False" />
-                <line number="51" hits="154" branch="False" />
+                <line number="53" hits="195" branch="False" />
+                <line number="54" hits="195" branch="False" />
+                <line number="55" hits="195" branch="False" />
+                <line number="56" hits="195" branch="False" />
+                <line number="57" hits="195" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="14" hits="451" branch="False" />
-            <line number="20" hits="451" branch="False" />
-            <line number="56" hits="142" branch="False" />
-            <line number="61" hits="142" branch="False" />
-            <line number="67" hits="1" branch="False" />
-            <line number="73" hits="0" branch="False" />
-            <line number="74" hits="0" branch="False" />
-            <line number="75" hits="0" branch="False" />
-            <line number="76" hits="0" branch="False" />
-            <line number="77" hits="0" branch="False" />
-            <line number="83" hits="0" branch="False" />
-            <line number="90" hits="0" branch="False" />
-            <line number="98" hits="1" branch="False" />
-            <line number="99" hits="1" branch="False" />
-            <line number="100" hits="1" branch="False" />
-            <line number="107" hits="0" branch="False" />
-            <line number="114" hits="0" branch="False" />
-            <line number="121" hits="1" branch="False" />
-            <line number="128" hits="0" branch="False" />
-            <line number="134" hits="0" branch="False" />
-            <line number="141" hits="1" branch="False" />
-            <line number="148" hits="2" branch="False" />
-            <line number="155" hits="0" branch="False" />
-            <line number="162" hits="0" branch="False" />
-            <line number="163" hits="0" branch="False" />
-            <line number="164" hits="0" branch="False" />
-            <line number="172" hits="2" branch="False" />
-            <line number="173" hits="2" branch="True" condition-coverage="50% (1/2)">
+            <line number="16" hits="547" branch="False" />
+            <line number="25" hits="547" branch="False" />
+            <line number="62" hits="143" branch="False" />
+            <line number="67" hits="143" branch="False" />
+            <line number="73" hits="1" branch="False" />
+            <line number="79" hits="1" branch="False" />
+            <line number="80" hits="1" branch="False" />
+            <line number="81" hits="1" branch="False" />
+            <line number="82" hits="1" branch="False" />
+            <line number="83" hits="1" branch="False" />
+            <line number="89" hits="1" branch="False" />
+            <line number="96" hits="1" branch="False" />
+            <line number="104" hits="2" branch="False" />
+            <line number="105" hits="2" branch="False" />
+            <line number="106" hits="2" branch="False" />
+            <line number="113" hits="2" branch="False" />
+            <line number="120" hits="2" branch="False" />
+            <line number="127" hits="2" branch="False" />
+            <line number="134" hits="1" branch="False" />
+            <line number="140" hits="1" branch="False" />
+            <line number="147" hits="2" branch="False" />
+            <line number="154" hits="15" branch="False" />
+            <line number="161" hits="1" branch="False" />
+            <line number="168" hits="1" branch="False" />
+            <line number="169" hits="1" branch="False" />
+            <line number="170" hits="1" branch="False" />
+            <line number="178" hits="17" branch="False" />
+            <line number="179" hits="17" branch="True" condition-coverage="100% (2/2)">
               <conditions>
-                <condition number="12" type="jump" coverage="50%" />
+                <condition number="15" type="jump" coverage="100%" />
               </conditions>
             </line>
-            <line number="174" hits="2" branch="False" />
-            <line number="175" hits="2" branch="False" />
-            <line number="176" hits="2" branch="True" condition-coverage="50% (1/2)">
+            <line number="180" hits="1" branch="False" />
+            <line number="181" hits="1" branch="False" />
+            <line number="184" hits="16" branch="False" />
+            <line number="185" hits="16" branch="True" condition-coverage="50% (1/2)">
               <conditions>
-                <condition number="34" type="jump" coverage="50%" />
+                <condition number="52" type="jump" coverage="50%" />
               </conditions>
             </line>
-            <line number="179" hits="0" branch="False" />
-            <line number="180" hits="2" branch="False" />
-            <line number="187" hits="0" branch="False" />
-            <line number="189" hits="0" branch="False" />
-            <line number="194" hits="0" branch="False" />
-            <line number="195" hits="0" branch="True" condition-coverage="0% (0/2)">
-              <conditions>
-                <condition number="26" type="jump" coverage="0%" />
-              </conditions>
-            </line>
-            <line number="196" hits="0" branch="True" condition-coverage="0% (0/2)">
-              <conditions>
-                <condition number="65" type="jump" coverage="0%" />
-              </conditions>
-            </line>
-            <line number="197" hits="0" branch="False" />
-            <line number="199" hits="0" branch="False" />
-            <line number="28" hits="1" branch="False" />
-            <line number="29" hits="1" branch="False" />
-            <line number="30" hits="1" branch="False" />
-            <line number="38" hits="4" branch="False" />
-            <line number="39" hits="4" branch="False" />
-            <line number="40" hits="4" branch="False" />
-            <line number="47" hits="154" branch="False" />
-            <line number="48" hits="154" branch="False" />
-            <line number="49" hits="154" branch="False" />
-            <line number="50" hits="154" branch="False" />
-            <line number="51" hits="154" branch="False" />
+            <line number="186" hits="16" branch="False" />
+            <line number="187" hits="17" branch="False" />
+            <line number="194" hits="2" branch="False" />
+            <line number="196" hits="2" branch="False" />
+            <line number="201" hits="2" branch="False" />
+            <line number="202" hits="2" branch="False" />
+            <line number="203" hits="2" branch="False" />
+            <line number="205" hits="2" branch="False" />
+            <line number="206" hits="2" branch="False" />
+            <line number="207" hits="2" branch="False" />
+            <line number="208" hits="2" branch="False" />
+            <line number="210" hits="2" branch="False" />
+            <line number="34" hits="2" branch="False" />
+            <line number="35" hits="2" branch="False" />
+            <line number="36" hits="2" branch="False" />
+            <line number="44" hits="6" branch="False" />
+            <line number="45" hits="6" branch="False" />
+            <line number="46" hits="6" branch="False" />
+            <line number="53" hits="195" branch="False" />
+            <line number="54" hits="195" branch="False" />
+            <line number="55" hits="195" branch="False" />
+            <line number="56" hits="195" branch="False" />
+            <line number="57" hits="195" branch="False" />
           </lines>
         </class>
         <class name="Paramdigma.Core.Geometry.Line" filename="/Users/alan/GitHub/Paramdigma.Core/src/Geometry/3D/Line.cs" line-rate="1" branch-rate="1" complexity="12">
@@ -7652,246 +7644,246 @@
             <line number="805" hits="0" branch="False" />
           </lines>
         </class>
-        <class name="Paramdigma.Core.Geometry.Plane" filename="/Users/alan/GitHub/Paramdigma.Core/src/Geometry/3D/Plane.cs" line-rate="0.1617" branch-rate="0" complexity="24">
+        <class name="Paramdigma.Core.Geometry.Plane" filename="/Users/alan/GitHub/Paramdigma.Core/src/Geometry/3D/Plane.cs" line-rate="0.7058" branch-rate="0.5" complexity="24">
           <methods>
             <method name="get_Origin" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="16" hits="1" branch="False" />
+                <line number="18" hits="20" branch="False" />
               </lines>
             </method>
             <method name="get_XAxis" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="22" hits="1" branch="False" />
+                <line number="27" hits="20" branch="False" />
               </lines>
             </method>
             <method name="get_YAxis" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="28" hits="1" branch="False" />
+                <line number="36" hits="19" branch="False" />
               </lines>
             </method>
             <method name="get_ZAxis" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="34" hits="1" branch="False" />
+                <line number="45" hits="19" branch="False" />
               </lines>
             </method>
-            <method name="get_WorldXY" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_WorldXY" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="40" hits="0" branch="False" />
+                <line number="52" hits="5" branch="False" />
               </lines>
             </method>
-            <method name="get_WorldXZ" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_WorldXZ" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="46" hits="0" branch="False" />
+                <line number="58" hits="1" branch="False" />
               </lines>
             </method>
-            <method name="get_WorldYZ" signature="()" line-rate="0" branch-rate="1">
+            <method name="get_WorldYZ" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="52" hits="0" branch="False" />
+                <line number="64" hits="1" branch="False" />
               </lines>
             </method>
             <method name="Flip" signature="()" line-rate="0" branch-rate="1">
               <lines>
-                <line number="146" hits="0" branch="False" />
-                <line number="147" hits="0" branch="False" />
-                <line number="148" hits="0" branch="False" />
-                <line number="149" hits="0" branch="False" />
-                <line number="150" hits="0" branch="False" />
-                <line number="151" hits="0" branch="False" />
-              </lines>
-            </method>
-            <method name="PointAt" signature="(System.Double,System.Double)" line-rate="0" branch-rate="1">
-              <lines>
+                <line number="158" hits="0" branch="False" />
                 <line number="159" hits="0" branch="False" />
+                <line number="160" hits="0" branch="False" />
+                <line number="161" hits="0" branch="False" />
+                <line number="162" hits="0" branch="False" />
+                <line number="163" hits="0" branch="False" />
               </lines>
             </method>
-            <method name="PointAt" signature="(System.Double,System.Double,System.Double)" line-rate="0" branch-rate="1">
+            <method name="PointAt" signature="(System.Double,System.Double)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="168" hits="0" branch="False" />
+                <line number="171" hits="2" branch="False" />
+              </lines>
+            </method>
+            <method name="PointAt" signature="(System.Double,System.Double,System.Double)" line-rate="1" branch-rate="1">
+              <lines>
+                <line number="180" hits="3" branch="False" />
               </lines>
             </method>
             <method name="RemapToPlaneSpace" signature="(Paramdigma.Core.Geometry.Point3d)" line-rate="0" branch-rate="1">
               <lines>
-                <line number="176" hits="0" branch="False" />
-                <line number="177" hits="0" branch="False" />
-                <line number="178" hits="0" branch="False" />
-                <line number="179" hits="0" branch="False" />
-                <line number="180" hits="0" branch="False" />
-                <line number="182" hits="0" branch="False" />
-                <line number="183" hits="0" branch="False" />
+                <line number="188" hits="0" branch="False" />
+                <line number="189" hits="0" branch="False" />
+                <line number="190" hits="0" branch="False" />
+                <line number="191" hits="0" branch="False" />
+                <line number="192" hits="0" branch="False" />
+                <line number="194" hits="0" branch="False" />
+                <line number="195" hits="0" branch="False" />
               </lines>
             </method>
             <method name="RemapToWorldXYSpace" signature="(Paramdigma.Core.Geometry.Point3d)" line-rate="0" branch-rate="1">
               <lines>
-                <line number="190" hits="0" branch="False" />
+                <line number="202" hits="0" branch="False" />
               </lines>
             </method>
-            <method name="ClosestPoint" signature="(Paramdigma.Core.Geometry.Point3d)" line-rate="0" branch-rate="1">
+            <method name="ClosestPoint" signature="(Paramdigma.Core.Geometry.Point3d)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="198" hits="0" branch="False" />
-                <line number="199" hits="0" branch="False" />
-                <line number="200" hits="0" branch="False" />
-                <line number="201" hits="0" branch="False" />
-                <line number="203" hits="0" branch="False" />
-                <line number="204" hits="0" branch="False" />
+                <line number="210" hits="1" branch="False" />
+                <line number="211" hits="1" branch="False" />
+                <line number="212" hits="1" branch="False" />
+                <line number="213" hits="1" branch="False" />
+                <line number="215" hits="1" branch="False" />
+                <line number="216" hits="1" branch="False" />
               </lines>
             </method>
-            <method name="DistanceTo" signature="(Paramdigma.Core.Geometry.Point3d)" line-rate="0" branch-rate="1">
+            <method name="DistanceTo" signature="(Paramdigma.Core.Geometry.Point3d)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="211" hits="0" branch="False" />
+                <line number="223" hits="1" branch="False" />
               </lines>
             </method>
             <method name="GetPlaneEquation" signature="()" line-rate="0" branch-rate="1">
               <lines>
-                <line number="218" hits="0" branch="False" />
-                <line number="219" hits="0" branch="False" />
+                <line number="230" hits="0" branch="False" />
+                <line number="231" hits="0" branch="False" />
               </lines>
             </method>
-            <method name="Clone" signature="()" line-rate="0" branch-rate="1">
+            <method name="Clone" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="226" hits="0" branch="False" />
+                <line number="238" hits="1" branch="False" />
               </lines>
             </method>
-            <method name="ToString" signature="()" line-rate="0" branch-rate="1">
+            <method name="ToString" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="232" hits="0" branch="False" />
+                <line number="244" hits="1" branch="False" />
               </lines>
             </method>
-            <method name=".ctor" signature="(Paramdigma.Core.Geometry.Plane)" line-rate="0" branch-rate="1">
+            <method name=".ctor" signature="(Paramdigma.Core.Geometry.Plane)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="60" hits="0" branch="False" />
-                <line number="61" hits="0" branch="False" />
-                <line number="62" hits="0" branch="False" />
+                <line number="72" hits="1" branch="False" />
+                <line number="73" hits="1" branch="False" />
+                <line number="74" hits="1" branch="False" />
               </lines>
             </method>
-            <method name=".ctor" signature="(Paramdigma.Core.Geometry.Point3d)" line-rate="0" branch-rate="1">
+            <method name=".ctor" signature="(Paramdigma.Core.Geometry.Point3d)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="69" hits="0" branch="False" />
-                <line number="70" hits="0" branch="False" />
-                <line number="71" hits="0" branch="False" />
+                <line number="81" hits="1" branch="False" />
+                <line number="82" hits="1" branch="False" />
+                <line number="83" hits="1" branch="False" />
               </lines>
             </method>
-            <method name=".ctor" signature="(Paramdigma.Core.Geometry.Point3d,Paramdigma.Core.Geometry.Vector3d,Paramdigma.Core.Geometry.Vector3d)" line-rate="0" branch-rate="1">
+            <method name=".ctor" signature="(Paramdigma.Core.Geometry.Point3d,Paramdigma.Core.Geometry.Vector3d,Paramdigma.Core.Geometry.Vector3d)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="82" hits="0" branch="False" />
-                <line number="83" hits="0" branch="False" />
-                <line number="84" hits="0" branch="False" />
+                <line number="94" hits="9" branch="False" />
+                <line number="95" hits="9" branch="False" />
+                <line number="96" hits="9" branch="False" />
               </lines>
             </method>
             <method name=".ctor" signature="(Paramdigma.Core.Geometry.Point3d,Paramdigma.Core.Geometry.Vector3d,Paramdigma.Core.Geometry.Vector3d,Paramdigma.Core.Geometry.Vector3d)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="94" hits="1" branch="False" />
-                <line number="95" hits="1" branch="False" />
-                <line number="96" hits="1" branch="False" />
-                <line number="97" hits="1" branch="False" />
-                <line number="98" hits="1" branch="False" />
-                <line number="99" hits="1" branch="False" />
-                <line number="100" hits="1" branch="False" />
+                <line number="106" hits="12" branch="False" />
+                <line number="107" hits="12" branch="False" />
+                <line number="108" hits="12" branch="False" />
+                <line number="109" hits="12" branch="False" />
+                <line number="110" hits="12" branch="False" />
+                <line number="111" hits="12" branch="False" />
+                <line number="112" hits="12" branch="False" />
               </lines>
             </method>
-            <method name=".ctor" signature="(Paramdigma.Core.Geometry.Point3d,Paramdigma.Core.Geometry.Point3d,Paramdigma.Core.Geometry.Point3d)" line-rate="0" branch-rate="0">
+            <method name=".ctor" signature="(Paramdigma.Core.Geometry.Point3d,Paramdigma.Core.Geometry.Point3d,Paramdigma.Core.Geometry.Point3d)" line-rate="0.9333" branch-rate="0.5">
               <lines>
-                <line number="108" hits="0" branch="False" />
-                <line number="109" hits="0" branch="False" />
-                <line number="110" hits="0" branch="False" />
-                <line number="111" hits="0" branch="False" />
-                <line number="112" hits="0" branch="False" />
-                <line number="113" hits="0" branch="False" />
-                <line number="115" hits="0" branch="False" />
-                <line number="116" hits="0" branch="False" />
-                <line number="119" hits="0" branch="True" condition-coverage="0% (0/2)">
+                <line number="120" hits="1" branch="False" />
+                <line number="121" hits="1" branch="False" />
+                <line number="122" hits="1" branch="False" />
+                <line number="123" hits="1" branch="False" />
+                <line number="124" hits="1" branch="False" />
+                <line number="125" hits="1" branch="False" />
+                <line number="127" hits="1" branch="False" />
+                <line number="128" hits="1" branch="False" />
+                <line number="131" hits="1" branch="True" condition-coverage="50% (1/2)">
                   <conditions>
-                    <condition number="91" type="jump" coverage="0%" />
+                    <condition number="91" type="jump" coverage="50%" />
                   </conditions>
                 </line>
-                <line number="120" hits="0" branch="False" />
-                <line number="122" hits="0" branch="False" />
-                <line number="123" hits="0" branch="False" />
-                <line number="124" hits="0" branch="False" />
-                <line number="125" hits="0" branch="False" />
-                <line number="126" hits="0" branch="False" />
+                <line number="132" hits="0" branch="False" />
+                <line number="134" hits="1" branch="False" />
+                <line number="135" hits="1" branch="False" />
+                <line number="136" hits="1" branch="False" />
+                <line number="137" hits="1" branch="False" />
+                <line number="138" hits="1" branch="False" />
               </lines>
             </method>
             <method name=".ctor" signature="(System.Double,System.Double,System.Double,System.Double)" line-rate="0" branch-rate="1">
               <lines>
-                <line number="135" hits="0" branch="False" />
-                <line number="136" hits="0" branch="False" />
-                <line number="137" hits="0" branch="False" />
+                <line number="147" hits="0" branch="False" />
+                <line number="148" hits="0" branch="False" />
+                <line number="149" hits="0" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="16" hits="1" branch="False" />
-            <line number="22" hits="1" branch="False" />
-            <line number="28" hits="1" branch="False" />
-            <line number="34" hits="1" branch="False" />
-            <line number="40" hits="0" branch="False" />
-            <line number="46" hits="0" branch="False" />
-            <line number="52" hits="0" branch="False" />
-            <line number="146" hits="0" branch="False" />
+            <line number="18" hits="20" branch="False" />
+            <line number="27" hits="20" branch="False" />
+            <line number="36" hits="19" branch="False" />
+            <line number="45" hits="19" branch="False" />
+            <line number="52" hits="5" branch="False" />
+            <line number="58" hits="1" branch="False" />
+            <line number="64" hits="1" branch="False" />
+            <line number="158" hits="0" branch="False" />
+            <line number="159" hits="0" branch="False" />
+            <line number="160" hits="0" branch="False" />
+            <line number="161" hits="0" branch="False" />
+            <line number="162" hits="0" branch="False" />
+            <line number="163" hits="0" branch="False" />
+            <line number="171" hits="2" branch="False" />
+            <line number="180" hits="3" branch="False" />
+            <line number="188" hits="0" branch="False" />
+            <line number="189" hits="0" branch="False" />
+            <line number="190" hits="0" branch="False" />
+            <line number="191" hits="0" branch="False" />
+            <line number="192" hits="0" branch="False" />
+            <line number="194" hits="0" branch="False" />
+            <line number="195" hits="0" branch="False" />
+            <line number="202" hits="0" branch="False" />
+            <line number="210" hits="1" branch="False" />
+            <line number="211" hits="1" branch="False" />
+            <line number="212" hits="1" branch="False" />
+            <line number="213" hits="1" branch="False" />
+            <line number="215" hits="1" branch="False" />
+            <line number="216" hits="1" branch="False" />
+            <line number="223" hits="1" branch="False" />
+            <line number="230" hits="0" branch="False" />
+            <line number="231" hits="0" branch="False" />
+            <line number="238" hits="1" branch="False" />
+            <line number="244" hits="1" branch="False" />
+            <line number="72" hits="1" branch="False" />
+            <line number="73" hits="1" branch="False" />
+            <line number="74" hits="1" branch="False" />
+            <line number="81" hits="1" branch="False" />
+            <line number="82" hits="1" branch="False" />
+            <line number="83" hits="1" branch="False" />
+            <line number="94" hits="9" branch="False" />
+            <line number="95" hits="9" branch="False" />
+            <line number="96" hits="9" branch="False" />
+            <line number="106" hits="12" branch="False" />
+            <line number="107" hits="12" branch="False" />
+            <line number="108" hits="12" branch="False" />
+            <line number="109" hits="12" branch="False" />
+            <line number="110" hits="12" branch="False" />
+            <line number="111" hits="12" branch="False" />
+            <line number="112" hits="12" branch="False" />
+            <line number="120" hits="1" branch="False" />
+            <line number="121" hits="1" branch="False" />
+            <line number="122" hits="1" branch="False" />
+            <line number="123" hits="1" branch="False" />
+            <line number="124" hits="1" branch="False" />
+            <line number="125" hits="1" branch="False" />
+            <line number="127" hits="1" branch="False" />
+            <line number="128" hits="1" branch="False" />
+            <line number="131" hits="1" branch="True" condition-coverage="50% (1/2)">
+              <conditions>
+                <condition number="91" type="jump" coverage="50%" />
+              </conditions>
+            </line>
+            <line number="132" hits="0" branch="False" />
+            <line number="134" hits="1" branch="False" />
+            <line number="135" hits="1" branch="False" />
+            <line number="136" hits="1" branch="False" />
+            <line number="137" hits="1" branch="False" />
+            <line number="138" hits="1" branch="False" />
             <line number="147" hits="0" branch="False" />
             <line number="148" hits="0" branch="False" />
             <line number="149" hits="0" branch="False" />
-            <line number="150" hits="0" branch="False" />
-            <line number="151" hits="0" branch="False" />
-            <line number="159" hits="0" branch="False" />
-            <line number="168" hits="0" branch="False" />
-            <line number="176" hits="0" branch="False" />
-            <line number="177" hits="0" branch="False" />
-            <line number="178" hits="0" branch="False" />
-            <line number="179" hits="0" branch="False" />
-            <line number="180" hits="0" branch="False" />
-            <line number="182" hits="0" branch="False" />
-            <line number="183" hits="0" branch="False" />
-            <line number="190" hits="0" branch="False" />
-            <line number="198" hits="0" branch="False" />
-            <line number="199" hits="0" branch="False" />
-            <line number="200" hits="0" branch="False" />
-            <line number="201" hits="0" branch="False" />
-            <line number="203" hits="0" branch="False" />
-            <line number="204" hits="0" branch="False" />
-            <line number="211" hits="0" branch="False" />
-            <line number="218" hits="0" branch="False" />
-            <line number="219" hits="0" branch="False" />
-            <line number="226" hits="0" branch="False" />
-            <line number="232" hits="0" branch="False" />
-            <line number="60" hits="0" branch="False" />
-            <line number="61" hits="0" branch="False" />
-            <line number="62" hits="0" branch="False" />
-            <line number="69" hits="0" branch="False" />
-            <line number="70" hits="0" branch="False" />
-            <line number="71" hits="0" branch="False" />
-            <line number="82" hits="0" branch="False" />
-            <line number="83" hits="0" branch="False" />
-            <line number="84" hits="0" branch="False" />
-            <line number="94" hits="1" branch="False" />
-            <line number="95" hits="1" branch="False" />
-            <line number="96" hits="1" branch="False" />
-            <line number="97" hits="1" branch="False" />
-            <line number="98" hits="1" branch="False" />
-            <line number="99" hits="1" branch="False" />
-            <line number="100" hits="1" branch="False" />
-            <line number="108" hits="0" branch="False" />
-            <line number="109" hits="0" branch="False" />
-            <line number="110" hits="0" branch="False" />
-            <line number="111" hits="0" branch="False" />
-            <line number="112" hits="0" branch="False" />
-            <line number="113" hits="0" branch="False" />
-            <line number="115" hits="0" branch="False" />
-            <line number="116" hits="0" branch="False" />
-            <line number="119" hits="0" branch="True" condition-coverage="0% (0/2)">
-              <conditions>
-                <condition number="91" type="jump" coverage="0%" />
-              </conditions>
-            </line>
-            <line number="120" hits="0" branch="False" />
-            <line number="122" hits="0" branch="False" />
-            <line number="123" hits="0" branch="False" />
-            <line number="124" hits="0" branch="False" />
-            <line number="125" hits="0" branch="False" />
-            <line number="126" hits="0" branch="False" />
-            <line number="135" hits="0" branch="False" />
-            <line number="136" hits="0" branch="False" />
-            <line number="137" hits="0" branch="False" />
           </lines>
         </class>
         <class name="Paramdigma.Core.Geometry.Point3d" filename="/Users/alan/GitHub/Paramdigma.Core/src/Geometry/3D/Point3d.cs" line-rate="1" branch-rate="1" complexity="23">
@@ -7903,7 +7895,7 @@
             </method>
             <method name="get_WorldOrigin" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="71" hits="10" branch="False" />
+                <line number="71" hits="19" branch="False" />
               </lines>
             </method>
             <method name="DistanceTo" signature="(Paramdigma.Core.Geometry.Point3d)" line-rate="1" branch-rate="1">
@@ -7913,7 +7905,7 @@
             </method>
             <method name="Equals" signature="(System.Object)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="81" hits="17" branch="False" />
+                <line number="81" hits="20" branch="False" />
               </lines>
             </method>
             <method name="GetHashCode" signature="()" line-rate="1" branch-rate="1">
@@ -7928,12 +7920,12 @@
             </method>
             <method name="op_Addition" signature="(Paramdigma.Core.Geometry.Point3d,Paramdigma.Core.Geometry.Vector3d)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="95" hits="953" branch="False" />
+                <line number="95" hits="956" branch="False" />
               </lines>
             </method>
             <method name="op_Subtraction" signature="(Paramdigma.Core.Geometry.Point3d,Paramdigma.Core.Geometry.Point3d)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="103" hits="13" branch="False" />
+                <line number="103" hits="17" branch="False" />
               </lines>
             </method>
             <method name="op_Subtraction" signature="(Paramdigma.Core.Geometry.Point3d,Paramdigma.Core.Geometry.Vector3d)" line-rate="1" branch-rate="1">
@@ -7963,7 +7955,7 @@
             </method>
             <method name="op_Equality" signature="(Paramdigma.Core.Geometry.Point3d,Paramdigma.Core.Geometry.Point3d)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="151" hits="15" branch="False" />
+                <line number="151" hits="18" branch="False" />
               </lines>
             </method>
             <method name="op_Inequality" signature="(Paramdigma.Core.Geometry.Point3d,Paramdigma.Core.Geometry.Point3d)" line-rate="1" branch-rate="1">
@@ -7995,9 +7987,9 @@
             </method>
             <method name=".ctor" signature="(System.Double,System.Double,System.Double)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="27" hits="2024" branch="False" />
-                <line number="28" hits="2024" branch="False" />
-                <line number="29" hits="2024" branch="False" />
+                <line number="27" hits="2043" branch="False" />
+                <line number="28" hits="2043" branch="False" />
+                <line number="29" hits="2043" branch="False" />
               </lines>
             </method>
             <method name=".ctor" signature="(Paramdigma.Core.Geometry.Point2d)" line-rate="1" branch-rate="1">
@@ -8009,9 +8001,9 @@
             </method>
             <method name=".ctor" signature="(Paramdigma.Core.Geometry.Point3d)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="47" hits="25" branch="False" />
-                <line number="48" hits="25" branch="False" />
-                <line number="49" hits="25" branch="False" />
+                <line number="47" hits="27" branch="False" />
+                <line number="48" hits="27" branch="False" />
+                <line number="49" hits="27" branch="False" />
               </lines>
             </method>
             <method name=".ctor" signature="(Paramdigma.Core.Geometry.Point4d)" line-rate="1" branch-rate="1">
@@ -8024,19 +8016,19 @@
           </methods>
           <lines>
             <line number="65" hits="303" branch="False" />
-            <line number="71" hits="10" branch="False" />
+            <line number="71" hits="19" branch="False" />
             <line number="78" hits="2" branch="False" />
-            <line number="81" hits="17" branch="False" />
+            <line number="81" hits="20" branch="False" />
             <line number="84" hits="4" branch="False" />
             <line number="87" hits="307" branch="False" />
-            <line number="95" hits="953" branch="False" />
-            <line number="103" hits="13" branch="False" />
+            <line number="95" hits="956" branch="False" />
+            <line number="103" hits="17" branch="False" />
             <line number="111" hits="1" branch="False" />
             <line number="118" hits="1" branch="False" />
             <line number="126" hits="2" branch="False" />
             <line number="134" hits="989" branch="False" />
             <line number="142" hits="2" branch="False" />
-            <line number="151" hits="15" branch="False" />
+            <line number="151" hits="18" branch="False" />
             <line number="159" hits="2" branch="False" />
             <line number="167" hits="1" branch="False" />
             <line number="173" hits="953" branch="False" />
@@ -8044,15 +8036,15 @@
             <line number="15" hits="303" branch="False" />
             <line number="16" hits="303" branch="False" />
             <line number="17" hits="303" branch="False" />
-            <line number="27" hits="2024" branch="False" />
-            <line number="28" hits="2024" branch="False" />
-            <line number="29" hits="2024" branch="False" />
+            <line number="27" hits="2043" branch="False" />
+            <line number="28" hits="2043" branch="False" />
+            <line number="29" hits="2043" branch="False" />
             <line number="37" hits="1" branch="False" />
             <line number="38" hits="1" branch="False" />
             <line number="39" hits="1" branch="False" />
-            <line number="47" hits="25" branch="False" />
-            <line number="48" hits="25" branch="False" />
-            <line number="49" hits="25" branch="False" />
+            <line number="47" hits="27" branch="False" />
+            <line number="48" hits="27" branch="False" />
+            <line number="49" hits="27" branch="False" />
             <line number="57" hits="2" branch="False" />
             <line number="58" hits="2" branch="False" />
             <line number="59" hits="2" branch="False" />
@@ -8670,22 +8662,22 @@
           <methods>
             <method name="get_LengthSquared" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="54" hits="15" branch="False" />
+                <line number="54" hits="17" branch="False" />
               </lines>
             </method>
             <method name="get_Length" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="60" hits="15" branch="False" />
+                <line number="60" hits="17" branch="False" />
               </lines>
             </method>
             <method name="Unitize" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="66" hits="9" branch="False" />
-                <line number="67" hits="9" branch="False" />
-                <line number="68" hits="9" branch="False" />
-                <line number="69" hits="9" branch="False" />
-                <line number="70" hits="9" branch="False" />
-                <line number="71" hits="9" branch="False" />
+                <line number="66" hits="11" branch="False" />
+                <line number="67" hits="11" branch="False" />
+                <line number="68" hits="11" branch="False" />
+                <line number="69" hits="11" branch="False" />
+                <line number="70" hits="11" branch="False" />
+                <line number="71" hits="11" branch="False" />
               </lines>
             </method>
             <method name="Unit" signature="()" line-rate="1" branch-rate="1">
@@ -8701,27 +8693,27 @@
             </method>
             <method name="Dot" signature="(Paramdigma.Core.Geometry.Vector3d)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="91" hits="5" branch="False" />
+                <line number="91" hits="10" branch="False" />
               </lines>
             </method>
             <method name="Cross" signature="(Paramdigma.Core.Geometry.Vector3d)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="98" hits="5" branch="False" />
+                <line number="98" hits="16" branch="False" />
               </lines>
             </method>
             <method name="DotProduct" signature="(Paramdigma.Core.Geometry.Vector3d,Paramdigma.Core.Geometry.Vector3d)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="107" hits="22" branch="False" />
+                <line number="107" hits="29" branch="False" />
               </lines>
             </method>
             <method name="CrossProduct" signature="(Paramdigma.Core.Geometry.Vector3d,Paramdigma.Core.Geometry.Vector3d)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="117" hits="7" branch="False" />
-                <line number="118" hits="7" branch="False" />
-                <line number="119" hits="7" branch="False" />
-                <line number="120" hits="7" branch="False" />
-                <line number="122" hits="7" branch="False" />
-                <line number="123" hits="7" branch="False" />
+                <line number="117" hits="18" branch="False" />
+                <line number="118" hits="18" branch="False" />
+                <line number="119" hits="18" branch="False" />
+                <line number="120" hits="18" branch="False" />
+                <line number="122" hits="18" branch="False" />
+                <line number="123" hits="18" branch="False" />
               </lines>
             </method>
             <method name="Angle" signature="(Paramdigma.Core.Geometry.Vector3d,Paramdigma.Core.Geometry.Vector3d)" line-rate="1" branch-rate="1">
@@ -8733,22 +8725,22 @@
             </method>
             <method name="get_UnitX" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="141" hits="4" branch="False" />
+                <line number="141" hits="12" branch="False" />
               </lines>
             </method>
             <method name="get_UnitY" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="147" hits="2" branch="False" />
+                <line number="147" hits="9" branch="False" />
               </lines>
             </method>
             <method name="get_UnitZ" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="153" hits="10" branch="False" />
+                <line number="153" hits="13" branch="False" />
               </lines>
             </method>
             <method name="op_Addition" signature="(Paramdigma.Core.Geometry.Vector3d,Paramdigma.Core.Geometry.Vector3d)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="161" hits="2" branch="False" />
+                <line number="161" hits="8" branch="False" />
               </lines>
             </method>
             <method name="op_Subtraction" signature="(Paramdigma.Core.Geometry.Vector3d,Paramdigma.Core.Geometry.Vector3d)" line-rate="1" branch-rate="1">
@@ -8763,7 +8755,7 @@
             </method>
             <method name="op_Multiply" signature="(System.Double,Paramdigma.Core.Geometry.Vector3d)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="185" hits="2" branch="False" />
+                <line number="185" hits="11" branch="False" />
               </lines>
             </method>
             <method name="op_UnaryNegation" signature="(Paramdigma.Core.Geometry.Vector3d)" line-rate="1" branch-rate="1">
@@ -8810,9 +8802,9 @@
             </method>
             <method name=".ctor" signature="(Paramdigma.Core.Geometry.Vector3d)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="24" hits="1" branch="False" />
-                <line number="25" hits="1" branch="False" />
-                <line number="26" hits="1" branch="False" />
+                <line number="24" hits="7" branch="False" />
+                <line number="25" hits="7" branch="False" />
+                <line number="26" hits="7" branch="False" />
               </lines>
             </method>
             <method name=".ctor" signature="(Paramdigma.Core.Geometry.Point3d)" line-rate="1" branch-rate="1">
@@ -8824,21 +8816,21 @@
             </method>
             <method name=".ctor" signature="(System.Double,System.Double,System.Double)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="46" hits="1018" branch="False" />
-                <line number="47" hits="1018" branch="False" />
-                <line number="48" hits="1018" branch="False" />
+                <line number="46" hits="1066" branch="False" />
+                <line number="47" hits="1066" branch="False" />
+                <line number="48" hits="1066" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="54" hits="15" branch="False" />
-            <line number="60" hits="15" branch="False" />
-            <line number="66" hits="9" branch="False" />
-            <line number="67" hits="9" branch="False" />
-            <line number="68" hits="9" branch="False" />
-            <line number="69" hits="9" branch="False" />
-            <line number="70" hits="9" branch="False" />
-            <line number="71" hits="9" branch="False" />
+            <line number="54" hits="17" branch="False" />
+            <line number="60" hits="17" branch="False" />
+            <line number="66" hits="11" branch="False" />
+            <line number="67" hits="11" branch="False" />
+            <line number="68" hits="11" branch="False" />
+            <line number="69" hits="11" branch="False" />
+            <line number="70" hits="11" branch="False" />
+            <line number="71" hits="11" branch="False" />
             <line number="78" hits="2" branch="False" />
             <line number="79" hits="2" branch="False" />
             <line number="80" hits="2" branch="False" />
@@ -8846,25 +8838,25 @@
             <line number="82" hits="2" branch="False" />
             <line number="83" hits="2" branch="False" />
             <line number="84" hits="2" branch="False" />
-            <line number="91" hits="5" branch="False" />
-            <line number="98" hits="5" branch="False" />
-            <line number="107" hits="22" branch="False" />
-            <line number="117" hits="7" branch="False" />
-            <line number="118" hits="7" branch="False" />
-            <line number="119" hits="7" branch="False" />
-            <line number="120" hits="7" branch="False" />
-            <line number="122" hits="7" branch="False" />
-            <line number="123" hits="7" branch="False" />
+            <line number="91" hits="10" branch="False" />
+            <line number="98" hits="16" branch="False" />
+            <line number="107" hits="29" branch="False" />
+            <line number="117" hits="18" branch="False" />
+            <line number="118" hits="18" branch="False" />
+            <line number="119" hits="18" branch="False" />
+            <line number="120" hits="18" branch="False" />
+            <line number="122" hits="18" branch="False" />
+            <line number="123" hits="18" branch="False" />
             <line number="133" hits="2" branch="False" />
             <line number="134" hits="2" branch="False" />
             <line number="135" hits="2" branch="False" />
-            <line number="141" hits="4" branch="False" />
-            <line number="147" hits="2" branch="False" />
-            <line number="153" hits="10" branch="False" />
-            <line number="161" hits="2" branch="False" />
+            <line number="141" hits="12" branch="False" />
+            <line number="147" hits="9" branch="False" />
+            <line number="153" hits="13" branch="False" />
+            <line number="161" hits="8" branch="False" />
             <line number="169" hits="2" branch="False" />
             <line number="177" hits="2" branch="False" />
-            <line number="185" hits="2" branch="False" />
+            <line number="185" hits="11" branch="False" />
             <line number="192" hits="1" branch="False" />
             <line number="200" hits="1" branch="False" />
             <line number="208" hits="11" branch="False" />
@@ -8875,15 +8867,15 @@
             <line number="15" hits="5" branch="False" />
             <line number="16" hits="5" branch="False" />
             <line number="17" hits="5" branch="False" />
-            <line number="24" hits="1" branch="False" />
-            <line number="25" hits="1" branch="False" />
-            <line number="26" hits="1" branch="False" />
+            <line number="24" hits="7" branch="False" />
+            <line number="25" hits="7" branch="False" />
+            <line number="26" hits="7" branch="False" />
             <line number="34" hits="1" branch="False" />
             <line number="35" hits="1" branch="False" />
             <line number="36" hits="1" branch="False" />
-            <line number="46" hits="1018" branch="False" />
-            <line number="47" hits="1018" branch="False" />
-            <line number="48" hits="1018" branch="False" />
+            <line number="46" hits="1066" branch="False" />
+            <line number="47" hits="1066" branch="False" />
+            <line number="48" hits="1066" branch="False" />
           </lines>
         </class>
         <class name="Paramdigma.Core.Geometry.BaseCurve" filename="/Users/alan/GitHub/Paramdigma.Core/src/Geometry/Base/BaseCurve.cs" line-rate="1" branch-rate="1" complexity="4">
@@ -8926,67 +8918,67 @@
           <methods>
             <method name="get_X" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="18" hits="4076" branch="False" />
-                <line number="19" hits="4076" branch="False" />
-                <line number="20" hits="4076" branch="False" />
+                <line number="18" hits="4185" branch="False" />
+                <line number="19" hits="4185" branch="False" />
+                <line number="20" hits="4185" branch="False" />
               </lines>
             </method>
             <method name="set_X" signature="(System.Double)" line-rate="0.8" branch-rate="0.5">
               <lines>
-                <line number="23" hits="9" branch="False" />
-                <line number="24" hits="9" branch="True" condition-coverage="50% (1/2)">
+                <line number="23" hits="11" branch="False" />
+                <line number="24" hits="11" branch="True" condition-coverage="50% (1/2)">
                   <conditions>
                     <condition number="9" type="jump" coverage="50%" />
                   </conditions>
                 </line>
                 <line number="25" hits="0" branch="False" />
-                <line number="26" hits="9" branch="False" />
-                <line number="27" hits="9" branch="False" />
+                <line number="26" hits="11" branch="False" />
+                <line number="27" hits="11" branch="False" />
               </lines>
             </method>
             <method name="get_Y" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="36" hits="4076" branch="False" />
-                <line number="37" hits="4076" branch="False" />
-                <line number="38" hits="4076" branch="False" />
+                <line number="36" hits="4185" branch="False" />
+                <line number="37" hits="4185" branch="False" />
+                <line number="38" hits="4185" branch="False" />
               </lines>
             </method>
             <method name="set_Y" signature="(System.Double)" line-rate="0.8" branch-rate="0.5">
               <lines>
-                <line number="41" hits="9" branch="False" />
-                <line number="42" hits="9" branch="True" condition-coverage="50% (1/2)">
+                <line number="41" hits="11" branch="False" />
+                <line number="42" hits="11" branch="True" condition-coverage="50% (1/2)">
                   <conditions>
                     <condition number="9" type="jump" coverage="50%" />
                   </conditions>
                 </line>
                 <line number="43" hits="0" branch="False" />
-                <line number="44" hits="9" branch="False" />
-                <line number="45" hits="9" branch="False" />
+                <line number="44" hits="11" branch="False" />
+                <line number="45" hits="11" branch="False" />
               </lines>
             </method>
             <method name="get_Z" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="54" hits="4076" branch="False" />
-                <line number="55" hits="4076" branch="False" />
-                <line number="56" hits="4076" branch="False" />
+                <line number="54" hits="4185" branch="False" />
+                <line number="55" hits="4185" branch="False" />
+                <line number="56" hits="4185" branch="False" />
               </lines>
             </method>
             <method name="set_Z" signature="(System.Double)" line-rate="0.8" branch-rate="0.5">
               <lines>
-                <line number="59" hits="9" branch="False" />
-                <line number="60" hits="9" branch="True" condition-coverage="50% (1/2)">
+                <line number="59" hits="11" branch="False" />
+                <line number="60" hits="11" branch="True" condition-coverage="50% (1/2)">
                   <conditions>
                     <condition number="9" type="jump" coverage="50%" />
                   </conditions>
                 </line>
                 <line number="61" hits="0" branch="False" />
-                <line number="62" hits="9" branch="False" />
-                <line number="63" hits="9" branch="False" />
+                <line number="62" hits="11" branch="False" />
+                <line number="63" hits="11" branch="False" />
               </lines>
             </method>
             <method name="get_IsUnset" signature="()" line-rate="1" branch-rate="1">
               <lines>
-                <line number="70" hits="3716" branch="False" />
+                <line number="70" hits="3797" branch="False" />
               </lines>
             </method>
             <method name="Add" signature="(Paramdigma.Core.Geometry.BasePoint)" line-rate="1" branch-rate="1">
@@ -9048,24 +9040,24 @@
             </method>
             <method name="Equals" signature="(System.Object)" line-rate="1" branch-rate="0.6666">
               <lines>
-                <line number="180" hits="30" branch="False" />
-                <line number="181" hits="30" branch="True" condition-coverage="100% (2/2)">
+                <line number="180" hits="33" branch="False" />
+                <line number="181" hits="33" branch="True" condition-coverage="100% (2/2)">
                   <conditions>
                     <condition number="15" type="jump" coverage="100%" />
                   </conditions>
                 </line>
                 <line number="182" hits="2" branch="False" />
                 <line number="183" hits="2" branch="False" />
-                <line number="186" hits="28" branch="False" />
-                <line number="187" hits="28" branch="True" condition-coverage="50% (2/4)">
+                <line number="186" hits="31" branch="False" />
+                <line number="187" hits="31" branch="True" condition-coverage="50% (2/4)">
                   <conditions>
                     <condition number="52" type="jump" coverage="50%" />
                     <condition number="77" type="jump" coverage="50%" />
                   </conditions>
                 </line>
-                <line number="188" hits="28" branch="False" />
-                <line number="189" hits="28" branch="False" />
-                <line number="190" hits="30" branch="False" />
+                <line number="188" hits="31" branch="False" />
+                <line number="189" hits="31" branch="False" />
+                <line number="190" hits="33" branch="False" />
               </lines>
             </method>
             <method name="GetHashCode" signature="()" line-rate="1" branch-rate="1">
@@ -9094,61 +9086,61 @@
             </method>
             <method name=".ctor" signature="(Paramdigma.Core.Geometry.BasePoint)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="92" hits="27" branch="False" />
-                <line number="93" hits="27" branch="False" />
-                <line number="94" hits="27" branch="False" />
+                <line number="92" hits="35" branch="False" />
+                <line number="93" hits="35" branch="False" />
+                <line number="94" hits="35" branch="False" />
               </lines>
             </method>
             <method name=".ctor" signature="(System.Double,System.Double,System.Double)" line-rate="1" branch-rate="1">
               <lines>
-                <line number="102" hits="3379" branch="False" />
-                <line number="103" hits="3379" branch="False" />
-                <line number="104" hits="3379" branch="False" />
-                <line number="105" hits="3379" branch="False" />
-                <line number="106" hits="3379" branch="False" />
-                <line number="107" hits="3379" branch="False" />
-                <line number="108" hits="3379" branch="False" />
+                <line number="102" hits="3454" branch="False" />
+                <line number="103" hits="3454" branch="False" />
+                <line number="104" hits="3454" branch="False" />
+                <line number="105" hits="3454" branch="False" />
+                <line number="106" hits="3454" branch="False" />
+                <line number="107" hits="3454" branch="False" />
+                <line number="108" hits="3454" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="18" hits="4076" branch="False" />
-            <line number="19" hits="4076" branch="False" />
-            <line number="20" hits="4076" branch="False" />
-            <line number="23" hits="9" branch="False" />
-            <line number="24" hits="9" branch="True" condition-coverage="50% (1/2)">
+            <line number="18" hits="4185" branch="False" />
+            <line number="19" hits="4185" branch="False" />
+            <line number="20" hits="4185" branch="False" />
+            <line number="23" hits="11" branch="False" />
+            <line number="24" hits="11" branch="True" condition-coverage="50% (1/2)">
               <conditions>
                 <condition number="9" type="jump" coverage="50%" />
               </conditions>
             </line>
             <line number="25" hits="0" branch="False" />
-            <line number="26" hits="9" branch="False" />
-            <line number="27" hits="9" branch="False" />
-            <line number="36" hits="4076" branch="False" />
-            <line number="37" hits="4076" branch="False" />
-            <line number="38" hits="4076" branch="False" />
-            <line number="41" hits="9" branch="False" />
-            <line number="42" hits="9" branch="True" condition-coverage="50% (1/2)">
+            <line number="26" hits="11" branch="False" />
+            <line number="27" hits="11" branch="False" />
+            <line number="36" hits="4185" branch="False" />
+            <line number="37" hits="4185" branch="False" />
+            <line number="38" hits="4185" branch="False" />
+            <line number="41" hits="11" branch="False" />
+            <line number="42" hits="11" branch="True" condition-coverage="50% (1/2)">
               <conditions>
                 <condition number="9" type="jump" coverage="50%" />
               </conditions>
             </line>
             <line number="43" hits="0" branch="False" />
-            <line number="44" hits="9" branch="False" />
-            <line number="45" hits="9" branch="False" />
-            <line number="54" hits="4076" branch="False" />
-            <line number="55" hits="4076" branch="False" />
-            <line number="56" hits="4076" branch="False" />
-            <line number="59" hits="9" branch="False" />
-            <line number="60" hits="9" branch="True" condition-coverage="50% (1/2)">
+            <line number="44" hits="11" branch="False" />
+            <line number="45" hits="11" branch="False" />
+            <line number="54" hits="4185" branch="False" />
+            <line number="55" hits="4185" branch="False" />
+            <line number="56" hits="4185" branch="False" />
+            <line number="59" hits="11" branch="False" />
+            <line number="60" hits="11" branch="True" condition-coverage="50% (1/2)">
               <conditions>
                 <condition number="9" type="jump" coverage="50%" />
               </conditions>
             </line>
             <line number="61" hits="0" branch="False" />
-            <line number="62" hits="9" branch="False" />
-            <line number="63" hits="9" branch="False" />
-            <line number="70" hits="3716" branch="False" />
+            <line number="62" hits="11" branch="False" />
+            <line number="63" hits="11" branch="False" />
+            <line number="70" hits="3797" branch="False" />
             <line number="115" hits="1" branch="False" />
             <line number="116" hits="1" branch="False" />
             <line number="117" hits="1" branch="False" />
@@ -9178,24 +9170,24 @@
             <line number="164" hits="1" branch="False" />
             <line number="170" hits="308" branch="False" />
             <line number="176" hits="1" branch="False" />
-            <line number="180" hits="30" branch="False" />
-            <line number="181" hits="30" branch="True" condition-coverage="100% (2/2)">
+            <line number="180" hits="33" branch="False" />
+            <line number="181" hits="33" branch="True" condition-coverage="100% (2/2)">
               <conditions>
                 <condition number="15" type="jump" coverage="100%" />
               </conditions>
             </line>
             <line number="182" hits="2" branch="False" />
             <line number="183" hits="2" branch="False" />
-            <line number="186" hits="28" branch="False" />
-            <line number="187" hits="28" branch="True" condition-coverage="50% (2/4)">
+            <line number="186" hits="31" branch="False" />
+            <line number="187" hits="31" branch="True" condition-coverage="50% (2/4)">
               <conditions>
                 <condition number="52" type="jump" coverage="50%" />
                 <condition number="77" type="jump" coverage="50%" />
               </conditions>
             </line>
-            <line number="188" hits="28" branch="False" />
-            <line number="189" hits="28" branch="False" />
-            <line number="190" hits="30" branch="False" />
+            <line number="188" hits="31" branch="False" />
+            <line number="189" hits="31" branch="False" />
+            <line number="190" hits="33" branch="False" />
             <line number="194" hits="6" branch="False" />
             <line number="196" hits="6" branch="False" />
             <line number="200" hits="6" branch="False" />
@@ -9212,16 +9204,16 @@
             <line number="82" hits="308" branch="False" />
             <line number="83" hits="308" branch="False" />
             <line number="84" hits="308" branch="False" />
-            <line number="92" hits="27" branch="False" />
-            <line number="93" hits="27" branch="False" />
-            <line number="94" hits="27" branch="False" />
-            <line number="102" hits="3379" branch="False" />
-            <line number="103" hits="3379" branch="False" />
-            <line number="104" hits="3379" branch="False" />
-            <line number="105" hits="3379" branch="False" />
-            <line number="106" hits="3379" branch="False" />
-            <line number="107" hits="3379" branch="False" />
-            <line number="108" hits="3379" branch="False" />
+            <line number="92" hits="35" branch="False" />
+            <line number="93" hits="35" branch="False" />
+            <line number="94" hits="35" branch="False" />
+            <line number="102" hits="3454" branch="False" />
+            <line number="103" hits="3454" branch="False" />
+            <line number="104" hits="3454" branch="False" />
+            <line number="105" hits="3454" branch="False" />
+            <line number="106" hits="3454" branch="False" />
+            <line number="107" hits="3454" branch="False" />
+            <line number="108" hits="3454" branch="False" />
           </lines>
         </class>
         <class name="Paramdigma.Core.Geometry.InvalidCurveException" filename="/Users/alan/GitHub/Paramdigma.Core/src/Geometry/Base/InvalidCurveException.cs" line-rate="0" branch-rate="1" complexity="3">
