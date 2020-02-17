@@ -6,6 +6,20 @@ namespace Paramdigma.Core.Tests.Geometry
     public class Point3dTests
     {
         [Fact]
+        public void CanBe_Created()
+        {
+            var pt2 = new Point2d(1, 0);
+            var pt3 = new Point3d(1, 0, 0);
+            var pt4 = new Point4d(1, 0, 0, 1);
+            var npt2 = new Point3d(pt2);
+            var npt4 = new Point3d(pt4);
+            var npt5 = (Point3d)pt4;
+            Assert.True(pt3 == npt2);
+            Assert.True(pt3 == npt4);
+            Assert.True(pt3 == npt5);
+        }
+
+        [Fact]
         public void CanBe_Added()
         {
             const double a = 3.3;
@@ -25,9 +39,11 @@ namespace Paramdigma.Core.Tests.Geometry
             const double b = 2.2;
             const double c = 4.11;
             var ptA = new Point3d(a, b, c);
-            var ptB = new Point3d(b, c, a);
+            var v = new Vector3d(b, c, a);
+            var ptB = (Point3d)v;
             var ptResult = new Point3d(a - b, b - c, c - a);
             Assert.True(ptA - ptB == ptResult);
+            Assert.True(ptA - v == ptResult);
         }
 
         [Fact]
@@ -73,6 +89,36 @@ namespace Paramdigma.Core.Tests.Geometry
             var b2 = pt.GetHashCode() == pt2.GetHashCode();
 
             Assert.True(b1 && b1 == b2);
+            Assert.False(pt != pt2);
         }
+
+        [Fact]
+        public void Can_OperateOnItself()
+        {
+            var pt = Point3d.WorldOrigin;
+            var pt2 = new Point3d(1, 0, 0);
+            pt.Add(pt2);
+            Assert.True(pt == pt2);
+            pt.Substract(pt2);
+            Assert.True(pt == Point3d.WorldOrigin);
+            var pt3 = pt2 * 2;
+            pt2.Multiply(2);
+            Assert.True(pt2 == pt3);
+            var pt4 = pt2 / 2;
+            pt2.Divide(2);
+            Assert.True(pt2 == new Point3d(1, 0, 0));
+            pt2.Negate();
+            Assert.True(pt2 == new Point3d(-1, 0, 0));
+        }
+
+        [Fact]
+        public void CanConvert_ToArray()
+        {
+            var v = Vector3d.UnitX;
+            var arr = v.ToArray();
+            Assert.True(arr.Length == 3);
+            Assert.True(arr[0] == 1 && arr[1] == 0 && arr[2] == 0);
+        }
+        
     }
 }

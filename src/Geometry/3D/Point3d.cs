@@ -141,13 +141,6 @@ namespace Paramdigma.Core.Geometry
         /// <returns><see cref="Point3d"/>.</returns>
         public static Point3d operator /(Point3d point, double scalar) => new Point3d(point.X / scalar, point.Y / scalar, point.Z / scalar);
 
-        /// <summary>
-        /// Divides a point with a number.
-        /// </summary>
-        /// <param name="scalar">Number.</param>
-        /// <param name="point">Point.</param>
-        /// <returns><see cref="Point3d"/>.</returns>
-        public static Point3d operator /(double scalar, Point3d point) => new Point3d(point.X / scalar, point.Y / scalar, point.Z / scalar);
 
         /// <summary>
         /// Checks equality between two points.
