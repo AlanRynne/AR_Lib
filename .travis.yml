@@ -18,4 +18,4 @@ branches:
     - development
 
 notifications:
-  slack: paramdigma:FtUcdwSDOynOHw2M479kXHxs
+  slack: paramdigma:FtUcdwSDOynOHw2M479kXHxs#geometry-library
