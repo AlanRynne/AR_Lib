@@ -740,14 +740,14 @@ namespace Paramdigma.Core.Geometry
         }
 
         // Nubs methods
-        public static Point4d CurvePoint(int n, int p, IList<double> U, IList<Point4d> Pw, double u)
+        public static Point4d CurvePoint(int n, int p, IList<double> knotVector, IList<Point4d> controlPoints, double u)
         {
-            var span = FindSpan(n, p, u, U);
-            var N = BasisFuns(span, u, p, U);
+            var span = FindSpan(n, p, u, knotVector);
+            var N = BasisFuns(span, u, p, knotVector);
             var Cw = new Point4d();
             for (int j = 0; j <= p; j++)
             {
-                Cw += N[j] * Pw[span - p + j];
+                Cw += N[j] * controlPoints[span - p + j];
             }
 
             return Cw / Cw.Weight;
@@ -778,12 +778,12 @@ namespace Paramdigma.Core.Geometry
             return ders;
         }
 
-        public static Point3d SurfacePoint(int n, int p, IList<double> U, int m, int q, IList<double> V, Matrix<Point4d> Pw, double u, double v)
+        public static Point3d SurfacePoint(int n, int p, IList<double> knotVectorU, int m, int q, IList<double> knotVectorV, Matrix<Point4d> controlPoints, double u, double v)
         {
-            var uspan = FindSpan(n, p, u, U);
-            var nU = BasisFuns(uspan, u, p, U);
-            var vspan = FindSpan(m, q, v, V);
-            var nV = BasisFuns(vspan, v, q, V);
+            var uspan = FindSpan(n, p, u, knotVectorU);
+            var nU = BasisFuns(uspan, u, p, knotVectorU);
+            var vspan = FindSpan(m, q, v, knotVectorV);
+            var nV = BasisFuns(vspan, v, q, knotVectorV);
 
             var temp = new Point4d[q];
             for (var l = 0; l <= q; l++)
@@ -791,7 +791,7 @@ namespace Paramdigma.Core.Geometry
                 temp[l] = new Point4d();
                 for (var k = 0; k <= p; k++)
                 {
-                    temp[l] += nU[k] * Pw[uspan - p + k, vspan - q + l];
+                    temp[l] += nU[k] * controlPoints[uspan - p + k, vspan - q + l];
                 }
             }
 
