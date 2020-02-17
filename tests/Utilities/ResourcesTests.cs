@@ -16,14 +16,13 @@ namespace Paramdigma.Core.Utilities
         {
             Console.WriteLine(Settings.Tolerance);
             Console.WriteLine(Settings.MaxDecimals);
+            Console.WriteLine(Settings.GetDefaultTesselationLevel());
             Settings.SetTolerance(0.1);
             Console.WriteLine(Settings.Tolerance);
             Console.WriteLine(Settings.MaxDecimals);
             Settings.Reset();
             Console.WriteLine(Settings.Tolerance);
             Console.WriteLine(Settings.MaxDecimals);
-
-            //Then
         }
     }
 }

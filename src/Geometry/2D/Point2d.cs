@@ -10,18 +10,24 @@ namespace Paramdigma.Core.Geometry
         /// <summary>
         /// Gets or sets the X coordinate of the point.
         /// </summary>
-        public double X { get; set; }
+        public double X
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Gets or sets the Y coordinate of the point.
         /// </summary>
-        public double Y { get; set; }
+        public double Y
+        {
+            get; set;
+        }
 
         /// <summary>
         ///  Gets a new 2d point with all coordinates =0.
         /// </summary>
         /// <returns>Origin 2d point.</returns>
-        public Point2d Origin => new Point2d(0, 0);
+        public static Point2d Origin => new Point2d(0, 0);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Point2d"/> class.
@@ -144,14 +150,6 @@ namespace Paramdigma.Core.Geometry
         /// <param name="scalar">Operand.</param>
         /// <returns>Division result.</returns>
         public static Point2d operator /(Point2d point, double scalar) => new Point2d(point.X / scalar, point.Y / scalar);
-
-        /// <summary>
-        /// Divides a point by a number.
-        /// </summary>
-        /// <param name="scalar">Operand.</param>
-        /// <param name="point">Point.</param>
-        /// <returns>Division result.</returns>
-        public static Point2d operator /(double scalar, Point2d point) => new Point2d(point.X / scalar, point.Y / scalar);
 
         /// <summary>
         /// Equality comparison between points.

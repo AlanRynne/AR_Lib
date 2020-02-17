@@ -16,7 +16,7 @@
       "type": "shell",
       "args": [
         "docfx_project/docfx.json"
-      ]
+      ],
     },
     {
       "label": "serve-docs",
@@ -28,6 +28,6 @@
       ],
       "isBackground": true,
       "problemMatcher": []
-    }
+    },
   ]
 }

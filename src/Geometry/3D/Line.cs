@@ -6,6 +6,22 @@ namespace Paramdigma.Core.Geometry
     public class Line : BaseCurve
     {
         /// <summary>
+        /// Gets or sets the lines's start point.
+        /// </summary>
+        public Point3d StartPoint
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// /// Gets or sets the line's end point.
+        /// </summary>
+        public Point3d EndPoint
+        {
+            get; set;
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Line"/> class from two points.
         /// </summary>
         /// <param name="startPoint">Start point.</param>
@@ -14,6 +30,18 @@ namespace Paramdigma.Core.Geometry
         {
             this.StartPoint = startPoint;
             this.EndPoint = endPoint;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Line"/> class from an origin point, a direction and a specified length.
+        /// </summary>
+        /// <param name="origin">Start point of the line.</param>
+        /// <param name="direction">Direction of the line (length will not be taken into account).</param>
+        /// <param name="length">Length of the line.</param>
+        public Line(Point3d origin, Vector3d direction, double length)
+        {
+            this.StartPoint = origin;
+            this.EndPoint = origin + (direction.Unit() * length);
         }
 
         /// <summary>
@@ -49,7 +77,7 @@ namespace Paramdigma.Core.Geometry
         public override Vector3d NormalAt(double t)
         {
             Vector3d tangent = TangentAt(t);
-            Vector3d v = new Vector3d();
+            var v = new Vector3d();
 
             if (tangent.Dot(Vector3d.UnitZ) == 1)
                 v = Vector3d.UnitX;

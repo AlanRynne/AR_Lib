@@ -32,8 +32,12 @@ namespace Paramdigma.Core.Tests.Geometry
         [Fact]
         public override void CanGet_Normal()
         {
-            var biNorm = TestLine.NormalAt(.5);
-            Assert.True(biNorm != null);
+            var norm = TestLine.NormalAt(.5);
+            Assert.True(norm != null);
+
+            var line = new Line(Point3d.WorldOrigin, Vector3d.UnitZ, 1);
+            line.NormalAt(0.5);
+
         }
 
         [Fact]
@@ -46,8 +50,8 @@ namespace Paramdigma.Core.Tests.Geometry
         [Fact]
         public override void CanGet_PointAt()
         {
-            var biNorm = TestLine.PointAt(.5);
-            Assert.True(biNorm == new Point3d(0.5, 0.5, 0.5));
+            var pt = TestLine.PointAt(.5);
+            Assert.True(pt == new Point3d(0.5, 0.5, 0.5));
         }
 
         [Fact]

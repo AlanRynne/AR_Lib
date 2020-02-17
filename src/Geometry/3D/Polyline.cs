@@ -110,13 +110,11 @@ namespace Paramdigma.Core.Geometry
             double t = 0;
             for (int i = 1; i < knots.Count; i++)
             {
-                Line l = new Line(knots[i - 1], knots[i])
-                {
-                    // Assign parameter values
-                    T0 = t,
-                };
+                Line l = new Line(knots[i - 1], knots[i]);
+                var t0 = t;
                 t += l.Length;
-                l.T1 = t;
+                var t1 = t;
+                l.Domain = new Collections.Interval(t0, t1);
 
                 // Add segment to list.
                 segments.Add(l);
