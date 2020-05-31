@@ -1,6 +1,4 @@
-using System;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
 
@@ -31,13 +29,13 @@ namespace Paramdigma.Core
         private static int tesselationLevel = 10;
 
         /// <summary>
-        /// Gets the default tesselation level when converting nurbs to meshes.
+        /// Gets the default tessellation level when converting nurbs to meshes.
         /// </summary>
-        /// <returns>Integer representing the default tesselation level.</returns>
+        /// <returns>Integer representing the default tessellation level.</returns>
         public static int GetDefaultTesselationLevel() => tesselationLevel;
 
         /// <summary>
-        /// Sets the default tesselation level when converting nurbs to meshes.
+        /// Sets the default tessellation level when converting nurbs to meshes.
         /// </summary>
         private static void SetDefaultTesselationLevel(int value) => tesselationLevel = value;
 
@@ -75,5 +73,4 @@ namespace Paramdigma.Core
             public int DefaultTesselation;
         }
     }
-
 }

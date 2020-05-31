@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Paramdigma.Core.HalfEdgeMesh
+﻿namespace Paramdigma.Core.HalfEdgeMesh
 {
     /// <summary>
     /// Represents a mesh half-edge.

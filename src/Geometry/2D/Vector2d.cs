@@ -13,7 +13,8 @@ namespace Paramdigma.Core.Geometry
         /// <value>X coordinate.</value>
         public double X
         {
-            get; set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -22,7 +23,8 @@ namespace Paramdigma.Core.Geometry
         /// <value>Y coordinate.</value>
         public double Y
         {
-            get; set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -31,9 +33,7 @@ namespace Paramdigma.Core.Geometry
         /// <param name="vector">Vector to duplicate.</param>
         /// <returns>New vector with same values.</returns>
         public Vector2d(Vector2d vector)
-            : this(vector.X, vector.Y)
-        {
-        }
+            : this(vector.X, vector.Y) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Vector2d"/> class from a point.
@@ -41,9 +41,7 @@ namespace Paramdigma.Core.Geometry
         /// <param name="point">Point to convert.</param>
         /// <returns>New vector with same values.</returns>
         public Vector2d(Point2d point)
-        : this(point.X, point.Y)
-        {
-        }
+            : this(point.X, point.Y) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Vector2d"/> class.
@@ -65,6 +63,16 @@ namespace Paramdigma.Core.Geometry
         /// Gets the length of the vector.
         /// </summary>
         public double Length => Math.Sqrt(this.LengthSquared);
+
+        /// <summary>
+        /// Creates a vector in the World X direction {1;0}
+        /// </summary>
+        public static Vector2d WorldX => new Vector2d(1, 0);
+
+        /// <summary>
+        /// Creates a vector in the World Y direction {0;1}
+        /// </summary>
+        public static Vector2d WorldY => new Vector2d(0, 1);
 
         /// <summary>
         /// Returns a unit vector of this vector.

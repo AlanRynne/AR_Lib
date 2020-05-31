@@ -67,5 +67,46 @@ namespace Paramdigma.Core.Tests.Geometry
             Assert.True(result == expected);
             Assert.True(dist == 1);
         }
+
+        [Fact]
+        public void LinearPoints_ThrowError()
+        {
+            var ptA = new Point3d(0, 0, 0);
+            var ptB = new Point3d(0.5, 0.5, 0.5);
+            var ptC = new Point3d(1, 1, 1);
+
+            Assert.Throws<Exception>(() => new Plane(ptA, ptB, ptC));
+        }
+
+        [Fact]
+        public void CanRemap_ToXYPlane()
+        {
+            var yz = Plane.WorldYZ;
+            var pt = new Point3d(1, 1, 0);
+            var expected = new Point3d(0, 1, 1);
+            var result = yz.RemapToWorldXYSpace(pt);
+            Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void CanRemap_FromXYPlane()
+        {
+            var yz = Plane.WorldYZ;
+            var pt = new Point3d(0, 1, 1);
+            var expected = new Point3d(1, 1, 0);
+            var result = yz.RemapToPlaneSpace(pt);
+            Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void CanBe_Flipped()
+        {
+            var xy = Plane.WorldXY;
+            var flipped = xy.Clone();
+            flipped.Flip();
+            Assert.Equal(xy.XAxis, flipped.YAxis);
+            Assert.Equal(xy.YAxis, flipped.XAxis);
+            Assert.Equal(xy.ZAxis, -flipped.ZAxis);
+        }
     }
 }

@@ -1,10 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Paramdigma.Core.Curves;
 using Paramdigma.Core.Geometry;
-using Paramdigma.Core.HalfEdgeMesh;
-using Paramdigma.Core.LinearAlgebra;
 
 namespace Paramdigma.Core
 {

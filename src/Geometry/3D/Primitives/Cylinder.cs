@@ -56,6 +56,10 @@ namespace Paramdigma.Core.Geometry
             throw new System.NotImplementedException();
         }
 
+        public double DistanceTo(Point3d point) => throw new System.NotImplementedException();
+
+        public Point3d ClosestPointTo(Point3d point) => throw new System.NotImplementedException();
+
         /// <inheritdoc/>
         public Vector3d NormalAt(double u, double v)
         {

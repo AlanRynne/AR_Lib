@@ -1,8 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Paramdigma.Core.Geometry;
-using Paramdigma.Core.LinearAlgebra;
 
 namespace Paramdigma.Core.Geometry
 {
@@ -50,17 +46,34 @@ namespace Paramdigma.Core.Geometry
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Point4d"/> class from a 3-dimensional point and a weight.
+        /// </summary>
+        /// <param name="pt">Point.</param>
+        /// <returns>New 4-dimensional point with the specified values.</returns>
+        public Point4d(Point3d pt)
+            : base(pt)
+        {
+            weight = 1;
+        }
+
+        /// <summary>
         /// Gets or sets the weight of this point.
         /// </summary>
         public double Weight
         {
-            get => weight; set
+            get => weight;
+            set
             {
                 weight = value;
                 if (IsUnset)
                     this.IsUnset = false;
             }
         }
+
+        /// <summary>
+        /// Returns the raw position of the point4d (without taking into account weight).
+        /// </summary>
+        public Point3d Position => new Point3d(X, Y, Z);
 
         /// <inheritdoc/>
         public static Point4d operator +(Point4d point, Point4d point2) => new Point4d(point.X + point2.X, point.Y + point2.Y, point.Z + point2.Z, point.Weight + point2.Weight);
@@ -80,9 +93,6 @@ namespace Paramdigma.Core.Geometry
         /// <inheritdoc />
         public static Point4d operator /(Point4d point, double scalar) => new Point4d(point.X / scalar, point.Y / scalar, point.Z / scalar, point.Weight / scalar);
 
-        /// <inheritdoc/>
-        public static Point4d operator /(double scalar, Point4d point) => new Point4d(point.X / scalar, point.Y / scalar, point.Z / scalar, point.Weight / scalar);
-
         /// <inheritdoc />
         public static bool operator ==(Point4d point, Point4d point2) => point.Equals(point2);
 
@@ -97,7 +107,8 @@ namespace Paramdigma.Core.Geometry
         {
             if (obj is Point4d pt)
             {
-                return base.Equals(obj) && this.Weight == pt.Weight;
+                return base.Equals(obj)
+                    && Math.Abs(this.Weight - pt.Weight) < Settings.Tolerance;
             }
             else
             {

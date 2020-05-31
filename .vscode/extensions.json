@@ -5,7 +5,7 @@
   // List of extensions which should be recommended for users of this workspace.
   "recommendations": [
     "ban.spellright",
-    "ms-vscode.csharp",
+    "ms-dotnettools.csharp",
     "Gruntfuggly.todo-tree",
     "brainfit.vscode-coverage-highlighter",
     "josefpihrt-vscode.snippetica-csharp",

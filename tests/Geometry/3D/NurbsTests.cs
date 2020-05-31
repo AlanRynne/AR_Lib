@@ -61,10 +61,6 @@ namespace Paramdigma.Core.Tests
                 var pt = NurbsCalculator.CurvePoint(3, 1, u, new Point3d[] { p0, p1, p2, p3 }, (double)i / n);
                 var pt2 = NurbsCalculator.CurvePoint(3, 2, u2, new Point3d[] { p0, p1, p2, p3 }, (double)i / n);
                 var pt3 = NurbsCalculator.CurvePoint(3, 3, u3, new Point3d[] { p0, p1, p2, p3 }, (double)i / n);
-                Console.WriteLine($"t: {(double)i / n} — {pt}");
-                Console.WriteLine($"t: {(double)i / n} — {pt2}");
-                Console.WriteLine($"t: {(double)i / n} — {pt3}");
-                Console.WriteLine("---");
             }
             watch.Stop();
             Console.WriteLine(watch.Elapsed);

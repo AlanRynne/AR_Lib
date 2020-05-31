@@ -1,10 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Paramdigma.Core.Curves;
 using Paramdigma.Core.Geometry;
 using Paramdigma.Core.HalfEdgeMesh;
-using Paramdigma.Core.LinearAlgebra;
 
 namespace Paramdigma.Core
 {
@@ -26,14 +23,14 @@ namespace Paramdigma.Core
         {
             Vector3d u = line.EndPoint - line.StartPoint;
             Vector3d w = line.StartPoint - plane.Origin;
-
+            
             double d = Vector3d.DotProduct(plane.ZAxis, u);
             double n = -Vector3d.DotProduct(plane.ZAxis, w);
 
-            if (d <= 0.000001)
+            if (Math.Abs(d) <= Settings.Tolerance)
             {
                 // Segment is parallel to plane
-                if (n == 0)
+                if (Math.Abs(n) < Settings.Tolerance)
                 {
                     // Segment lies in plane
                     intersectionPoint = null;

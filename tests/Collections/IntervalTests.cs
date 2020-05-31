@@ -7,12 +7,18 @@ namespace Paramdigma.Core.Tests
     public class IntervalTests
     {
         [Fact]
-        public async void CanCreate_Interval()
+        public void CanCreate_Interval()
         {
             var i0 = new Interval(0, 1);
             var i1 = Interval.Unit;
             var i2 = new Interval(i0);
+            
+            Assert.Equal(1, i0.Length);
+            Assert.Throws<ArithmeticException>(() => new Interval(double.NaN,1));
+            Assert.Throws<ArithmeticException>(() => new Interval(0, double.NaN));
         }
+        
+
 
         [Fact]
         public void Can_CheckAndModifyDirection()

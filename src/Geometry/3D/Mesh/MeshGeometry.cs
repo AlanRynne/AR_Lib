@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Paramdigma.Core.HalfEdgeMesh;
 
 namespace Paramdigma.Core.Geometry

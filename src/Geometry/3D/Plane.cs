@@ -127,8 +127,10 @@ namespace Paramdigma.Core.Geometry
             Vector3d normal = tempX.Cross(tempY);
             double colinearCheck = Math.Abs(1 - tempY.Dot(tempX));
 
+            var compare = tempX.Dot(tempY);
+
             // Ensure points are not co-linear
-            if (tempY.Dot(tempX) == 1)
+            if (Math.Abs(compare - 1) <= Settings.Tolerance)
                 throw new System.Exception("Cannot create plane out of co-linear points.");
 
             Origin = ptA;
@@ -220,7 +222,7 @@ namespace Paramdigma.Core.Geometry
         /// </summary>
         /// <param name="point">Point to compute distance to.</param>
         /// <returns>Distance to point.</returns>
-        public double DistanceTo(Point3d point) => ((Vector3d)(point - Origin)).Dot(ZAxis);
+        public double DistanceTo(Point3d point) => (point - Origin).Dot(ZAxis);
 
         /// <summary>
         /// Returns the parametric equation for this plane.

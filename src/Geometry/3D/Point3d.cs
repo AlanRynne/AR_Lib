@@ -71,6 +71,12 @@ namespace Paramdigma.Core.Geometry
         public static Point3d WorldOrigin => new Point3d(0, 0, 0);
 
         /// <summary>
+        /// Performs a deep clone of the point.
+        /// </summary>
+        /// <returns>Returns a copy of this point instance.</returns>
+        public Point3d Clone() => new Point3d(this.X, this.Y, this.Z);
+
+        /// <summary>
         /// Gets the euclidean distance between this point and the provided one.
         /// </summary>
         /// <param name="point">Point.</param>
@@ -140,7 +146,6 @@ namespace Paramdigma.Core.Geometry
         /// <param name="scalar">Number.</param>
         /// <returns><see cref="Point3d"/>.</returns>
         public static Point3d operator /(Point3d point, double scalar) => new Point3d(point.X / scalar, point.Y / scalar, point.Z / scalar);
-
 
         /// <summary>
         /// Checks equality between two points.

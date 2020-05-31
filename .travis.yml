@@ -16,6 +16,7 @@ branches:
   only:
     - master
     - development
+    - feature/*
 
 notifications:
   slack: paramdigma:FtUcdwSDOynOHw2M479kXHxs#geometry-library

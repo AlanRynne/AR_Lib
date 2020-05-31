@@ -1,3 +1,6 @@
+using System;
+using Paramdigma.Core.Collections;
+
 namespace Paramdigma.Core.Geometry
 {
     /// <summary>
@@ -10,15 +13,17 @@ namespace Paramdigma.Core.Geometry
         /// </summary>
         public Point3d StartPoint
         {
-            get; set;
+            get;
+            set;
         }
 
         /// <summary>
-        /// /// Gets or sets the line's end point.
+        /// Gets or sets the line's end point.
         /// </summary>
         public Point3d EndPoint
         {
-            get; set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -55,7 +60,7 @@ namespace Paramdigma.Core.Geometry
         /// </summary>
         /// <param name="t">Parameter of the point. Must be between 0 and 1.</param>
         /// <returns>Point at specified parameter.</returns>
-        public override Point3d PointAt(double t) => this.StartPoint + (t * (this.EndPoint - this.StartPoint));
+        public override Point3d PointAt(double t) => this.StartPoint + (Domain.RemapToUnit(t) * (this.EndPoint - this.StartPoint));
 
         /// <summary>
         /// Computes the tangent at the given parameter.
@@ -79,7 +84,7 @@ namespace Paramdigma.Core.Geometry
             Vector3d tangent = TangentAt(t);
             var v = new Vector3d();
 
-            if (tangent.Dot(Vector3d.UnitZ) == 1)
+            if (Math.Abs(tangent.Dot(Vector3d.UnitZ) - 1) < Settings.Tolerance)
                 v = Vector3d.UnitX;
             else
                 v = Vector3d.UnitZ;

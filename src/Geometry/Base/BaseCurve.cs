@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Paramdigma.Core.Collections;
+﻿using Paramdigma.Core.Collections;
 
 #pragma warning disable 1591
 
