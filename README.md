@@ -6,11 +6,11 @@
 ![Main language](https://img.shields.io/github/languages/top/Paramdigma/Core.svg)
 ![Code Size](https://img.shields.io/github/languages/code-size/Paramdigma/Core.svg)
 
-| Service       | Master                                                                                                                                                                 | Development                                                                                                                                                                      |
+| Service       | Master                                                                                                                                                                 | Develop                                                                                                                                                                   |
 | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| CI Status     | [![Build Status](https://travis-ci.com/Paramdigma/Core.svg?branch=master)](https://travis-ci.com/Paramdigma/Core)                                                      | [![Build Status](https://travis-ci.com/Paramdigma/Core.svg?branch=development)](https://travis-ci.com/Paramdigma/Core)                                                           |
-| Code Quality  | [![CodeFactor](https://www.codefactor.io/repository/github/Paramdigma/Core/badge/master)](https://www.codefactor.io/repository/github/Paramdigma/Core/overview/master) | [![CodeFactor](https://www.codefactor.io/repository/github/Paramdigma/Core/badge/development)](https://www.codefactor.io/repository/github/Paramdigma/Core/overview/development) |
-| Test Coverage | [![codecov](https://codecov.io/gh/Paramdigma/Core/branch/master/graph/badge.svg)](https://codecov.io/gh/Paramdigma/Core/branch/master)                                 | [![codecov](https://codecov.io/gh/Paramdigma/Core/branch/development/graph/badge.svg)](https://codecov.io/gh/Paramdigma/Core/branch/development)                                 |
+| CI Status     | [![Build Status](https://travis-ci.com/Paramdigma/Core.svg?branch=master)](https://travis-ci.com/Paramdigma/Core)                                                      | [![Build Status](https://travis-ci.com/Paramdigma/Core.svg?branch=develop)](https://travis-ci.com/Paramdigma/Core)                                                           |
+| Code Quality  | [![CodeFactor](https://www.codefactor.io/repository/github/Paramdigma/Core/badge/master)](https://www.codefactor.io/repository/github/Paramdigma/Core/overview/master) | [![CodeFactor](https://www.codefactor.io/repository/github/Paramdigma/Core/badge/develop)](https://www.codefactor.io/repository/github/Paramdigma/Core/overview/develop) |
+| Test Coverage | [![codecov](https://codecov.io/gh/Paramdigma/Core/branch/master/graph/badge.svg)](https://codecov.io/gh/Paramdigma/Core/branch/master)                                 | [![codecov](https://codecov.io/gh/Paramdigma/Core/branch/develop/graph/badge.svg)](https://codecov.io/gh/Paramdigma/Core/branch/develop)                                 |
 
 ## Objective
 
@@ -21,13 +21,10 @@ The core idea is to create a complete package of 3D entities and functions that 
 - McNeel Rhinoceros/Grasshopper
 - Autodesk Revit/Dynamo
 - Autocad
+
+But also available as a:
 - CLI
 - NuGet Package
-- Possibly others
-
-> I have also started developing a set of _Grasshopper components_ that is also available online at:
->
-> [![](https://img.shields.io/badge/Child%20Project-Rhino%2FGrasshopper-green.svg)](https://github.com/AlanRynne/AR_Grasshopper)
 
 ## Usage
 
