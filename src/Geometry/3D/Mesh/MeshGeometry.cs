@@ -158,7 +158,7 @@ namespace Paramdigma.Core.Geometry
         /// <param name="corner">Corner.</param>
         public static double Angle(MeshCorner corner)
         {
-            Vector3d u = Vector(corner.HalfEdge.Prev).Unit();
+            Vector3d u = Vector(corner.HalfEdge).Unit();
             Vector3d v = -Vector(corner.HalfEdge.Next).Unit();
 
             return Math.Acos(Math.Max(-1, Math.Min(1.0, u.Dot(v))));

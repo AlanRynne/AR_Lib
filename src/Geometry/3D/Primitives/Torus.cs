@@ -1,7 +1,7 @@
 using Paramdigma.Core.Collections;
 using Paramdigma.Core.Geometry.Interfaces;
 
-namespace Paramdigma.Core.Geometry.Primitives
+namespace Paramdigma.Core.Geometry
 {
     /// <summary>
     /// Represents a toroidal surface.
