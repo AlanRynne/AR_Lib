@@ -48,6 +48,12 @@ namespace Paramdigma.Core.Geometry.Primitives
         /// <inheritdoc/>
         public Plane FrameAt(double u, double v) => throw new System.NotImplementedException();
 
+        /// <inheritdoc />
+        public double DistanceTo(Point3d point) => throw new System.NotImplementedException();
+
+        /// <inheritdoc />
+        public Point3d ClosestPointTo(Point3d point) => throw new System.NotImplementedException();
+
         /// <inheritdoc/>
         public Vector3d NormalAt(double u, double v) => throw new System.NotImplementedException();
 

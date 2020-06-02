@@ -13,25 +13,37 @@ namespace Paramdigma.Core.Geometry
         /// Gets or sets the plane origin.
         /// </summary>
         /// <value></value>
-        public Point3d Origin { get; set; }
+        public Point3d Origin
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Gets or sets the plane X axis.
         /// </summary>
         /// <value></value>
-        public Vector3d XAxis { get; set; }
+        public Vector3d XAxis
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Gets or sets the plane Y axis.
         /// </summary>
         /// <value></value>
-        public Vector3d YAxis { get; set; }
+        public Vector3d YAxis
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Gets or sets the plane Z axis.
         /// </summary>
         /// <value></value>
-        public Vector3d ZAxis { get; set; }
+        public Vector3d ZAxis
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Gets plane with axis' UnitX and UnitY.
@@ -57,7 +69,7 @@ namespace Paramdigma.Core.Geometry
         /// </summary>
         /// <param name="plane">Plane to copy values from.</param>
         public Plane(Plane plane)
-            : this(plane.Origin, plane.XAxis, plane.YAxis, plane.ZAxis)
+            : this(new Point3d(plane.Origin), new Vector3d(plane.XAxis), new Vector3d(plane.YAxis), new Vector3d(plane.ZAxis))
         {
         }
 
@@ -115,9 +127,11 @@ namespace Paramdigma.Core.Geometry
             Vector3d normal = tempX.Cross(tempY);
             double colinearCheck = Math.Abs(1 - tempY.Dot(tempX));
 
+            var compare = tempX.Dot(tempY);
+
             // Ensure points are not co-linear
-            if (tempY.Dot(tempX) == 1)
-                throw new System.Exception("Cannot create plane out of co-linear points.");
+            if (Math.Abs(compare - 1) <= Settings.Tolerance)
+                throw new Exception("Cannot create plane out of co-linear points.");
 
             Origin = ptA;
             XAxis = tempX;
@@ -208,7 +222,7 @@ namespace Paramdigma.Core.Geometry
         /// </summary>
         /// <param name="point">Point to compute distance to.</param>
         /// <returns>Distance to point.</returns>
-        public double DistanceTo(Point3d point) => ((Vector3d)(point - Origin)).Dot(ZAxis);
+        public double DistanceTo(Point3d point) => (point - Origin).Dot(ZAxis);
 
         /// <summary>
         /// Returns the parametric equation for this plane.
@@ -224,11 +238,5 @@ namespace Paramdigma.Core.Geometry
         /// </summary>
         /// <returns>Plane clone.</returns>
         public Plane Clone() => new Plane(new Point3d(Origin), new Vector3d(XAxis), new Vector3d(YAxis), new Vector3d(ZAxis));
-
-        /// <summary>
-        /// Returns the string representation of the plane.
-        /// </summary>
-        /// <returns>Plane string.</returns>
-        public override string ToString() => base.ToString();
     }
 }

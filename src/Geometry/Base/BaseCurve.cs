@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using Paramdigma.Core.Collections;
 
 #pragma warning disable 1591
 
@@ -12,30 +12,18 @@ namespace Paramdigma.Core.Geometry
         // Public properties
 
         /// <summary>
-        /// Gets or sets the curve's start point.
+        /// Gets or sets the curve's domain.
         /// </summary>
-        public virtual Point3d StartPoint { get; set; }
-
-        /// <summary>
-        /// Gets or sets the curves end point.
-        /// </summary>
-        public virtual Point3d EndPoint { get; set; }
-
-        /// <summary>
-        /// Gets or sets the curves initial parameter.
-        /// </summary>
-        public virtual double T0 { get; set; }
-
-        /// <summary>
-        /// Gets or sets the curves final parameter.
-        /// </summary>
-        public virtual double T1 { get; set; }
+        public Interval Domain
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Gets a value indicating whether the curve is valid.
         /// </summary>
         /// <returns>True if Valid.</returns>
-        public virtual bool IsValid => this.CheckValidity();
+        public bool IsValid => this.CheckValidity();
 
         public double Length => this.ComputeLength();
 
@@ -44,6 +32,7 @@ namespace Paramdigma.Core.Geometry
         /// </summary>
         protected BaseCurve()
         {
+            this.Domain = Interval.Unit;
         }
 
         /// <summary>

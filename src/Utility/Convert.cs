@@ -1,10 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Paramdigma.Core.Curves;
 using Paramdigma.Core.Geometry;
-using Paramdigma.Core.HalfEdgeMesh;
-using Paramdigma.Core.LinearAlgebra;
 
 namespace Paramdigma.Core
 {
@@ -35,23 +29,6 @@ namespace Paramdigma.Core
             double[] result = { u, v, w };
 
             return result;
-        }
-
-        /// <summary>
-        /// Translate the coordinates of a given 3d point from the World XYZ into the relative coordinates of a given plane.
-        /// </summary>
-        /// <param name="point">The point to convert.</param>
-        /// <param name="plane">The plane of reference to convert into.</param>
-        /// <returns></returns>
-        public static Point3d RelativeCoordinatesFromPlane(Point3d point, Plane plane)
-        {
-            Vector3d relativeVector = point - plane.Origin;
-
-            double x = Vector3d.DotProduct(relativeVector, plane.XAxis);
-            double y = Vector3d.DotProduct(relativeVector, plane.YAxis);
-            double z = Vector3d.DotProduct(relativeVector, plane.ZAxis);
-
-            return new Point3d(x, y, z);
         }
     }
 }

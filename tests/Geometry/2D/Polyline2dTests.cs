@@ -37,7 +37,6 @@ namespace Paramdigma.Core.Tests.Geometry
         public IEnumerator<object[]> GetEnumerator()
         {
             yield return new object[] { new Polyline2d(new List<Point2d> { pt1, pt2, pt3, pt4 }, false) };
-            yield return new object[] { new Polyline2d(new List<Point2d> { pt1, pt2, pt3, pt4 }, true) };
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -68,6 +67,27 @@ namespace Paramdigma.Core.Tests.Geometry
 
             Assert.True(polyline.Domain.End == polyline.Segments[^1].Domain.End);
             Assert.True(polyline.Domain.End == 1);
+        }
+
+        [Theory]
+        [ClassData(typeof(Polyline2dDataSet))]
+        public void Check_IsClockwise(Polyline2d polyline)
+        {
+            polyline.IsClosed = true;
+            var cond = polyline.IsClockwise();
+            Assert.False(cond);
+        }
+
+        [Theory]
+        [ClassData(typeof(Polyline2dDataSet))]
+        public void CanCompute_Area(Polyline2d polyline)
+        {
+            polyline.IsClosed = true;
+            var area = polyline.Area();
+            Assert.True(area == 1.0);
+            polyline.IsClosed = false;
+            area = polyline.Area();
+            Assert.True(area == 0.0);
         }
     }
 }

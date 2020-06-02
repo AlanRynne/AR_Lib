@@ -1,10 +1,23 @@
+using System;
+
 namespace Paramdigma.Core.Geometry
 {
     /// <summary>
-    /// Represents a 2-dimensional ray.
+    /// Represents an infinite 2-dimensional ray.
     /// </summary>
     public class Ray2d
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Ray2d"/> class.
+        /// </summary>
+        /// <param name="origin">Origin point.</param>
+        /// <param name="direction">Direction vector.</param>
+        public Ray2d(Point2d origin, Vector2d direction)
+        {
+            this.Origin = origin ?? throw new ArgumentNullException(nameof(origin));
+            this.Direction = direction ?? throw new ArgumentNullException(nameof(direction));
+        }
+
         /// <summary>
         /// Gets or sets the origin of the ray.
         /// </summary>

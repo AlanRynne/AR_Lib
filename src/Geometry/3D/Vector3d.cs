@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Paramdigma.Core.Geometry
 {
@@ -48,7 +47,7 @@ namespace Paramdigma.Core.Geometry
         }
 
         /// <summary>
-        /// Gets the Euclidiean length squared of this vector.
+        /// Gets the Euclidean length squared of this vector.
         /// </summary>
         /// <returns>Squared Length of the vector.</returns>
         public double LengthSquared => DotProduct(this, this);

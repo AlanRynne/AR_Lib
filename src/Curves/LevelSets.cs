@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Paramdigma.Core.Geometry;
 using Paramdigma.Core.HalfEdgeMesh;
@@ -89,7 +88,7 @@ namespace Paramdigma.Core.Curves
                         double desiredDiff = level - vertexValues[j];
                         double unitizedDistance = desiredDiff / diff;
                         Vector3d edgeV = adj[i] - adj[j];
-                        Point3d levelPoint = (Point3d)adj[j] + (edgeV * unitizedDistance);
+                        Point3d levelPoint = adj[j] + (edgeV * unitizedDistance);
                         intersectionPoints.Add(levelPoint);
                     }
                 }

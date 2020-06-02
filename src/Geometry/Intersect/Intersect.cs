@@ -1,10 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Paramdigma.Core.Curves;
 using Paramdigma.Core.Geometry;
 using Paramdigma.Core.HalfEdgeMesh;
-using Paramdigma.Core.LinearAlgebra;
 
 namespace Paramdigma.Core
 {
@@ -30,10 +27,10 @@ namespace Paramdigma.Core
             double d = Vector3d.DotProduct(plane.ZAxis, u);
             double n = -Vector3d.DotProduct(plane.ZAxis, w);
 
-            if (d <= 0.000001)
+            if (Math.Abs(d) <= Settings.Tolerance)
             {
                 // Segment is parallel to plane
-                if (n == 0)
+                if (Math.Abs(n) < Settings.Tolerance)
                 {
                     // Segment lies in plane
                     intersectionPoint = null;
@@ -153,24 +150,28 @@ namespace Paramdigma.Core
 
             // compute the line parameters of the two closest points
             if (d2 < Settings.Tolerance)
-            { // the lines are almost parallel
+            {
+                // the lines are almost parallel
                 sN = 0.0; // force using point P0 on segment S1
                 sD = 1.0; // to prevent possible division by 0.0 later
                 tN = e;
                 tD = c;
             }
             else
-            { // get the closest points on the infinite lines
+            {
+                // get the closest points on the infinite lines
                 sN = (b * e) - (c * d);
                 tN = (a * e) - (b * d);
                 if (sN < 0.0)
-                { // sc < 0 => the s=0 edge is visible
+                {
+                    // sc < 0 => the s=0 edge is visible
                     sN = 0.0;
                     tN = e;
                     tD = c;
                 }
                 else if (sN > sD)
-                { // sc > 1  => the s=1 edge is visible
+                {
+                    // sc > 1  => the s=1 edge is visible
                     sN = sD;
                     tN = e + b;
                     tD = c;
@@ -223,7 +224,7 @@ namespace Paramdigma.Core
             tc = Math.Abs(tN) < Settings.Tolerance ? 0.0 : tN / tD;
 
             // get the difference of the two closest points
-            Vector3d dP = w + (sc * u) - (tc * v); // =  S1(sc) - S2(tc)
+            Vector3d dP = w + ((sc * u) - (tc * v)); // =  S1(sc) - S2(tc)
             result = default;
             result.Distance = dP.Length; // return the closest distance
             result.TA = sc;

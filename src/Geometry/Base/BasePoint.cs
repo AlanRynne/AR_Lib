@@ -67,7 +67,10 @@ namespace Paramdigma.Core.Geometry
         /// Gets or sets a value indicating whether the current point is unset.
         /// </summary>
         /// <value>True if Unset.</value>
-        public bool IsUnset { get; set; }
+        public bool IsUnset
+        {
+            get; set;
+        }
 
         private double x;
         private double y;
@@ -173,7 +176,12 @@ namespace Paramdigma.Core.Geometry
         /// Converts a point to an array of numbers.
         /// </summary>
         /// <returns>Array with cartesian coordinates of point.</returns>
-        public double[] ToArray() => new double[] { x, y, z };
+        public double[] ToArray() => new[] { this.x, this.y, this.z };
+
+        /// <summary>
+        /// Performs a deep clone of the point.
+        /// </summary>
+        /// <returns>Returns a copy of this BasePoint instance.</returns>
 
         /// <inheritdoc/>
         public override bool Equals(object obj)

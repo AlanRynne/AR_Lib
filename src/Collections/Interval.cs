@@ -14,12 +14,10 @@ namespace Paramdigma.Core.Collections
         /// <param name="end">Ending value of the interval.</param>
         public Interval(double start, double end)
         {
-            if (start == end)
-                throw new Exception("Cannot create Interval out of two equal numbers");
             if (double.IsNaN(start) || double.IsInfinity(start))
-                throw new Exception("Start value is invalid");
+                throw new ArithmeticException("Start value is invalid");
             if (double.IsNaN(end) || double.IsInfinity(end))
-                throw new Exception("End value is invalid");
+                throw new ArithmeticException("End value is invalid");
             this.Start = start;
             this.End = end;
         }
@@ -130,7 +128,7 @@ namespace Paramdigma.Core.Collections
         {
             double min = this.HasInvertedDirection ? this.End : this.Start;
             double max = this.HasInvertedDirection ? this.Start : this.End;
-            return min < number && number < max;
+            return min <= number && number <= max;
         }
 
         /// <summary>
