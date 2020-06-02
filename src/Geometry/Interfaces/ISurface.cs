@@ -50,7 +50,7 @@ namespace Paramdigma.Core.Geometry.Interfaces
         Plane FrameAt(double u, double v);
 
         /// <summary>
-        /// Compute the distance between this surface and a point
+        /// Compute the distance between this surface and a point.
         /// </summary>
         /// <param name="point">Point to compute distance to.</param>
         /// <returns>Number representing the distance.</returns>

@@ -65,12 +65,12 @@ namespace Paramdigma.Core.Geometry
         public double Length => Math.Sqrt(this.LengthSquared);
 
         /// <summary>
-        /// Creates a vector in the World X direction {1;0}
+        /// Gets a vector in the World X direction {1;0}.
         /// </summary>
         public static Vector2d WorldX => new Vector2d(1, 0);
 
         /// <summary>
-        /// Creates a vector in the World Y direction {0;1}
+        /// Gets a vector in the World Y direction {0;1}.
         /// </summary>
         public static Vector2d WorldY => new Vector2d(0, 1);
 

@@ -176,7 +176,7 @@ namespace Paramdigma.Core.Geometry
         /// Converts a point to an array of numbers.
         /// </summary>
         /// <returns>Array with cartesian coordinates of point.</returns>
-        public double[] ToArray() => new double[] { this.x, this.y, this.z };
+        public double[] ToArray() => new[] { this.x, this.y, this.z };
 
         /// <summary>
         /// Performs a deep clone of the point.

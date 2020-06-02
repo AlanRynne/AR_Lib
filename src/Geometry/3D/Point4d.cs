@@ -13,8 +13,7 @@ namespace Paramdigma.Core.Geometry
         /// Initializes a new instance of the <see cref="Point4d"/> class.
         /// </summary>
         /// <returns>Point with all values to zero.</returns>
-        public Point4d()
-            : base()
+        public Point4d() : base()
         {
             weight = 0;
         }
@@ -71,7 +70,7 @@ namespace Paramdigma.Core.Geometry
         }
 
         /// <summary>
-        /// Returns the raw position of the point4d (without taking into account weight).
+        /// Gets the raw position of the point4d (without taking into account weight).
         /// </summary>
         public Point3d Position => new Point3d(X, Y, Z);
 

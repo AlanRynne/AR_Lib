@@ -131,7 +131,7 @@ namespace Paramdigma.Core.Geometry
 
             // Ensure points are not co-linear
             if (Math.Abs(compare - 1) <= Settings.Tolerance)
-                throw new System.Exception("Cannot create plane out of co-linear points.");
+                throw new Exception("Cannot create plane out of co-linear points.");
 
             Origin = ptA;
             XAxis = tempX;
@@ -238,11 +238,5 @@ namespace Paramdigma.Core.Geometry
         /// </summary>
         /// <returns>Plane clone.</returns>
         public Plane Clone() => new Plane(new Point3d(Origin), new Vector3d(XAxis), new Vector3d(YAxis), new Vector3d(ZAxis));
-
-        /// <summary>
-        /// Returns the string representation of the plane.
-        /// </summary>
-        /// <returns>Plane string.</returns>
-        public override string ToString() => base.ToString();
     }
 }

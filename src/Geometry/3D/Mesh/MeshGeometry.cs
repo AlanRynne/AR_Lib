@@ -148,7 +148,7 @@ namespace Paramdigma.Core.Geometry
             Vector3d normal = FaceNormal(face);
             Vector3d e2 = normal.Cross(e1);
 
-            return new Vector3d[] { e1, e2 };
+            return new[] { e1, e2 };
         }
 
         /// <summary>
@@ -410,7 +410,7 @@ namespace Paramdigma.Core.Geometry
             double k1 = h - discriminant;
             double k2 = h + discriminant;
 
-            return new double[] { k1, k2 };
+            return new[] { k1, k2 };
         }
     }
 }

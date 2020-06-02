@@ -153,7 +153,7 @@ namespace Paramdigma.Core.Geometry
         /// <param name="point">Point A.</param>
         /// <param name="point2">Point B.</param>
         /// <returns><see cref="Point3d"/>.</returns>
-        public static bool operator ==(Point3d point, Point3d point2) => point.Equals(point2);
+        public static bool operator ==(Point3d point, Point3d point2) => point != null && point.Equals(point2);
 
         /// <summary>
         /// Checks inequality between two points.

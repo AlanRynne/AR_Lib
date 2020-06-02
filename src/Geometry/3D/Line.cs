@@ -1,5 +1,4 @@
 using System;
-using Paramdigma.Core.Collections;
 
 namespace Paramdigma.Core.Geometry
 {

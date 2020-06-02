@@ -17,7 +17,7 @@ namespace Paramdigma.Core.Geometry
         private bool segmentsNeedUpdate;
 
         /// <summary>
-        /// Initializes a new instance of the <see crkef="Polyline"/> class.
+        /// Initializes a new instance of the <see cref="Polyline"/> class.
         /// </summary>
         public Polyline()
         {
@@ -156,7 +156,6 @@ namespace Paramdigma.Core.Geometry
                                                       where segment.Domain.Contains(t)
                                                       select segment.PointAt(t)).FirstOrDefault();
 
-
         /// <inheritdoc/>
         public override Vector3d TangentAt(double t) => (from segment in this.segments
                                                          where segment.Domain.Contains(t)
@@ -176,7 +175,7 @@ namespace Paramdigma.Core.Geometry
         }
 
         /// <summary>
-        /// Checks the validity of the polyline. Currently only checks if some segments are collapsed (length == 0);
+        /// Checks the validity of the polyline. Currently only checks if some segments are collapsed (length == 0).
         /// </summary>
         /// <returns>True if polyline has no collapsed segments.</returns>
         public override bool CheckValidity()
