@@ -72,5 +72,12 @@ namespace Paramdigma.Core.Tests.Geometry._3D
             Assert.False(mesh.IsNgonMesh());
             Assert.False(mesh.IsTriangularMesh());
         }
+        
+        [Fact]
+        public void CanConvert_ToString()
+        {
+            Assert.IsType<string>(FlatSquare.ToString());
+            Assert.IsType<string>(FlatSquare.GetMeshInfo());
+        }
     }
 }
