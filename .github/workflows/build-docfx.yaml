@@ -16,6 +16,8 @@ jobs:
         name: Build Docs 📚
         with:
           args: docfx_project/docfx.json
+      - run: "rm .gitignore"
+        name: Remove .gitignore file
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
