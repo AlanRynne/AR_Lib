@@ -1,3 +1,10 @@
+> # **THIS REPO IS DEPRECATED**
+> I moved and renamed this library onto my GitHub Organization ([Paramdigma](https://github.com/paramdigma)).
+>
+> You can find, follow, fork and contribute to [Paramdigma.Core](https://github.com/paramdigma/core).
+> The repo was forked from this one to keep the history, so any contributions could be brought to the new codebase.
+
+
 # Architectrual Geometry Library for .Net
 
 ![Target Framework](https://img.shields.io/badge/Target%20Framework-.Net%20Standard-blueviolet.svg)
