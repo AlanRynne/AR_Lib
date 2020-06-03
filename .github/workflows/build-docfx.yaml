@@ -12,16 +12,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         name: Checkout 🛎
+      - run: "rm .gitignore && ls ."
+        name: Remove .gitignore file
       - uses: nikeee/docfx-action@master
         name: Build Docs 📚
         with:
-          args: Core/docfx_project/docfx.json
-      - run: "rm .gitignore && ls ."
-        name: Remove .gitignore file
+          args: docfx_project/docfx.json
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: Core/docs # The folder the action should deploy.
+          FOLDER: docs/ # The folder the action should deploy.
  
