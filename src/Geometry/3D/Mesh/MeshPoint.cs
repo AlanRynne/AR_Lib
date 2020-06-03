@@ -48,7 +48,7 @@ namespace Paramdigma.Core.HalfEdgeMesh
         /// </summary>
         /// <param name="point">3D Point.</param>
         /// <param name="face">Mesh face.</param>
-        public MeshPoint(Point3d point, MeshFace face)
+        public MeshPoint(MeshFace face, Point3d point)
         {
             List<MeshVertex> adj = face.AdjacentVertices();
             double[] bary = Convert.Point3dToBarycentric(point, adj[0], adj[1], adj[2]);

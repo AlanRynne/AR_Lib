@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Paramdigma.Core.Geometry;
 
 namespace Paramdigma.Core.HalfEdgeMesh
@@ -83,16 +84,7 @@ namespace Paramdigma.Core.HalfEdgeMesh
         /// Check if vertex is on mesh boundary.
         /// </summary>
         /// <returns></returns>
-        public bool OnBoundary()
-        {
-            foreach (MeshHalfEdge halfEdge in AdjacentHalfEdges())
-            {
-                if (halfEdge.OnBoundary)
-                    return true;
-            }
-
-            return false;
-        }
+        public bool OnBoundary() => this.AdjacentHalfEdges().Any(halfEdge => halfEdge.OnBoundary);
 
         /// <summary>
         /// Returns a list with all adjacent HE_HalfEdge of this vertex.

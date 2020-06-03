@@ -102,7 +102,8 @@ namespace Paramdigma.Core.HalfEdgeMesh
             MeshHalfEdge edge = this.HalfEdge;
             do
             {
-                faces.Add(edge.Twin.Face);
+                if (!edge.Twin.Face.IsBoundaryLoop() && !faces.Contains(edge.Twin.Face))
+                    faces.Add(edge.Twin.Face);
                 edge = edge.Next;
             }
             while (edge != this.HalfEdge);
