@@ -29,6 +29,8 @@ namespace Paramdigma.Core.Geometry
         /// <inheritdoc/>
         public double DistanceTo(Point3d point) => Plane.DistanceTo(point) - Radius;
 
+        public Point3d ClosestPointTo(Point3d point) => Plane.Origin + ((point - Plane.Origin).Unit() * Radius);
+
         /// <inheritdoc/>
         public Plane FrameAt(double u, double v) => throw new System.NotImplementedException();
 

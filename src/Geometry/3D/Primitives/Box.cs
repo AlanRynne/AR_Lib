@@ -1,6 +1,6 @@
 using Paramdigma.Core.Collections;
 
-namespace Paramdigma.Core.Geometry.Primitives
+namespace Paramdigma.Core.Geometry
 {
     /// <summary>
     /// Represents a 3D box.

@@ -1,3 +1,4 @@
+using System;
 using Paramdigma.Core.Geometry;
 using Xunit;
 
@@ -5,6 +6,18 @@ namespace Paramdigma.Core.Tests.Geometry
 {
     public class Vector3dTests
     {
+        [Fact]
+        public void CanBe_Created()
+        {
+            var v = Vector3d.UnitY;
+            var pt = new Point3d(0, 2, 2);
+            var newV = new Vector3d(v);
+            var newVp = new Vector3d(pt);
+
+            Assert.True(v == newV);
+            Assert.True(pt == newVp);
+        }
+
         [Fact]
         public void CanBe_Added()
         {
@@ -74,6 +87,28 @@ namespace Paramdigma.Core.Tests.Geometry
             var b2 = v.GetHashCode() == v2.GetHashCode();
 
             Assert.True(b1 && b1 == b2);
+        }
+
+        [Fact]
+        public void Can_ComputeAngle()
+        {
+            var v1 = Vector3d.UnitX;
+            var v2 = Vector3d.UnitY;
+            var v3 = v1 + v2;
+            var q = 0.25 * Math.PI;
+            var a = Vector3d.Angle(v1, v2);
+            var a2 = Vector3d.Angle(v1, v3);
+            Assert.True(a == 0.5 * Math.PI);
+            Assert.True(Math.Abs(a2 - q) <= Settings.Tolerance);
+        }
+
+        [Fact]
+        public void CanBe_ConvertedToString()
+        {
+            var result = "Vector3d{ 1, 0, 0 }";
+            var v = Vector3d.UnitX;
+            var s = v.ToString();
+            Assert.True(s == result);
         }
     }
 }

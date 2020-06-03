@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Paramdigma.Core.HalfEdgeMesh;
 
 namespace Paramdigma.Core.Geometry
@@ -149,7 +148,7 @@ namespace Paramdigma.Core.Geometry
             Vector3d normal = FaceNormal(face);
             Vector3d e2 = normal.Cross(e1);
 
-            return new Vector3d[] { e1, e2 };
+            return new[] { e1, e2 };
         }
 
         /// <summary>
@@ -159,7 +158,7 @@ namespace Paramdigma.Core.Geometry
         /// <param name="corner">Corner.</param>
         public static double Angle(MeshCorner corner)
         {
-            Vector3d u = Vector(corner.HalfEdge.Prev).Unit();
+            Vector3d u = Vector(corner.HalfEdge).Unit();
             Vector3d v = -Vector(corner.HalfEdge.Next).Unit();
 
             return Math.Acos(Math.Max(-1, Math.Min(1.0, u.Dot(v))));
@@ -411,7 +410,7 @@ namespace Paramdigma.Core.Geometry
             double k1 = h - discriminant;
             double k2 = h + discriminant;
 
-            return new double[] { k1, k2 };
+            return new[] { k1, k2 };
         }
     }
 }

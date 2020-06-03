@@ -119,7 +119,7 @@ namespace Paramdigma.Core.Geometry
             if (!isClosed)
                 return 0;
             List<Point2d> v = vertices;
-            int n = vertices.Count;
+            int n = vertices.Count - 1;
             double area = 0;
             int i, j, k;
 

@@ -1,3 +1,5 @@
+using System;
+
 namespace Paramdigma.Core.Geometry
 {
     /// <summary>
@@ -22,8 +24,8 @@ namespace Paramdigma.Core.Geometry
         /// <param name="direction">Vector representing the direction of the ray.</param>
         public Ray(Point3d origin, Vector3d direction)
         {
-            Origin = origin;
-            Direction = direction;
+            Origin = origin ?? throw new ArgumentNullException(nameof(origin));
+            Direction = direction ?? throw new ArgumentNullException(nameof(direction));
         }
 
         /// <summary>

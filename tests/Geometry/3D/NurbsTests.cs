@@ -50,32 +50,28 @@ namespace Paramdigma.Core.Tests
             var p1 = new Point3d(1, 3, 0);
             var p2 = new Point3d(1.4, 5, 0);
             var p3 = new Point3d(0, 7, 0);
-            double[] U = NurbsCalculator.CreateUnitKnotVector(3, 1);
-            double[] U2 = NurbsCalculator.CreateUnitKnotVector(3, 2);
-            double[] U3 = NurbsCalculator.CreateUnitKnotVector(3, 3);
+            var u = NurbsCalculator.CreateUnitKnotVector(3, 1);
+            var u2 = NurbsCalculator.CreateUnitKnotVector(3, 2);
+            var u3 = NurbsCalculator.CreateUnitKnotVector(3, 3);
             var watch = new Stopwatch();
             watch.Start();
             const int n = 100;
-            for (int i = 0; i <= n; i++)
+            for (var i = 0; i <= n; i++)
             {
-                var pt = NurbsCalculator.CurvePoint(3, 1, U, new Point3d[] { p0, p1, p2, p3 }, (double)i / n);
-                var pt2 = NurbsCalculator.CurvePoint(3, 2, U2, new Point3d[] { p0, p1, p2, p3 }, (double)i / n);
-                var pt3 = NurbsCalculator.CurvePoint(3, 3, U3, new Point3d[] { p0, p1, p2, p3 }, (double)i / n);
-                Console.WriteLine($"t: {(double)i / n} — {pt}");
-                Console.WriteLine($"t: {(double)i / n} — {pt2}");
-                Console.WriteLine($"t: {(double)i / n} — {pt3}");
-                Console.WriteLine("---");
+                var pt = NurbsCalculator.CurvePoint(3, 1, u, new Point3d[] { p0, p1, p2, p3 }, (double)i / n);
+                var pt2 = NurbsCalculator.CurvePoint(3, 2, u2, new Point3d[] { p0, p1, p2, p3 }, (double)i / n);
+                var pt3 = NurbsCalculator.CurvePoint(3, 3, u3, new Point3d[] { p0, p1, p2, p3 }, (double)i / n);
             }
             watch.Stop();
             Console.WriteLine(watch.Elapsed);
         }
 
         [Fact]
-        public void TestKnotVectore()
+        public void TestKnotVector()
         {
-            var U = NurbsCalculator.CreateUnitKnotVector(3, 1);
-            var U2 = NurbsCalculator.CreateUnitKnotVector(3, 2);
-            var U3 = NurbsCalculator.CreateUnitKnotVector(3, 3);
+            var u = NurbsCalculator.CreateUnitKnotVector(3, 1);
+            var u2 = NurbsCalculator.CreateUnitKnotVector(3, 2);
+            var u3 = NurbsCalculator.CreateUnitKnotVector(3, 3);
         }
     }
 }
