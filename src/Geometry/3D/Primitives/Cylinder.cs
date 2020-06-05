@@ -25,19 +25,28 @@ namespace Paramdigma.Core.Geometry
         /// Gets or sets the base plane of the cylinder.
         /// </summary>
         /// <value><see cref="Plane"/>.</value>
-        public Plane Plane { get; set; }
+        public Plane Plane
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Gets or sets the radius of the cylinder.
         /// </summary>
         /// <value><see cref="double"/>.</value>
-        public double Radius { get; set; }
+        public double Radius
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Gets or sets the height range of the cylinder.
         /// </summary>
         /// <value><see cref="Interval"/>.</value>
-        public Interval HeightRange { get; set; }
+        public Interval HeightRange
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Gets the cylinder height.
@@ -45,10 +54,16 @@ namespace Paramdigma.Core.Geometry
         public double Height => HeightRange.Length;
 
         /// <inheritdoc/>
-        public Interval DomainU { get; set; }
+        public Interval DomainU
+        {
+            get; set;
+        }
 
         /// <inheritdoc/>
-        public Interval DomainV { get; set; }
+        public Interval DomainV
+        {
+            get; set;
+        }
 
         /// <inheritdoc/>
         public Plane FrameAt(double u, double v)
@@ -56,8 +71,18 @@ namespace Paramdigma.Core.Geometry
             throw new System.NotImplementedException();
         }
 
+        /// <summary>
+        /// Compute the distance from a point to this cylinder.
+        /// </summary>
+        /// <param name="point">Point to compute with.</param>
+        /// <returns>Number representing the distance.</returns>
         public double DistanceTo(Point3d point) => throw new System.NotImplementedException();
 
+        /// <summary>
+        /// Compute the closes point of a point in this cylinder.
+        /// </summary>
+        /// <param name="point">Point to compute with.</param>
+        /// <returns>Point3d instance of the closest point in the cylinder.</returns>
         public Point3d ClosestPointTo(Point3d point) => throw new System.NotImplementedException();
 
         /// <inheritdoc/>

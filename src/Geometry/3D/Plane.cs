@@ -125,8 +125,6 @@ namespace Paramdigma.Core.Geometry
             tempY.Unitize();
 
             Vector3d normal = tempX.Cross(tempY);
-            double colinearCheck = Math.Abs(1 - tempY.Dot(tempX));
-
             var compare = tempX.Dot(tempY);
 
             // Ensure points are not co-linear
@@ -137,18 +135,6 @@ namespace Paramdigma.Core.Geometry
             XAxis = tempX;
             YAxis = normal.Cross(XAxis);
             ZAxis = normal;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Plane"/> class given its equation Ax + By + Cz + D = 0.
-        /// </summary>
-        /// <param name="a">A.</param>
-        /// <param name="b">B.</param>
-        /// <param name="c">C.</param>
-        /// <param name="d">D.</param>
-        public Plane(double a, double b, double c, double d)
-        {
-            throw new NotImplementedException();
         }
 
         // TODO: Add utility methods to Plane class  (flip Axis, relative coordinates...)

@@ -12,23 +12,36 @@ namespace Paramdigma.Core.Geometry
         /// Gets or sets the base plane of the sphere.
         /// </summary>
         /// <value><see cref="Plane"/>.</value>
-        public Plane Plane { get; set; }
+        public Plane Plane
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Gets or sets the radius of the sphere.
         /// </summary>
         /// <value><see cref="double"/>.</value>
-        public double Radius { get; set; }
+        public double Radius
+        {
+            get; set;
+        }
 
         /// <inheritdoc/>
-        public Interval DomainU { get; set; }
+        public Interval DomainU
+        {
+            get; set;
+        }
 
         /// <inheritdoc/>
-        public Interval DomainV { get; set; }
+        public Interval DomainV
+        {
+            get; set;
+        }
 
         /// <inheritdoc/>
         public double DistanceTo(Point3d point) => Plane.DistanceTo(point) - Radius;
 
+        /// <inheritdoc />
         public Point3d ClosestPointTo(Point3d point) => Plane.Origin + ((point - Plane.Origin).Unit() * Radius);
 
         /// <inheritdoc/>
