@@ -181,6 +181,7 @@ namespace Paramdigma.Core.Geometry
         /// <summary>
         /// Performs a deep clone of the point.
         /// </summary>
+        /// <param name="obj">Object to compare to.</param>
         /// <returns>Returns a copy of this BasePoint instance.</returns>
 
         /// <inheritdoc/>
