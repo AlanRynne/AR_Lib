@@ -37,6 +37,7 @@ namespace Paramdigma.Core.Tests.Optimization
         [Fact]
         public void KMeans_MainTest()
         {
+            // T
             const double sep = 5.0;
             const int expectedClusters = 4;
             const int expectedClusterCount = 40;
@@ -55,26 +56,30 @@ namespace Paramdigma.Core.Tests.Optimization
             {
                 vectors.AddRange(createClusterAround(pt, 1, expectedClusterCount));
             });
+            
             Assert.True(vectors.Count == expectedClusters * expectedClusterCount);
 
             // When
-            var kMeans = new KMeansClustering(100, expectedClusters, vectors);
-
+            var kMeans = new KMeansClustering(1000, expectedClusters, vectors);
             kMeans.Run();
+            
             // Then
-            // kMeans.Clusters.ForEach(cluster =>
-            // {
-            //     var firstVector = cluster[0];
-            //     var first = new Point3d(cluster[0][0], cluster[0][1], cluster[0][2]);
-            //     var closest = pts.First(pt => pt.DistanceTo(first) <= 2);
-            //     foreach (var vector in cluster)
-            //     {
-            //         var pt = new Point3d(vector[0], vector[1], vector[2]);
-            //         var dist = pt.DistanceTo(closest);
-            //         //testOutputHelper.WriteLine($"Distance: {dist}");
-            //         Assert.True(dist <= 2, $"Distance was bigger: {dist}");
-            //     }
-            // });
+            kMeans.Clusters.ForEach(cluster =>
+            {
+                Assert.NotEmpty(cluster);
+                var firstVector = cluster[0];
+                var first = new Point3d(cluster[0][0], cluster[0][1], cluster[0][2]);
+                var closest = pts.First(pt => pt.DistanceTo(first) <= 2);
+                foreach (var vector in cluster)
+                {
+                    var pt = new Point3d(vector[0], vector[1], vector[2]);
+                    var dist = pt.DistanceTo(closest);
+                    //testOutputHelper.WriteLine($"Distance: {dist}");
+                    Assert.True(dist <= 2, $"Distance was bigger: {dist}");
+                }
+            });
+            
+            
         }
     }
 }

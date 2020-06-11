@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Paramdigma.Core.Geometry;
 
 namespace Paramdigma.Core.Optimization
@@ -47,14 +48,15 @@ namespace Paramdigma.Core.Optimization
         /// <summary>
         /// Run the algorithm until it reaches the maximum amount of iterations.
         /// </summary>
-        public void Run() => Run(maxIterations);
+        public void Run() => Run(maxIterations, false);
 
         /// <summary>
         /// Run the k-means clustering algorithm for a specified amount of iterations.
         /// </summary>
         /// <param name="iterations">Iterations to run.</param>
-        public void Run(int iterations)
+        public void Run(int iterations, bool allowEmptyClusters)
         {
+            var rnd = new Random();
             bool hasChanged;
             int iteration = 0;
             do
@@ -86,6 +88,25 @@ namespace Paramdigma.Core.Optimization
                     }
                 });
 
+                // Check for empty clusters
+                if (!allowEmptyClusters)
+                {
+                    newClusters.ForEach(cluster =>
+                    {
+                        if (cluster.Count == 0)
+                        {
+                            Console.WriteLine("Cluster has no mass");
+                            var biggest = newClusters.OrderByDescending(x => x.Count)
+                                                     .First();
+
+                            var randomVector = biggest[rnd.Next(biggest.Count)];
+
+                            biggest.Remove(randomVector);
+                            cluster.Add(randomVector);
+                        }
+                    });
+                }
+                
                 // Update clusters and increase iteration
                 Clusters = newClusters;
                 var iterArgs = new IterationCompletedEventArgs() {iteration = iteration, Clusters = newClusters};
