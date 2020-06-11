@@ -34,33 +34,33 @@ namespace Paramdigma.Core.Tests.Optimization
             return cluster;
         }
 
-        [Fact]
-        public void KMeans_MainTest()
+        [Theory]
+        [InlineData(4)]
+        [InlineData(6)]
+        [InlineData(10)]
+        public void KMeans_MainTest(int expectedClusters)
         {
             // T
             const double sep = 5.0;
-            const int expectedClusters = 4;
-            const int expectedClusterCount = 40;
+            int expectedClusterCount = 20;
 
             //Generate random vectors
             var vectors = new List<VectorNd>();
             var rnd = new Random();
+            var cir = new Circle(Plane.WorldXY, 10);
+            var pts = new List<Point3d>();
 
-            var ptA = new Point3d(sep, sep, 0);
-            var ptB = new Point3d(sep, -sep, 0);
-            var ptC = new Point3d(-sep, -sep, 0);
-            var ptD = new Point3d(-sep, sep, 0);
-
-            var pts = new List<Point3d> {ptA, ptB, ptC, ptD};
-            pts.ForEach(pt =>
+            for (int i = 0; i < expectedClusters; i++)
             {
+                var pt = cir.PointAt((double)i / expectedClusters);
+                pts.Add(pt);
                 vectors.AddRange(createClusterAround(pt, 1, expectedClusterCount));
-            });
+            }
             
             Assert.True(vectors.Count == expectedClusters * expectedClusterCount);
 
             // When
-            var kMeans = new KMeansClustering(1000, expectedClusters, vectors);
+            var kMeans = new KMeansClustering(100, expectedClusters, vectors);
             kMeans.Run();
             
             // Then
